@@ -1,0 +1,48 @@
+/**
+ * Colors
+ * Значения переменных цвета в HEX указываются в верхнем регистре.
+ * Название переменной конкретного цвета генерируется на http://chir.ag/projects/name-that-color/
+ */
+
+$white: #ffffff;
+$hint-of-red: #f8f6f6;
+$white-linen: #faf8ef;
+$linen: #f8efde;
+$we-peep: #f8dede;
+$alto: #d9d9d9;
+$timberwolf: #d6d4d0;
+$sandy-brown: #f4ab56;
+$cornflower-blue: #6a7ee4;
+$torea-bay: #092097;
+$persian-red: #d42929;
+$rangoon-green: #0f0f0c;
+$black: #000000;
+
+// Fonts
+
+$font-path: './fonts';
+$font-family-default: 'Helvetica', sans-serif;
+$font-family-custom: 'Montserrat';
+$font-family: $font-family-custom, $font-family-default;
+
+$font-size-basic: 10px;
+
+$font-weight-extra-light: 200;
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semi-bold: 600;
+$font-weight-bold: 700;
+
+// Borders
+
+$border-standard: 1px solid $timberwolf;
+
+$border-radius-small: 3px;
+$border-radius-normal: 15px;
+$border-radius-large: 30px;
+
+// Effects
+
+$box-shadow-standard: 2px 4px 10px rgba(0, 0, 0, 0.25);
+$blur: blur(10px);
