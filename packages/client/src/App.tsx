@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
-import './App.css'
+import './App.scss'
+import GuiButton from './components/ui/GuiButton/GuiButton'
 
 function App() {
   useEffect(() => {
@@ -12,7 +13,12 @@ function App() {
 
     fetchServerData()
   }, [])
-  return <div className="App">Вот тут будет жить ваше приложение :)</div>
+  return (
+    <div className="App">
+      <span>Вот тут будет жить ваше приложение :)</span>
+      <GuiButton />
+    </div>
+  )
 }
 
 export default App
