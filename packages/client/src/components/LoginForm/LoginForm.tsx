@@ -1,8 +1,8 @@
 import './LoginForm.scss'
 import React, { FormEvent, ReactElement, useState } from 'react'
-import GuiInput from '../../ui/GuiInput/GuiInput'
-import GuiButton from '../../ui/GuiButton/GuiButton'
-import {FormFields} from "../../../types/form";
+import GuiInput from "../../ui/GuiInput/GuiInput";
+import GuiButton from "../../ui/GuiButton/GuiButton";
+import { FormFields } from '../../types/form'
 
 const LoginForm = (): ReactElement => {
   const [email, setEmail] = useState('')
@@ -17,15 +17,17 @@ const LoginForm = (): ReactElement => {
       email: '',
       password: '',
     }
+
     let isValid = true
+
     if (email.length === 0) {
       isValid = false
-      errorsObj['email'] = 'Поле необходимо заполнить'
+      errorsObj[FormFields.Email] = 'Поле необходимо заполнить'
     }
 
     if (password.length === 0) {
       isValid = false
-      errorsObj['password'] = 'Поле необходимо заполнить'
+      errorsObj[FormFields.Password] = 'Поле необходимо заполнить'
     }
     setErrors(errorsObj)
 
@@ -37,7 +39,8 @@ const LoginForm = (): ReactElement => {
     if (!validate()) {
       return
     }
-    //send
+    //api
+
   }
 
   const onChangeEmail = (e: FormEvent) => {
@@ -55,12 +58,12 @@ const LoginForm = (): ReactElement => {
 
   return (
     <div className="login-form">
-      <div className="login-form-inner">
-        <div className="login-form-wrapper">
+      <div className="login-form__inner">
+        <div className="login-form__wrapper">
           <div>
-            <h1 className="login-form-title">Log In</h1>
+            <h1 className="login-form__title">Log In</h1>
 
-            <div className="login-form-text">Welcome to the 2048 Game</div>
+            <div className="login-form__text">Welcome to the 2048 Game</div>
           </div>
 
           <form onSubmit={onSubmit}>
@@ -80,7 +83,7 @@ const LoginForm = (): ReactElement => {
               label="Password"
               placeholder="password"
               value={password}
-              error={errors[FormFields.Email]}
+              error={errors[FormFields.Password]}
               onChange={onChangePassword}
               onBlur={resetError}
               onFocus={resetError}
@@ -89,10 +92,10 @@ const LoginForm = (): ReactElement => {
             <GuiButton
               type="submit"
               btnText="Log in"
-              className="login-form-btn"
+              className="login-form__btn"
             />
 
-            <div className="login-form-info">
+            <div className="login-form__info">
               Don't have an account? <a className="base-link">Sign up</a>
             </div>
           </form>

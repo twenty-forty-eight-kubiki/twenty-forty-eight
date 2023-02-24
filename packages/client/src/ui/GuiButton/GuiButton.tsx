@@ -1,8 +1,8 @@
 import './GuiButton.scss'
-import React, { FC, FormEvent, ReactElement } from 'react'
+import React, { FC, ReactElement } from 'react'
 
 type GuiButtonProps = {
-  type?: string
+  type?: 'button' | 'submit',
   btnText: string
   className?: string
   onClick?: () => void
@@ -19,7 +19,6 @@ const GuiButton: FC<GuiButtonProps> = ({
     if (className) {
       classes.push(className)
     }
-
     return classes.join(' ')
   }
 

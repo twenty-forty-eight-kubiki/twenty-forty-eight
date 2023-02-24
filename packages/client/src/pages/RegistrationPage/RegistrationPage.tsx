@@ -1,5 +1,5 @@
 import './RegistrationPage.scss'
-import RegistrationForm from '../../components/modules/RegisatrationForm/RegistrationForm'
+import RegistrationForm from '../../components/RegisatrationForm/RegistrationForm'
 
 const RegistrationPage = () => {
   return (

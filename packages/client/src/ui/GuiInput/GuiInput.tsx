@@ -1,6 +1,8 @@
 import './GuiInput.scss'
 import React, { FC, FormEvent, ReactElement } from 'react'
-import {FormFields} from "../../../types/form";
+import {FormFields} from "../../types/form";
+import {Simulate} from "react-dom/test-utils";
+import error = Simulate.error;
 
 type GuiInputProps = {
   value: string | number
@@ -33,6 +35,7 @@ const GuiInput: FC<GuiInputProps> = ({
 
     return classNames.join(' ')
   }
+
 
   return (
     <div className="gui-input">

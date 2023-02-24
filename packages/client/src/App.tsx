@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import './App.scss'
-import GuiButton from './components/ui/GuiButton/GuiButton'
+import LoginPage from "./pages/LoginPage/LoginPage";
 
 function App() {
   useEffect(() => {
@@ -15,8 +15,7 @@ function App() {
   }, [])
   return (
     <div className="App">
-      <span>Вот тут будет жить ваше приложение :)</span>
-      <GuiButton />
+
     </div>
   )
 }

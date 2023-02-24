@@ -1,7 +1,7 @@
 export enum FormFields {
   Firstname = 'firstname',
   Surname = 'surname',
-  Email = 'password',
+  Email = 'email',
   Password = 'password',
-  ConfirmPassword = 'confirmPassword'
+  ConfirmPassword = 'confirmPassword',
 }
