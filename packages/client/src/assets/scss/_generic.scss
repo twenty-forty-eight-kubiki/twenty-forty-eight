@@ -24,13 +24,18 @@ html {
 }
 
 body {
-  height: 100%;
+  overflow-x: hidden;
+  display: flex;
+  flex-flow: column nowrap;
+  min-height: 100vh;
+  width: 100%;
+  min-width: 320px;
+  background: $white-linen;
 }
 
 button {
   cursor: pointer;
   user-select: none;
-
   border: none;
   background-color: transparent;
   outline: none;
@@ -78,4 +83,9 @@ ol {
     padding-left: 15px;
     padding-right: 15px;
   }
+}
+
+.base-link {
+  color: $torea-bay;
+  font-weight: 500;
 }

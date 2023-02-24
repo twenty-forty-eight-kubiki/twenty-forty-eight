@@ -4,8 +4,11 @@ import LoginForm from '../../components/modules/LoginForm/LoginForm'
 const LoginPage = () => {
   return (
     <div className="login-page">
-      <div className="login-page-inner">
-        <LoginForm />
+      <div className="container">
+          <div className="login-page-wrapper">
+              <LoginForm />
+          </div>
+
       </div>
     </div>
   )
