@@ -1,0 +1,37 @@
+@import 'src/assets/scss/variables';
+
+.gui-input {
+  position: relative;
+  margin-bottom: 25px;
+
+  &-label {
+    span {
+      display: block;
+      width: fit-content;
+      font-size: 18px;
+      line-height: 22px;
+      margin-bottom: 15px;
+      cursor: pointer;
+    }
+  }
+
+  &-control {
+    width: 100%;
+    border: 1px solid $timberwolf;
+    border-radius: 10px;
+    box-shadow: 0 4px 40px rgba(0, 0, 0, 0.07);
+    padding: 8px 11px;
+    font-size: 16px;
+    line-height: 20px;
+    height: 36px;
+    background: $white;
+
+    &--disabled {
+      background-color: $alto;
+    }
+
+    &--error {
+      border-color: $persian-red;
+    }
+  }
+}

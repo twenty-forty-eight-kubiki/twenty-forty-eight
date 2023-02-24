@@ -53,10 +53,29 @@ a {
 input {
   border: none;
   outline: none;
-  background: transparent;
 }
 
 ul,
 ol {
   list-style: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding-left: 75px;
+  padding-right: 75px;
+
+  @media (max-width: 768px) {
+    max-width: 768px;
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+
+  @media (max-width: 375px) {
+    max-width: 375px;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
 }

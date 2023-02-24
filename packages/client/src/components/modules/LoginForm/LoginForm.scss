@@ -1,0 +1,44 @@
+@import 'src/assets/scss/variables';
+
+.login-form {
+  max-width: 500px;
+  height: 587px;
+  width: 100%;
+  background: $linen;
+  border-radius: $border-radius-large;
+
+  &-inner {
+    padding: 50px;
+    height: 100%;
+  }
+
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  &-title {
+    font-size: 26px;
+    line-height: 30px;
+    text-align: center;
+    margin-bottom: 21px;
+  }
+
+  &-text {
+    font-size: 20px;
+    line-height: 25px;
+    font-style: italic;
+    text-align: center;
+  }
+
+  &-btn {
+    display: block;
+    margin: 47px auto 11px;
+  }
+
+  &-info {
+    text-align: center;
+  }
+}
