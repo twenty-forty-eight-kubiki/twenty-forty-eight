@@ -1,48 +1,52 @@
 import './GuiInput.scss'
-import React, { FC, FormEvent, ReactElement } from 'react'
+import React, {FC, FormEvent, ReactElement} from 'react'
 
 type GuiInputProps = {
-  value: string | number
-  label: string
-  placeholder: string
-  type?: string
-  disabled?: boolean
-  onChange: (e: FormEvent) => void
+    value: string | number
+    label: string
+    placeholder: string
+    type?: string
+    disabled?: boolean
+    error?: string
+    name: string
+    onChange: (e: FormEvent) => void
+    onBlur: (name: string) => void
+    onFocus: (name: string) => void
 }
 
-const GuiInput: FC<GuiInputProps> = ({
-  value,
-  onChange,
-  label,
-  placeholder,
-  type = 'text',
-  disabled = false,
-}): ReactElement => {
-  const getClassName = () => {
-    const classNames = ['gui-input-control']
+const GuiInput: FC<GuiInputProps> = ({ onBlur, onChange, onFocus, ...props}): ReactElement => {
+    const getClassName = () => {
+        const classNames = ['gui-input-control']
 
-    if (disabled) {
-      classNames.push('gui-input-control--disabled')
+        if (props.disabled) {
+            classNames.push('gui-input-control--disabled')
+        }
+        if (props.error) {
+            classNames.push('gui-input-control--error')
+        }
+
+        return classNames.join(' ')
     }
 
-    return classNames.join(' ')
-  }
+    return (
+        <div className="gui-input">
+            <label className="gui-input-label">
+                <span>{props.label}</span>
+                <input
+                    value={props.value}
+                    type={props.type}
+                    placeholder={props.placeholder}
+                    disabled={props.disabled}
+                    className={getClassName()}
+                    onChange={(e: FormEvent) => onChange(e)}
+                    onBlur={() => onBlur(props.name)}
+                    onFocus={() => onFocus(props.name)}
+                />
+            </label>
 
-  return (
-    <div className="gui-input">
-      <label className="gui-input-label">
-        <span>{label}</span>
-        <input
-          value={value}
-          type={type}
-          placeholder={placeholder}
-          disabled={disabled}
-          className={getClassName()}
-          onChange={(e: FormEvent) => onChange(e)}
-        />
-      </label>
-    </div>
-  )
+            <div v-if={props.error} className="gui-input-error">{ props.error }</div>
+        </div>
+    )
 }
 
 export default GuiInput
