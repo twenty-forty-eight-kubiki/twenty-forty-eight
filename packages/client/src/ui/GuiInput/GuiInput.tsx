@@ -10,7 +10,7 @@ type GuiInputProps = {
   placeholder: string
   type?: string
   disabled?: boolean
-  error?: string
+  error?: string | null
   name: FormFields
   onChange: (e: FormEvent) => void
   onBlur: (name: string) => void

@@ -3,44 +3,34 @@ import React, { FormEvent, ReactElement, useState } from 'react'
 import GuiInput from "../../ui/GuiInput/GuiInput";
 import GuiButton from "../../ui/GuiButton/GuiButton";
 import { FormFields } from '../../types/form'
+import EasyValidator, {IValidationSchema} from "../../helpers/easy-validator";
 
 const LoginForm = (): ReactElement => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState({
-    email: '',
-    password: '',
+    email: null,
+    password: null,
   })
 
-  const validate = () => {
-    const errorsObj = {
-      email: '',
-      password: '',
+  const schema: IValidationSchema = {
+    email: {
+      isRequired: { msg: 'Это поле обязательно для заполнения' },
+      isEmail: { msg: 'Введите корректный email' },
+    },
+    password: {
+      isRequired: { msg: 'Это поле обязательно для заполнения' }
     }
-
-    let isValid = true
-
-    if (email.length === 0) {
-      isValid = false
-      errorsObj[FormFields.Email] = 'Поле необходимо заполнить'
-    }
-
-    if (password.length === 0) {
-      isValid = false
-      errorsObj[FormFields.Password] = 'Поле необходимо заполнить'
-    }
-    setErrors(errorsObj)
-
-    return isValid
   }
+
+  const easyValidator = new EasyValidator(schema)
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
-    if (!validate()) {
-      return
-    }
+    const errorsObj = easyValidator.validateFields({ email, password })
     //api
 
+    setErrors({ ...errorsObj })
   }
 
   const onChangeEmail = (e: FormEvent) => {
