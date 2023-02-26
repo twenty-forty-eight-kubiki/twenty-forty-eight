@@ -31,6 +31,10 @@ const LoginForm = (): ReactElement => {
 
     // @ts-ignore
     setErrors({ ...errorsObj })
+
+    if (easyValidator.isValid()) {
+      //api
+    }
   }
 
   const onChangeEmail = (e: FormEvent) => {

@@ -3,8 +3,10 @@ export interface IValidatorConfig {
   value?: string | number
 }
 export type TForm = Record<string, string>
-export type TValidator = (config: IValidatorConfig, form: TForm) => (value: string) => string | null
-
+export type TValidator = (
+  config: IValidatorConfig,
+  form: TForm
+) => (value: string) => string | null
 
 export const validators: Record<string, TValidator> = {
   isRequired: isRequired,
@@ -56,7 +58,8 @@ export function confirmPass(config: IValidatorConfig, form: TForm) {
   }
 }
 
-const EMAIL_REGEXP = /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+const EMAIL_REGEXP =
+  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 export function isEmail(config: IValidatorConfig, form: TForm) {
   return function (value: string) {
     if (!EMAIL_REGEXP.test(value)) {

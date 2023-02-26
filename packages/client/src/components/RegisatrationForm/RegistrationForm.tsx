@@ -3,7 +3,7 @@ import React, { FormEvent, ReactElement, useState } from 'react'
 import GuiInput from '../../ui/GuiInput/GuiInput'
 import GuiButton from '../../ui/GuiButton/GuiButton'
 import { FormFields } from '../../types/form'
-import EasyValidator, {IValidationSchema} from "../../helpers/easy-validator";
+import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
 
 const RegistrationForm = (): ReactElement => {
   const [email, setEmail] = useState('')
@@ -32,26 +32,35 @@ const RegistrationForm = (): ReactElement => {
     },
     email: {
       isRequired: { msg: 'Это поле обязательно для заполнения' },
-      isEmail: { msg: 'Введите корректный email' }
+      isEmail: { msg: 'Введите корректный email' },
     },
     password: {
       isRequired: { msg: 'Это поле обязательно для заполнения' },
     },
     confirmPassword: {
       isRequired: { msg: 'Это поле обязательно для заполнения' },
-      confirmPass: { msg: 'Поля не совпадают' }
-    }
+      confirmPass: { msg: 'Поля не совпадают' },
+    },
   }
 
   const easyValidator = new EasyValidator(schema)
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
-    const errorsObj = easyValidator.validateFields({email, firstname, surname, password, confirmPassword})
+    const errorsObj = easyValidator.validateFields({
+      email,
+      firstname,
+      surname,
+      password,
+      confirmPassword,
+    })
 
     // @ts-ignore
-    setErrors({...errorsObj})
+    setErrors({ ...errorsObj })
 
+    if (easyValidator.isValid()) {
+      //api
+    }
   }
 
   const onChangeFirstname = (e: FormEvent) => {

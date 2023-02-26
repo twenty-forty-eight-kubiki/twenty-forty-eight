@@ -4,6 +4,7 @@ export type IValidationSchema = Record<string, Record<string, IValidatorConfig>>
 
 export default class EasyValidator {
   schema: IValidationSchema = {}
+  errors: Record<string, string | null> = {}
 
   constructor(schema: IValidationSchema) {
     this.schema = { ...schema }
@@ -39,6 +40,12 @@ export default class EasyValidator {
       errors[key] = this.validateField(value, config, form)
     })
 
+    this.errors = errors
     return errors
+  }
+
+  isValid() {
+    const values = Object.values(this.errors);
+    return values.every(value => value === null)
   }
 }
