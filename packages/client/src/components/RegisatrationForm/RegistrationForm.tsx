@@ -1,8 +1,9 @@
 import './RegistrationForm.scss'
 import React, { FormEvent, ReactElement, useState } from 'react'
-import GuiInput from "../../ui/GuiInput/GuiInput";
-import GuiButton from "../../ui/GuiButton/GuiButton";
+import GuiInput from '../../ui/GuiInput/GuiInput'
+import GuiButton from '../../ui/GuiButton/GuiButton'
 import { FormFields } from '../../types/form'
+import EasyValidator, {IValidationSchema} from "../../helpers/easy-validator";
 
 const RegistrationForm = (): ReactElement => {
   const [email, setEmail] = useState('')
@@ -18,12 +19,39 @@ const RegistrationForm = (): ReactElement => {
     confirmPassword: '',
   })
 
+  const schema: IValidationSchema = {
+    firstname: {
+      isRequired: { msg: 'Это поле обязательно для заполнения' },
+      minLength: { value: 3, msg: 'Минимум 3 символа' },
+      maxLength: { value: 50, msg: 'Максимум 50 символов' },
+    },
+    surname: {
+      isRequired: { msg: 'Это поле обязательно для заполнения' },
+      minLength: { value: 3, msg: 'Минимум 3 символа' },
+      maxLength: { value: 50, msg: 'Максимум 50 символов' },
+    },
+    email: {
+      isRequired: { msg: 'Это поле обязательно для заполнения' },
+      isEmail: { msg: 'Введите корректный email' }
+    },
+    password: {
+      isRequired: { msg: 'Это поле обязательно для заполнения' },
+    },
+    confirmPassword: {
+      isRequired: { msg: 'Это поле обязательно для заполнения' },
+      confirmPass: { msg: 'Поля не совпадают' }
+    }
+  }
+
+  const easyValidator = new EasyValidator(schema)
+
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
-    if (!validate()) {
-      return
-    }
-    //api
+    const errorsObj = easyValidator.validateFields({email, firstname, surname, password, confirmPassword})
+
+    // @ts-ignore
+    setErrors({...errorsObj})
+
   }
 
   const onChangeFirstname = (e: FormEvent) => {
@@ -49,62 +77,6 @@ const RegistrationForm = (): ReactElement => {
   const resetError = (fieldName: string) => {
     const errorsObj = { ...errors, [fieldName]: '' }
     setErrors(errorsObj)
-  }
-
-  const validate = () => {
-    const errorsObj = {
-      firstname: '',
-      surname: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-    }
-
-    let isValid = true
-    if (firstname.length === 0) {
-      isValid = false
-      errorsObj[FormFields.Firstname] = 'Поле необходимо заполнить'
-    } else if (firstname.length < 3 || firstname.length > 50) {
-      isValid = false
-      errorsObj[FormFields.Firstname] = 'Длина должна быть больше от 3 до 50'
-    }
-
-    if (surname.length === 0) {
-      isValid = false
-      errorsObj[FormFields.Surname] = 'Поле необходимо заполнить'
-    } else if (firstname.length < 3 || firstname.length > 50) {
-      isValid = false
-      errorsObj[FormFields.Surname] = 'Длина должна быть больше от 3 до 50'
-    }
-
-    if (email.length === 0) {
-      isValid = false
-      errorsObj[FormFields.Email] = 'Поле необходимо заполнить'
-    } else if (!/^([\w.-])+@([\w.-])+\.([A-Za-z]{2,4})$/.test(email)) {
-      isValid = false
-      errorsObj[FormFields.Email] = 'Введите корректный email'
-    }
-
-    if (password.length === 0) {
-      isValid = false
-      errorsObj[FormFields.Password] = 'Поле необходимо заполнить'
-    } else if (!/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,40}$/.test(password)) {
-      isValid = false
-      errorsObj[FormFields.Password] =
-        'Пароль должен быть от 8 до 40 символов, хотя бы одна заглавная буква и цифра.'
-    }
-
-    if (confirmPassword.length === 0) {
-      isValid = false
-      errorsObj[FormFields.ConfirmPassword] = 'Поле необходимо заполнить'
-    } else if (password !== confirmPassword) {
-      isValid = false
-      errorsObj[FormFields.ConfirmPassword] = 'Пароли не совпадают'
-    }
-
-    setErrors(errorsObj)
-
-    return isValid
   }
 
   return (
