@@ -4,4 +4,6 @@ export enum FormFields {
   Email = 'email',
   Password = 'password',
   ConfirmPassword = 'confirmPassword',
+  OldPassword = 'oldPassword',
+  DisplayName = 'displayName'
 }
