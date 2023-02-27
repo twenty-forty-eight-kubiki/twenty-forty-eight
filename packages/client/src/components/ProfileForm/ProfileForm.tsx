@@ -15,7 +15,7 @@ const ProfileForm = (): ReactElement => {
   const [firstname, setFirstname] = useState('')
   const [displayName, setDisplayName] = useState('')
   const [surname, setSurname] = useState('')
-  const [avatar, setAvatar] = useState('img/user-icon.png')
+  const [avatar] = useState('img/user-icon.png')
   const [errors, setErrors] = useState({
     firstname: '',
     surname: '',

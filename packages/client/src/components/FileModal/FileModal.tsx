@@ -20,6 +20,7 @@ const FileModal = (): ReactElement => {
         'form'
       ) as HTMLFormElement
       const formData = new FormData(form)
+      console.log(formData)
     } else {
       ;(fileError.current as HTMLElement).textContent = 'Add file'
     }

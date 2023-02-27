@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, ReactElement, ReactNode, useState } from 'react'
+import React, { FC, ReactNode } from 'react'
 
 interface ModalProps {
   isVisible: boolean
