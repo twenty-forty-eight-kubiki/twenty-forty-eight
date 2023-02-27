@@ -1,9 +1,5 @@
 import { useEffect } from 'react'
 import './App.scss'
-import LoginPage from "./pages/LoginPage/LoginPage";
-import ProfilePage from './pages/ProfilePage/ProfilePage'
-import ProfileSettings from './pages/ProfileSettings/ProfileSettings'
-import RegistrationPage from './pages/RegistrationPage/RegistrationPage'
 
 function App() {
   useEffect(() => {
@@ -16,11 +12,7 @@ function App() {
 
     fetchServerData()
   }, [])
-  return (
-    <div className="App">
-      <ProfileSettings />
-    </div>
-  )
+  return <div className="App"></div>
 }
 
 export default App

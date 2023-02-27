@@ -1,7 +1,7 @@
 import './RegistrationForm.scss'
 import React, { FormEvent, ReactElement, useState } from 'react'
-import GuiInput from "../../ui/GuiInput/GuiInput";
-import GuiButton from "../../ui/GuiButton/GuiButton";
+import GuiInput from '../../ui/GuiInput/GuiInput'
+import GuiButton from '../../ui/GuiButton/GuiButton'
 import { FormFields } from '../../types/form'
 
 const RegistrationForm = (): ReactElement => {

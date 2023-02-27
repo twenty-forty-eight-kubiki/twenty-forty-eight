@@ -33,7 +33,7 @@
       justify-content: center;
 
       &::after {
-        content: "";
+        content: '';
         position: absolute;
         left: 0;
         top: 0;
@@ -61,7 +61,7 @@
       position: absolute;
       opacity: 0;
 
-      color: #F8DEDE;
+      color: #f8dede;
 
       text-align: center;
 
@@ -97,7 +97,7 @@
     font-size: 20px;
     line-height: 24px;
 
-    border-bottom: 1px solid #D6D4D0;
+    border-bottom: 1px solid #d6d4d0;
   }
 
   &__list {

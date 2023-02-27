@@ -1,9 +1,9 @@
 import './LoginForm.scss'
 import React, { FormEvent, ReactElement, useState } from 'react'
-import GuiInput from "../../ui/GuiInput/GuiInput";
-import GuiButton from "../../ui/GuiButton/GuiButton";
+import GuiInput from '../../ui/GuiInput/GuiInput'
+import GuiButton from '../../ui/GuiButton/GuiButton'
 import { FormFields } from '../../types/form'
-import EasyValidator, {IValidationSchema} from "../../helpers/easy-validator";
+import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
 
 const LoginForm = (): ReactElement => {
   const [email, setEmail] = useState('')
@@ -19,8 +19,8 @@ const LoginForm = (): ReactElement => {
       isEmail: { msg: 'Введите корректный email' },
     },
     password: {
-      isRequired: { msg: 'Это поле обязательно для заполнения' }
-    }
+      isRequired: { msg: 'Это поле обязательно для заполнения' },
+    },
   }
 
   const easyValidator = new EasyValidator(schema)

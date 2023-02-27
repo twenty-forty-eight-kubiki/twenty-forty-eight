@@ -1,14 +1,14 @@
-import '../ProfileList/ProfileList.scss';
-import '../Modal/Modal.scss';
-import React, { FormEvent, ReactElement, useState } from 'react';
-import GuiButton from "../../ui/GuiButton/GuiButton";
-import { FormFields } from '../../types/form';
-import GuiInput from '../../ui/GuiInput/GuiInput';
-import Modal from '../Modal/Modal';
+import '../ProfileList/ProfileList.scss'
+import '../Modal/Modal.scss'
+import React, { FormEvent, ReactElement, useState } from 'react'
+import GuiButton from '../../ui/GuiButton/GuiButton'
+import { FormFields } from '../../types/form'
+import GuiInput from '../../ui/GuiInput/GuiInput'
+import Modal from '../Modal/Modal'
 import FileModal from '../FileModal/FileModal'
 
 const ProfileForm = (): ReactElement => {
-  const [isModal, setModal] = useState(false);
+  const [isModal, setModal] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [oldPassword, setOldPassword] = useState('')
@@ -34,7 +34,7 @@ const ProfileForm = (): ReactElement => {
       oldPassword: '',
     }
 
-    let isValid = true;
+    let isValid = true
 
     if (firstname.length === 0) {
       isValid = false
@@ -76,13 +76,14 @@ const ProfileForm = (): ReactElement => {
 
     if (displayName.length === 0) {
       isValid = false
-      errorsObj[FormFields.DisplayName] = 'Поле необходимо заполнить';
-    } else if ((!/^[А-ЯA-Z][a-zA-Zа-яА-Я-]+$/.test(displayName))) {
+      errorsObj[FormFields.DisplayName] = 'Поле необходимо заполнить'
+    } else if (!/^[А-ЯA-Z][a-zA-Zа-яА-Я-]+$/.test(displayName)) {
       isValid = false
-      errorsObj[FormFields.DisplayName] = 'Первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов (допустим только дефис)'
+      errorsObj[FormFields.DisplayName] =
+        'Первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов (допустим только дефис)'
     }
 
-    setErrors(errorsObj);
+    setErrors(errorsObj)
 
     return isValid
   }
@@ -124,112 +125,114 @@ const ProfileForm = (): ReactElement => {
   }
 
   const openModal = () => {
-    setModal(true);
+    setModal(true)
   }
 
   return (
     <div className="profile-list">
       <div className="profile-list__inner">
-        <button className="profile-list__avatar profile-list__avatar--button" onClick={openModal}>
-          <img  src={avatar} alt="User avatar" />
+        <button
+          className="profile-list__avatar profile-list__avatar--button"
+          onClick={openModal}>
+          <img src={avatar} alt="User avatar" />
           <span>Change picture</span>
         </button>
         <form onSubmit={onSubmit}>
-        <div className="profile-list__fields">
-          <div className="profile-list__field">
-            <h2 className="profile-list__title">Profile info</h2>
-            <div className="profile-list__list">
-                  <div className="profile-list__column">
-                    <div className="profile-list__item">
-                      <GuiInput
-                        name={FormFields.Firstname}
-                        label="Name"
-                        placeholder="Enter your name"
-                        value={firstname}
-                        error={errors[FormFields.Firstname]}
-                        onChange={onChangeFirstname}
-                        onBlur={resetError}
-                        onFocus={resetError}
-                      />
-                    </div>
-                    <div className="profile-list__item">
-                      <GuiInput
-                        name={FormFields.Surname}
-                        label="Surname"
-                        placeholder="Enter your surname"
-                        value={surname}
-                        error={errors[FormFields.Surname]}
-                        onChange={onChangeSurname}
-                        onBlur={resetError}
-                        onFocus={resetError}
-                      />
-                    </div>
-                    <div className="profile-list__item">
-                      <GuiInput
-                        name={FormFields.DisplayName}
-                        label="Display name"
-                        placeholder="Enter your display name"
-                        value={displayName}
-                        error={errors[FormFields.DisplayName]}
-                        onChange={onChangeDisplayName}
-                        onBlur={resetError}
-                        onFocus={resetError}
-                      />
-                    </div>
+          <div className="profile-list__fields">
+            <div className="profile-list__field">
+              <h2 className="profile-list__title">Profile info</h2>
+              <div className="profile-list__list">
+                <div className="profile-list__column">
+                  <div className="profile-list__item">
+                    <GuiInput
+                      name={FormFields.Firstname}
+                      label="Name"
+                      placeholder="Enter your name"
+                      value={firstname}
+                      error={errors[FormFields.Firstname]}
+                      onChange={onChangeFirstname}
+                      onBlur={resetError}
+                      onFocus={resetError}
+                    />
                   </div>
-                  <div className="profile-list__column">
-                    <div className="profile-list__item">
-                      <GuiInput
-                        name={FormFields.Email}
-                        label="Email"
-                        placeholder="Enter your email"
-                        value={email}
-                        error={errors[FormFields.Email]}
-                        onChange={onChangeEmail}
-                        onBlur={resetError}
-                        onFocus={resetError}
-                      />
-                    </div>
+                  <div className="profile-list__item">
+                    <GuiInput
+                      name={FormFields.Surname}
+                      label="Surname"
+                      placeholder="Enter your surname"
+                      value={surname}
+                      error={errors[FormFields.Surname]}
+                      onChange={onChangeSurname}
+                      onBlur={resetError}
+                      onFocus={resetError}
+                    />
+                  </div>
+                  <div className="profile-list__item">
+                    <GuiInput
+                      name={FormFields.DisplayName}
+                      label="Display name"
+                      placeholder="Enter your display name"
+                      value={displayName}
+                      error={errors[FormFields.DisplayName]}
+                      onChange={onChangeDisplayName}
+                      onBlur={resetError}
+                      onFocus={resetError}
+                    />
                   </div>
                 </div>
-          </div>
-          <div className="profile-list__field">
-            <h2 className="profile-list__title">Password Config</h2>
-            <div className="profile-list__list">
-              <div className="profile-list__column">
-                <div className="profile-list__item">
-                  <GuiInput
-                    name={FormFields.OldPassword}
-                    label="Old password"
-                    placeholder="Enter your old password"
-                    value={oldPassword}
-                    error={errors[FormFields.OldPassword]}
-                    onChange={onChangeOldPassword}
-                    onBlur={resetError}
-                    onFocus={resetError}
-                  />
-                </div>
-                <div className="profile-list__item">
-                  <GuiInput
-                    name={FormFields.Password}
-                    label="New password"
-                    placeholder="Enter your new password"
-                    value={password}
-                    error={errors[FormFields.Password]}
-                    onChange={onChangePassword}
-                    onBlur={resetError}
-                    onFocus={resetError}
-                  />
+                <div className="profile-list__column">
+                  <div className="profile-list__item">
+                    <GuiInput
+                      name={FormFields.Email}
+                      label="Email"
+                      placeholder="Enter your email"
+                      value={email}
+                      error={errors[FormFields.Email]}
+                      onChange={onChangeEmail}
+                      onBlur={resetError}
+                      onFocus={resetError}
+                    />
+                  </div>
                 </div>
               </div>
+            </div>
+            <div className="profile-list__field">
+              <h2 className="profile-list__title">Password Config</h2>
+              <div className="profile-list__list">
+                <div className="profile-list__column">
+                  <div className="profile-list__item">
+                    <GuiInput
+                      name={FormFields.OldPassword}
+                      label="Old password"
+                      placeholder="Enter your old password"
+                      value={oldPassword}
+                      error={errors[FormFields.OldPassword]}
+                      onChange={onChangeOldPassword}
+                      onBlur={resetError}
+                      onFocus={resetError}
+                    />
+                  </div>
+                  <div className="profile-list__item">
+                    <GuiInput
+                      name={FormFields.Password}
+                      label="New password"
+                      placeholder="Enter your new password"
+                      value={password}
+                      error={errors[FormFields.Password]}
+                      onChange={onChangePassword}
+                      onBlur={resetError}
+                      onFocus={resetError}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          </div>
-        </div>
-        <GuiButton
-          type="submit"
-          btnText="Update"
-          className="profile-list__btn"
-        />
+          <GuiButton
+            type="submit"
+            btnText="Update"
+            className="profile-list__btn"
+          />
         </form>
       </div>
       <Modal
@@ -238,7 +241,6 @@ const ProfileForm = (): ReactElement => {
         onClose={() => setModal(false)}
       />
     </div>
-
   )
 }
 

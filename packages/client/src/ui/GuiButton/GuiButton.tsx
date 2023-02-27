@@ -2,7 +2,7 @@ import './GuiButton.scss'
 import React, { FC, ReactElement } from 'react'
 
 type GuiButtonProps = {
-  type?: 'button' | 'submit',
+  type?: 'button' | 'submit'
   btnText: string
   className?: string
   onClick?: () => void

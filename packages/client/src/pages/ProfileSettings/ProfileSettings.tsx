@@ -6,7 +6,7 @@ const ProfileSettings = () => {
     <div className="profile-page">
       <div className="container">
         <div className="profile-page__wrapper">
-          < ProfileForm />
+          <ProfileForm />
         </div>
       </div>
     </div>
