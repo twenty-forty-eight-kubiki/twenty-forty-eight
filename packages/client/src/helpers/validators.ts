@@ -1,5 +1,5 @@
 export interface IValidatorConfig {
-  msg?: string
+  msg: string
   value?: string | number
 }
 export type TForm = Record<string, string>
@@ -7,9 +7,8 @@ export type TValidator = (
   config: IValidatorConfig,
   form: TForm
 ) => (value: string) => string | null
-export type TValidators = Record<string, TValidator>
 
-export const validators: TValidators = {
+export const validators: Record<string, TValidator> = {
   isRequired: isRequired,
   minLength: minLength,
   maxLength: maxLength,
@@ -17,7 +16,7 @@ export const validators: TValidators = {
   isEmail: isEmail,
 }
 
-export function isRequired(config, form) {
+export function isRequired(config: IValidatorConfig, form: TForm) {
   return function (value: string) {
     if (value === '') {
       return config.msg
@@ -27,8 +26,9 @@ export function isRequired(config, form) {
   }
 }
 
-export function minLength(config, form) {
+export function minLength(config: IValidatorConfig, form: TForm) {
   return function (value: string) {
+    if (!config.value) throw new Error('Укажите минимальное значение для поля')
     if (value.length < config.value) {
       return config.msg
     } else {
@@ -37,8 +37,9 @@ export function minLength(config, form) {
   }
 }
 
-export function maxLength(config, form) {
+export function maxLength(config: IValidatorConfig, form: TForm) {
   return function (value: string) {
+    if (!config.value) throw new Error('Укажите максимальное значение для поля')
     if (value.length > config.value) {
       return config.msg
     } else {
@@ -47,7 +48,7 @@ export function maxLength(config, form) {
   }
 }
 
-export function confirmPass(config, form) {
+export function confirmPass(config: IValidatorConfig, form: TForm) {
   return function (value: string) {
     if (value !== form.password) {
       return config.msg
@@ -59,7 +60,7 @@ export function confirmPass(config, form) {
 
 const EMAIL_REGEXP =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-export function isEmail(config, form) {
+export function isEmail(config: IValidatorConfig, form: TForm) {
   return function (value: string) {
     if (!EMAIL_REGEXP.test(value)) {
       return config.msg

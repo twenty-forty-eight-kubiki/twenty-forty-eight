@@ -28,9 +28,13 @@ const LoginForm = (): ReactElement => {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
     const errorsObj = easyValidator.validateFields({ email, password })
-    //api
 
+    // @ts-ignore
     setErrors({ ...errorsObj })
+
+    if (easyValidator.isValid()) {
+      //api
+    }
   }
 
   const onChangeEmail = (e: FormEvent) => {
