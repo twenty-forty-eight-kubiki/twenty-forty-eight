@@ -47,13 +47,17 @@ const ProfileForm = (): ReactElement => {
     },
     password: {
       isRequired: { msg: 'This field is required' },
-      minLength: { value: 8, msg: 'Минимум 8 символа' },
-      maxLength: { value: 40, msg: 'Максимум 40 символов' },
-      isCorrectPassword: {msg: 'Password must contain at least one uppercase letter and a number'}
+      minLength: { value: 8, msg: 'Minimum 8 characters' },
+      maxLength: { value: 40, msg: 'Maximum 40 characters' },
+      isCorrectPassword: {
+        msg: 'Password must contain at least one uppercase letter and a number',
+      },
     },
     displayName: {
       isRequired: { msg: 'This field is required' },
-      isDisplayName: { msg: 'The first letter must be capital, no spaces and no numbers, no special characters (only a hyphen is allowed)' },
+      isDisplayName: {
+        msg: 'The first letter must be capital, no spaces and no numbers, no special characters (only a hyphen is allowed)',
+      },
     },
   }
 
@@ -67,7 +71,7 @@ const ProfileForm = (): ReactElement => {
       surname,
       password,
       oldPassword,
-      displayName
+      displayName,
     })
 
     // @ts-ignore
