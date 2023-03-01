@@ -12,7 +12,7 @@ export const validators: Record<string, TValidator> = {
   isRequired: isRequired,
   minLength: minLength,
   maxLength: maxLength,
-  confirmPass: confirmPass,
+  areEqual: areEqual,
   isEmail: isEmail,
 }
 
@@ -48,9 +48,10 @@ export function maxLength(config: IValidatorConfig, form: TForm) {
   }
 }
 
-export function confirmPass(config: IValidatorConfig, form: TForm) {
+export function areEqual(config: IValidatorConfig, form: TForm) {
   return function (value: string) {
-    if (value !== form.password) {
+    if (!config.value) throw new Error('Укажите поле, с которым нужно сравнить')
+    if (value !== form[config.value]) {
       return config.msg
     } else {
       return null

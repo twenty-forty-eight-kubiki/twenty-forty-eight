@@ -33,14 +33,6 @@ body {
   background: $white-linen;
 }
 
-button {
-  cursor: pointer;
-  user-select: none;
-  border: none;
-  background-color: transparent;
-  outline: none;
-}
-
 a {
   text-decoration: none;
 
@@ -53,16 +45,6 @@ a {
   &:active {
     outline: 0;
   }
-}
-
-input {
-  border: none;
-  outline: none;
-}
-
-ul,
-ol {
-  list-style: none;
 }
 
 .container {

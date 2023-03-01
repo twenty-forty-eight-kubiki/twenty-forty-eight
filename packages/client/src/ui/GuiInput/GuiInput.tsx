@@ -1,8 +1,5 @@
 import './GuiInput.scss'
 import React, { FC, FormEvent, ReactElement } from 'react'
-import { FormFields } from '../../types/form'
-import { Simulate } from 'react-dom/test-utils'
-import error = Simulate.error
 
 type GuiInputProps = {
   value: string | number
@@ -11,10 +8,9 @@ type GuiInputProps = {
   type?: string
   disabled?: boolean
   error?: string | null
-  name: FormFields
   onChange: (e: FormEvent) => void
-  onBlur: (name: string) => void
-  onFocus: (name: string) => void
+  onBlur: () => void
+  onFocus: () => void
 }
 
 const GuiInput: FC<GuiInputProps> = ({
@@ -47,14 +43,14 @@ const GuiInput: FC<GuiInputProps> = ({
           disabled={props.disabled}
           className={getClassName()}
           onChange={(e: FormEvent) => onChange(e)}
-          onBlur={() => onBlur(props.name)}
-          onFocus={() => onFocus(props.name)}
+          onBlur={onBlur}
+          onFocus={onFocus}
         />
       </label>
 
-      <div v-if={props.error} className="gui-input-error">
-        {props.error}
-      </div>
+      { !!props.error &&
+          <div v-if={props.error} className="gui-input-error">{props.error}</div>
+      }
     </div>
   )
 }

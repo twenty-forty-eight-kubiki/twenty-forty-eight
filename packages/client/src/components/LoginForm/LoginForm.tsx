@@ -2,13 +2,13 @@ import './LoginForm.scss'
 import React, { FormEvent, ReactElement, useState } from 'react'
 import GuiInput from '../../ui/GuiInput/GuiInput'
 import GuiButton from '../../ui/GuiButton/GuiButton'
-import { FormFields } from '../../types/form'
+import {Form, FormFields} from '../../types/form'
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
 
 const LoginForm = (): ReactElement => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [errors, setErrors] = useState({
+  const [errors, setErrors] = useState<Form>({
     email: null,
     password: null,
   })
@@ -29,7 +29,7 @@ const LoginForm = (): ReactElement => {
     e.preventDefault()
     const errorsObj = easyValidator.validateFields({ email, password })
 
-    // @ts-ignore
+
     setErrors({ ...errorsObj })
 
     if (easyValidator.isValid()) {
@@ -45,7 +45,7 @@ const LoginForm = (): ReactElement => {
     setPassword((e.target as HTMLInputElement).value)
   }
 
-  const resetError = (type: string) => {
+  const resetError = (type: FormFields) => {
     const errorsObj = { ...errors, [type]: '' }
     setErrors(errorsObj)
   }
@@ -62,25 +62,23 @@ const LoginForm = (): ReactElement => {
 
           <form onSubmit={onSubmit}>
             <GuiInput
-              name={FormFields.Email}
               label="Email"
               placeholder="example@yandex.ru"
               value={email}
               error={errors[FormFields.Email]}
               onChange={onChangeEmail}
-              onBlur={resetError}
-              onFocus={resetError}
+              onBlur={() => resetError(FormFields.Email)}
+              onFocus={() => resetError(FormFields.Email)}
             />
 
             <GuiInput
-              name={FormFields.Password}
               label="Password"
               placeholder="password"
               value={password}
               error={errors[FormFields.Password]}
               onChange={onChangePassword}
-              onBlur={resetError}
-              onFocus={resetError}
+              onBlur={() => resetError(FormFields.Password)}
+              onFocus={() => resetError(FormFields.Password)}
             />
 
             <GuiButton
