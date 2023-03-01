@@ -14,6 +14,8 @@ export const validators: Record<string, TValidator> = {
   maxLength: maxLength,
   confirmPass: confirmPass,
   isEmail: isEmail,
+  isDisplayName: isDisplayName,
+  isCorrectPassword: isCorrectPassword
 }
 
 export function isRequired(config: IValidatorConfig, form: TForm) {
@@ -69,3 +71,28 @@ export function isEmail(config: IValidatorConfig, form: TForm) {
     }
   }
 }
+
+const NAME_REGEXP = /^[А-ЯA-Z][a-zA-Zа-яА-Я-]+$/;
+
+export function isDisplayName(config: IValidatorConfig, form: TForm) {
+  return function (value: string) {
+    if (!NAME_REGEXP.test(value)) {
+      return config.msg
+    } else {
+      return null
+    }
+  }
+}
+
+const PASSWORD_REGEXP = /^(?=.*[А-ЯA-Z])(?=.*\d)[a-zA-Zа-яА-Я\d]+$/;
+
+export function isCorrectPassword(config: IValidatorConfig, form: TForm) {
+  return function (value: string) {
+    if (!PASSWORD_REGEXP.test(value)) {
+      return config.msg
+    } else {
+      return null
+    }
+  }
+}
+

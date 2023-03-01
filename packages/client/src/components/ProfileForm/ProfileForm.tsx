@@ -6,6 +6,8 @@ import { FormFields } from '../../types/form'
 import GuiInput from '../../ui/GuiInput/GuiInput'
 import Modal from '../Modal/Modal'
 import FileModal from '../FileModal/FileModal'
+import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
+import { isCorrectPassword, isDisplayName } from '../../helpers/validators'
 
 const ProfileForm = (): ReactElement => {
   const [isModal, setModal] = useState(false)
@@ -24,74 +26,55 @@ const ProfileForm = (): ReactElement => {
     password: '',
     oldPassword: '',
   })
-  const validate = () => {
-    const errorsObj = {
-      firstname: '',
-      surname: '',
-      displayName: '',
-      email: '',
-      password: '',
-      oldPassword: '',
-    }
 
-    let isValid = true
-
-    if (firstname.length === 0) {
-      isValid = false
-      errorsObj[FormFields.Firstname] = 'Поле необходимо заполнить'
-    } else if (firstname.length < 3 || firstname.length > 50) {
-      isValid = false
-      errorsObj[FormFields.Firstname] = 'Длина должна быть больше от 3 до 50'
-    }
-
-    if (surname.length === 0) {
-      isValid = false
-      errorsObj[FormFields.Surname] = 'Поле необходимо заполнить'
-    } else if (firstname.length < 3 || firstname.length > 50) {
-      isValid = false
-      errorsObj[FormFields.Surname] = 'Длина должна быть больше от 3 до 50'
-    }
-
-    if (email.length === 0) {
-      isValid = false
-      errorsObj[FormFields.Email] = 'Поле необходимо заполнить'
-    } else if (!/^([\w.-])+@([\w.-])+\.([A-Za-z]{2,4})$/.test(email)) {
-      isValid = false
-      errorsObj[FormFields.Email] = 'Введите корректный email'
-    }
-
-    if (password.length === 0) {
-      isValid = false
-      errorsObj[FormFields.Password] = 'Поле необходимо заполнить'
-    } else if (!/^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,40}$/.test(password)) {
-      isValid = false
-      errorsObj[FormFields.Password] =
-        'Пароль должен быть от 8 до 40 символов, хотя бы одна заглавная буква и цифра.'
-    }
-
-    if (oldPassword.length === 0) {
-      isValid = false
-      errorsObj[FormFields.OldPassword] = 'Поле необходимо заполнить'
-    }
-
-    if (displayName.length === 0) {
-      isValid = false
-      errorsObj[FormFields.DisplayName] = 'Поле необходимо заполнить'
-    } else if (!/^[А-ЯA-Z][a-zA-Zа-яА-Я-]+$/.test(displayName)) {
-      isValid = false
-      errorsObj[FormFields.DisplayName] =
-        'Первая буква должна быть заглавной, без пробелов и без цифр, нет спецсимволов (допустим только дефис)'
-    }
-
-    setErrors(errorsObj)
-
-    return isValid
+  const schema: IValidationSchema = {
+    firstname: {
+      isRequired: { msg: 'This field is required' },
+      minLength: { value: 3, msg: 'Minimum 3 characters' },
+      maxLength: { value: 50, msg: 'Maximum 50 characters' },
+    },
+    surname: {
+      isRequired: { msg: 'This field is required' },
+      minLength: { value: 3, msg: 'Minimum 3 characters' },
+      maxLength: { value: 50, msg: 'Maximum 50 characters' },
+    },
+    email: {
+      isRequired: { msg: 'This field is required' },
+      isEmail: { msg: 'Enter a valid email' },
+    },
+    oldPassword: {
+      isRequired: { msg: 'This field is required' },
+    },
+    password: {
+      isRequired: { msg: 'This field is required' },
+      minLength: { value: 8, msg: 'Минимум 8 символа' },
+      maxLength: { value: 40, msg: 'Максимум 40 символов' },
+      isCorrectPassword: {msg: 'Password must contain at least one uppercase letter and a number'}
+    },
+    displayName: {
+      isRequired: { msg: 'This field is required' },
+      isDisplayName: { msg: 'The first letter must be capital, no spaces and no numbers, no special characters (only a hyphen is allowed)' },
+    },
   }
+
+  const easyValidator = new EasyValidator(schema)
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
-    if (!validate()) {
-      return
+    const errorsObj = easyValidator.validateFields({
+      email,
+      firstname,
+      surname,
+      password,
+      oldPassword,
+      displayName
+    })
+
+    // @ts-ignore
+    setErrors({ ...errorsObj })
+
+    if (easyValidator.isValid()) {
+      //api
     }
   }
 
