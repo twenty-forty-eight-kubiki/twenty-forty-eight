@@ -1,5 +1,5 @@
-import './App.scss'
 import LoginPage from './pages/LoginPage/LoginPage';
+import './App.scss'
 
 function App() {
 

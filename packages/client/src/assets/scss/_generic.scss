@@ -33,19 +33,6 @@ body {
   background: $white-linen;
 }
 
-a {
-  text-decoration: none;
-
-  cursor: pointer;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-
-  &:hover,
-  &:focus,
-  &:active {
-    outline: 0;
-  }
-}
 
 .container {
   max-width: 1200px;
@@ -67,7 +54,3 @@ a {
   }
 }
 
-.base-link {
-  color: $torea-bay;
-  font-weight: 500;
-}
