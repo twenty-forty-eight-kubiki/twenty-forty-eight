@@ -6,7 +6,7 @@ import GuiInput from '../../ui/GuiInput/GuiInput'
 import Modal from '../Modal/Modal'
 import FileModal from '../FileModal/FileModal'
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
-import { ProfileFormFields, ProfileErrorsObj, RegistrationFormFields } from '../../types/form'
+import { ProfileFormFields, ProfileErrorsObj } from '../../types/form'
 
 const ProfileForm = (): ReactElement => {
   const [isModal, setModal] = useState(false)
@@ -71,7 +71,7 @@ const ProfileForm = (): ReactElement => {
       password,
       oldPassword,
       displayName,
-    });
+    })
 
     setErrors({ ...errorsObj })
 

@@ -18,7 +18,7 @@ export const validators: Record<string, TValidator> = {
   isCorrectPassword: isCorrectPassword,
 }
 
-export function isRequired(config: IValidatorConfig, form: TForm) {
+export function isRequired(config: IValidatorConfig) {
   return function (value: string) {
     if (value === '') {
       return config.msg
@@ -28,7 +28,7 @@ export function isRequired(config: IValidatorConfig, form: TForm) {
   }
 }
 
-export function minLength(config: IValidatorConfig, form: TForm) {
+export function minLength(config: IValidatorConfig) {
   return function (value: string) {
     if (!config.value) throw new Error('Укажите минимальное значение для поля')
     if (value.length < config.value) {
@@ -39,7 +39,7 @@ export function minLength(config: IValidatorConfig, form: TForm) {
   }
 }
 
-export function maxLength(config: IValidatorConfig, form: TForm) {
+export function maxLength(config: IValidatorConfig) {
   return function (value: string) {
     if (!config.value) throw new Error('Укажите максимальное значение для поля')
     if (value.length > config.value) {
@@ -63,7 +63,7 @@ export function areEqual(config: IValidatorConfig, form: TForm) {
 
 const EMAIL_REGEXP =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-export function isEmail(config: IValidatorConfig, form: TForm) {
+export function isEmail(config: IValidatorConfig) {
   return function (value: string) {
     if (!EMAIL_REGEXP.test(value)) {
       return config.msg
@@ -75,7 +75,7 @@ export function isEmail(config: IValidatorConfig, form: TForm) {
 
 const NAME_REGEXP = /^[А-ЯA-Z][a-zA-Zа-яА-Я-]+$/
 
-export function isDisplayName(config: IValidatorConfig, form: TForm) {
+export function isDisplayName(config: IValidatorConfig) {
   return function (value: string) {
     if (!NAME_REGEXP.test(value)) {
       return config.msg
@@ -87,7 +87,7 @@ export function isDisplayName(config: IValidatorConfig, form: TForm) {
 
 const PASSWORD_REGEXP = /^(?=.*[А-ЯA-Z])(?=.*\d)[a-zA-Zа-яА-Я\d]+$/
 
-export function isCorrectPassword(config: IValidatorConfig, form: TForm) {
+export function isCorrectPassword(config: IValidatorConfig) {
   return function (value: string) {
     if (!PASSWORD_REGEXP.test(value)) {
       return config.msg

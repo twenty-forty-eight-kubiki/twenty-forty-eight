@@ -1,13 +1,12 @@
-import LoginPage from './pages/LoginPage/LoginPage';
+import LoginPage from './pages/LoginPage/LoginPage'
 import './App.scss'
 
 function App() {
-
-    return (
-        <div className="App">
-            <LoginPage/>
-        </div>
-    )
+  return (
+    <div className="App">
+      <LoginPage />
+    </div>
+  )
 }
 
 export default App

@@ -8,21 +8,25 @@ export enum RegistrationFormFields {
   Surname = 'surname',
   Email = 'email',
   Password = 'password',
-  ConfirmPassword = 'confirmPassword'
+  ConfirmPassword = 'confirmPassword',
 }
 
-export type LoginErrorsObj = {
-  email: string | null;
-  password: string | null;
-} | Record<string, never>
+export type LoginErrorsObj =
+  | {
+      email: string | null
+      password: string | null
+    }
+  | Record<string, never>
 
-export type RegistrationErrorsObj = {
-  firstname: string | null;
-  surname: string | null;
-  email: string | null;
-  password: string | null;
-  confirmPassword: string | null;
-} | Record<string, never>
+export type RegistrationErrorsObj =
+  | {
+      firstname: string | null
+      surname: string | null
+      email: string | null
+      password: string | null
+      confirmPassword: string | null
+    }
+  | Record<string, never>
 
 export enum ProfileFormFields {
   Firstname = 'firstname',
@@ -34,11 +38,13 @@ export enum ProfileFormFields {
   DisplayName = 'displayName',
 }
 
-export type ProfileErrorsObj = {
-  firstname: string | null;
-  surname: string | null;
-  email: string | null;
-  password: string | null;
-  oldPassword: string | null;
-  displayName: string | null;
-} | Record<string, never>
+export type ProfileErrorsObj =
+  | {
+      firstname: string | null
+      surname: string | null
+      email: string | null
+      password: string | null
+      oldPassword: string | null
+      displayName: string | null
+    }
+  | Record<string, never>
