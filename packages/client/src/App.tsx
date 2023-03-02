@@ -1,5 +1,6 @@
-import { useEffect } from 'react'
-import './App.css'
+import { useEffect } from 'react';
+import './App.css';
+import GamePage from './pages/GamePage/GamePage';
 
 function App() {
   useEffect(() => {
@@ -12,7 +13,7 @@ function App() {
 
     fetchServerData()
   }, [])
-  return <div className="App">Вот тут будет жить ваше приложение :)</div>
+  return <GamePage />
 }
 
-export default App
+export default App;
