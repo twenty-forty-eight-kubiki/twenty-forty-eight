@@ -2,12 +2,11 @@ import '../ProfileList/ProfileList.scss'
 import '../Modal/Modal.scss'
 import React, { FormEvent, ReactElement, useState } from 'react'
 import GuiButton from '../../ui/GuiButton/GuiButton'
-import { FormFields } from '../../types/form'
 import GuiInput from '../../ui/GuiInput/GuiInput'
 import Modal from '../Modal/Modal'
 import FileModal from '../FileModal/FileModal'
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
-import { isCorrectPassword, isDisplayName } from '../../helpers/validators'
+import { ProfileFormFields, ProfileErrorsObj, RegistrationFormFields } from '../../types/form'
 
 const ProfileForm = (): ReactElement => {
   const [isModal, setModal] = useState(false)
@@ -18,7 +17,7 @@ const ProfileForm = (): ReactElement => {
   const [displayName, setDisplayName] = useState('')
   const [surname, setSurname] = useState('')
   const [avatar] = useState('img/user-icon.png')
-  const [errors, setErrors] = useState({
+  const [errors, setErrors] = useState<ProfileErrorsObj>({
     firstname: '',
     surname: '',
     displayName: '',
@@ -72,9 +71,8 @@ const ProfileForm = (): ReactElement => {
       password,
       oldPassword,
       displayName,
-    })
+    });
 
-    // @ts-ignore
     setErrors({ ...errorsObj })
 
     if (easyValidator.isValid()) {
@@ -107,7 +105,7 @@ const ProfileForm = (): ReactElement => {
   }
 
   const resetError = (fieldName: string) => {
-    const errorsObj = { ...errors, [fieldName]: '' }
+    const errorsObj = { ...errors, [fieldName]: '' } as ProfileErrorsObj
     setErrors(errorsObj)
   }
 
@@ -132,52 +130,48 @@ const ProfileForm = (): ReactElement => {
                 <div className="profile-list__column">
                   <div className="profile-list__item">
                     <GuiInput
-                      name={FormFields.Firstname}
                       label="Name"
                       placeholder="Enter your name"
                       value={firstname}
-                      error={errors[FormFields.Firstname]}
+                      error={errors[ProfileFormFields.Firstname]}
                       onChange={onChangeFirstname}
-                      onBlur={resetError}
-                      onFocus={resetError}
+                      onBlur={() => resetError(ProfileFormFields.Firstname)}
+                      onFocus={() => resetError(ProfileFormFields.Firstname)}
                     />
                   </div>
                   <div className="profile-list__item">
                     <GuiInput
-                      name={FormFields.Surname}
                       label="Surname"
                       placeholder="Enter your surname"
                       value={surname}
-                      error={errors[FormFields.Surname]}
+                      error={errors[ProfileFormFields.Surname]}
                       onChange={onChangeSurname}
-                      onBlur={resetError}
-                      onFocus={resetError}
+                      onBlur={() => resetError(ProfileFormFields.Surname)}
+                      onFocus={() => resetError(ProfileFormFields.Surname)}
                     />
                   </div>
                   <div className="profile-list__item">
                     <GuiInput
-                      name={FormFields.DisplayName}
                       label="Display name"
                       placeholder="Enter your display name"
                       value={displayName}
-                      error={errors[FormFields.DisplayName]}
+                      error={errors[ProfileFormFields.DisplayName]}
                       onChange={onChangeDisplayName}
-                      onBlur={resetError}
-                      onFocus={resetError}
+                      onBlur={() => resetError(ProfileFormFields.DisplayName)}
+                      onFocus={() => resetError(ProfileFormFields.DisplayName)}
                     />
                   </div>
                 </div>
                 <div className="profile-list__column">
                   <div className="profile-list__item">
                     <GuiInput
-                      name={FormFields.Email}
                       label="Email"
                       placeholder="Enter your email"
                       value={email}
-                      error={errors[FormFields.Email]}
+                      error={errors[ProfileFormFields.Email]}
                       onChange={onChangeEmail}
-                      onBlur={resetError}
-                      onFocus={resetError}
+                      onBlur={() => resetError(ProfileFormFields.Email)}
+                      onFocus={() => resetError(ProfileFormFields.Email)}
                     />
                   </div>
                 </div>
@@ -189,26 +183,24 @@ const ProfileForm = (): ReactElement => {
                 <div className="profile-list__column">
                   <div className="profile-list__item">
                     <GuiInput
-                      name={FormFields.OldPassword}
                       label="Old password"
                       placeholder="Enter your old password"
                       value={oldPassword}
-                      error={errors[FormFields.OldPassword]}
+                      error={errors[ProfileFormFields.OldPassword]}
                       onChange={onChangeOldPassword}
-                      onBlur={resetError}
-                      onFocus={resetError}
+                      onBlur={() => resetError(ProfileFormFields.OldPassword)}
+                      onFocus={() => resetError(ProfileFormFields.OldPassword)}
                     />
                   </div>
                   <div className="profile-list__item">
                     <GuiInput
-                      name={FormFields.Password}
                       label="New password"
                       placeholder="Enter your new password"
                       value={password}
-                      error={errors[FormFields.Password]}
+                      error={errors[ProfileFormFields.Password]}
                       onChange={onChangePassword}
-                      onBlur={resetError}
-                      onFocus={resetError}
+                      onBlur={() => resetError(ProfileFormFields.Password)}
+                      onFocus={() => resetError(ProfileFormFields.Password)}
                     />
                   </div>
                 </div>

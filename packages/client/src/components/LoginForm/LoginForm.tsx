@@ -1,14 +1,15 @@
-import './LoginForm.scss'
 import React, { FormEvent, ReactElement, useState } from 'react'
 import GuiInput from '../../ui/GuiInput/GuiInput'
 import GuiButton from '../../ui/GuiButton/GuiButton'
-import { FormFields } from '../../types/form'
+import { LoginErrorsObj, LoginFormFields } from '../../types/form'
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
+import './LoginForm.scss'
+import GuiLink from "../../ui/GuiLink/GuiLink";
 
 const LoginForm = (): ReactElement => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [errors, setErrors] = useState({
+  const [errors, setErrors] = useState<LoginErrorsObj>({
     email: null,
     password: null,
   })
@@ -29,7 +30,7 @@ const LoginForm = (): ReactElement => {
     e.preventDefault()
     const errorsObj = easyValidator.validateFields({ email, password })
 
-    // @ts-ignore
+
     setErrors({ ...errorsObj })
 
     if (easyValidator.isValid()) {
@@ -45,8 +46,8 @@ const LoginForm = (): ReactElement => {
     setPassword((e.target as HTMLInputElement).value)
   }
 
-  const resetError = (type: string) => {
-    const errorsObj = { ...errors, [type]: '' }
+  const resetError = (type: LoginFormFields) => {
+    const errorsObj = { ...errors, [type]: '' } as LoginErrorsObj
     setErrors(errorsObj)
   }
 
@@ -62,25 +63,23 @@ const LoginForm = (): ReactElement => {
 
           <form onSubmit={onSubmit}>
             <GuiInput
-              name={FormFields.Email}
               label="Email"
               placeholder="example@yandex.ru"
               value={email}
-              error={errors[FormFields.Email]}
+              error={errors[LoginFormFields.Email]}
               onChange={onChangeEmail}
-              onBlur={resetError}
-              onFocus={resetError}
+              onBlur={() => resetError(LoginFormFields.Email)}
+              onFocus={() => resetError(LoginFormFields.Email)}
             />
 
             <GuiInput
-              name={FormFields.Password}
               label="Password"
               placeholder="password"
               value={password}
-              error={errors[FormFields.Password]}
+              error={errors[LoginFormFields.Password]}
               onChange={onChangePassword}
-              onBlur={resetError}
-              onFocus={resetError}
+              onBlur={() => resetError(LoginFormFields.Password)}
+              onFocus={() => resetError(LoginFormFields.Password)}
             />
 
             <GuiButton
@@ -90,7 +89,7 @@ const LoginForm = (): ReactElement => {
             />
 
             <div className="login-form__info">
-              Don't have an account? <a className="base-link">Sign up</a>
+              Don't have an account? <GuiLink url={''} text="Sign up" />
             </div>
           </form>
         </div>

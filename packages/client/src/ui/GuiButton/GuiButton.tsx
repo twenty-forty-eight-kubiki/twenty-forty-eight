@@ -14,16 +14,10 @@ const GuiButton: FC<GuiButtonProps> = ({
   onClick,
   className,
 }): ReactElement => {
-  const btnClass = () => {
-    const classes = ['gui-button']
-    if (className) {
-      classes.push(className)
-    }
-    return classes.join(' ')
-  }
+
 
   return (
-    <button className={btnClass()} type={type} onClick={() => onClick}>
+    <button className={`gui-button ${className}`} type={type} onClick={() => onClick}>
       {btnText}
     </button>
   )

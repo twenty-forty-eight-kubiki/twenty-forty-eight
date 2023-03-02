@@ -33,37 +33,6 @@ body {
   background: $white-linen;
 }
 
-button {
-  cursor: pointer;
-  user-select: none;
-  border: none;
-  background-color: transparent;
-  outline: none;
-}
-
-a {
-  text-decoration: none;
-
-  cursor: pointer;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-
-  &:hover,
-  &:focus,
-  &:active {
-    outline: 0;
-  }
-}
-
-input {
-  border: none;
-  outline: none;
-}
-
-ul,
-ol {
-  list-style: none;
-}
 
 .container {
   max-width: 1200px;
