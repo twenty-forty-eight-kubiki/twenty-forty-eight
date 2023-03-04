@@ -4,7 +4,7 @@ import GuiInput from '../../ui/GuiInput/GuiInput'
 import GuiButton from '../../ui/GuiButton/GuiButton'
 import { RegistrationErrorsObj, RegistrationFormFields } from '../../types/form'
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
-import GuiLink from "../../ui/GuiLink/GuiLink";
+import GuiLink from '../../ui/GuiLink/GuiLink'
 
 const RegistrationForm = (): ReactElement => {
   const [email, setEmail] = useState('')
@@ -40,11 +40,12 @@ const RegistrationForm = (): ReactElement => {
     },
     confirmPassword: {
       isRequired: { msg: 'Это поле обязательно для заполнения' },
-      areEqual: { value: RegistrationFormFields.Password, msg: 'Поля не совпадают'},
+      areEqual: {
+        value: RegistrationFormFields.Password,
+        msg: 'Поля не совпадают',
+      },
     },
   }
-
-
 
   const easyValidator = new EasyValidator(schema)
 

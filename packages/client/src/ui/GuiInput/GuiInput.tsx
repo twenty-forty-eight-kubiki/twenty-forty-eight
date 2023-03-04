@@ -48,9 +48,11 @@ const GuiInput: FC<GuiInputProps> = ({
         />
       </label>
 
-      { !!props.error &&
-          <div v-if={props.error} className="gui-input-error">{props.error}</div>
-      }
+      {!!props.error && (
+        <div v-if={props.error} className="gui-input-error">
+          {props.error}
+        </div>
+      )}
     </div>
   )
 }

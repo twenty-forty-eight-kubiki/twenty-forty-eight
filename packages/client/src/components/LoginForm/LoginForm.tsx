@@ -4,7 +4,7 @@ import GuiButton from '../../ui/GuiButton/GuiButton'
 import { LoginErrorsObj, LoginFormFields } from '../../types/form'
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
 import './LoginForm.scss'
-import GuiLink from "../../ui/GuiLink/GuiLink";
+import GuiLink from '../../ui/GuiLink/GuiLink'
 
 const LoginForm = (): ReactElement => {
   const [email, setEmail] = useState('')
@@ -29,7 +29,6 @@ const LoginForm = (): ReactElement => {
   const onSubmit = (e: FormEvent) => {
     e.preventDefault()
     const errorsObj = easyValidator.validateFields({ email, password })
-
 
     setErrors({ ...errorsObj })
 
