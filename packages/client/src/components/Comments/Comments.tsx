@@ -37,4 +37,4 @@ const Comments = (props: { comments: CommentsProps[] }) => {
   )
 }
 
-export default Comments
+export default Comments;
