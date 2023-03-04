@@ -1,13 +1,13 @@
 @import '../../assets/scss/variables';
 
-.Topic {
+.topic {
   background-color: $hint-of-red;
   margin-bottom: 25px;
   padding: 15px;
   box-shadow: 2px 4px 10px 0 rgba(0, 0, 0, 0.25);
   border-radius: 30px;
 
-  .Topic__header {
+  &__header {
     display: flex;
     font-size: 16px;
     padding-bottom: 15px;
@@ -17,21 +17,20 @@
     .user-name {
       font-weight: bold;
     }
+  }
+  &__date {
+    font-size: 12px;
+  }
 
-    .Topic__date {
-      font-size: 12px;
-    }
-
-    .Topic__theme {
-      font-size: 18px;
-    }
+  &__theme {
+    font-size: 18px;
   }
 
   .icon {
     margin-right: 15px;
   }
 
-  .Topic__body {
+  &__body {
     font-size: 14px;
   }
 }

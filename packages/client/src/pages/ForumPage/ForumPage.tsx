@@ -12,12 +12,14 @@ interface CreateTopicProps {
 }
 
 const ForumPage = () => {
-    const [topics, setTopics] = useState<CreateTopicProps[]>([])
-    const [isCreateTopicModalOpened, setIsCreateTopicModalOpened] = useState<boolean>(false)
-    const [post, setPost] = useState<Omit<CreateTopicProps, 'userId' | 'id'>>({
+    const initialPost = {
         title: '',
         body: '',
-    })
+    };
+    const [topics, setTopics] = useState<CreateTopicProps[]>([])
+    const [isCreateTopicModalOpened, setIsCreateTopicModalOpened] = useState<boolean>(false);
+    const [post, setPost] = useState<Omit<CreateTopicProps, 'userId' | 'id'>>(initialPost);
+
 
     useEffect(() => {
         fetchPosts().then()
@@ -42,23 +44,23 @@ const ForumPage = () => {
             {...post, id: Date.now(), userId: Math.floor(Math.random() * 10)},
         ])
         setIsCreateTopicModalOpened(false)
-        setPost({title: '', body: ''})
+        setPost(initialPost)
     }
 
     return (
-        <div className="ForumPage">
+        <div className="forum-page">
             <h2>Forum</h2>
             {topics.map(item => {
                 return (
                     <ForumTopic header={item.title} theme={item.body} key={item.id}/>
                 )
             })}
-            <div className="ForumPage__button">
+            <div className="forum-page__button">
                 <GuiButton onClick={() => toggleModal} btnText="Создать тему"/>
             </div>
 
             {isCreateTopicModalOpened && (
-                <div className="ForumPage__modal">
+                <div className="forum-page__modal">
                     <ModalCreateForumTopic onClose={toggleModal}>
                         <form onSubmit={createTopic}>
                             <label htmlFor="postTitle">Тема форума</label>

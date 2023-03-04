@@ -48,7 +48,7 @@ const TopicPage = () => {
   }
 
   return (
-    <div className="TopicPage">
+    <div className="topic-page">
       <Topic topic={topic} />
       <Comments comments={comments} />
     </div>

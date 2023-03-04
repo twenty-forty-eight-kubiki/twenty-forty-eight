@@ -12,18 +12,18 @@ interface TopicProps {
 
 const Topic = (props: { topic: TopicProps }) => {
   return (
-    <div className="Topic">
-      <div className="Topic__header">
+    <div className="topic">
+      <div className="topic__header">
         <Icon img="" />
-        <div className="Topic__info">
+        <div className="topic__info">
           <div>
             <span className="user-name">{props.topic.user_name}</span>, &nbsp;
-            <span className="Topic__date">{props.topic.date}</span>
+            <span className="topic__date">{props.topic.date}</span>
           </div>
-          <p className="Topic__theme">{props.topic.title}</p>
+          <p className="topic__theme">{props.topic.title}</p>
         </div>
       </div>
-      <div className="Topic__body">{props.topic.body}</div>
+      <div className="topic__body">{props.topic.body}</div>
     </div>
   )
 }

@@ -14,22 +14,22 @@ interface CommentsProps {
 
 const Comments = (props: { comments: CommentsProps[] }) => {
   return (
-    <div className="Comments">
+    <div className="comments">
       <h4>Comments</h4>
       {props.comments.map(comment => {
         return (
           <div style={{ marginBottom: 30 }}>
-            <div className="Comments__header">
+            <div className="comments__header">
               <Icon img="" />
-              <div className="Comments__info">
+              <div className="comments__info">
                 <div>
                   <span className="user-name">{comment.user_name}</span>, &nbsp;
-                  <span className="Comments__date">{comment.date}</span>
+                  <span className="comments__date">{comment.date}</span>
                 </div>
-                <div className="Comments__title">{comment.name}</div>
+                <div className="comments__title">{comment.name}</div>
               </div>
             </div>
-            <div className="Comments__body">{comment.body}</div>
+            <div className="comments__body">{comment.body}</div>
           </div>
         )
       })}
@@ -37,4 +37,4 @@ const Comments = (props: { comments: CommentsProps[] }) => {
   )
 }
 
-export default Comments;
+export default Comments
