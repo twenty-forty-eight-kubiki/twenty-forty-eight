@@ -1,15 +1,24 @@
 import './GuiButton.scss'
-import { MouseEventHandler } from 'react'
+import React, { FC, ReactElement } from 'react'
 
-interface GuiButtonProps {
-  children?: string
-  clickHandler?: MouseEventHandler
+type GuiButtonProps = {
+  type?: 'button' | 'submit'
+  btnText: string
+  className?: string
+  onClick?: () => void
 }
 
-const GuiButton = ({ children, clickHandler }: GuiButtonProps) => {
+const GuiButton: FC<GuiButtonProps> = ({
+  type = 'button',
+  btnText,
+  onClick,
+  className,
+}): ReactElement => {
+
+
   return (
-    <button className="gui-button" onClick={clickHandler}>
-      {children}
+    <button className={`gui-button ${className}`} type={type} onClick={() => onClick}>
+      {btnText}
     </button>
   )
 }
