@@ -1,4 +1,4 @@
-import React, {SyntheticEvent, useEffect, useState} from 'react'
+import React, { SyntheticEvent, useEffect, useState } from 'react'
 import ForumTopic from '../../components/ForumTopic/ForumTopic'
 import GuiButton from '../../ui/GuiButton/GuiButton'
 import ModalCreateForumTopic from '../../components/ModalCreateForumTopic/ModalCreateForumTopic'
@@ -21,14 +21,14 @@ const ForumPage = () => {
   })
 
   useEffect(() => {
-    fetchPosts().then();
+    fetchPosts().then()
   }, [])
 
   const fetchPosts = async () => {
-      const result = fetch(
-          'https://jsonplaceholder.typicode.com/posts?_limit=5'
-      ).then(res => res.json())
-      setTopics(await result)
+    const result = fetch(
+      'https://jsonplaceholder.typicode.com/posts?_limit=5'
+    ).then(res => res.json())
+    setTopics(await result)
   }
 
   const toggleModal = (event: SyntheticEvent) => {
