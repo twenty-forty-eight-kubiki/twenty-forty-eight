@@ -1,0 +1,23 @@
+@charset "UTF-8";
+/**
+ * Colors
+ * Значения переменных цвета в HEX указываются в верхнем регистре.
+ * Название переменной конкретного цвета генерируется на http://chir.ag/projects/name-that-color/
+ */
+.icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #d6d4d0;
+  background-color: #f8f6f6;
+}
+.icon img {
+  width: auto;
+  min-width: 100%;
+  height: auto;
+  min-height: 100%;
+  opacity: 0;
+}
+
+/*# sourceMappingURL=Icon.css.map */

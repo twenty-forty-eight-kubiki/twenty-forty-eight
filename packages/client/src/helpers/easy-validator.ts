@@ -45,7 +45,7 @@ export default class EasyValidator {
   }
 
   isValid() {
-    const values = Object.values(this.errors);
+    const values = Object.values(this.errors)
     return values.every(value => value === null)
   }
 }

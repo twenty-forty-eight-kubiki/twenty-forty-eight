@@ -1,0 +1,58 @@
+@charset "UTF-8";
+/**
+ * Colors
+ * Значения переменных цвета в HEX указываются в верхнем регистре.
+ * Название переменной конкретного цвета генерируется на http://chir.ag/projects/name-that-color/
+ */
+.modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal .modal-inner {
+  width: 400px;
+  height: auto;
+  background-color: #faf8ef;
+  margin: 150px auto;
+  border-radius: 30px;
+  padding: 15px;
+}
+.modal .modal__header {
+  font-size: 18px;
+  text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  padding-bottom: 15px;
+}
+.modal .button__close {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  padding: 0;
+  font-size: 24px;
+}
+.modal label {
+  width: 100%;
+  display: block;
+  font-size: 14px;
+  padding-left: 10px;
+  margin-bottom: 5px;
+}
+.modal .FormPage__input {
+  width: 100%;
+  line-height: 36px;
+  border: 1px solid #d6d4d0;
+  border-radius: 16px;
+  cursor: pointer;
+  padding: 0 10px;
+  margin-bottom: 15px;
+  background-color: #fff;
+}
+.modal .FormPage__input:hover {
+  box-shadow: 2px 4px 10px 0 rgba(0, 0, 0, 0.25);
+}
+
+/*# sourceMappingURL=ModalCreateForumTopic.css.map */
