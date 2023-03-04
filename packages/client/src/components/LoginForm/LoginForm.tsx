@@ -3,8 +3,8 @@ import GuiInput from '../../ui/GuiInput/GuiInput'
 import GuiButton from '../../ui/GuiButton/GuiButton'
 import { LoginErrorsObj, LoginFormFields } from '../../types/form'
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
-import './LoginForm.scss'
 import GuiLink from '../../ui/GuiLink/GuiLink'
+import './LoginForm.scss'
 
 const LoginForm = (): ReactElement => {
   const [email, setEmail] = useState('')

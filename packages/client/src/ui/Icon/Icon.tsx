@@ -1,12 +1,12 @@
 import React from 'react'
 import './Icon.scss'
 
-const Icon = () => {
-  return (
-    <div className="icon">
-      <img src="" alt="" className="icon__img" />
-    </div>
-  )
+const Icon = (props: { img: string }) => {
+    return (
+        <div className="icon">
+            <img src={props.img} alt="" className="icon__img"/>
+        </div>
+    )
 }
 
 export default Icon
