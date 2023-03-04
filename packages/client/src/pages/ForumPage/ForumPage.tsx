@@ -13,7 +13,7 @@ interface CreateTopicProps {
 
 const ForumPage = () => {
   const [topics, setTopics] = useState<CreateTopicProps[]>([])
-  const [modal, setModal] = useState<boolean>(false)
+  const [isCreateTopicModalOpened, setIsCreateTopicModalOpened] = useState<boolean>(false)
   const [post, setPost] = useState<Omit<CreateTopicProps, 'userId' | 'id'>>({
     title: '',
     body: '',
@@ -32,7 +32,7 @@ const ForumPage = () => {
 
   const toggleModal = (event: { stopPropagation: () => void }) => {
     event.stopPropagation()
-    setModal(!modal)
+    setIsCreateTopicModalOpened(!isCreateTopicModalOpened)
   }
 
   const createTopic = (event: { preventDefault: () => void }) => {
@@ -41,7 +41,7 @@ const ForumPage = () => {
       ...topics,
       { ...post, id: Date.now(), userId: Math.floor(Math.random() * 10) },
     ])
-    setModal(false)
+    setIsCreateTopicModalOpened(false)
     setPost({ title: '', body: '' })
   }
 
@@ -57,7 +57,7 @@ const ForumPage = () => {
         <GuiButton onClick={() => toggleModal} btnText="Создать тему" />
       </div>
 
-      {modal && (
+      {isCreateTopicModalOpened && (
         <div className="ForumPage__modal">
           <ModalCreateForumTopic modalClose={toggleModal}>
             <form onSubmit={createTopic}>
