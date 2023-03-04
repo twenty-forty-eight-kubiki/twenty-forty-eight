@@ -15,18 +15,33 @@
     padding: 20px;
     font-size: 20px;
   }
-}
 
-.ForumPage__button {
-  padding: 30px;
-  text-align: right;
-  background-color: $hint-of-red;
+  &__button {
+    padding: 30px;
+    text-align: right;
+    background-color: $hint-of-red;
 
-  button {
-    border-radius: 3px;
-    box-shadow: 2px 4px 10px 0 rgba(0, 0, 0, 0.25);
-    color: #fff;
-    padding: 0 20px;
-    width: auto;
+    button {
+      border-radius: 3px;
+      box-shadow: 2px 4px 10px 0 rgba(0, 0, 0, 0.25);
+      color: #fff;
+      padding: 0 20px;
+      width: auto;
+    }
+  }
+
+  &__input {
+    width: 100%;
+    line-height: 36px;
+    border: 1px solid $timberwolf;
+    border-radius: 16px;
+    cursor: pointer;
+    padding: 0 10px;
+    margin-bottom: 15px;
+    background-color: #fff;
+
+    &:hover {
+      box-shadow: 2px 4px 10px 0 rgba(0, 0, 0, 0.25);
+    }
   }
 }

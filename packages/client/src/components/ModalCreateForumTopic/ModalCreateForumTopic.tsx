@@ -1,17 +1,17 @@
-import React from 'react'
+import React, {SyntheticEvent} from 'react'
 import './ModalCreateForumTopic.scss'
 
 const ModalCreateForumTopic = (props: {
-  modalClose: (e: { stopPropagation: () => void }) => void
+  onClose: (e: SyntheticEvent) => void
   children: any
 }) => {
   return (
     <div>
-      <div className="modal" onClick={props.modalClose}>
+      <div className="modal" onClick={props.onClose}>
         <div className="modal-inner" onClick={e => e.stopPropagation()}>
           <div className="modal__header">
             Создать тему форума
-            <button className="button__close" onClick={props.modalClose}>
+            <button className="button__close" onClick={props.onClose}>
               &times;
             </button>
           </div>

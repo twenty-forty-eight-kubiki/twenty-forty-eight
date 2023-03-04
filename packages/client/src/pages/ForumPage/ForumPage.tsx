@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, {SyntheticEvent, useEffect, useState} from 'react'
 import ForumTopic from '../../components/ForumTopic/ForumTopic'
 import GuiButton from '../../ui/GuiButton/GuiButton'
 import ModalCreateForumTopic from '../../components/ModalCreateForumTopic/ModalCreateForumTopic'
@@ -13,29 +13,30 @@ interface CreateTopicProps {
 
 const ForumPage = () => {
   const [topics, setTopics] = useState<CreateTopicProps[]>([])
-  const [isCreateTopicModalOpened, setIsCreateTopicModalOpened] = useState<boolean>(false)
+  const [isCreateTopicModalOpened, setIsCreateTopicModalOpened] =
+    useState<boolean>(false)
   const [post, setPost] = useState<Omit<CreateTopicProps, 'userId' | 'id'>>({
     title: '',
     body: '',
   })
 
   useEffect(() => {
-    fetchPost().then()
+    fetchPosts().then();
   }, [])
 
-  const fetchPost = async () => {
-    const result = await fetch(
-      'https://jsonplaceholder.typicode.com/posts?_limit=5'
-    ).then(res => res.json())
-    setTopics(result)
+  const fetchPosts = async () => {
+      const result = fetch(
+          'https://jsonplaceholder.typicode.com/posts?_limit=5'
+      ).then(res => res.json())
+      setTopics(await result)
   }
 
-  const toggleModal = (event: { stopPropagation: () => void }) => {
+  const toggleModal = (event: SyntheticEvent) => {
     event.stopPropagation()
     setIsCreateTopicModalOpened(!isCreateTopicModalOpened)
   }
 
-  const createTopic = (event: { preventDefault: () => void }) => {
+  const createTopic = (event: SyntheticEvent) => {
     event.preventDefault()
     setTopics([
       ...topics,
@@ -59,7 +60,7 @@ const ForumPage = () => {
 
       {isCreateTopicModalOpened && (
         <div className="ForumPage__modal">
-          <ModalCreateForumTopic modalClose={toggleModal}>
+          <ModalCreateForumTopic onClose={toggleModal}>
             <form onSubmit={createTopic}>
               <label htmlFor="postTitle">Тема форума</label>
               <input
