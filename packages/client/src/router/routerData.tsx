@@ -1,14 +1,22 @@
 import LoginPage from '../pages/LoginPage/LoginPage'
 import RegistrationPage from '../pages/RegistrationPage/RegistrationPage'
 import ForumPage from '../pages/ForumPage/ForumPage'
+import { ReactElement } from "react";
 
-export const routes = [
+export interface IRoute {
+  id: number
+  path: string
+  exact: boolean
+  component: () => ReactElement
+  private: boolean
+}
+
+export const routes: Array<IRoute> = [
   {
     id: 1,
     path: '/',
     exact: true,
     component: LoginPage,
-    title: 'Login page',
     private: false,
   },
   {
@@ -16,7 +24,6 @@ export const routes = [
     path: '/registration',
     exact: true,
     component: RegistrationPage,
-    title: 'Registration page',
     private: false,
   },
   {
@@ -24,7 +31,6 @@ export const routes = [
     path: '/forum',
     exact: true,
     component: ForumPage,
-    title: 'Forum page',
     private: true,
   },
 ]

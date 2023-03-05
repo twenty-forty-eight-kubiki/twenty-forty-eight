@@ -2,7 +2,7 @@ import { Route, Redirect } from 'react-router-dom'
 import React, { FC, ReactElement } from 'react'
 
 type PrivateRouteProps = {
-  component: any
+  component: () => ReactElement
   isAuth?: boolean
   key: number
   path: string
