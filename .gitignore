@@ -5,3 +5,6 @@ node_modules/
 dist
 tmp
 .DS_Store
+
+*.css.map
+*.css

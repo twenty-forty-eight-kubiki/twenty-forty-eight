@@ -27,7 +27,6 @@ export type RegistrationErrorsObj =
       confirmPassword: string | null
     }
   | Record<string, never>
-
 export enum ProfileFormFields {
   Firstname = 'firstname',
   Surname = 'surname',
