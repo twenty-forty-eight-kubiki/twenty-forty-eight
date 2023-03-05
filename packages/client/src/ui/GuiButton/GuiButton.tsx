@@ -18,7 +18,7 @@ const GuiButton: FC<GuiButtonProps> = ({
     <button
       className={`gui-button ${className}`}
       type={type}
-      onClick={() => onClick}>
+      onClick={onClick}>
       {btnText}
     </button>
   )
