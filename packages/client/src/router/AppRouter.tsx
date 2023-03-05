@@ -1,12 +1,12 @@
 import { Switch, Route, Redirect } from 'react-router-dom'
-import {IRoute, routes} from './routerData'
+import { IRoute, routes } from './routerData'
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute'
 
 const AppRouter = () => {
   return (
     <div>
       <Switch>
-        { routes.map((route: IRoute) => {
+        {routes.map((route: IRoute) => {
           if (route.private) {
             return (
               <PrivateRoute
@@ -27,7 +27,7 @@ const AppRouter = () => {
               />
             )
           }
-        }) }
+        })}
         <Redirect to="/" />
       </Switch>
     </div>

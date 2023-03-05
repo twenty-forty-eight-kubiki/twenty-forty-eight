@@ -1,7 +1,7 @@
 import LoginPage from '../pages/LoginPage/LoginPage'
 import RegistrationPage from '../pages/RegistrationPage/RegistrationPage'
 import ForumPage from '../pages/ForumPage/ForumPage'
-import { ReactElement } from "react";
+import { ReactElement } from 'react'
 
 export interface IRoute {
   id: number
