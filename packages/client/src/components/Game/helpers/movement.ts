@@ -1,7 +1,13 @@
 import { Board } from '../common/types'
 import produce from 'immer'
 
-export const moveTile = (board: Board, x: number, y: number, newX: number, newY: number) => {
+export const moveTile = (
+  board: Board,
+  x: number,
+  y: number,
+  newX: number,
+  newY: number
+) => {
   if (x !== newX || y !== newY) {
     return produce(board, draft => {
       draft[newX][newY] = draft[x][y]
@@ -12,7 +18,13 @@ export const moveTile = (board: Board, x: number, y: number, newX: number, newY:
   return board
 }
 
-export const mergeTile = (board: Board, x: number, y: number, mergeX: number, mergeY: number) => {
+export const mergeTile = (
+  board: Board,
+  x: number,
+  y: number,
+  mergeX: number,
+  mergeY: number
+) => {
   if (board[x][y] === board[mergeX][mergeY]) {
     return produce(board, draft => {
       draft[x][y] = draft[x][y] * 2
@@ -132,7 +144,7 @@ export const moveDown = (board: Board): Board => {
   let newBoard = board
 
   for (let x = 0; x < newBoard.length; x++) {
-    for (let y = (newBoard[x].length - 1); y >= 0; y--) {
+    for (let y = newBoard[x].length - 1; y >= 0; y--) {
       if (newBoard[x][y]) {
         let topY = -1
 
@@ -171,7 +183,6 @@ export const moveLeft = (board: Board): Board => {
 
   for (let y = 0; y < newBoard.length; y++) {
     for (let x = 0; x < newBoard.length; x++) {
-
       if (newBoard[x][y]) {
         let leftX = -1
 
@@ -209,7 +220,7 @@ export const moveRight = (board: Board): Board => {
   let newBoard = board
 
   for (let y = 0; y < newBoard.length; y++) {
-    for (let x = (newBoard.length - 1); x >= 0; x--) {
+    for (let x = newBoard.length - 1; x >= 0; x--) {
       if (newBoard[x][y]) {
         let rightX = -1
 
@@ -242,5 +253,3 @@ export const moveRight = (board: Board): Board => {
 
   return newBoard
 }
-
-

@@ -1,7 +1,6 @@
 import Board from '../../components/Game/components/Board/Board'
 import './GamePage.scss'
 
-
 const GamePage = () => {
   return (
     <div className="board-page">
@@ -10,4 +9,4 @@ const GamePage = () => {
   )
 }
 
-export default GamePage;
+export default GamePage

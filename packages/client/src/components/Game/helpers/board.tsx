@@ -3,7 +3,16 @@ import { getRandomInt } from './random'
 import produce from 'immer'
 import { GameState } from '../common/states'
 import { Direction } from '../common/direction'
-import { canMoveDown, canMoveLeft, canMoveRight, canMoveUp, moveDown, moveLeft, moveRight, moveUp } from './movement'
+import {
+  canMoveDown,
+  canMoveLeft,
+  canMoveRight,
+  canMoveUp,
+  moveDown,
+  moveLeft,
+  moveRight,
+  moveUp,
+} from './movement'
 
 export const getEmptyCell = (board: Board) => {
   const empties = []
@@ -29,7 +38,9 @@ export const randomNewTile = (board: Board) => {
 }
 
 export const generateBoard = (size: number) => {
-  return Array(size).fill(1).map(() => Array(size).fill(0))
+  return Array(size)
+    .fill(1)
+    .map(() => Array(size).fill(0))
 }
 
 export const initBoard = (board: Board) => {
@@ -51,7 +62,6 @@ export const resetBoard = (board: Board) => {
         draft[x][y] = 0
       }
     }
-
   })
 }
 

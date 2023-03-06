@@ -8,7 +8,7 @@ import {
   generateBoard,
   initBoard,
   randomNewTile,
-  resetBoard
+  resetBoard,
 } from '../../helpers/board'
 
 import { useGameConfig } from '../../hooks/useGameConfig'
@@ -55,14 +55,21 @@ const Board = memo(() => {
   return (
     <Canvas height={boardSize} width={boardSize} dpr={1}>
       <Grid />
-      {board.map((row, rowIndex) => row.map((column, columnIndex) => {
-        if (!column) {
-          return null
-        }
-        return <Tile key={`${columnIndex}${rowIndex}`} value={column}
-         y={columnIndex * tileSize + (columnIndex * padding) + padding}
-         x={rowIndex * tileSize + (rowIndex * padding) + padding} />
-      }))}
+      {board.map((row, rowIndex) =>
+        row.map((column, columnIndex) => {
+          if (!column) {
+            return null
+          }
+          return (
+            <Tile
+              key={`${columnIndex}${rowIndex}`}
+              value={column}
+              y={columnIndex * tileSize + columnIndex * padding + padding}
+              x={rowIndex * tileSize + rowIndex * padding + padding}
+            />
+          )
+        })
+      )}
     </Canvas>
   )
 })

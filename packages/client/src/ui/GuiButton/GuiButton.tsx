@@ -15,10 +15,7 @@ const GuiButton: FC<GuiButtonProps> = ({
   className,
 }): ReactElement => {
   return (
-    <button
-      className={`gui-button ${className}`}
-      type={type}
-      onClick={onClick}>
+    <button className={`gui-button ${className}`} type={type} onClick={onClick}>
       {btnText}
     </button>
   )

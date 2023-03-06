@@ -4,9 +4,9 @@ import { useGameConfig } from '../../hooks/useGameConfig'
 import Text from '../Text/Text'
 
 export type TileProps = {
-  x: number;
-  y: number;
-  value: number;
+  x: number
+  y: number
+  value: number
 }
 
 const colorTile: any = {
@@ -21,7 +21,7 @@ const colorTile: any = {
     '256': '#edcc61',
     '512': '#edc850',
     '1024': '#edc53f',
-    '2048': '#edc22e'
+    '2048': '#edc22e',
   },
   textColor: {
     '2': '#776e65',
@@ -34,8 +34,8 @@ const colorTile: any = {
     '256': '#f9f6f2',
     '512': '#f9f6f2',
     '1024': '#f9f6f2',
-    '2048': '#f9f6f2'
-  }
+    '2048': '#f9f6f2',
+  },
 }
 
 const Tile: FC<TileProps> = ({ x, y, value }) => {
@@ -43,9 +43,20 @@ const Tile: FC<TileProps> = ({ x, y, value }) => {
 
   return (
     <>
-      <RoundedRectangle x={x} y={y} width={tileSize} height={tileSize} radius={5}
-        color={colorTile.backgroundColor[String(value)]} />
-      <Text text={String(value)} x={x + tileSize / 2} y={y + tileSize / 2} color={colorTile.textColor[String(value)]} />
+      <RoundedRectangle
+        x={x}
+        y={y}
+        width={tileSize}
+        height={tileSize}
+        radius={5}
+        color={colorTile.backgroundColor[String(value)]}
+      />
+      <Text
+        text={String(value)}
+        x={x + tileSize / 2}
+        y={y + tileSize / 2}
+        color={colorTile.textColor[String(value)]}
+      />
     </>
   )
 }
