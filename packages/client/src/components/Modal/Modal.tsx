@@ -1,4 +1,5 @@
-import React, { FC, ReactNode } from 'react'
+import React, { FC, ReactNode, useEffect } from 'react'
+import './Modal.scss'
 
 interface ModalProps {
   isVisible: boolean
@@ -6,8 +7,7 @@ interface ModalProps {
   onClose: () => void
 }
 
-type Props = FC<ModalProps>
-const Modal: Props = ({ isVisible = false, content, onClose }) => {
+const Modal = ({ isVisible = false, content, onClose }: ModalProps) => {
   const keydownHandler = (e: KeyboardEvent) => {
     switch (e.key) {
       case 'Escape':
@@ -17,12 +17,12 @@ const Modal: Props = ({ isVisible = false, content, onClose }) => {
     }
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.addEventListener('keydown', keydownHandler)
     return () => document.removeEventListener('keydown', keydownHandler)
   })
 
-  return !isVisible ? null : (
+  return isVisible ? (
     <div className="modal" onClick={onClose}>
       <div className="modal__wrapper">
         <div className="modal__overlay"></div>
@@ -52,7 +52,7 @@ const Modal: Props = ({ isVisible = false, content, onClose }) => {
         </div>
       </div>
     </div>
-  )
+  ) : null
 }
 
 export default Modal

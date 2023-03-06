@@ -1,6 +1,7 @@
 import './ProfileList.scss'
 import React, { FC } from 'react'
 import GuiButton from '../../ui/GuiButton/GuiButton'
+import './ProfileList.scss'
 
 interface ProfileProps {
   firstname?: string
@@ -10,8 +11,7 @@ interface ProfileProps {
   avatar?: string
 }
 
-type Props = FC<ProfileProps>
-const ProfileList: Props = props => {
+const ProfileList = (props: ProfileProps) => {
   const { firstname, surname, email, displayName, avatar } = props
 
   return (

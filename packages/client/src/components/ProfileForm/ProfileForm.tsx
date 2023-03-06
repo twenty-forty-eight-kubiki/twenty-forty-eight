@@ -1,5 +1,3 @@
-import '../ProfileList/ProfileList.scss'
-import '../Modal/Modal.scss'
 import React, { FormEvent, ReactElement, useState } from 'react'
 import GuiButton from '../../ui/GuiButton/GuiButton'
 import GuiInput from '../../ui/GuiInput/GuiInput'
@@ -7,6 +5,7 @@ import Modal from '../Modal/Modal'
 import FileModal from '../FileModal/FileModal'
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
 import { ProfileFormFields, ProfileErrorsObj } from '../../types/form'
+import '../ProfileList/ProfileList.scss'
 
 const ProfileForm = (): ReactElement => {
   const [isModal, setModal] = useState(false)
@@ -16,7 +15,7 @@ const ProfileForm = (): ReactElement => {
   const [firstname, setFirstname] = useState('')
   const [displayName, setDisplayName] = useState('')
   const [surname, setSurname] = useState('')
-  const [avatar] = useState('img/user-icon.png')
+  const [avatar] = useState('icons/user-icon.svg')
   const [errors, setErrors] = useState<ProfileErrorsObj>({
     firstname: '',
     surname: '',
@@ -80,31 +79,31 @@ const ProfileForm = (): ReactElement => {
     }
   }
 
-  const onChangeFirstname = (e: FormEvent) => {
-    setFirstname((e.target as HTMLInputElement).value)
+  const onChangeFirstname = (event: FormEvent<HTMLInputElement>) => {
+    setFirstname(event.currentTarget.value)
   }
 
-  const onChangeSurname = (e: FormEvent) => {
-    setSurname((e.target as HTMLInputElement).value)
+  const onChangeSurname = (e: React.FormEvent<HTMLInputElement>) => {
+    setSurname(e.currentTarget.value)
   }
 
-  const onChangeEmail = (e: FormEvent) => {
-    setEmail((e.target as HTMLInputElement).value)
+  const onChangeEmail = (e: React.FormEvent<HTMLInputElement>) => {
+    setEmail(e.currentTarget.value)
   }
 
-  const onChangePassword = (e: FormEvent) => {
-    setPassword((e.target as HTMLInputElement).value)
+  const onChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
+    setPassword(e.currentTarget.value)
   }
 
-  const onChangeDisplayName = (e: FormEvent) => {
-    setDisplayName((e.target as HTMLInputElement).value)
+  const onChangeDisplayName = (e: React.FormEvent<HTMLInputElement>) => {
+    setDisplayName(e.currentTarget.value)
   }
 
-  const onChangeOldPassword = (e: FormEvent) => {
-    setOldPassword((e.target as HTMLInputElement).value)
+  const onChangeOldPassword = (e: FormEvent<HTMLInputElement>) => {
+    setOldPassword(e.currentTarget.value)
   }
 
-  const resetError = (fieldName: string) => {
+  const resetError = (fieldName: ProfileFormFields) => {
     const errorsObj = { ...errors, [fieldName]: '' } as ProfileErrorsObj
     setErrors(errorsObj)
   }

@@ -11,7 +11,7 @@ const ProfilePage = () => {
             surname="Ivanov"
             email="test@test.ru"
             displayName="ivan"
-            avatar="img/user-icon.png"
+            avatar="icons/user-icon.svg"
           />
         </div>
       </div>
