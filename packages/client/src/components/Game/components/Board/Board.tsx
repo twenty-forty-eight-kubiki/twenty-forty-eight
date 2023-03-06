@@ -1,96 +1,67 @@
 import React, { memo, useEffect, useState } from 'react'
-import { Canvas } from '../Context/Context'
+import { Canvas } from '../Canvas/Canvas'
 import Grid from '../Grid/Grid'
-import { useGameValue } from '../../../../hooks/useGameValue'
 import Tile from '../Tile/Tile'
-import { getEmptyCell, isGameEnd, randomNewTile, resetBoard } from '../../helpers/board'
-import { randomInt } from '../../helpers/random'
 import {
-  canMoveDown,
-  canMoveLeft,
-  canMoveRight,
-  canMoveUp,
-  moveDown,
-  moveLeft,
-  moveRight,
-  moveUp
-} from '../../helpers/movement'
+  checkBoardStatus,
+  directionMove,
+  generateBoard,
+  initBoard,
+  randomNewTile,
+  resetBoard
+} from '../../helpers/board'
+
+import { useGameConfig } from '../../hooks/useGameConfig'
+import { GameState } from '../../common/states'
+import { directionByKey } from '../../common/direction'
 
 const Board = memo(() => {
-  const { boardSize, countTiles, tileSize, padding } = useGameValue()
+  const { boardSize, countTiles, tileSize, padding } = useGameConfig()
 
-  const [board, setBoard] = useState(Array(countTiles).fill(1).map(() => Array(countTiles).fill(0)))
+  const [board, setBoard] = useState(generateBoard(countTiles))
 
   useEffect(() => {
-    const directionControls = (event: any) => {
-      switch (event.key) {
-        case 'ArrowUp': {
-          if (canMoveUp(board)) {
-            setBoard([...moveUp(board)])
-            setBoard([...randomNewTile(board)])
-          }
-          break
-        }
-        case 'ArrowLeft': {
-          if (canMoveLeft(board)) {
-            setBoard([...moveLeft(board)])
-            setBoard([...randomNewTile(board)])
-          }
-          break
-        }
-        case 'ArrowDown': {
-          if (canMoveDown(board)) {
-            setBoard([...moveDown(board)])
-            setBoard([...randomNewTile(board)])
-          }
-          break
-        }
-        case 'ArrowRight': {
-          if (canMoveRight(board)) {
-            setBoard([...moveRight(board)])
-            setBoard([...randomNewTile(board)])
-          }
-          break
-        }
-      }
+    const handleMove = (event: any) => {
+      const direction = directionByKey[event.key]
 
+      if (direction) {
+        const newBoard = directionMove(board, direction)
+        setBoard(randomNewTile(newBoard))
+      }
     }
 
-    document.addEventListener('keyup', directionControls)
+    document.addEventListener('keyup', handleMove)
 
-    return () => document.removeEventListener('keyup', directionControls)
+    return () => document.removeEventListener('keyup', handleMove)
+  }, [board])
+
+  useEffect(() => {
+    const startBoard = initBoard(board)
+
+    setBoard(startBoard)
   }, [])
 
   useEffect(() => {
-    const startBoard = resetBoard(board)
+    switch (checkBoardStatus(board)) {
+      case GameState.Win: {
+        console.log('Вы выиграли')
 
-    const { x: firstX, y: firstY } = getEmptyCell(startBoard)
-    startBoard[firstX][firstY] = randomInt(1, 2) * 2
-
-    const { x: secondX, y: secondY } = getEmptyCell(startBoard)
-    startBoard[secondX][secondY] = randomInt(1, 2) * 2
-
-    setBoard([...startBoard])
-  }, [])
-
-  useEffect(() => {
-    if (isGameEnd(board)) {
-      console.log('Вы выиграли')
-
-      setBoard([...resetBoard(board)])
+        setBoard(resetBoard(board))
+        break
+      }
     }
   }, [board])
 
   return (
-    <Canvas height={boardSize} width={boardSize} dpr={1} isAnimating={true}>
+    <Canvas height={boardSize} width={boardSize} dpr={1}>
       <Grid />
       {board.map((row, rowIndex) => row.map((column, columnIndex) => {
         if (!column) {
           return null
         }
         return <Tile key={`${columnIndex}${rowIndex}`} value={column}
-                     y={columnIndex * tileSize + (columnIndex * padding) + padding}
-                     x={rowIndex * tileSize + (rowIndex * padding) + padding} />
+         y={columnIndex * tileSize + (columnIndex * padding) + padding}
+         x={rowIndex * tileSize + (rowIndex * padding) + padding} />
       }))}
     </Canvas>
   )

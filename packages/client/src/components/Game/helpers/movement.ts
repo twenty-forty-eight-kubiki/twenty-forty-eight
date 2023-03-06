@@ -1,17 +1,26 @@
-import { Board } from '../common/allias'
+import { Board } from '../common/types'
+import produce from 'immer'
 
 export const moveTile = (board: Board, x: number, y: number, newX: number, newY: number) => {
   if (x !== newX || y !== newY) {
-    board[newX][newY] = board[x][y]
-    board[x][y] = 0
+    return produce(board, draft => {
+      draft[newX][newY] = draft[x][y]
+      draft[x][y] = 0
+    })
   }
+
+  return board
 }
 
 export const mergeTile = (board: Board, x: number, y: number, mergeX: number, mergeY: number) => {
   if (board[x][y] === board[mergeX][mergeY]) {
-    board[x][y] = board[x][y] * 2
-    board[mergeX][mergeY] = 0
+    return produce(board, draft => {
+      draft[x][y] = draft[x][y] * 2
+      draft[mergeX][mergeY] = 0
+    })
   }
+
+  return board
 }
 
 export const canMoveUp = (board: Board): boolean => {
@@ -82,149 +91,156 @@ export const canMoveRight = (board: Board): boolean => {
 }
 
 export const moveUp = (board: Board): Board => {
-  for (let x = 0; x < board.length; x++) {
-    for (let y = 0; y < board[x].length; y++) {
-      if (board[x][y]) {
+  let newBoard = board
+
+  for (let x = 0; x < newBoard.length; x++) {
+    for (let y = 0; y < newBoard[x].length; y++) {
+      if (newBoard[x][y]) {
         let bottomY = -1
 
-        for (let bottom = 0; bottom < board[x].length; bottom++) {
+        for (let bottom = 0; bottom < newBoard[x].length; bottom++) {
           if (bottom <= y) {
             continue
           }
 
-          if (bottomY === -1 && board[x][bottom]) {
+          if (bottomY === -1 && newBoard[x][bottom]) {
             bottomY = bottom
           }
         }
 
         if (bottomY !== -1) {
-          mergeTile(board, x, y, x, bottomY)
+          newBoard = mergeTile(newBoard, x, y, x, bottomY)
         }
 
         let topY = y
 
         for (let top = y; top >= 0; top--) {
-          if (top < topY && !board[x][top]) {
+          if (top < topY && !newBoard[x][top]) {
             topY = top
           }
         }
 
-        moveTile(board, x, y, x, topY)
+        newBoard = moveTile(newBoard, x, y, x, topY)
       }
     }
   }
 
-  return board
+  return newBoard
 }
 
 export const moveDown = (board: Board): Board => {
-  for (let x = 0; x < board.length; x++) {
-    for (let y = (board[x].length - 1); y >= 0; y--) {
-      if (board[x][y]) {
+  let newBoard = board
+
+  for (let x = 0; x < newBoard.length; x++) {
+    for (let y = (newBoard[x].length - 1); y >= 0; y--) {
+      if (newBoard[x][y]) {
         let topY = -1
 
-        for (let bottom = board[x].length; bottom >= 0; bottom--) {
+        for (let bottom = newBoard[x].length; bottom >= 0; bottom--) {
           if (bottom >= y) {
             continue
           }
 
-          if (topY === -1 && board[x][bottom]) {
+          if (topY === -1 && newBoard[x][bottom]) {
             topY = bottom
           }
         }
 
         let bottomY = y
 
-        for (let top = 0; top < board[x].length; top++) {
-          if (top > bottomY && !board[x][top]) {
+        for (let top = 0; top < newBoard[x].length; top++) {
+          if (top > bottomY && !newBoard[x][top]) {
             bottomY = top
           }
         }
 
         if (topY !== -1) {
-          mergeTile(board, x, y, x, topY)
+          newBoard = mergeTile(newBoard, x, y, x, topY)
         }
 
-        moveTile(board, x, y, x, bottomY)
+        newBoard = moveTile(newBoard, x, y, x, bottomY)
       }
     }
   }
 
-  return board
+  return newBoard
 }
 
 export const moveLeft = (board: Board): Board => {
-  for (let y = 0; y < board.length; y++) {
-    for (let x = 0; x < board.length; x++) {
+  let newBoard = board
 
-      if (board[x][y]) {
+  for (let y = 0; y < newBoard.length; y++) {
+    for (let x = 0; x < newBoard.length; x++) {
+
+      if (newBoard[x][y]) {
         let leftX = -1
 
-        for (let left = 0; left < board[x].length; left++) {
+        for (let left = 0; left < newBoard[x].length; left++) {
           if (left <= x) {
             continue
           }
 
-          if (leftX === -1 && board[left][y]) {
+          if (leftX === -1 && newBoard[left][y]) {
             leftX = left
           }
         }
 
         if (leftX !== -1) {
-          mergeTile(board, x, y, leftX, y)
+          newBoard = mergeTile(newBoard, x, y, leftX, y)
         }
 
         let rightX = x
 
         for (let right = x; right >= 0; right--) {
-          if (right < rightX && !board[right][y]) {
+          if (right < rightX && !newBoard[right][y]) {
             rightX = right
           }
         }
 
-        moveTile(board, x, y, rightX, y)
+        newBoard = moveTile(newBoard, x, y, rightX, y)
       }
     }
   }
 
-  return board
+  return newBoard
 }
 
 export const moveRight = (board: Board): Board => {
-  for (let y = 0; y < board.length; y++) {
-    for (let x = (board.length - 1); x >= 0; x--) {
-      console.log(x, y)
-      if (board[x][y]) {
+  let newBoard = board
+
+  for (let y = 0; y < newBoard.length; y++) {
+    for (let x = (newBoard.length - 1); x >= 0; x--) {
+      if (newBoard[x][y]) {
         let rightX = -1
 
-        for (let left = board.length; left >= 0; left--) {
+        for (let left = newBoard.length; left >= 0; left--) {
           if (left >= x) {
             continue
           }
 
-          if (rightX === -1 && board[left][y]) {
+          if (rightX === -1 && newBoard[left][y]) {
             rightX = left
           }
         }
 
         let leftX = x
 
-        for (let left = 0; left < board.length; left++) {
-          if (left > leftX && !board[left][y]) {
+        for (let left = 0; left < newBoard.length; left++) {
+          if (left > leftX && !newBoard[left][y]) {
             leftX = left
           }
         }
 
         if (rightX !== -1) {
-          mergeTile(board, x, y, rightX, y)
+          newBoard = mergeTile(newBoard, x, y, rightX, y)
         }
 
-        moveTile(board, x, y, leftX, y)
+        newBoard = moveTile(newBoard, x, y, leftX, y)
       }
     }
   }
 
-  return board
+  return newBoard
 }
 
 

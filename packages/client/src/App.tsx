@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
-import './App.css';
 import GamePage from './pages/GamePage/GamePage';
+import './App.scss';
 
 function App() {
   useEffect(() => {

@@ -1,5 +1,5 @@
-import './GamePage.scss'
 import Board from '../../components/Game/components/Board/Board'
+import './GamePage.scss'
 
 
 const GamePage = () => {

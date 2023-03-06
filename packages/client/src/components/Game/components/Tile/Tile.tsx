@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import RoundedRectangle from '../RoundedRectangle/RoundedRectangle'
-import { useGameValue } from '../../../../hooks/useGameValue'
+import { useGameConfig } from '../../hooks/useGameConfig'
 import Text from '../Text/Text'
 
 export type TileProps = {
@@ -39,12 +39,12 @@ const colorTile: any = {
 }
 
 const Tile: FC<TileProps> = ({ x, y, value }) => {
-  const { tileSize } = useGameValue()
+  const { tileSize } = useGameConfig()
 
   return (
     <>
       <RoundedRectangle x={x} y={y} width={tileSize} height={tileSize} radius={5}
-                        color={colorTile.backgroundColor[String(value)]} />
+        color={colorTile.backgroundColor[String(value)]} />
       <Text text={String(value)} x={x + tileSize / 2} y={y + tileSize / 2} color={colorTile.textColor[String(value)]} />
     </>
   )
