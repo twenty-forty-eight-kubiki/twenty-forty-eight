@@ -1,12 +1,11 @@
 import React, { FormEvent, ReactElement, useState } from 'react'
 import GuiButton from '../../ui/GuiButton/GuiButton'
 import './FileModal.scss'
-import * as events from 'events'
 
 const FileModal = (): ReactElement => {
   const [fileLabel, setFileLabel] = useState('Select a file on your computer')
   const [fileError, setFileError] = useState('')
-  const [file, setFile] = useState<File>();
+  const [file, setFile] = useState<File>()
 
   const onFileChange = (event: React.FormEvent<HTMLInputElement>) => {
     const files = event.currentTarget.files
@@ -35,9 +34,7 @@ const FileModal = (): ReactElement => {
       <form onSubmit={onSubmit} className="file-modal__form">
         <h2 className="file-modal__title">Upload file</h2>
         <label className="file-modal__label">
-          <span className="file-modal__text">
-            {fileLabel}
-          </span>
+          <span className="file-modal__text">{fileLabel}</span>
           <input
             type="file"
             name="avatar"
@@ -61,4 +58,4 @@ const FileModal = (): ReactElement => {
   )
 }
 
-export default FileModal
+export { FileModal }

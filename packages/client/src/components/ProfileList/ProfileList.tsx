@@ -1,5 +1,5 @@
 import './ProfileList.scss'
-import React, { FC } from 'react'
+import React from 'react'
 import GuiButton from '../../ui/GuiButton/GuiButton'
 import './ProfileList.scss'
 

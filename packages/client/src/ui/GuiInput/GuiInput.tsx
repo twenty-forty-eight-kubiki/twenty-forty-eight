@@ -42,7 +42,7 @@ const GuiInput: FC<GuiInputProps> = ({
           placeholder={props.placeholder}
           disabled={props.disabled}
           className={getClassName()}
-          onChange={(e) => onChange(e)}
+          onChange={e => onChange(e)}
           onBlur={onBlur}
           onFocus={onFocus}
         />

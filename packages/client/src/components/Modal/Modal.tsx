@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useEffect } from 'react'
+import React, { ReactNode, useEffect } from 'react'
 import './Modal.scss'
 
 interface ModalProps {
