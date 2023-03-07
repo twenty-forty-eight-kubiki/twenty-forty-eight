@@ -1,5 +1,6 @@
 import './ProfilePage.scss'
 import ProfileList from '../../components/ProfileList/ProfileList'
+import userIcon from '../../assets/icons/user-icon.svg'
 
 const ProfilePage = () => {
   return (
@@ -11,7 +12,7 @@ const ProfilePage = () => {
             surname="Ivanov"
             email="test@test.ru"
             displayName="ivan"
-            avatar="icons/user-icon.svg"
+            avatar={userIcon}
           />
         </div>
       </div>

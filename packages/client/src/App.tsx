@@ -2,11 +2,12 @@
 import ForumPage from './pages/ForumPage/ForumPage'
 import './App.scss'
 import ProfileSettings from './pages/ProfileSettings/ProfileSettings'
+import ProfilePage from './pages/ProfilePage/ProfilePage'
 
 function App() {
   return (
     <div className="App">
-      <ProfileSettings />
+      <ProfilePage />
     </div>
   )
 }

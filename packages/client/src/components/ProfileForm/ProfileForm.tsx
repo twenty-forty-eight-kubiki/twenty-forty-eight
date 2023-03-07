@@ -6,6 +6,7 @@ import { FileModal } from '../FileModal/FileModal'
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
 import { ProfileFormFields, ProfileErrorsObj } from '../../types/form'
 import '../ProfileList/ProfileList.scss'
+import userIcon from '../../assets/icons/user-icon.svg'
 
 const ProfileForm = (): ReactElement => {
   const [isModal, setModal] = useState(false)
@@ -15,7 +16,7 @@ const ProfileForm = (): ReactElement => {
   const [firstname, setFirstname] = useState('')
   const [displayName, setDisplayName] = useState('')
   const [surname, setSurname] = useState('')
-  const [avatar] = useState('icons/user-icon.svg')
+  const [avatar] = useState(userIcon)
   const [errors, setErrors] = useState<ProfileErrorsObj>({
     firstname: '',
     surname: '',
