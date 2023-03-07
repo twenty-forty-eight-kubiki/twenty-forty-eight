@@ -1,10 +1,10 @@
 import React from 'react'
 import './GamerItem.scss'
 import Icon from '../../ui/Icon/Icon'
-import {LeadersProps} from "../../pages/LeaderBoardPage/LeaderBoardPage";
+import { LeadersProps } from '../../pages/LeaderBoardPage/LeaderBoardPage'
 
 interface GamerItemProps {
-    profile: LeadersProps
+  profile: LeadersProps
 }
 
 const GamerItem = (props: GamerItemProps) => {
