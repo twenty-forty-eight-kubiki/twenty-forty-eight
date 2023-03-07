@@ -1,4 +1,4 @@
-import {BaseUrl} from '../utils/baseURL'
+import { BaseUrl } from '../utils/baseURL'
 
 export const LeaderBoardApi = {
   async getAll() {
@@ -10,6 +10,6 @@ export const LeaderBoardApi = {
       },
     })
       .then(response => response.json())
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
   },
 }

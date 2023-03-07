@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ForumTopic from '../../components/ForumTopic/ForumTopic'
 import GuiButton from '../../ui/GuiButton/GuiButton'
 import ModalCreateForumTopic from '../../components/ModalCreateForumTopic/ModalCreateForumTopic'
