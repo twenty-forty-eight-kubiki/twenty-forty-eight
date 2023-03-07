@@ -3,7 +3,7 @@ import GamerItem from '../../components/GamerItem/GamerItem'
 import { LeaderBoardApi } from '../../api/leaderBoardApi'
 import './LeaderBoardPage.scss'
 
-export interface GamerItemProps {
+export interface LeadersProps {
   user_name: string
   avatar: string
   userId: number
@@ -11,7 +11,7 @@ export interface GamerItemProps {
 }
 
 const LeaderBoardPage = () => {
-  const [leaders, setLeaders] = useState<GamerItemProps[]>([])
+  const [leaders, setLeaders] = useState<LeadersProps[]>([])
 
   useEffect(() => {
     getLeaders()

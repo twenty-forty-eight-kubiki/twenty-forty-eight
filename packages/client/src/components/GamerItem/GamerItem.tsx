@@ -1,9 +1,13 @@
 import React from 'react'
 import './GamerItem.scss'
-import { GamerItemProps } from '../../pages/LeaderBoardPage/LeaderBoardPage'
 import Icon from '../../ui/Icon/Icon'
+import {LeadersProps} from "../../pages/LeaderBoardPage/LeaderBoardPage";
 
-const GamerItem = (props: { profile: GamerItemProps }) => {
+interface GamerItemProps {
+    profile: LeadersProps
+}
+
+const GamerItem = (props: GamerItemProps) => {
   return (
     <div className="gamer-item">
       <div className="gamer-item__icon">
