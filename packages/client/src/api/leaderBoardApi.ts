@@ -1,4 +1,4 @@
-import {BaseUrl} from '../utils/baseURL'
+import { BaseUrl } from '../utils/baseURL'
 
 export interface LeadersProps {
   user_name: string
@@ -8,7 +8,7 @@ export interface LeadersProps {
 }
 
 export interface LeadersError {
-  reason: string;
+  reason: string
 }
 
 export const LeaderBoardApi = {
