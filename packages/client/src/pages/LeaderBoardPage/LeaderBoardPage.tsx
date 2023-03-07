@@ -26,9 +26,10 @@ const LeaderBoardPage = () => {
 
   return (
     <div className="lieder-board-page">
-      {Array.isArray(leaders) && leaders.map((leader) => (
-        <GamerItem profile={leader} key={leader.userId} />
-      ))}
+      {Array.isArray(leaders) &&
+        leaders.map(leader => (
+          <GamerItem profile={leader} key={leader.userId} />
+        ))}
     </div>
   )
 }

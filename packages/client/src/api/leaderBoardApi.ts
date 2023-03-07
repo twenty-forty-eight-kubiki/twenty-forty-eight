@@ -1,4 +1,4 @@
-import { BaseUrl } from '../utils/baseURL'
+import {BASE_URL} from "../constants";
 
 export interface LeadersProps {
   user_name: string
@@ -13,7 +13,7 @@ export interface LeadersError {
 
 export const LeaderBoardApi = {
   async getAll(): Promise<LeadersProps[] | LeadersError> {
-    return fetch(`${BaseUrl}/leaderboard/all`, {
+    return fetch(`${BASE_URL}/leaderboard/all`, {
       body: '',
       method: 'POST',
       headers: {
