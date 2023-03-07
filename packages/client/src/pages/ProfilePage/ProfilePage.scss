@@ -1,0 +1,34 @@
+@import '../src/assets/scss/variables';
+
+.profile-page {
+  .container {
+    display: flex;
+    justify-content: center;
+  }
+  &__wrapper {
+    position: relative;
+    z-index: 10;
+
+    min-height: 100%;
+    width: 100%;
+    max-width: 900px;
+
+    display: flex;
+    justify-content: center;
+    padding-top: 61px;
+    padding-bottom: 90px;
+
+    background-color: $hint-of-red;
+
+    &:before {
+      content: '';
+      position: absolute;
+      z-index: 0;
+      top: 0;
+      width: 100%;
+      height: 131px;
+
+      background: rgba(248, 222, 222, 0.5);
+    }
+  }
+}

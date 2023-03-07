@@ -27,3 +27,23 @@ export type RegistrationErrorsObj =
       confirmPassword: string | null
     }
   | Record<string, never>
+export enum ProfileFormFields {
+  Firstname = 'firstname',
+  Surname = 'surname',
+  Email = 'email',
+  Password = 'password',
+  ConfirmPassword = 'confirmPassword',
+  OldPassword = 'oldPassword',
+  DisplayName = 'displayName',
+}
+
+export type ProfileErrorsObj =
+  | {
+      firstname: string | null
+      surname: string | null
+      email: string | null
+      password: string | null
+      oldPassword: string | null
+      displayName: string | null
+    }
+  | Record<string, never>

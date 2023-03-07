@@ -27,6 +27,14 @@
     background: $white;
     outline: none;
 
+    &::placeholder {
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 20px;
+
+      color: rgba(15, 15, 12, 0.5);
+    }
+
     &--disabled {
       background-color: $alto;
     }
