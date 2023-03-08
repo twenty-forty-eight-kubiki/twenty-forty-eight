@@ -8,7 +8,7 @@ type GuiInputProps = {
   type?: string
   disabled?: boolean
   error?: string | null
-  onChange: (e: FormEvent) => void
+  onChange: (e: React.FormEvent<HTMLInputElement>) => void
   onBlur: () => void
   onFocus: () => void
 }
@@ -42,7 +42,7 @@ const GuiInput: FC<GuiInputProps> = ({
           placeholder={props.placeholder}
           disabled={props.disabled}
           className={getClassName()}
-          onChange={(e: FormEvent) => onChange(e)}
+          onChange={(e: React.FormEvent<HTMLInputElement>) => onChange(e)}
           onBlur={onBlur}
           onFocus={onFocus}
         />
