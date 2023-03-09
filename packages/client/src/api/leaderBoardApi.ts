@@ -7,12 +7,8 @@ export interface LeaderResponse {
   score: number
 }
 
-export interface LeadersError {
-  reason: string
-}
-
 export const LeaderBoardApi = {
-  async getAll(): Promise<LeaderResponse[] | LeadersError> {
+  async getAll(): Promise<LeaderResponse[]> {
     return fetch(`${BASE_URL}/leaderboard/all`, {
       body: '',
       method: 'POST',
