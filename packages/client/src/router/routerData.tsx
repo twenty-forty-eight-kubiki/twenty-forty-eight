@@ -2,6 +2,7 @@ import LoginPage from '../pages/LoginPage/LoginPage'
 import RegistrationPage from '../pages/RegistrationPage/RegistrationPage'
 import ForumPage from '../pages/ForumPage/ForumPage'
 import { ReactElement } from 'react'
+import LeaderBoardPage from "../pages/LeaderBoardPage/LeaderBoardPage";
 
 export interface IRoute {
   id: number
@@ -33,4 +34,11 @@ export const routes: Array<IRoute> = [
     component: ForumPage,
     private: true,
   },
+  {
+    id: 3,
+    path: '/leaders',
+    exact: true,
+    component: LeaderBoardPage,
+    private: true,
+  }
 ]
