@@ -17,10 +17,11 @@ $torea-bay: #092097;
 $persian-red: #d42929;
 $rangoon-green: #0f0f0c;
 $black: #000000;
+$geebung: #d7831f;
 
 // Fonts
 
-$font-path: './fonts';
+$font-path: '../src/assets/fonts';
 $font-family-default: 'Helvetica', sans-serif;
 $font-family-custom: 'Montserrat';
 $font-family: $font-family-custom, $font-family-default;
@@ -46,3 +47,8 @@ $border-radius-large: 30px;
 
 $box-shadow-standard: 2px 4px 10px rgba(0, 0, 0, 0.25);
 $blur: blur(10px);
+
+// Animation
+
+$tf-default: ease;
+$trans-default: 0.3s $tf-default;
