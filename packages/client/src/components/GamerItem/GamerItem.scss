@@ -1,0 +1,29 @@
+@import '../../assets/scss/variables';
+
+.gamer-item {
+  background-color: $hint-of-red;
+  box-shadow: 2px 4px 10px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 30px;
+  overflow: hidden;
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 30px;
+  width: 48%;
+
+  &__icon {
+    margin-right: 10px;
+    flex-shrink: 0;
+  }
+
+  &__info {
+    text-align: left;
+    flex-grow: 1;
+  }
+
+  &__score {
+    flex-shrink: 0;
+    text-align: right;
+  }
+}
