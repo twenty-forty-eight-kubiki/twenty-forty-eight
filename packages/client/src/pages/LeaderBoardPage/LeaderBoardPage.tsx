@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import GamerItem from '../../components/GamerItem/GamerItem'
-import {
-  LeaderBoardApi,
-  LeaderResponse,
-} from '../../api/leaderBoardApi'
+import { LeaderBoardApi, LeaderResponse } from '../../api/leaderBoardApi'
 import './LeaderBoardPage.scss'
 
 const LeaderBoardPage = () => {
@@ -14,8 +11,7 @@ const LeaderBoardPage = () => {
   }, [])
 
   const getLeaders = (): void => {
-    const response: Promise<LeaderResponse[]> =
-      LeaderBoardApi.getAll()
+    const response: Promise<LeaderResponse[]> = LeaderBoardApi.getAll()
     response.then(response => {
       if (Array.isArray(response)) {
         setLeaders(response)
