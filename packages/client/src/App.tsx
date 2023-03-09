@@ -1,13 +1,10 @@
-// import LoginPage from './pages/LoginPage/LoginPage'
-import ForumPage from './pages/ForumPage/ForumPage'
-// import LeaderBoardPage from './pages/LeaderBoardPage/LeaderBoardPage'
+import AppRouter from './router/AppRouter'
 import './App.scss'
 
 function App() {
   return (
     <div className="App">
-      {/*<LeaderBoardPage />*/}
-      <ForumPage />
+      <AppRouter />
     </div>
   )
 }
