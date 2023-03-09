@@ -1,6 +1,6 @@
-import {BASE_URL} from "../constants";
+import { BASE_URL } from '../constants'
 
-export interface LeadersProps {
+export interface LeaderResponse {
   user_name: string
   avatar: string
   userId: number
@@ -12,7 +12,7 @@ export interface LeadersError {
 }
 
 export const LeaderBoardApi = {
-  async getAll(): Promise<LeadersProps[] | LeadersError> {
+  async getAll(): Promise<LeaderResponse[] | LeadersError> {
     return fetch(`${BASE_URL}/leaderboard/all`, {
       body: '',
       method: 'POST',

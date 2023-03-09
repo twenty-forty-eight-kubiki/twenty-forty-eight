@@ -3,19 +3,19 @@ import GamerItem from '../../components/GamerItem/GamerItem'
 import {
   LeaderBoardApi,
   LeadersError,
-  LeadersProps,
+  LeaderResponse,
 } from '../../api/leaderBoardApi'
 import './LeaderBoardPage.scss'
 
 const LeaderBoardPage = () => {
-  const [leaders, setLeaders] = useState<LeadersProps[] | LeadersError>([])
+  const [leaders, setLeaders] = useState<LeaderResponse[] | LeadersError>([])
 
   useEffect(() => {
     getLeaders()
   }, [])
 
   const getLeaders = (): void => {
-    const response: Promise<LeadersProps[] | LeadersError> =
+    const response: Promise<LeaderResponse[] | LeadersError> =
       LeaderBoardApi.getAll()
     response.then(response => {
       if (Array.isArray(response)) {
