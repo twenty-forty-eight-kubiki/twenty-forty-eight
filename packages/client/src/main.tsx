@@ -6,10 +6,5 @@ import './index.scss'
 import Header from './components/Header/Header'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Header />
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
+  <App />
 )
