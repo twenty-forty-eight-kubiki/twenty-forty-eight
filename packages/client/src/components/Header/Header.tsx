@@ -1,4 +1,4 @@
-import React, {memo} from 'react'
+import React, { memo } from 'react'
 import Icon from '../../ui/Icon/Icon'
 import { Link } from 'react-router-dom'
 import './Header.scss'
