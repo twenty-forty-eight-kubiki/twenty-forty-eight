@@ -1,4 +1,4 @@
-import React, {memo, ReactElement, SyntheticEvent} from 'react'
+import React, { memo, ReactElement, SyntheticEvent } from 'react'
 import './ModalCreateForumTopic.scss'
 
 const ModalCreateForumTopic = memo(
