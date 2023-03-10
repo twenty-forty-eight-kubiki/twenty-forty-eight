@@ -3,6 +3,7 @@ import RegistrationPage from '../pages/RegistrationPage/RegistrationPage'
 import ForumPage from '../pages/ForumPage/ForumPage'
 import { ReactElement } from 'react'
 import LeaderBoardPage from '../pages/LeaderBoardPage/LeaderBoardPage'
+import ProfilePage from '../pages/ProfilePage/ProfilePage'
 
 export interface IRoute {
   id: number
@@ -41,4 +42,11 @@ export const routes: Array<IRoute> = [
     component: LeaderBoardPage,
     private: true,
   },
+  {
+    id: 5,
+    path:'/settings',
+    exact: true,
+    component: ProfilePage,
+    private: true,
+  }
 ]

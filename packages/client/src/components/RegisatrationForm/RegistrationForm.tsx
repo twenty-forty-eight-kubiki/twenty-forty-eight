@@ -5,6 +5,9 @@ import GuiButton from '../../ui/GuiButton/GuiButton'
 import { RegistrationErrorsObj, RegistrationFormFields } from '../../types/form'
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
 import GuiLink from '../../ui/GuiLink/GuiLink'
+import { Link } from 'react-router-dom'
+import { authAPI } from '../../api/authApi'
+import { apiHasError } from '../../utils/apiHasError'
 
 const RegistrationForm = (): ReactElement => {
   const [email, setEmail] = useState('')
@@ -12,13 +15,18 @@ const RegistrationForm = (): ReactElement => {
   const [confirmPassword, setConfirmPassword] = useState('')
   const [firstname, setFirstname] = useState('')
   const [surname, setSurname] = useState('')
+  const [phone, setPhone] = useState('')
+  const [login, setLogin] = useState('')
   const [errors, setErrors] = useState<RegistrationErrorsObj>({
     firstname: null,
     surname: null,
     email: null,
     password: null,
     confirmPassword: null,
+    phone: null,
+    login: null
   })
+  const [formError, setFormError] = useState('')
 
   const schema: IValidationSchema = {
     firstname: {
@@ -31,9 +39,17 @@ const RegistrationForm = (): ReactElement => {
       minLength: { value: 3, msg: 'Минимум 3 символа' },
       maxLength: { value: 50, msg: 'Максимум 50 символов' },
     },
+    login: {
+      isRequired: { msg: 'Это поле обязательно для заполнения' },
+      minLength: { value: 3, msg: 'Минимум 3 символа' },
+      maxLength: { value: 50, msg: 'Максимум 50 символов' },
+    },
     email: {
       isRequired: { msg: 'Это поле обязательно для заполнения' },
       isEmail: { msg: 'Введите корректный email' },
+    },
+    phone: {
+      isRequired: { msg: 'Это поле обязательно для заполнения' },
     },
     password: {
       isRequired: { msg: 'Это поле обязательно для заполнения' },
@@ -55,14 +71,34 @@ const RegistrationForm = (): ReactElement => {
       email,
       firstname,
       surname,
+      login,
       password,
+      phone,
       confirmPassword,
     })
 
     setErrors({ ...errorsObj })
 
     if (easyValidator.isValid()) {
-      //api
+      const userData = {
+        first_name: firstname,
+        second_name: surname,
+        login: login,
+        email: email,
+        password: password,
+        phone: phone,
+      };
+
+      authAPI.signup(JSON.stringify(userData))
+        .then(response => {
+          if (apiHasError(response)) {
+            setFormError(response.reason);
+            return;
+          }
+
+          console.log('success');
+        })
+        .catch((e)=>console.log('error', e))
     }
   }
 
@@ -82,13 +118,22 @@ const RegistrationForm = (): ReactElement => {
     setPassword((e.target as HTMLInputElement).value)
   }
 
+  const onChangeLogin= (e: FormEvent) => {
+    setLogin((e.target as HTMLInputElement).value)
+  }
+
   const onChangeConfirmPassword = (e: FormEvent) => {
     setConfirmPassword((e.target as HTMLInputElement).value)
+  }
+
+  const onChangePhone = (e: FormEvent) => {
+    setPhone((e.target as HTMLInputElement).value)
   }
 
   const resetError = (fieldName: RegistrationFormFields) => {
     const errorsObj = { ...errors, [fieldName]: '' } as RegistrationErrorsObj
     setErrors(errorsObj)
+    setFormError('')
   }
 
   return (
@@ -125,6 +170,16 @@ const RegistrationForm = (): ReactElement => {
             />
 
             <GuiInput
+              label="Login"
+              placeholder="Enter your login"
+              value={login}
+              error={errors[RegistrationFormFields.Login]}
+              onChange={onChangeLogin}
+              onBlur={() => resetError(RegistrationFormFields.Login)}
+              onFocus={() => resetError(RegistrationFormFields.Login)}
+            />
+
+            <GuiInput
               label="Email"
               placeholder="Enter your email"
               value={email}
@@ -132,6 +187,16 @@ const RegistrationForm = (): ReactElement => {
               onChange={onChangeEmail}
               onBlur={() => resetError(RegistrationFormFields.Email)}
               onFocus={() => resetError(RegistrationFormFields.Email)}
+            />
+
+            <GuiInput
+              label="Phone"
+              placeholder="Enter your phone"
+              value={phone}
+              error={errors[RegistrationFormFields.Phone]}
+              onChange={onChangePhone}
+              onBlur={() => resetError(RegistrationFormFields.Phone)}
+              onFocus={() => resetError(RegistrationFormFields.Phone)}
             />
 
             <GuiInput
@@ -159,9 +224,11 @@ const RegistrationForm = (): ReactElement => {
               btnText="Sign up"
               className="registration-form__btn"
             />
+            <span className="registration-form__error">{formError}</span>
 
             <div className="registration-form__info">
-              Already have an account <GuiLink url={''} text="Log in" />
+              Already have an account
+              <Link to='/' className="registration-form__link"> Log in</Link>
             </div>
           </form>
         </div>
