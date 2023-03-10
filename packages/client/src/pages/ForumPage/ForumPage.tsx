@@ -1,4 +1,4 @@
-import React, { SyntheticEvent, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ForumTopic from '../../components/ForumTopic/ForumTopic'
 import GuiButton from '../../ui/GuiButton/GuiButton'
 import ModalCreateForumTopic from '../../components/ModalCreateForumTopic/ModalCreateForumTopic'
@@ -11,7 +11,7 @@ interface CreateTopicProps {
   body: string
 }
 
-const ForumPage = () => {
+const ForumPage = React.memo(() => {
   const initialPost = {
     title: '',
     body: '',
@@ -91,6 +91,6 @@ const ForumPage = () => {
       )}
     </div>
   )
-}
+})
 
 export default ForumPage
