@@ -32,13 +32,13 @@ export const routes: Array<IRoute> = [
     path: '/forum',
     exact: true,
     component: ForumPage,
-    private: true,
+    private: false,
   },
   {
     id: 4,
     path: '/leaders',
     exact: true,
     component: LeaderBoardPage,
-    private: true,
+    private: false,
   },
 ]

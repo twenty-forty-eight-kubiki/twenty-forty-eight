@@ -11,7 +11,7 @@ interface CreateTopicProps {
   body: string
 }
 
-const ForumPage = React.memo(() => {
+const ForumPage = () => {
   const initialPost = {
     title: '',
     body: '',
@@ -91,6 +91,6 @@ const ForumPage = React.memo(() => {
       )}
     </div>
   )
-})
+}
 
 export default ForumPage
