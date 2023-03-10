@@ -1,7 +1,7 @@
-import React, { SyntheticEvent } from 'react'
+import React, {memo, SyntheticEvent} from 'react'
 import './ModalCreateForumTopic.scss'
 
-const ModalCreateForumTopic = (props: {
+const ModalCreateForumTopic = memo((props: {
   onClose: (e: SyntheticEvent) => void
   children: any
 }) => {
@@ -20,6 +20,6 @@ const ModalCreateForumTopic = (props: {
       </div>
     </div>
   )
-}
+})
 
 export default ModalCreateForumTopic

@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {memo} from 'react'
 import Icon from '../../ui/Icon/Icon'
 import { Link } from 'react-router-dom'
 import './Header.scss'
 
-const Header = () => {
+const Header = memo(() => {
   return (
     <div className="header">
       <div className="inner">
@@ -25,6 +25,6 @@ const Header = () => {
       </div>
     </div>
   )
-}
+})
 
 export default Header
