@@ -1,6 +1,5 @@
-// import LoginPage from './pages/LoginPage/LoginPage'
-import ForumPage from './pages/ForumPage/ForumPage'
 import './App.scss'
+import AppRouter from "./router/AppRouter";
 
 function App() {
   return (
