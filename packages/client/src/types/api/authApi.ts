@@ -11,3 +11,12 @@ export type LoginRequestData = {
   login: string
   password: string
 }
+
+export type signupResponse = {
+  id?: string,
+  reason?: string
+}
+
+export type APIError = {
+  reason: string;
+};

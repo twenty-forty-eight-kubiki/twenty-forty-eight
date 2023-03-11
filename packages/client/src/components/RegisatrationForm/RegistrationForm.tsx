@@ -6,7 +6,7 @@ import { RegistrationErrorsObj, RegistrationFormFields } from '../../types/form'
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
 import GuiLink from '../../ui/GuiLink/GuiLink'
 import { authAPI } from '../../api/authApi'
-import { SignupRequestData } from '../../types/api'
+import { SignupRequestData } from '../../types/api/authApi'
 import TextError from '../../ui/TextError/TextError'
 
 const RegistrationForm = (): ReactElement => {
