@@ -3,7 +3,7 @@ import GuiInput from '../../ui/GuiInput/GuiInput'
 import GuiButton from '../../ui/GuiButton/GuiButton'
 import { LoginErrorsObj, LoginFormFields } from '../../types/form'
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
-import GuiLink from "../../ui/GuiLink/GuiLink";
+import GuiLink from '../../ui/GuiLink/GuiLink'
 import './LoginForm.scss'
 
 const LoginForm = (): ReactElement => {
@@ -88,7 +88,8 @@ const LoginForm = (): ReactElement => {
             />
 
             <div className="login-form__info">
-              Don't have an account? <GuiLink url="/registration" text="Sign up" />
+              Don't have an account?{' '}
+              <GuiLink url="/registration" text="Sign up" />
             </div>
           </form>
         </div>
