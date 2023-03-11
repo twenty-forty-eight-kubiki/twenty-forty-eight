@@ -6,8 +6,8 @@ import {
 } from '../types/api/authApi'
 
 export const authAPI = {
-  async login(userData: LoginRequestData): Promise<void> {
-    return API.post<LoginRequestData, void>('auth/signin', userData)
+  async login(userData: LoginRequestData): Promise<string> {
+    return API.post<LoginRequestData, string>('auth/signin', userData)
   },
   async logout(): Promise<void> {
     return API.post('auth/logout')

@@ -43,16 +43,13 @@ const LoginForm = (): ReactElement => {
         login: login,
         password: password,
       }
-
       authAPI
         .login(loginData)
         .then(() => {
           history.push('/settings')
         })
-        .catch(response => {
-          response.then((error: APIError) => {
-            setFormError(error.reason)
-          })
+        .catch((error: string) => {
+          setFormError(error)
         })
     }
   }

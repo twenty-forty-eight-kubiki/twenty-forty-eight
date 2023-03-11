@@ -3,9 +3,6 @@ import { APIError } from '../types/api/shared'
 function request<T>(url: string, config: RequestInit = {}): Promise<T> {
   return fetch(`${BASE_URL}/` + url, config)
     .then(response => {
-      if (!response.ok) {
-        return Promise.reject(response.json())
-      }
       const contentType = response.headers.get('content-type')
       const isJson =
         contentType && contentType.indexOf('application/json') !== -1
@@ -13,13 +10,17 @@ function request<T>(url: string, config: RequestInit = {}): Promise<T> {
       if (isJson) {
         return response.json()
       }
-
       if (isText) {
         return response.text()
       }
+      return response;
     })
-    .catch((error: Promise<APIError>) => {
-      throw error
+    .then(data => {
+      if (data && data.reason) {
+        throw data.reason
+      } else {
+        return data;
+      }
     })
 }
 

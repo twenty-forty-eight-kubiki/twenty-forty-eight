@@ -95,10 +95,8 @@ const RegistrationForm = (): ReactElement => {
         .then(response => {
           console.log(response.id)
         })
-        .catch(response => {
-          response.then((error: APIError) => {
-            setFormError(error.reason)
-          })
+        .catch((error: string) => {
+          setFormError(error)
         })
     }
   }

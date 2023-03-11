@@ -24,11 +24,9 @@ const ProfileList = (props: ProfileProps) => {
       .then(() => {
         history.push('/')
       })
-      .catch(response => {
-        response.then((error: APIError) => {
-          console.log('error', error.reason)
-        })
-      })
+      .catch((error: string) => {
+        console.log(error)
+    })
   }
 
   return (
