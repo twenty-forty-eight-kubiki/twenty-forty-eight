@@ -13,10 +13,10 @@ export type LoginRequestData = {
 }
 
 export type signupResponse = {
-  id?: string,
+  id?: string
   reason?: string
 }
 
 export type APIError = {
-  reason: string;
-};
+  reason: string
+}

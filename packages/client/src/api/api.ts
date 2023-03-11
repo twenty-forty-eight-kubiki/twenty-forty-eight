@@ -1,17 +1,17 @@
 import { BASE_URL } from '../constants'
-import { APIError } from '../types/api/authApi'
 function request<T>(url: string, config: RequestInit = {}): Promise<T> {
   return fetch(`${BASE_URL}/` + url, config)
     .then(response => {
       const contentType = response.headers.get('content-type')
-      const isJson = contentType && contentType.indexOf('application/json') !== -1;
-      const isText = contentType && contentType.indexOf('text/plain') !== -1;
+      const isJson =
+        contentType && contentType.indexOf('application/json') !== -1
+      const isText = contentType && contentType.indexOf('text/plain') !== -1
       if (isJson) {
         return response.json()
       }
 
       if (isText) {
-        return null;
+        return null
       }
     })
     .catch((error: Error) => {
