@@ -44,9 +44,9 @@ export const routes: Array<IRoute> = [
   },
   {
     id: 5,
-    path:'/settings',
+    path: '/settings',
     exact: true,
     component: ProfilePage,
     private: true,
-  }
+  },
 ]

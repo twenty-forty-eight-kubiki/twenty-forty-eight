@@ -5,33 +5,33 @@ import React from 'react'
 
 const AppRouter = () => {
   return (
-      <div>
-        <Switch>
-          {routes.map((route: IRoute) => {
-            if (route.private) {
-              return (
-                <PrivateRoute
-                  key={route.id}
-                  path={route.path}
-                  exact={route.exact}
-                  isAuth={true}
-                  component={route.component}
-                />
-              )
-            } else {
-              return (
-                <Route
-                  key={route.id}
-                  path={route.path}
-                  exact={route.exact}
-                  component={route.component}
-                />
-              )
-            }
-          })}
-          <Redirect to="/" />
-        </Switch>
-      </div>
+    <div>
+      <Switch>
+        {routes.map((route: IRoute) => {
+          if (route.private) {
+            return (
+              <PrivateRoute
+                key={route.id}
+                path={route.path}
+                exact={route.exact}
+                isAuth={true}
+                component={route.component}
+              />
+            )
+          } else {
+            return (
+              <Route
+                key={route.id}
+                path={route.path}
+                exact={route.exact}
+                component={route.component}
+              />
+            )
+          }
+        })}
+        <Redirect to="/" />
+      </Switch>
+    </div>
   )
 }
 

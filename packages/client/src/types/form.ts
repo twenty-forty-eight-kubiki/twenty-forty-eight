@@ -10,7 +10,7 @@ export enum RegistrationFormFields {
   Password = 'password',
   ConfirmPassword = 'confirmPassword',
   Phone = 'phone',
-  Login = 'login'
+  Login = 'login',
 }
 
 export type LoginErrorsObj =

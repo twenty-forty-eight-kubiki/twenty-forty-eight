@@ -1,22 +1,28 @@
-function request<TResponse>(
-  url: string,
-  config: RequestInit = {}
-): Promise<TResponse> {
-  return fetch(url, config)
-    .then((response) => {
+import { BASE_URL } from '../constants'
+function request<T>(url: string, config: RequestInit = {}) {
+  return fetch(`${BASE_URL}/`+ url, config)
+    .then(response => {
       const contentType = response.headers.get("content-type");
-      return contentType && contentType.indexOf("application/json") !== -1 ? response.json() : null;
+      return contentType && contentType.indexOf("application/json") !== -1 ? response.json() : null
     })
-    .then((data) => data as TResponse);
+    .catch((error: Error) => {
+      console.log('error', error)
+    })
 }
 
 export const API = {
-  get: <TResponse>(url: string) =>
-    request<TResponse>(url),
-
-  post: <TBody extends BodyInit, TResponse>(url: string, body?: TBody) =>
-    request<TResponse>(url, { method: 'POST', body,
+  get: (url: string) => request(url, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }),
+  post: <T>(url: string, body?: T) =>
+    request<T>(url, {
+      method: 'POST',
+      body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json',
-      }, }),
+      },
+    }),
 }

@@ -4,10 +4,11 @@ import GuiButton from '../../ui/GuiButton/GuiButton'
 import { LoginErrorsObj, LoginFormFields } from '../../types/form'
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
 import { authAPI } from '../../api/authApi'
-import { apiHasError } from '../../utils/apiHasError'
-import { Link, useHistory} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
+import { LoginRequestData } from '../../types/api'
+import GuiLink from '../../ui/GuiLink/GuiLink'
+import TextError from '../../ui/TextError/TextError'
 import './LoginForm.scss'
-
 
 const LoginForm = (): ReactElement => {
   const [login, setLogin] = useState('')
@@ -17,7 +18,7 @@ const LoginForm = (): ReactElement => {
     password: null,
   })
   const [formError, setFormError] = useState('')
-  const history = useHistory();
+  const history = useHistory()
 
   const schema: IValidationSchema = {
     login: {
@@ -37,21 +38,21 @@ const LoginForm = (): ReactElement => {
     setErrors({ ...errorsObj })
 
     if (easyValidator.isValid()) {
-      const loginData = {
+      const loginData: LoginRequestData = {
         login: login,
-        password: password
+        password: password,
       }
 
-      authAPI.login(JSON.stringify(loginData))
+      authAPI.login(loginData)
         .then(response => {
-          if (apiHasError(response)) {
+          if (response && response.reason) {
             setFormError(response.reason);
             return;
           }
 
-          history.push("/settings");
+          history.push('/settings')
         })
-        .catch((e)=>console.log('error', e))
+        .catch(e => console.log('error', e))
     }
   }
 
@@ -66,7 +67,7 @@ const LoginForm = (): ReactElement => {
   const resetError = (type: LoginFormFields) => {
     const errorsObj = { ...errors, [type]: '' } as LoginErrorsObj
     setErrors(errorsObj)
-    setFormError('');
+    setFormError('')
   }
 
   return (
@@ -106,11 +107,9 @@ const LoginForm = (): ReactElement => {
               btnText="Log in"
               className="login-form__btn"
             />
-            <span className="login-form__error">{formError}</span>
-
+            <TextError text={formError}/>
             <div className="login-form__info">
-              Don't have an account?
-              <Link to='/registration' className="login-form__link"> Sign up</Link>
+              Don't have an account? <GuiLink url="/registration" text="Sign up"/>
             </div>
           </form>
         </div>

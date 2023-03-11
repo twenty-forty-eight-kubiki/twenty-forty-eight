@@ -5,9 +5,9 @@ import GuiButton from '../../ui/GuiButton/GuiButton'
 import { RegistrationErrorsObj, RegistrationFormFields } from '../../types/form'
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
 import GuiLink from '../../ui/GuiLink/GuiLink'
-import { Link } from 'react-router-dom'
 import { authAPI } from '../../api/authApi'
-import { apiHasError } from '../../utils/apiHasError'
+import { SignupRequestData } from '../../types/api'
+import TextError from '../../ui/TextError/TextError'
 
 const RegistrationForm = (): ReactElement => {
   const [email, setEmail] = useState('')
@@ -24,7 +24,7 @@ const RegistrationForm = (): ReactElement => {
     password: null,
     confirmPassword: null,
     phone: null,
-    login: null
+    login: null,
   })
   const [formError, setFormError] = useState('')
 
@@ -80,25 +80,25 @@ const RegistrationForm = (): ReactElement => {
     setErrors({ ...errorsObj })
 
     if (easyValidator.isValid()) {
-      const userData = {
+      const userData: SignupRequestData = {
         first_name: firstname,
         second_name: surname,
         login: login,
         email: email,
         password: password,
         phone: phone,
-      };
+      }
 
-      authAPI.signup(JSON.stringify(userData))
+      authAPI.signup(userData)
         .then(response => {
-          if (apiHasError(response)) {
+          if (response && response.reason) {
             setFormError(response.reason);
             return;
           }
 
-          console.log('success');
+          console.log('success')
         })
-        .catch((e)=>console.log('error', e))
+        .catch(e => console.log('error', e))
     }
   }
 
@@ -118,7 +118,7 @@ const RegistrationForm = (): ReactElement => {
     setPassword((e.target as HTMLInputElement).value)
   }
 
-  const onChangeLogin= (e: FormEvent) => {
+  const onChangeLogin = (e: FormEvent) => {
     setLogin((e.target as HTMLInputElement).value)
   }
 
@@ -224,11 +224,10 @@ const RegistrationForm = (): ReactElement => {
               btnText="Sign up"
               className="registration-form__btn"
             />
-            <span className="registration-form__error">{formError}</span>
+            <TextError text={formError}/>
 
             <div className="registration-form__info">
-              Already have an account
-              <Link to='/' className="registration-form__link"> Log in</Link>
+              Already have an account  <GuiLink url="/" text="Log in"/>
             </div>
           </form>
         </div>

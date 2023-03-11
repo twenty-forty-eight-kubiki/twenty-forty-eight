@@ -3,7 +3,6 @@ import React from 'react'
 import GuiButton from '../../ui/GuiButton/GuiButton'
 import './ProfileList.scss'
 import { authAPI } from '../../api/authApi'
-import { apiHasError } from '../../utils/apiHasError'
 import { useHistory } from 'react-router-dom'
 
 interface ProfileProps {
@@ -16,18 +15,19 @@ interface ProfileProps {
 
 const ProfileList = (props: ProfileProps) => {
   const { firstname, surname, email, displayName, avatar } = props
-  const history = useHistory();
+  const history = useHistory()
 
   const onLogoutClick = () => {
-    authAPI.logout()
+    authAPI
+      .logout()
       .then(response => {
-        if (apiHasError(response)) {
+        if (response && response.reason) {
           return;
         }
 
-        history.push("/");
+        history.push('/')
       })
-      .catch((e)=>console.log('error', e))
+      .catch(e => console.log('error', e))
   }
 
   return (
