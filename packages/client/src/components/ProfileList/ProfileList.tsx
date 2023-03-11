@@ -4,7 +4,6 @@ import GuiButton from '../../ui/GuiButton/GuiButton'
 import './ProfileList.scss'
 import { authAPI } from '../../api/authApi'
 import { useHistory } from 'react-router-dom'
-import { APIError } from '../../types/api/shared'
 
 interface ProfileProps {
   firstname?: string
@@ -26,7 +25,7 @@ const ProfileList = (props: ProfileProps) => {
       })
       .catch((error: string) => {
         console.log(error)
-    })
+      })
   }
 
   return (

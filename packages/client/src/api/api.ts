@@ -1,5 +1,4 @@
 import { BASE_URL } from '../constants'
-import { APIError } from '../types/api/shared'
 function request<T>(url: string, config: RequestInit = {}): Promise<T> {
   return fetch(`${BASE_URL}/` + url, config)
     .then(response => {
@@ -13,13 +12,13 @@ function request<T>(url: string, config: RequestInit = {}): Promise<T> {
       if (isText) {
         return response.text()
       }
-      return response;
+      return response
     })
     .then(data => {
       if (data && data.reason) {
         throw data.reason
       } else {
-        return data;
+        return data
       }
     })
 }

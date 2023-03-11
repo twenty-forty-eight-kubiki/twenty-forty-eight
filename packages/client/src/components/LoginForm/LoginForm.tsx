@@ -9,7 +9,6 @@ import { LoginRequestData } from '../../types/api/authApi'
 import GuiLink from '../../ui/GuiLink/GuiLink'
 import TextError from '../../ui/TextError/TextError'
 import './LoginForm.scss'
-import { APIError } from '../../types/api/shared'
 
 const LoginForm = (): ReactElement => {
   const [login, setLogin] = useState('')

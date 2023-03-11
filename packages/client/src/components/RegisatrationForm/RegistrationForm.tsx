@@ -8,7 +8,6 @@ import GuiLink from '../../ui/GuiLink/GuiLink'
 import { authAPI } from '../../api/authApi'
 import { SignupRequestData } from '../../types/api/authApi'
 import TextError from '../../ui/TextError/TextError'
-import { APIError } from '../../types/api/shared'
 
 const RegistrationForm = (): ReactElement => {
   const [email, setEmail] = useState('')
