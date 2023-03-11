@@ -6,9 +6,7 @@ type TextErrorProps = {
 }
 
 const TextError: FC<TextErrorProps> = ({ text }): ReactElement => {
-  return (
-    <span className="text-error">{text}</span>
-  )
+  return <span className="text-error">{text}</span>
 }
 
 export default TextError

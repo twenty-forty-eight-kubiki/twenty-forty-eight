@@ -43,11 +43,12 @@ const LoginForm = (): ReactElement => {
         password: password,
       }
 
-      authAPI.login(loginData)
+      authAPI
+        .login(loginData)
         .then(response => {
           if (response && response.reason) {
-            setFormError(response.reason);
-            return;
+            setFormError(response.reason)
+            return
           }
 
           history.push('/settings')
@@ -107,9 +108,10 @@ const LoginForm = (): ReactElement => {
               btnText="Log in"
               className="login-form__btn"
             />
-            <TextError text={formError}/>
+            <TextError text={formError} />
             <div className="login-form__info">
-              Don't have an account? <GuiLink url="/registration" text="Sign up"/>
+              Don't have an account?{' '}
+              <GuiLink url="/registration" text="Sign up" />
             </div>
           </form>
         </div>

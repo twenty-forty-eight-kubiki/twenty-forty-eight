@@ -89,11 +89,12 @@ const RegistrationForm = (): ReactElement => {
         phone: phone,
       }
 
-      authAPI.signup(userData)
+      authAPI
+        .signup(userData)
         .then(response => {
           if (response && response.reason) {
-            setFormError(response.reason);
-            return;
+            setFormError(response.reason)
+            return
           }
 
           console.log('success')
@@ -224,10 +225,10 @@ const RegistrationForm = (): ReactElement => {
               btnText="Sign up"
               className="registration-form__btn"
             />
-            <TextError text={formError}/>
+            <TextError text={formError} />
 
             <div className="registration-form__info">
-              Already have an account  <GuiLink url="/" text="Log in"/>
+              Already have an account <GuiLink url="/" text="Log in" />
             </div>
           </form>
         </div>

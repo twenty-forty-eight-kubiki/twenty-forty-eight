@@ -10,7 +10,7 @@ type GuiLinkProps = {
 const GuiLink: FC<GuiLinkProps> = ({ url, text }): ReactElement => {
   return (
     <Link to={url} className="gui-link">
-        {text}
+      {text}
     </Link>
   )
 }

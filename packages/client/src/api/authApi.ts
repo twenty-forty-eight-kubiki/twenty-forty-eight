@@ -3,10 +3,7 @@ import { SignupRequestData, LoginRequestData } from '../types/api'
 
 export const authAPI = {
   async login(userData: LoginRequestData) {
-    return API.post<LoginRequestData>(
-      'auth/signin',
-      userData
-    )
+    return API.post<LoginRequestData>('auth/signin', userData)
   },
   async logout() {
     return API.post('auth/logout')
@@ -17,9 +14,6 @@ export const authAPI = {
   },
 
   async signup(userData: SignupRequestData) {
-    return API.post<SignupRequestData>(
-      'auth/signup',
-      userData
-    )
+    return API.post<SignupRequestData>('auth/signup', userData)
   },
 }

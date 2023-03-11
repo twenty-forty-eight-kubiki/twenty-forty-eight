@@ -22,7 +22,7 @@ const ProfileList = (props: ProfileProps) => {
       .logout()
       .then(response => {
         if (response && response.reason) {
-          return;
+          return
         }
 
         history.push('/')
