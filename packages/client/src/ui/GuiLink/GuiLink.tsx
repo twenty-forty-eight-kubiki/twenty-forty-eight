@@ -1,17 +1,18 @@
-import React, { FC, ReactElement } from 'react'
-import './GuiLink.scss'
+import React, {FC, memo, ReactElement} from 'react';
+import { Link } from 'react-router-dom';
+import './GuiLink.scss';
 
 type GuiLinkProps = {
   url: string
   text: string
 }
 
-const GuiLink: FC<GuiLinkProps> = ({ url, text }): ReactElement => {
+const GuiLink: FC<GuiLinkProps> = memo(({ url, text }): ReactElement => {
   return (
-    <a href={url} className="gui-link">
+    <Link to={url} className="gui-link">
       {text}
-    </a>
+    </Link>
   )
-}
+})
 
-export default GuiLink
+export default GuiLink;

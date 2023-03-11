@@ -3,8 +3,8 @@ import GuiInput from '../../ui/GuiInput/GuiInput'
 import GuiButton from '../../ui/GuiButton/GuiButton'
 import { LoginErrorsObj, LoginFormFields } from '../../types/form'
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
+import GuiLink from "../../ui/GuiLink/GuiLink";
 import './LoginForm.scss'
-import { Link } from 'react-router-dom'
 
 const LoginForm = (): ReactElement => {
   const [email, setEmail] = useState('')
@@ -88,10 +88,7 @@ const LoginForm = (): ReactElement => {
             />
 
             <div className="login-form__info">
-              Don't have an account?
-              <Link to="/registration">
-                <span className="gui-link">Sign up</span>
-              </Link>
+              Don't have an account? <GuiLink url="/registration" text="Sign up" />
             </div>
           </form>
         </div>
