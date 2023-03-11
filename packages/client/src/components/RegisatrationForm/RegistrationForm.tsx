@@ -8,6 +8,7 @@ import GuiLink from '../../ui/GuiLink/GuiLink'
 import { authAPI } from '../../api/authApi'
 import { SignupRequestData } from '../../types/api/authApi'
 import TextError from '../../ui/TextError/TextError'
+import { APIError } from '../../types/api/shared'
 
 const RegistrationForm = (): ReactElement => {
   const [email, setEmail] = useState('')
@@ -92,14 +93,13 @@ const RegistrationForm = (): ReactElement => {
       authAPI
         .signup(userData)
         .then(response => {
-          if (response && response.reason) {
-            setFormError(response.reason)
-            return
-          }
-
-          console.log('success')
+          console.log(response.id)
         })
-        .catch(e => console.log('error', e))
+        .catch(response => {
+          response.then((error: APIError) => {
+            setFormError(error.reason)
+          })
+        })
     }
   }
 

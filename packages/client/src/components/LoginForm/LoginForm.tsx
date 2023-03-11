@@ -9,6 +9,7 @@ import { LoginRequestData } from '../../types/api/authApi'
 import GuiLink from '../../ui/GuiLink/GuiLink'
 import TextError from '../../ui/TextError/TextError'
 import './LoginForm.scss'
+import { APIError } from '../../types/api/shared'
 
 const LoginForm = (): ReactElement => {
   const [login, setLogin] = useState('')
@@ -45,15 +46,14 @@ const LoginForm = (): ReactElement => {
 
       authAPI
         .login(loginData)
-        .then(response => {
-          if (response && response.reason) {
-            setFormError(response.reason)
-            return
-          }
-
+        .then(() => {
           history.push('/settings')
         })
-        .catch(e => console.log('error', e))
+        .catch(response => {
+          response.then((error: APIError) => {
+            setFormError(error.reason)
+          })
+        })
     }
   }
 

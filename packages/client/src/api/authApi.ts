@@ -2,23 +2,22 @@ import { API } from './api'
 import {
   SignupRequestData,
   LoginRequestData,
-  signupResponse,
-  APIError,
+  SignupResponse,
 } from '../types/api/authApi'
 
 export const authAPI = {
-  async login(userData: LoginRequestData): Promise<APIError> {
-    return API.post<LoginRequestData, APIError>('auth/signin', userData)
+  async login(userData: LoginRequestData): Promise<void> {
+    return API.post<LoginRequestData, void>('auth/signin', userData)
   },
-  async logout(): Promise<any> {
+  async logout(): Promise<void> {
     return API.post('auth/logout')
   },
 
-  async me(): Promise<any> {
+  async me(): Promise<void> {
     return API.get('auth/logout')
   },
 
-  async signup(userData: SignupRequestData): Promise<signupResponse> {
-    return API.post<SignupRequestData, signupResponse>('auth/signup', userData)
+  async signup(userData: SignupRequestData): Promise<SignupResponse> {
+    return API.post<SignupRequestData, SignupResponse>('auth/signup', userData)
   },
 }

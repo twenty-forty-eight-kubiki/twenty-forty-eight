@@ -4,6 +4,7 @@ import GuiButton from '../../ui/GuiButton/GuiButton'
 import './ProfileList.scss'
 import { authAPI } from '../../api/authApi'
 import { useHistory } from 'react-router-dom'
+import { APIError } from '../../types/api/shared'
 
 interface ProfileProps {
   firstname?: string
@@ -20,14 +21,14 @@ const ProfileList = (props: ProfileProps) => {
   const onLogoutClick = () => {
     authAPI
       .logout()
-      .then(response => {
-        if (response && response.reason) {
-          return Promise.reject()
-        }
-
+      .then(() => {
         history.push('/')
       })
-      .catch(e => console.log('error', e))
+      .catch(response => {
+        response.then((error: APIError) => {
+          console.log('error', error.reason)
+        })
+      })
   }
 
   return (

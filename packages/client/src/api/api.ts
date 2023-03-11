@@ -1,7 +1,11 @@
 import { BASE_URL } from '../constants'
+import { APIError } from '../types/api/shared'
 function request<T>(url: string, config: RequestInit = {}): Promise<T> {
   return fetch(`${BASE_URL}/` + url, config)
     .then(response => {
+      if (!response.ok) {
+        return Promise.reject(response.json())
+      }
       const contentType = response.headers.get('content-type')
       const isJson =
         contentType && contentType.indexOf('application/json') !== -1
@@ -11,11 +15,11 @@ function request<T>(url: string, config: RequestInit = {}): Promise<T> {
       }
 
       if (isText) {
-        return null
+        return response.text()
       }
     })
-    .catch((error: Error) => {
-      console.log('error', error)
+    .catch((error: Promise<APIError>) => {
+      throw error
     })
 }
 
@@ -23,6 +27,7 @@ export const API = {
   get: <T>(url: string): Promise<T> =>
     request(url, {
       method: 'GET',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -31,6 +36,7 @@ export const API = {
     request<TResponse>(url, {
       method: 'POST',
       body: JSON.stringify(body),
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },

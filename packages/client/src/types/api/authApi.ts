@@ -12,11 +12,7 @@ export type LoginRequestData = {
   password: string
 }
 
-export type signupResponse = {
+export type SignupResponse = {
   id?: string
   reason?: string
-}
-
-export type APIError = {
-  reason: string
 }
