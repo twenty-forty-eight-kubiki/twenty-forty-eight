@@ -1,5 +1,5 @@
 export enum LoginFormFields {
-  Email = 'email',
+  Login = 'login',
   Password = 'password',
 }
 
@@ -9,11 +9,13 @@ export enum RegistrationFormFields {
   Email = 'email',
   Password = 'password',
   ConfirmPassword = 'confirmPassword',
+  Phone = 'phone',
+  Login = 'login',
 }
 
 export type LoginErrorsObj =
   | {
-      email: string | null
+      login: string | null
       password: string | null
     }
   | Record<string, never>
@@ -25,6 +27,8 @@ export type RegistrationErrorsObj =
       email: string | null
       password: string | null
       confirmPassword: string | null
+      phone: string | null
+      login: string | null
     }
   | Record<string, never>
 export enum ProfileFormFields {
