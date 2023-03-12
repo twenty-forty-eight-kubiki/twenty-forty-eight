@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import GamerItem from '../../components/GamerItem/GamerItem'
 import { LeaderBoardApi, LeaderResponse } from '../../api/leaderBoardApi'
 import './LeaderBoardPage.scss'
 
-const LeaderBoardPage = () => {
+const LeaderBoardPage = memo(() => {
   const [leaders, setLeaders] = useState<LeaderResponse[]>([])
 
   useEffect(() => {
@@ -27,6 +27,6 @@ const LeaderBoardPage = () => {
         ))}
     </div>
   )
-}
+})
 
 export default LeaderBoardPage

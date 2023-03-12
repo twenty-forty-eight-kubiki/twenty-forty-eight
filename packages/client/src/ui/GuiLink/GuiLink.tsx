@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react'
+import React, { FC, memo, ReactElement } from 'react'
 import './GuiLink.scss'
 import { Link } from 'react-router-dom'
 
@@ -7,12 +7,12 @@ type GuiLinkProps = {
   text: string
 }
 
-const GuiLink: FC<GuiLinkProps> = ({ url, text }): ReactElement => {
+const GuiLink: FC<GuiLinkProps> = memo(({ url, text }): ReactElement => {
   return (
     <Link to={url} className="gui-link">
       {text}
     </Link>
   )
-}
+})
 
 export default GuiLink
