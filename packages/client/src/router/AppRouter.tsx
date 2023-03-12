@@ -1,6 +1,7 @@
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { IRoute, routes } from './routerData'
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute'
+import React from 'react'
 
 const AppRouter = () => {
   return (

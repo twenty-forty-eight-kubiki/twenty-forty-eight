@@ -1,5 +1,6 @@
 import React, { FC, ReactElement } from 'react'
 import './GuiLink.scss'
+import { Link } from 'react-router-dom'
 
 type GuiLinkProps = {
   url: string
@@ -8,9 +9,9 @@ type GuiLinkProps = {
 
 const GuiLink: FC<GuiLinkProps> = ({ url, text }): ReactElement => {
   return (
-    <a href={url} className="gui-link">
+    <Link to={url} className="gui-link">
       {text}
-    </a>
+    </Link>
   )
 }
 

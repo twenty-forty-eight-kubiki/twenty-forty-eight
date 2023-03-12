@@ -2,6 +2,8 @@ import './ProfileList.scss'
 import React from 'react'
 import GuiButton from '../../ui/GuiButton/GuiButton'
 import './ProfileList.scss'
+import { authAPI } from '../../api/authApi'
+import { useHistory } from 'react-router-dom'
 
 interface ProfileProps {
   firstname?: string
@@ -13,6 +15,18 @@ interface ProfileProps {
 
 const ProfileList = (props: ProfileProps) => {
   const { firstname, surname, email, displayName, avatar } = props
+  const history = useHistory()
+
+  const onLogoutClick = () => {
+    authAPI
+      .logout()
+      .then(() => {
+        history.push('/')
+      })
+      .catch((error: string) => {
+        console.log(error)
+      })
+  }
 
   return (
     <div className="profile-list">
@@ -50,6 +64,12 @@ const ProfileList = (props: ProfileProps) => {
         type="button"
         btnText="Change profile info"
         className="profile-list__btn"
+      />
+      <GuiButton
+        type="button"
+        btnText="Logout"
+        className="profile-list__btn profile-list__btn--logout"
+        onClick={() => onLogoutClick()}
       />
     </div>
   )
