@@ -2,15 +2,14 @@ import { BASE_URL } from '../constants'
 function request<T>(url: string, config: RequestInit = {}): Promise<T> {
   return fetch(`${BASE_URL}/` + url, config)
     .then(response => {
-
       if (!response.ok) {
         return response.json().then(data => {
           if (data.reason) {
             throw data.reason
           }
 
-          return console.log('error', data);
-        });
+          return console.log('error', data)
+        })
       }
       const contentType = response.headers.get('content-type')
       const isJson =
