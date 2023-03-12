@@ -2,6 +2,16 @@ import { BASE_URL } from '../constants'
 function request<T>(url: string, config: RequestInit = {}): Promise<T> {
   return fetch(`${BASE_URL}/` + url, config)
     .then(response => {
+
+      if (!response.ok) {
+        return response.json().then(data => {
+          if (data.reason) {
+            throw data.reason
+          }
+
+          return console.log('error', data);
+        });
+      }
       const contentType = response.headers.get('content-type')
       const isJson =
         contentType && contentType.indexOf('application/json') !== -1
@@ -14,13 +24,7 @@ function request<T>(url: string, config: RequestInit = {}): Promise<T> {
       }
       return response
     })
-    .then(data => {
-      if (data && data.reason) {
-        throw data.reason
-      } else {
-        return data
-      }
-    })
+    .then(data => data)
 }
 
 export const API = {
