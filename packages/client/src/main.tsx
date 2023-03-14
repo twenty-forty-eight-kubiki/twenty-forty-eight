@@ -3,10 +3,10 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import { setupStore } from './store/store';
+import { setupStore } from './store/store'
 import './index.scss'
 
-const store = setupStore();
+const store = setupStore()
 
 const application = (
   <Provider store={store}>
@@ -16,4 +16,6 @@ const application = (
   </Provider>
 )
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(application)
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  application
+)

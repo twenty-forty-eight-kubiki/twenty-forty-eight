@@ -1,18 +1,19 @@
 import { Switch, Route, Redirect } from 'react-router-dom'
 import { IRoute, routes } from './router/routerData'
 import PrivateRoute from './components/PrivateRoute/PrivateRoute'
-import { withLayout } from './hocs/withLayout';
+import { withLayout } from './hocs/withLayout'
 
 import { fetchUser } from './store/reducers/AuthSlice'
-import { useAppSelector } from './hooks/store';
-import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from './hooks/store'
+import { useEffect } from 'react'
 
 function App() {
-  const { user } = useAppSelector((state) => state.auth)
+  const dispatch = useAppDispatch()
+  const { user } = useAppSelector(state => state.auth)
 
   useEffect(() => {
-    fetchUser();
-  }, [])
+    dispatch(fetchUser())
+  }, [ ])
 
   return (
     <Switch>
@@ -43,5 +44,4 @@ function App() {
   )
 }
 
-
-export default withLayout(App);
+export default withLayout(App)
