@@ -9,12 +9,13 @@ export const authAPI = {
   async login(userData: LoginRequestData): Promise<string> {
     return API.post<LoginRequestData, string>('auth/signin', userData)
   },
+
   async logout(): Promise<void> {
     return API.post('auth/logout')
   },
 
-  async me(): Promise<void> {
-    return API.get('auth/logout')
+  async getUser(): Promise<void> {
+    return API.get('auth/user')
   },
 
   async signup(userData: SignupRequestData): Promise<SignupResponse> {

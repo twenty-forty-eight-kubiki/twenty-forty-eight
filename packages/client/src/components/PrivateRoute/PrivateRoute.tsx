@@ -18,7 +18,7 @@ const PrivateRoute: FC<PrivateRouteProps> = ({
     <Route
       {...rest}
       render={(props: any) =>
-        isAuth === false ? <Redirect to="" /> : <Component {...props} />
+        isAuth === false ? <Redirect to="/" /> : <Component {...props} />
       }
     />
   )

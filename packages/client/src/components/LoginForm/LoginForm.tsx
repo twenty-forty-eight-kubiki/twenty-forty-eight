@@ -74,7 +74,7 @@ const LoginForm = (): ReactElement => {
           <div>
             <h1 className="login-form__title">Log In</h1>
 
-            <div className="login-form__text">Welcome to the 2048 Game</div>
+            <div className="login-form__text">Welcome to the 2048 Game!</div>
           </div>
 
           <form onSubmit={onSubmit}>
