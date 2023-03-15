@@ -51,7 +51,9 @@ const LoginForm = (): ReactElement => {
       authAPI
         .login(loginData)
         .then(() => dispatch(fetchUser()))
-        .then(() => { history.push('/settings') })
+        .then(() => {
+          history.push('/settings')
+        })
         .catch((error: string) => {
           setFormError(error)
         })

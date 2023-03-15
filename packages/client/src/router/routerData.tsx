@@ -63,5 +63,5 @@ export const routes: Array<IRoute> = [
     exact: true,
     component: () => <>User profile page in progress...</>,
     private: true,
-  }
+  },
 ]

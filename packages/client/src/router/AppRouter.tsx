@@ -13,30 +13,38 @@ const AppRouter = () => {
   const { data: user } = useAppSelector(state => state.auth)
   const isAuth = !!user
 
-  useEffect(() => { dispatch(fetchUser()) }, [])
+  useEffect(() => {
+    dispatch(fetchUser())
+  }, [])
 
   return (
     <>
-      <PrivateRoute exact path={RoutePath.root} component={() => <Redirect to={RoutePath.settings} />} />
+      <PrivateRoute
+        exact
+        path={RoutePath.root}
+        component={() => <Redirect to={RoutePath.settings} />}
+      />
 
       {isAuth ? <Route path={HEADER_PATHS} component={Header} /> : null}
 
       <Switch>
         {routes.map((route: IRoute) =>
-          route.private
-            ? <PrivateRoute
+          route.private ? (
+            <PrivateRoute
               key={route.id}
               path={route.path}
               exact={route.exact}
               isAuth={isAuth}
               component={route.component}
             />
-            : <Route
+          ) : (
+            <Route
               key={route.id}
               path={route.path}
               exact={route.exact}
               component={route.component}
             />
+          )
         )}
 
         <Redirect to={RoutePath.login} />

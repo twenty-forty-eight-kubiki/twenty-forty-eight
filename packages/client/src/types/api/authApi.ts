@@ -8,7 +8,7 @@ export type SignupRequestData = {
 }
 
 export type UserInfoResponse = {
-  id: number,
+  id: number
   first_name: string
   second_name: string
   display_name: string

@@ -3,7 +3,7 @@ import {
   LoginRequestData,
   SignupRequestData,
   SignupResponse,
-  UserInfoResponse
+  UserInfoResponse,
 } from '../types/api/authApi'
 
 export const authAPI = {
