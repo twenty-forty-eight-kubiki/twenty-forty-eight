@@ -52,7 +52,7 @@ const LoginForm = (): ReactElement => {
         .login(loginData)
         .then(() => dispatch(fetchUser()))
         .then(() => {
-          history.push('/settings')
+          history.push('/user')
         })
         .catch((error: string) => {
           setFormError(error)

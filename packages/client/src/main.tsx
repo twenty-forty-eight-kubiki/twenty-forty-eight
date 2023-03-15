@@ -3,10 +3,9 @@ import { Provider } from 'react-redux'
 import { BrowserRouter } from 'react-router-dom'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import { setupStore } from './store/store'
+import { store } from './store/store'
 import './index.scss'
-
-const store = setupStore()
+import { fetchUser } from './store/reducers/AuthSlice'
 
 const application = (
   <Provider store={store}>

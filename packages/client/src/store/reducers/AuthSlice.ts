@@ -8,6 +8,7 @@ const initialState: GenericState<UserInfoResponse> = {
   status: Status.FULFILLED,
   error: null,
   data: null,
+  authorizationStatus: false,
 }
 
 export const fetchUser = createAsyncThunk<UserInfoResponse, undefined>(
@@ -53,11 +54,13 @@ export const authSlice = createSlice({
       .addCase(fetchUser.fulfilled, (state, action) => {
         state.status = Status.FULFILLED
         state.data = action.payload
+        state.authorizationStatus = true
       })
       .addCase(fetchUser.rejected, (state, action) => {
         state.status = Status.REJECTED
         state.error = action.payload as string
         state.data = null
+        state.authorizationStatus = false
       })
       .addCase(logoutUser.pending, state => {
         state.status = Status.PENDING
@@ -66,6 +69,7 @@ export const authSlice = createSlice({
       .addCase(logoutUser.fulfilled, state => {
         state.status = Status.FULFILLED
         state.data = null
+        state.authorizationStatus = false
       })
       .addCase(logoutUser.rejected, (state, action) => {
         state.status = Status.REJECTED

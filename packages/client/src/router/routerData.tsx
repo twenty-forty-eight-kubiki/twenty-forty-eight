@@ -5,6 +5,7 @@ import RegistrationPage from '../pages/RegistrationPage/RegistrationPage'
 import ForumPage from '../pages/ForumPage/ForumPage'
 import LeaderBoardPage from '../pages/LeaderBoardPage/LeaderBoardPage'
 import ProfilePage from '../pages/ProfilePage/ProfilePage'
+import ProfileSettings from '../pages/ProfileSettings/ProfileSettings'
 
 export interface IRoute {
   id: number
@@ -17,51 +18,51 @@ export interface IRoute {
 export const routes: Array<IRoute> = [
   {
     id: 1,
-    path: RoutePath.login,
+    path: RoutePath.Login,
     exact: true,
     component: LoginPage,
     private: false,
   },
   {
     id: 2,
-    path: RoutePath.registration,
+    path: RoutePath.Registration,
     exact: true,
     component: RegistrationPage,
     private: false,
   },
   {
     id: 3,
-    path: RoutePath.forum,
+    path: RoutePath.Forum,
     exact: true,
     component: ForumPage,
     private: true,
   },
   {
     id: 4,
-    path: RoutePath.leaders,
+    path: RoutePath.Leaders,
     exact: true,
     component: LeaderBoardPage,
     private: true,
   },
   {
     id: 5,
-    path: RoutePath.settings,
+    path: RoutePath.Settings,
     exact: true,
-    component: ProfilePage,
+    component: ProfileSettings,
     private: true,
   },
   {
     id: 6,
-    path: RoutePath.game,
+    path: RoutePath.Game,
     exact: true,
     component: () => <>Game page in progress...</>,
     private: true,
   },
   {
     id: 7,
-    path: RoutePath.user,
+    path: RoutePath.User,
     exact: true,
-    component: () => <>User profile page in progress...</>,
+    component: ProfilePage,
     private: true,
   },
 ]

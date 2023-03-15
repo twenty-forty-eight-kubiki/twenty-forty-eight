@@ -1,3 +1,5 @@
+import { store, rootReducer } from './store'
+
 export enum Status {
   PENDING = 'pending',
   FULFILLED = 'fulfilled',
@@ -7,5 +9,11 @@ export enum Status {
 export type GenericState<TData, TError = unknown> = {
   data: TData | null
   error: TError | null
-  status: Status
+  status: Status,
+  authorizationStatus: boolean,
 }
+
+
+export type RootState = ReturnType<typeof rootReducer>
+export type State = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
