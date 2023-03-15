@@ -1,11 +1,11 @@
-import { Route, Redirect } from 'react-router-dom'
-import React, { FC, ReactElement } from 'react'
+import { Route, Redirect, RouteProps } from 'react-router-dom'
+import { FC, ReactElement } from 'react'
+import { RoutePath } from '../../router/RoutePath'
 
 type PrivateRouteProps = {
-  component: () => ReactElement
+  component: FC
   isAuth?: boolean
-  key: number
-  path: string
+  path: RouteProps['path']
   exact: boolean
 }
 
@@ -18,7 +18,7 @@ const PrivateRoute: FC<PrivateRouteProps> = ({
     <Route
       {...rest}
       render={(props: any) =>
-        isAuth === false ? <Redirect to="/" /> : <Component {...props} />
+        isAuth ? <Component {...props} /> : <Redirect to={RoutePath.login} />
       }
     />
   )

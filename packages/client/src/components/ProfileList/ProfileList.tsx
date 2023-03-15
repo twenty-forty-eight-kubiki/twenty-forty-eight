@@ -1,9 +1,10 @@
-import './ProfileList.scss'
-import React from 'react'
+import { useHistory } from 'react-router-dom'
+import { useAppDispatch } from '../../hooks/store'
+import { authAPI } from '../../api/authApi'
 import GuiButton from '../../ui/GuiButton/GuiButton'
 import './ProfileList.scss'
-import { authAPI } from '../../api/authApi'
-import { useHistory } from 'react-router-dom'
+import { logoutUser } from '../../store/reducers/AuthSlice'
+import { RoutePath } from '../../router/RoutePath'
 
 interface ProfileProps {
   firstname?: string
@@ -14,18 +15,14 @@ interface ProfileProps {
 }
 
 const ProfileList = (props: ProfileProps) => {
-  const { firstname, surname, email, displayName, avatar } = props
   const history = useHistory()
+  const dispatch = useAppDispatch()
+
+  const { firstname, surname, email, displayName, avatar } = props
 
   const onLogoutClick = () => {
-    authAPI
-      .logout()
-      .then(() => {
-        history.push('/')
-      })
-      .catch((error: string) => {
-        console.log(error)
-      })
+    dispatch(logoutUser()).catch(console.error)
+    history.push(RoutePath.root)
   }
 
   return (

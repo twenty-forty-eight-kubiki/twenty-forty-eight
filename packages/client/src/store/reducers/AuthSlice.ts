@@ -1,23 +1,30 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { authAPI } from '../../api/authApi'
-import { IDLE, LOADING, SUCCEEDED, FAILED } from '../../utils/statuses'
+import { UserInfoResponse } from '../../types/api/authApi'
+import { isAPIError } from '../../utils/isAPIError'
+import { GenericState, Status } from '../store.types'
 
-const initialState = {
-  user: null,
-  status: IDLE,
+const initialState: GenericState<UserInfoResponse> = {
+  status: Status.FULFILLED,
   error: null,
+  data: null,
 }
 
-export const fetchUser = createAsyncThunk('auth/fetchUser', async thunkAPI => {
+export const fetchUser = createAsyncThunk<UserInfoResponse, undefined>('auth/fetchUser', async (_, thunkApi) => {
   try {
     return await authAPI.getUser()
   } catch (error: unknown) {
-    const message =
-      (error.response && error.response.data && error.response.data.message) ||
-      error.message ||
-      error.toString()
+    const reason = isAPIError(error) ? error.reason : 'Неизвестная ошибка авторизации'
+    return thunkApi.rejectWithValue(reason)
+  }
+})
 
-    return thunkAPI.rejectWithValue(message)
+export const logoutUser = createAsyncThunk<void, undefined>('auth/logoutUser', async (_, thunkApi) => {
+  try {
+    return await authAPI.logout()
+  } catch (error: unknown) {
+    const reason = isAPIError(error) ? error.reason : 'Ошибка завершения сессии.'
+    return thunkApi.rejectWithValue(reason)
   }
 })
 
@@ -25,28 +32,38 @@ export const authSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    reset: state => {
-      state.status = IDLE
-      state.error = null
-    },
+    clear: () => initialState,
   },
   extraReducers: builder => {
     builder
       .addCase(fetchUser.pending, state => {
-        state.status = LOADING
+        state.status = Status.PENDING
         state.error = null
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
-        state.status = SUCCEEDED
-        state.user = action.payload
+        state.status = Status.FULFILLED
+        state.data = action.payload
       })
       .addCase(fetchUser.rejected, (state, action) => {
-        state.status = FAILED
-        state.error = action.payload
-        state.user = null
+        state.status = Status.REJECTED
+        state.error = action.payload as string
+        state.data = null
+      })
+      .addCase(logoutUser.pending, state => {
+        state.status = Status.PENDING
+        state.error = null
+      })
+      .addCase(logoutUser.fulfilled, state => {
+        state.status = Status.FULFILLED
+        state.data = null
+      })
+      .addCase(logoutUser.rejected, (state, action) => {
+        state.status = Status.REJECTED
+        state.error = action.payload as string
+        state.data = null
       })
   },
 })
 
-export const { reset } = authSlice.actions
+export const { clear } = authSlice.actions
 export default authSlice.reducer

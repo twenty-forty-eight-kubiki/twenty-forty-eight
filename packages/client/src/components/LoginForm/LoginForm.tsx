@@ -1,16 +1,21 @@
-import React, { FormEvent, ReactElement, useState } from 'react'
-import GuiInput from '../../ui/GuiInput/GuiInput'
-import GuiButton from '../../ui/GuiButton/GuiButton'
+import { FormEvent, ReactElement, useState } from 'react'
+import { useAppDispatch } from '../../hooks/store'
+import { useHistory } from 'react-router-dom'
+
+import { authAPI } from '../../api/authApi'
+import { LoginRequestData } from '../../types/api/authApi'
 import { LoginErrorsObj, LoginFormFields } from '../../types/form'
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
-import { authAPI } from '../../api/authApi'
-import { useHistory } from 'react-router-dom'
-import { LoginRequestData } from '../../types/api/authApi'
+import GuiInput from '../../ui/GuiInput/GuiInput'
+import GuiButton from '../../ui/GuiButton/GuiButton'
 import GuiLink from '../../ui/GuiLink/GuiLink'
 import TextError from '../../ui/TextError/TextError'
 import './LoginForm.scss'
+import { fetchUser } from '../../store/reducers/AuthSlice'
 
 const LoginForm = (): ReactElement => {
+  const dispatch = useAppDispatch()
+
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState<LoginErrorsObj>({
@@ -42,11 +47,11 @@ const LoginForm = (): ReactElement => {
         login: login,
         password: password,
       }
+
       authAPI
         .login(loginData)
-        .then(() => {
-          history.push('/settings')
-        })
+        .then(() => dispatch(fetchUser()))
+        .then(() => { history.push('/settings') })
         .catch((error: string) => {
           setFormError(error)
         })
