@@ -4,14 +4,12 @@ import { useAppDispatch } from './hooks/store'
 import { useEffect } from 'react'
 
 const App = () => {
-  const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch()
   useEffect(() => {
-    dispatch(fetchUser());
-  });
+    dispatch(fetchUser())
+  })
 
-  return (
-    <AppRouter />
-  )
+  return <AppRouter />
 }
 
 export default App

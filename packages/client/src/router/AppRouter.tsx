@@ -8,31 +8,31 @@ import { RoutePath } from './RoutePath'
 import { getAuthorizationStatus } from '../store/selectors'
 
 const AppRouter = () => {
-  const isAuth = useAppSelector(getAuthorizationStatus);
+  const isAuth = useAppSelector(getAuthorizationStatus)
 
   return (
-      <Switch>
-        {routes.map((route: IRoute) =>
-          route.private ? (
-            <PrivateRoute
-              key={route.id}
-              path={route.path}
-              exact={route.exact}
-              isAuth={isAuth}
-              component={route.component}
-            />
-          ) : (
-            <Route
-              key={route.id}
-              path={route.path}
-              exact={route.exact}
-              component={route.component}
-            />
-          )
-        )}
+    <Switch>
+      {routes.map((route: IRoute) =>
+        route.private ? (
+          <PrivateRoute
+            key={route.id}
+            path={route.path}
+            exact={route.exact}
+            isAuth={isAuth}
+            component={route.component}
+          />
+        ) : (
+          <Route
+            key={route.id}
+            path={route.path}
+            exact={route.exact}
+            component={route.component}
+          />
+        )
+      )}
 
-        <Redirect to={RoutePath.Login} />
-      </Switch>
+      <Redirect to={RoutePath.Login} />
+    </Switch>
   )
 }
 

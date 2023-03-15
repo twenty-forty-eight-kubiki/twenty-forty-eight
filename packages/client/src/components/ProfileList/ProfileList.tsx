@@ -21,7 +21,9 @@ const ProfileList = (props: ProfileProps) => {
   const { firstname, surname, email, displayName, avatar } = props
 
   const onLogoutClick = () => {
-    dispatch(logoutUser()).then(() => history.push(RoutePath.Root)).catch(console.error)
+    dispatch(logoutUser())
+      .then(() => history.push(RoutePath.Root))
+      .catch(console.error)
   }
 
   return (
