@@ -7,7 +7,7 @@ type PublicRouteProps = {
   component: FC
   isPublic?: boolean
   path: RouteProps['path']
-  exact: boolean,
+  exact: boolean
   isAuth: AuthorizationStatus
 }
 
@@ -20,7 +20,11 @@ const PublicRoute: FC<PublicRouteProps> = ({
     <Route
       {...rest}
       render={(props: any) =>
-        isAuth === AuthorizationStatus.NoAuth ? <Component {...props} /> : <Redirect to={RoutePath.User} />
+        isAuth === AuthorizationStatus.NoAuth ? (
+          <Component {...props} />
+        ) : (
+          <Redirect to={RoutePath.User} />
+        )
       }
     />
   )

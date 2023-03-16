@@ -12,7 +12,7 @@ export interface IRoute {
   path: RoutePath | RoutePath[]
   exact: boolean
   component: FC
-  private: boolean,
+  private: boolean
   public?: boolean
 }
 
@@ -23,7 +23,7 @@ export const routes: Array<IRoute> = [
     exact: true,
     component: LoginPage,
     private: false,
-    public: true
+    public: true,
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ export const routes: Array<IRoute> = [
     exact: true,
     component: RegistrationPage,
     private: false,
-    public: true
+    public: true,
   },
   {
     id: 3,

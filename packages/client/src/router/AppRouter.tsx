@@ -16,31 +16,38 @@ const AppRouter = () => {
     <Switch>
       {routes.map((route: IRoute) => {
         if (route.private) {
-          return <PrivateRoute
-            key={route.id}
-            path={route.path}
-            exact={route.exact}
-            isAuth={isAuth}
-            component={route.component}
-          />
+          return (
+            <PrivateRoute
+              key={route.id}
+              path={route.path}
+              exact={route.exact}
+              isAuth={isAuth}
+              component={route.component}
+            />
+          )
         } else {
           if (route.public) {
-            return <PublicRoute key={route.id}
-                                path={route.path}
-                                exact={route.exact}
-                                component={route.component}
-                                isAuth={isAuth}/>
+            return (
+              <PublicRoute
+                key={route.id}
+                path={route.path}
+                exact={route.exact}
+                component={route.component}
+                isAuth={isAuth}
+              />
+            )
           }
 
-          return <Route
-            key={route.id}
-            path={route.path}
-            exact={route.exact}
-            component={route.component}
+          return (
+            <Route
+              key={route.id}
+              path={route.path}
+              exact={route.exact}
+              component={route.component}
             />
+          )
         }
-      }
-      )}
+      })}
 
       <Redirect to={RoutePath.Login} />
     </Switch>

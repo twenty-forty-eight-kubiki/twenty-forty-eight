@@ -1,7 +1,6 @@
 import { store, rootReducer } from './store'
 import { AuthorizationStatus } from '../constants'
 
-
 export type GenericState<TData, TError = unknown> = {
   data: TData | null
   error: TError | null
