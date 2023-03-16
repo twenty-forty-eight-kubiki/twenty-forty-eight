@@ -10,7 +10,7 @@ export type GenericState<TData, TError = unknown> = {
   data: TData | null
   error: TError | null
   status: Status
-  authorizationStatus: boolean
+  authorizationStatus: boolean | 'Unknown'
 }
 
 export type RootState = ReturnType<typeof rootReducer>
