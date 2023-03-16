@@ -3,14 +3,15 @@ import { FC, ReactElement } from 'react'
 import { RoutePath } from '../../router/RoutePath'
 import { AuthorizationStatus } from '../../constants'
 
-type PrivateRouteProps = {
+type PublicRouteProps = {
   component: FC
-  isAuth?: AuthorizationStatus
+  isPublic?: boolean
   path: RouteProps['path']
-  exact: boolean
+  exact: boolean,
+  isAuth: AuthorizationStatus
 }
 
-const PrivateRoute: FC<PrivateRouteProps> = ({
+const PublicRoute: FC<PublicRouteProps> = ({
   component: Component,
   isAuth,
   ...rest
@@ -19,10 +20,10 @@ const PrivateRoute: FC<PrivateRouteProps> = ({
     <Route
       {...rest}
       render={(props: any) =>
-        isAuth === AuthorizationStatus.Auth ? <Component {...props} /> : <Redirect to={RoutePath.Login} />
+        isAuth === AuthorizationStatus.NoAuth ? <Component {...props} /> : <Redirect to={RoutePath.User} />
       }
     />
   )
 }
 
-export default PrivateRoute
+export default PublicRoute

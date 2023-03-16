@@ -1,16 +1,11 @@
 import { store, rootReducer } from './store'
+import { AuthorizationStatus } from '../constants'
 
-export enum Status {
-  PENDING = 'pending',
-  FULFILLED = 'fulfilled',
-  REJECTED = 'rejected',
-}
 
 export type GenericState<TData, TError = unknown> = {
   data: TData | null
   error: TError | null
-  status: Status
-  authorizationStatus: boolean | 'Unknown'
+  authorizationStatus: AuthorizationStatus
 }
 
 export type RootState = ReturnType<typeof rootReducer>

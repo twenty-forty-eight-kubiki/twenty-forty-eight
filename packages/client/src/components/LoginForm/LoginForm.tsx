@@ -12,6 +12,7 @@ import GuiLink from '../../ui/GuiLink/GuiLink'
 import TextError from '../../ui/TextError/TextError'
 import './LoginForm.scss'
 import { fetchUser } from '../../store/reducers/AuthSlice'
+import { RoutePath } from '../../router/RoutePath'
 
 const LoginForm = (): ReactElement => {
   const dispatch = useAppDispatch()
@@ -52,7 +53,7 @@ const LoginForm = (): ReactElement => {
         .login(loginData)
         .then(() => dispatch(fetchUser()))
         .then(() => {
-          history.push('/settings')
+          history.push(RoutePath.Login)
         })
         .catch((error: string) => {
           setFormError(error)

@@ -2,13 +2,13 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { authAPI } from '../../api/authApi'
 import { UserInfoResponse } from '../../types/api/authApi'
 import { isAPIError } from '../../utils/isAPIError'
-import { GenericState, Status } from '../store.types'
+import { GenericState } from '../store.types'
+import { AuthorizationStatus } from '../../constants'
 
 const initialState: GenericState<UserInfoResponse> = {
-  status: Status.FULFILLED,
   error: null,
   data: null,
-  authorizationStatus: 'Unknown',
+  authorizationStatus: AuthorizationStatus.Unknown,
 }
 
 export const fetchUser = createAsyncThunk<UserInfoResponse, undefined>(
@@ -48,30 +48,28 @@ export const authSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(fetchUser.pending, state => {
-        state.status = Status.PENDING
         state.error = null
+        state.authorizationStatus = AuthorizationStatus.Unknown
       })
       .addCase(fetchUser.fulfilled, (state, action) => {
-        state.status = Status.FULFILLED
         state.data = action.payload
-        state.authorizationStatus = true
+        state.authorizationStatus = AuthorizationStatus.Auth
       })
       .addCase(fetchUser.rejected, (state, action) => {
-        state.status = Status.REJECTED
         state.error = action.payload as string
         state.data = null
-        state.authorizationStatus = false
+        state.authorizationStatus = AuthorizationStatus.NoAuth
       })
       .addCase(logoutUser.pending, state => {
-        state.status = Status.PENDING
+        state.authorizationStatus = AuthorizationStatus.Unknown
         state.error = null
       })
       .addCase(logoutUser.fulfilled, state => {
-        state.status = Status.FULFILLED
+        state.authorizationStatus = AuthorizationStatus.NoAuth
         state.data = null
       })
       .addCase(logoutUser.rejected, (state, action) => {
-        state.status = Status.REJECTED
+        state.authorizationStatus = AuthorizationStatus.Auth
         state.error = action.payload as string
         state.data = null
       })

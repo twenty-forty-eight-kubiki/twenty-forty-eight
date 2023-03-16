@@ -22,7 +22,7 @@ const ProfileList = (props: ProfileProps) => {
 
   const onLogoutClick = () => {
     dispatch(logoutUser())
-      .then(() => history.push(RoutePath.Root))
+      .then(() => history.push(RoutePath.Login))
       .catch(console.error)
   }
 

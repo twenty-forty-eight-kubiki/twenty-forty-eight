@@ -5,6 +5,9 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import { store } from './store/store'
 import './index.scss'
+import { fetchUser } from './store/reducers/AuthSlice'
+
+store.dispatch(fetchUser())
 
 const Application = (
   <Provider store={store}>

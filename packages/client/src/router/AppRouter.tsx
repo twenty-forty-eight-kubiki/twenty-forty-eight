@@ -7,34 +7,39 @@ import {
   getAuthorizationStatus,
   getAuthCheckedStatus,
 } from '../store/selectors'
+import PublicRoute from '../components/PublicRoute/PublicRoute'
 
 const AppRouter = () => {
   const isAuth = useAppSelector(getAuthorizationStatus)
-  const isAuthChecked = useAppSelector(getAuthCheckedStatus)
-
-  if (!isAuthChecked) {
-    return <p>Loading...</p>
-  }
 
   return (
     <Switch>
-      {routes.map((route: IRoute) =>
-        route.private ? (
-          <PrivateRoute
+      {routes.map((route: IRoute) => {
+        if (route.private) {
+          return <PrivateRoute
             key={route.id}
             path={route.path}
             exact={route.exact}
             isAuth={isAuth}
             component={route.component}
           />
-        ) : (
-          <Route
+        } else {
+          if (route.public) {
+            return <PublicRoute key={route.id}
+                                path={route.path}
+                                exact={route.exact}
+                                component={route.component}
+                                isAuth={isAuth}/>
+          }
+
+          return <Route
             key={route.id}
             path={route.path}
             exact={route.exact}
             component={route.component}
-          />
-        )
+            />
+        }
+      }
       )}
 
       <Redirect to={RoutePath.Login} />
