@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 
 const App = () => {
   const dispatch = useAppDispatch()
+
   useEffect(() => {
     dispatch(fetchUser())
   })

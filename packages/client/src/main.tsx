@@ -6,7 +6,7 @@ import App from './App'
 import { store } from './store/store'
 import './index.scss'
 
-const application = (
+const Application = (
   <Provider store={store}>
     <BrowserRouter>
       <App />
@@ -15,5 +15,5 @@ const application = (
 )
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  application
+  Application
 )

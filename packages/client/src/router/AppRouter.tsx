@@ -1,5 +1,5 @@
 import { useAppSelector } from '../hooks/store'
-import { Switch, Route, Redirect, useHistory } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import { IRoute, routes } from './routerData'
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute'
 import { RoutePath } from './RoutePath'
