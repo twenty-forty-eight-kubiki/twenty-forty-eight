@@ -3,16 +3,17 @@ import { Switch, Route, Redirect, useHistory } from 'react-router-dom'
 import { IRoute, routes } from './routerData'
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute'
 import { RoutePath } from './RoutePath'
-import { getAuthorizationStatus, getAuthCheckedStatus } from '../store/selectors'
+import {
+  getAuthorizationStatus,
+  getAuthCheckedStatus,
+} from '../store/selectors'
 
 const AppRouter = () => {
   const isAuth = useAppSelector(getAuthorizationStatus)
-  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus)
 
   if (!isAuthChecked) {
-    return (
-      <p>Loading...</p>
-    );
+    return <p>Loading...</p>
   }
 
   return (
