@@ -3,9 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import { IRoute, routes } from './routerData'
 import PrivateRoute from '../components/PrivateRoute/PrivateRoute'
 import { RoutePath } from './RoutePath'
-import {
-  getAuthorizationStatus,
-} from '../store/selectors'
+import { getAuthorizationStatus } from '../store/selectors'
 import PublicRoute from '../components/PublicRoute/PublicRoute'
 
 const AppRouter = () => {

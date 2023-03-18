@@ -4,7 +4,6 @@ import Comments from '../../components/Comments/Comments'
 import { withLayout } from '../../hocs/withLayout'
 import './TopicPage.scss'
 
-
 const TopicPage = () => {
   const comments = [
     {

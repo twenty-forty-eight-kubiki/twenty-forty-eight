@@ -3,7 +3,6 @@ import { useAppSelector } from '../../hooks/store'
 import Header from '../Header/Header'
 
 const Layout = ({ children }: React.PropsWithChildren) => {
-
   return (
     <div className="layout">
       <Header />
