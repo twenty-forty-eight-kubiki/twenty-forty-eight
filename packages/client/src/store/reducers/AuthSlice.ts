@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import { UserInfoResponse } from '../../types/api/authApi'
 import { GenericState } from '../store.types'
 import { AuthorizationStatus } from '../../constants'
-import { fetchUser,logoutUser } from '../auth-actions'
+import { fetchUser, logoutUser } from '../auth-actions'
 
 const initialState: GenericState<UserInfoResponse> = {
   error: null,
