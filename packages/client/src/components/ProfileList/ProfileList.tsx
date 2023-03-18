@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../hooks/store'
 import { authAPI } from '../../api/authApi'
 import GuiButton from '../../ui/GuiButton/GuiButton'
 import './ProfileList.scss'
-import { logoutUser } from '../../store/reducers/AuthSlice'
+import { logoutUser } from '../../store/auth-actions'
 import { RoutePath } from '../../router/RoutePath'
 
 interface ProfileProps {

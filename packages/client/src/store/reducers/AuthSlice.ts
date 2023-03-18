@@ -1,43 +1,14 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { authAPI } from '../../api/authApi'
+import { createSlice } from '@reduxjs/toolkit'
 import { UserInfoResponse } from '../../types/api/authApi'
-import { isAPIError } from '../../utils/isAPIError'
 import { GenericState } from '../store.types'
 import { AuthorizationStatus } from '../../constants'
+import { fetchUser,logoutUser } from '../auth-actions'
 
 const initialState: GenericState<UserInfoResponse> = {
   error: null,
   data: null,
   authorizationStatus: AuthorizationStatus.Unknown,
 }
-
-export const fetchUser = createAsyncThunk<UserInfoResponse, undefined>(
-  'auth/fetchUser',
-  async (_, thunkApi) => {
-    try {
-      return await authAPI.getUser()
-    } catch (error: unknown) {
-      const reason = isAPIError(error)
-        ? error.reason
-        : 'Неизвестная ошибка авторизации'
-      return thunkApi.rejectWithValue(reason)
-    }
-  }
-)
-
-export const logoutUser = createAsyncThunk<void, undefined>(
-  'auth/logoutUser',
-  async (_, thunkApi) => {
-    try {
-      return await authAPI.logout()
-    } catch (error: unknown) {
-      const reason = isAPIError(error)
-        ? error.reason
-        : 'Ошибка завершения сессии.'
-      return thunkApi.rejectWithValue(reason)
-    }
-  }
-)
 
 export const authSlice = createSlice({
   name: 'auth',

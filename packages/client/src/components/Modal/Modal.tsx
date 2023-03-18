@@ -20,7 +20,7 @@ const Modal = ({ isVisible = false, content, onClose }: ModalProps) => {
   useEffect(() => {
     document.addEventListener('keydown', keydownHandler)
     return () => document.removeEventListener('keydown', keydownHandler)
-  })
+  }, [isVisible])
 
   return isVisible ? (
     <div className="modal" onClick={onClose}>
