@@ -1,7 +1,8 @@
-import React, { memo, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import ForumTopic from '../../components/ForumTopic/ForumTopic'
 import GuiButton from '../../ui/GuiButton/GuiButton'
 import ModalCreateForumTopic from '../../components/ModalCreateForumTopic/ModalCreateForumTopic'
+import { withLayout } from '../../hocs/withLayout'
 import './ForumPage.scss'
 
 interface CreateTopicProps {
@@ -11,7 +12,7 @@ interface CreateTopicProps {
   body: string
 }
 
-const ForumPage = memo(() => {
+const ForumPage = () => {
   const initialPost = {
     title: '',
     body: '',
@@ -91,6 +92,6 @@ const ForumPage = memo(() => {
       )}
     </div>
   )
-})
+}
 
-export default ForumPage
+export default withLayout(ForumPage)

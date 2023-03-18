@@ -1,47 +1,21 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom'
-import './App.scss'
-import Header from './components/Header/Header'
-import { IRoute, routes } from './router/routerData'
-import PrivateRoute from './components/PrivateRoute/PrivateRoute'
+import AppRouter from './router/AppRouter'
+import { fetchUser } from './store/auth-actions'
+import { useAppDispatch, useAppSelector } from './hooks/store'
+import { useEffect } from 'react'
+import { getAuthCheckedStatus } from './store/selectors'
 
-function App() {
-  return (
-    <Router>
-      <Header />
-      <div>
-        <Switch>
-          {routes.map((route: IRoute) => {
-            if (route.private) {
-              return (
-                <PrivateRoute
-                  key={route.id}
-                  path={route.path}
-                  exact={route.exact}
-                  isAuth={true}
-                  component={route.component}
-                />
-              )
-            } else {
-              return (
-                <Route
-                  key={route.id}
-                  path={route.path}
-                  exact={route.exact}
-                  component={route.component}
-                />
-              )
-            }
-          })}
-          <Redirect to="/" />
-        </Switch>
-      </div>
-    </Router>
-  )
+const App = () => {
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    dispatch(fetchUser())
+  }, [])
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus)
+
+  if (!isAuthChecked) {
+    return <p>Loading...</p>
+  }
+
+  return <AppRouter />
 }
 
 export default App

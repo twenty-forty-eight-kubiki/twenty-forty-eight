@@ -1,4 +1,5 @@
 import Board from '../../components/Game/components/Board/Board'
+import { withLayout } from '../../hocs/withLayout'
 import './GamePage.scss'
 
 const GamePage = () => {
@@ -9,4 +10,4 @@ const GamePage = () => {
   )
 }
 
-export default GamePage
+export default withLayout(GamePage)

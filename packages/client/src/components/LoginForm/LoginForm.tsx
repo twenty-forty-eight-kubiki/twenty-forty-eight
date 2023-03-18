@@ -1,16 +1,22 @@
-import React, { FormEvent, ReactElement, useState } from 'react'
-import GuiInput from '../../ui/GuiInput/GuiInput'
-import GuiButton from '../../ui/GuiButton/GuiButton'
+import { FormEvent, ReactElement, useState } from 'react'
+import { useAppDispatch } from '../../hooks/store'
+import { useHistory } from 'react-router-dom'
+
+import { authAPI } from '../../api/authApi'
+import { LoginRequestData } from '../../types/api/authApi'
 import { LoginErrorsObj, LoginFormFields } from '../../types/form'
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
-import { authAPI } from '../../api/authApi'
-import { useHistory } from 'react-router-dom'
-import { LoginRequestData } from '../../types/api/authApi'
+import GuiInput from '../../ui/GuiInput/GuiInput'
+import GuiButton from '../../ui/GuiButton/GuiButton'
 import GuiLink from '../../ui/GuiLink/GuiLink'
 import TextError from '../../ui/TextError/TextError'
 import './LoginForm.scss'
+import { fetchUser } from '../../store/auth-actions'
+import { RoutePath } from '../../router/RoutePath'
 
 const LoginForm = (): ReactElement => {
+  const dispatch = useAppDispatch()
+
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState<LoginErrorsObj>({
@@ -42,10 +48,12 @@ const LoginForm = (): ReactElement => {
         login: login,
         password: password,
       }
+
       authAPI
         .login(loginData)
+        .then(() => dispatch(fetchUser()))
         .then(() => {
-          history.push('/settings')
+          history.push(RoutePath.User)
         })
         .catch((error: string) => {
           setFormError(error)
@@ -74,7 +82,7 @@ const LoginForm = (): ReactElement => {
           <div>
             <h1 className="login-form__title">Log In</h1>
 
-            <div className="login-form__text">Welcome to the 2048 Game</div>
+            <div className="login-form__text">Welcome to the 2048 Game!</div>
           </div>
 
           <form onSubmit={onSubmit}>
