@@ -3,11 +3,10 @@ import { useAppSelector } from '../../hooks/store'
 import Header from '../Header/Header'
 
 const Layout = ({ children }: React.PropsWithChildren) => {
-  const { data: user } = useAppSelector(state => state.auth)
 
   return (
     <div className="layout">
-      {!!user && <Header />}
+      <Header />
       <div className="layout__main">{children}</div>
     </div>
   )

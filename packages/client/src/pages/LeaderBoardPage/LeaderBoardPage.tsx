@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import GamerItem from '../../components/GamerItem/GamerItem'
 import { LeaderBoardApi, LeaderResponse } from '../../api/leaderBoardApi'
+import { withLayout } from '../../hocs/withLayout'
 import './LeaderBoardPage.scss'
 
 const LeaderBoardPage = () => {
@@ -29,4 +30,4 @@ const LeaderBoardPage = () => {
   )
 }
 
-export default LeaderBoardPage
+export default withLayout(LeaderBoardPage)

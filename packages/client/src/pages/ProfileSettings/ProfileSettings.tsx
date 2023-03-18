@@ -1,4 +1,5 @@
 import '../ProfilePage/ProfilePage.scss'
+import { withLayout } from '../../hocs/withLayout'
 import ProfileForm from '../../components/ProfileForm/ProfileForm'
 
 const ProfileSettings = () => {
@@ -13,4 +14,4 @@ const ProfileSettings = () => {
   )
 }
 
-export default ProfileSettings
+export default withLayout(ProfileSettings)

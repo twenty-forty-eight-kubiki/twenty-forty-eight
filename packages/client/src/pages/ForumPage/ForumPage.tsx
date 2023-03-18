@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import ForumTopic from '../../components/ForumTopic/ForumTopic'
 import GuiButton from '../../ui/GuiButton/GuiButton'
 import ModalCreateForumTopic from '../../components/ModalCreateForumTopic/ModalCreateForumTopic'
+import { withLayout } from '../../hocs/withLayout'
 import './ForumPage.scss'
 
 interface CreateTopicProps {
@@ -93,4 +94,4 @@ const ForumPage = () => {
   )
 }
 
-export default ForumPage
+export default withLayout(ForumPage)

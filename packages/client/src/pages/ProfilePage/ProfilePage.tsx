@@ -1,6 +1,7 @@
 import './ProfilePage.scss'
 import ProfileList from '../../components/ProfileList/ProfileList'
 import userIcon from '../../assets/icons/user-icon.svg'
+import { withLayout } from '../../hocs/withLayout'
 
 const ProfilePage = () => {
   return (
@@ -20,4 +21,4 @@ const ProfilePage = () => {
   )
 }
 
-export default ProfilePage
+export default withLayout(ProfilePage)

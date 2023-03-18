@@ -1,7 +1,9 @@
 import React from 'react'
 import Topic from '../../components/Topic/Topic'
 import Comments from '../../components/Comments/Comments'
+import { withLayout } from '../../hocs/withLayout'
 import './TopicPage.scss'
+
 
 const TopicPage = () => {
   const comments = [
@@ -55,4 +57,4 @@ const TopicPage = () => {
   )
 }
 
-export default TopicPage
+export default withLayout(TopicPage)

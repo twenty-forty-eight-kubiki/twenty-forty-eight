@@ -5,7 +5,6 @@ import PrivateRoute from '../components/PrivateRoute/PrivateRoute'
 import { RoutePath } from './RoutePath'
 import {
   getAuthorizationStatus,
-  getAuthCheckedStatus,
 } from '../store/selectors'
 import PublicRoute from '../components/PublicRoute/PublicRoute'
 
