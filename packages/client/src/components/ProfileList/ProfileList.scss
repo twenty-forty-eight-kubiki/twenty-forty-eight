@@ -9,11 +9,19 @@
   flex-direction: column;
 
   &__btn {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 0 auto;
+    color: $white;
 
     &--logout {
       margin-top: 10px;
+    }
+
+    &--change {
+      margin-top: 30px;
+      margin-bottom: 5px;
     }
   }
 
@@ -26,15 +34,17 @@
     border-radius: 50%;
     background-color: $alto;
     border: 5px solid $white;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &--button {
       position: relative;
 
-      overflow: hidden;
       margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+
       cursor: pointer;
 
       &::after {
@@ -54,14 +64,14 @@
           background-color: rgba(0, 0, 0, 0.5);
         }
 
-        span {
+        .profile-list__avatar-text {
           opacity: 1;
           z-index: 100;
         }
       }
     }
 
-    span {
+    .profile-list__avatar-text {
       position: absolute;
       opacity: 0;
 
@@ -77,9 +87,11 @@
       line-height: 17px;
     }
 
-    img {
+    .profile-list__avatar-img {
       object-fit: cover;
       width: 100%;
+      height: 100%;
+      object-position: center;
     }
   }
 

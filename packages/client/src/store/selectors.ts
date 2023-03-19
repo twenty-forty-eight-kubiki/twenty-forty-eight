@@ -6,3 +6,7 @@ export const getAuthorizationStatus = (state: State): AuthorizationStatus =>
 
 export const getAuthCheckedStatus = (state: State): boolean =>
   state.auth.authorizationStatus !== AuthorizationStatus.Unknown
+
+export const getUserData = (state: State) => state.auth.data
+
+export const getUserAvatar = (state: State) => state.auth.data?.avatar

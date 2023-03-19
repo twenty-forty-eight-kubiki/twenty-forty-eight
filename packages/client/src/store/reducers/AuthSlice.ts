@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { UserInfoResponse } from '../../types/api/authApi'
 import { GenericState } from '../store.types'
 import { AuthorizationStatus } from '../../constants'
@@ -15,6 +15,9 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     clear: () => initialState,
+    updateUserData: (state, action: PayloadAction<UserInfoResponse>) => {
+      state.data = action.payload
+    },
   },
   extraReducers: builder => {
     builder
@@ -47,5 +50,5 @@ export const authSlice = createSlice({
   },
 })
 
-export const { clear } = authSlice.actions
+export const { clear, updateUserData } = authSlice.actions
 export default authSlice.reducer

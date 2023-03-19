@@ -16,6 +16,7 @@ export const validators: Record<string, TValidator> = {
   isEmail: isEmail,
   isDisplayName: isDisplayName,
   isCorrectPassword: isCorrectPassword,
+  isCorrectPhone: isCorrectPhone,
 }
 
 export function isRequired(config: IValidatorConfig) {
@@ -62,7 +63,7 @@ export function areEqual(config: IValidatorConfig, form: TForm) {
 }
 
 const EMAIL_REGEXP =
-  /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+  /[a-zA-Zа-яёА-ЯЁ0-9]{1}([a-zA-Zа-яёА-ЯЁ0-9\-_.]{1,})?@[a-zA-Zа-яёА-ЯЁ0-9-]{1}([a-zA-Zа-яёА-ЯЁ0-9.-]{1,})?[a-zA-Zа-яёА-ЯЁ0-9-]{1}\.[a-zA-Zа-яёА-ЯЁ]{2,6}/
 export function isEmail(config: IValidatorConfig) {
   return function (value: string) {
     if (!EMAIL_REGEXP.test(value)) {
@@ -90,6 +91,17 @@ const PASSWORD_REGEXP = /^(?=.*[А-ЯA-Z])(?=.*\d)[a-zA-Zа-яА-Я\d]+$/
 export function isCorrectPassword(config: IValidatorConfig) {
   return function (value: string) {
     if (!PASSWORD_REGEXP.test(value)) {
+      return config.msg
+    } else {
+      return null
+    }
+  }
+}
+
+const PHONE_REGEXP = /[0-9]{9,15}$/
+export function isCorrectPhone(config: IValidatorConfig) {
+  return function (value: string) {
+    if (!PHONE_REGEXP.test(value)) {
       return config.msg
     } else {
       return null

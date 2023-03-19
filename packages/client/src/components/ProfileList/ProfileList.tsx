@@ -1,24 +1,25 @@
 import { useHistory } from 'react-router-dom'
-import { useAppDispatch } from '../../hooks/store'
-import { authAPI } from '../../api/authApi'
+import { useAppDispatch, useAppSelector } from '../../hooks/store'
 import GuiButton from '../../ui/GuiButton/GuiButton'
-import './ProfileList.scss'
 import { logoutUser } from '../../store/auth-actions'
 import { RoutePath } from '../../router/RoutePath'
+import { useState } from 'react'
+import userIcon from '../../assets/icons/user-icon.svg'
+import GuiLink from '../../ui/GuiLink/GuiLink'
+import './ProfileList.scss'
+import { getUserData } from '../../store/selectors'
+import { getAvatar } from '../../helpers/getAvatar'
 
-interface ProfileProps {
-  firstname?: string
-  surname?: string
-  email?: string
-  displayName?: string
-  avatar?: string
-}
-
-const ProfileList = (props: ProfileProps) => {
+const ProfileList = () => {
   const history = useHistory()
   const dispatch = useAppDispatch()
+  const userData = useAppSelector(getUserData)
 
-  const { firstname, surname, email, displayName, avatar } = props
+  const [email] = useState(userData?.email || '')
+  const [firstname] = useState(userData?.first_name || '')
+  const [surname] = useState(userData?.second_name || '')
+  const [displayName] = useState(userData?.display_name || '')
+  const [avatar] = useState(getAvatar(userData?.avatar))
 
   const onLogoutClick = () => {
     dispatch(logoutUser())
@@ -30,7 +31,11 @@ const ProfileList = (props: ProfileProps) => {
     <div className="profile-list">
       <div className="profile-list__inner">
         <div className="profile-list__avatar">
-          <img src={avatar} alt="User avatar" />
+          <img
+            className="profile-list__avatar-img"
+            src={avatar}
+            alt="User avatar"
+          />
         </div>
         <div className="profile-list__fields">
           <h2 className="profile-list__title">Profile info</h2>
@@ -58,10 +63,10 @@ const ProfileList = (props: ProfileProps) => {
           </div>
         </div>
       </div>
-      <GuiButton
-        type="button"
-        btnText="Change profile info"
-        className="profile-list__btn"
+      <GuiLink
+        text="Change profile info"
+        url={RoutePath.Settings}
+        className="gui-button profile-list__btn"
       />
       <GuiButton
         type="button"
