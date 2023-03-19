@@ -207,7 +207,11 @@ const ProfileForm = (): ReactElement => {
         <button
           className="profile-list__avatar profile-list__avatar--button"
           onClick={openModal}>
-          <img className="profile-list__avatar-img" src={avatar} alt="User avatar" />
+          <img
+            className="profile-list__avatar-img"
+            src={avatar}
+            alt="User avatar"
+          />
           <span className="profile-list__avatar-text">Change picture</span>
         </button>
         <form>

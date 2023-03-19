@@ -13,6 +13,6 @@ export type PasswordRequestData = {
 }
 
 export type FileRequestData = {
-  file: File,
+  file: File
   fileName: string
 }

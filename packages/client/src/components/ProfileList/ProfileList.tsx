@@ -10,7 +10,6 @@ import './ProfileList.scss'
 import { getUserData } from '../../store/selectors'
 import { getAvatar } from '../../helpers/getAvatar'
 
-
 const ProfileList = () => {
   const history = useHistory()
   const dispatch = useAppDispatch()
@@ -32,7 +31,11 @@ const ProfileList = () => {
     <div className="profile-list">
       <div className="profile-list__inner">
         <div className="profile-list__avatar">
-          <img className="profile-list__avatar-img" src={avatar} alt="User avatar" />
+          <img
+            className="profile-list__avatar-img"
+            src={avatar}
+            alt="User avatar"
+          />
         </div>
         <div className="profile-list__fields">
           <h2 className="profile-list__title">Profile info</h2>

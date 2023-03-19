@@ -28,7 +28,7 @@ const FileModal = (): ReactElement => {
     } else {
       const fileData: FileRequestData = {
         file: file,
-        fileName: 'avatar'
+        fileName: 'avatar',
       }
       profileAPI
         .avatar(fileData)
