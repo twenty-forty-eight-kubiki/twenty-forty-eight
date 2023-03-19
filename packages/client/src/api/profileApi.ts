@@ -2,7 +2,7 @@ import { API } from './api'
 import {
   ProfileRequestData,
   PasswordRequestData,
-  AvatarRequestData,
+  FileRequestData
 } from '../types/api/profieApi'
 import { UserInfoResponse } from '../types/api/authApi'
 
@@ -18,10 +18,10 @@ export const profileAPI = {
     return API.put<PasswordRequestData, void>('user/password', passwordData)
   },
 
-  async avatar(avatarData: AvatarRequestData) {
-    return API.putFile<AvatarRequestData, void>(
+  async avatar(data: FileRequestData) {
+    return API.putFile<void>(
       'user/profile/avatar',
-      avatarData
+      data
     )
   },
 }

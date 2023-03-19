@@ -6,14 +6,11 @@ import { RoutePath } from '../../router/RoutePath'
 import { useAppSelector } from '../../hooks/store'
 import { getUserAvatar } from '../../store/selectors'
 import userIcon from '../../assets/icons/user-icon.svg'
+import { getAvatar } from '../../helpers/getAvatar'
 
 const Header = memo(() => {
   const avatarPath = useAppSelector(getUserAvatar)
-  const [avatar] = useState(
-    avatarPath
-      ? `https://ya-praktikum.tech/api/v2/resources/${avatarPath}`
-      : userIcon
-  )
+  const [avatar] = useState(getAvatar(avatarPath))
 
   return (
     <div className="header">

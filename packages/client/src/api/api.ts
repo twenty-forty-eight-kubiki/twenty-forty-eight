@@ -1,4 +1,5 @@
 import { BASE_URL } from '../constants'
+import { FileRequestData } from '../types/api/profieApi'
 function request<T>(url: string, config: RequestInit = {}): Promise<T> {
   return fetch(`${BASE_URL}/` + url, config)
     .then(response => {
@@ -53,16 +54,20 @@ export const API = {
         'Content-Type': 'application/json',
       },
     }),
-  putFile: <TBody extends BodyInit, TResponse>(
+  putFile: <TResponse>(
     url: string,
-    body: TBody
-  ): Promise<TResponse> =>
-    request<TResponse>(url, {
+    data: FileRequestData
+  ): Promise<TResponse> => {
+    const formData = new FormData()
+    formData.append(data.fileName, data.file)
+    return request<TResponse>(url, {
       method: 'PUT',
-      body: body,
+      body: formData,
       credentials: 'include',
       headers: {
         accept: 'application/json',
       },
-    }),
+    })
+  }
 }
+

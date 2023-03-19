@@ -12,4 +12,7 @@ export type PasswordRequestData = {
   newPassword: string
 }
 
-export type AvatarRequestData = FormData
+export type FileRequestData = {
+  file: File,
+  fileName: string
+}

@@ -64,14 +64,14 @@
           background-color: rgba(0, 0, 0, 0.5);
         }
 
-        span {
+        .profile-list__avatar-text {
           opacity: 1;
           z-index: 100;
         }
       }
     }
 
-    span {
+    .profile-list__avatar-text {
       position: absolute;
       opacity: 0;
 
@@ -87,7 +87,7 @@
       line-height: 17px;
     }
 
-    img {
+    .profile-list__avatar-img {
       object-fit: cover;
       width: 100%;
       height: 100%;

@@ -5,7 +5,6 @@ import Modal from '../Modal/Modal'
 import { FileModal } from '../FileModal/FileModal'
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
 import { ProfileFormFields, ProfileErrorsObj } from '../../types/form'
-import userIcon from '../../assets/icons/user-icon.svg'
 import { useAppDispatch, useAppSelector } from '../../hooks/store'
 import { getUserData } from '../../store/selectors'
 import {
@@ -14,6 +13,7 @@ import {
 } from '../../types/api/profieApi'
 import { profileAPI } from '../../api/profileApi'
 import { updateUserData } from '../../store/reducers/AuthSlice'
+import { getAvatar } from '../../helpers/getAvatar'
 import TextError from '../../ui/TextError/TextError'
 import '../ProfileList/ProfileList.scss'
 
@@ -22,28 +22,14 @@ const ProfileForm = (): ReactElement => {
   const dispatch = useAppDispatch()
 
   const [isModal, setModal] = useState(false)
-  const [email, setEmail] = useState(() =>
-    userData?.email ? userData?.email : ''
-  )
+  const [email, setEmail] = useState(userData?.email || '')
   const [password, setPassword] = useState('')
   const [oldPassword, setOldPassword] = useState('')
-  const [firstname, setFirstname] = useState(() =>
-    userData?.first_name ? userData?.first_name : ''
-  )
-  const [displayName, setDisplayName] = useState(() =>
-    userData?.display_name ? userData?.display_name : ''
-  )
-  const [surname, setSurname] = useState(() =>
-    userData?.second_name ? userData?.second_name : ''
-  )
-  const [login, setLogin] = useState(() =>
-    userData?.login ? userData?.login : ''
-  )
-  const [avatar] = useState(() =>
-    userData?.avatar
-      ? `https://ya-praktikum.tech/api/v2/resources/${userData?.avatar}`
-      : userIcon
-  )
+  const [firstname, setFirstname] = useState(userData?.first_name || '')
+  const [displayName, setDisplayName] = useState(userData?.display_name || '')
+  const [surname, setSurname] = useState(userData?.second_name || '')
+  const [login, setLogin] = useState(userData?.login || '')
+  const [avatar] = useState(getAvatar(userData?.avatar))
   const [phone, setPhone] = useState(() =>
     userData?.phone ? userData?.phone : ''
   )
@@ -221,8 +207,8 @@ const ProfileForm = (): ReactElement => {
         <button
           className="profile-list__avatar profile-list__avatar--button"
           onClick={openModal}>
-          <img src={avatar} alt="User avatar" />
-          <span>Change picture</span>
+          <img className="profile-list__avatar-img" src={avatar} alt="User avatar" />
+          <span className="profile-list__avatar-text">Change picture</span>
         </button>
         <form>
           <div className="profile-list__fields">

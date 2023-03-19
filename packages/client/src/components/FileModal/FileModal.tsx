@@ -4,6 +4,7 @@ import './FileModal.scss'
 import { profileAPI } from '../../api/profileApi'
 import { useAppDispatch } from '../../hooks/store'
 import { fetchUser } from '../../store/auth-actions'
+import { FileRequestData } from '../../types/api/profieApi'
 
 const FileModal = (): ReactElement => {
   const dispatch = useAppDispatch()
@@ -25,10 +26,12 @@ const FileModal = (): ReactElement => {
     if (!file) {
       setFileError('Add file')
     } else {
-      const formData = new FormData()
-      formData.append('avatar', file)
+      const fileData: FileRequestData = {
+        file: file,
+        fileName: 'avatar'
+      }
       profileAPI
-        .avatar(formData)
+        .avatar(fileData)
         .then(() => dispatch(fetchUser()))
         .catch(error => setFileError(error))
     }

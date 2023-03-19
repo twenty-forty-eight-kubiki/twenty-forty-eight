@@ -8,25 +8,19 @@ import userIcon from '../../assets/icons/user-icon.svg'
 import GuiLink from '../../ui/GuiLink/GuiLink'
 import './ProfileList.scss'
 import { getUserData } from '../../store/selectors'
+import { getAvatar } from '../../helpers/getAvatar'
+
 
 const ProfileList = () => {
   const history = useHistory()
   const dispatch = useAppDispatch()
   const userData = useAppSelector(getUserData)
 
-  const [email] = useState(() => (userData?.email ? userData?.email : ''))
-  const [firstname] = useState(() =>
-    userData?.first_name ? userData?.first_name : ''
-  )
-  const [surname] = useState(userData?.second_name ? userData?.second_name : '')
-  const [displayName] = useState(
-    userData?.display_name ? userData?.display_name : ''
-  )
-  const [avatar] = useState(() =>
-    userData?.avatar
-      ? `https://ya-praktikum.tech/api/v2/resources/${userData?.avatar}`
-      : userIcon
-  )
+  const [email] = useState(userData?.email || '')
+  const [firstname] = useState(userData?.first_name || '')
+  const [surname] = useState(userData?.second_name || '')
+  const [displayName] = useState(userData?.display_name || '')
+  const [avatar] = useState(getAvatar(userData?.avatar))
 
   const onLogoutClick = () => {
     dispatch(logoutUser())
@@ -38,7 +32,7 @@ const ProfileList = () => {
     <div className="profile-list">
       <div className="profile-list__inner">
         <div className="profile-list__avatar">
-          <img src={avatar} alt="User avatar" />
+          <img className="profile-list__avatar-img" src={avatar} alt="User avatar" />
         </div>
         <div className="profile-list__fields">
           <h2 className="profile-list__title">Profile info</h2>
