@@ -1,8 +1,12 @@
 import React, { FormEvent, ReactElement, useState } from 'react'
 import GuiButton from '../../ui/GuiButton/GuiButton'
 import './FileModal.scss'
+import { profileAPI } from '../../api/profileApi'
+import { useAppDispatch } from '../../hooks/store'
+import { fetchUser } from '../../store/auth-actions'
 
 const FileModal = (): ReactElement => {
+  const dispatch = useAppDispatch()
   const [fileLabel, setFileLabel] = useState('Select a file on your computer')
   const [fileError, setFileError] = useState('')
   const [file, setFile] = useState<File>()
@@ -21,7 +25,12 @@ const FileModal = (): ReactElement => {
     if (!file) {
       setFileError('Add file')
     } else {
-      // api
+      const formData = new FormData()
+      formData.append('avatar', file)
+      profileAPI
+        .avatar(formData)
+        .then(() => dispatch(fetchUser()))
+        .catch(error => setFileError(error))
     }
   }
 

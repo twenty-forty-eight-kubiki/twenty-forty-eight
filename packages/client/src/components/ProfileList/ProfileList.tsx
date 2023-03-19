@@ -1,24 +1,32 @@
 import { useHistory } from 'react-router-dom'
-import { useAppDispatch } from '../../hooks/store'
-import { authAPI } from '../../api/authApi'
+import { useAppDispatch, useAppSelector } from '../../hooks/store'
 import GuiButton from '../../ui/GuiButton/GuiButton'
-import './ProfileList.scss'
 import { logoutUser } from '../../store/auth-actions'
 import { RoutePath } from '../../router/RoutePath'
+import { useState } from 'react'
+import userIcon from '../../assets/icons/user-icon.svg'
+import GuiLink from '../../ui/GuiLink/GuiLink'
+import './ProfileList.scss'
+import { getUserData } from '../../store/selectors'
 
-interface ProfileProps {
-  firstname?: string
-  surname?: string
-  email?: string
-  displayName?: string
-  avatar?: string
-}
-
-const ProfileList = (props: ProfileProps) => {
+const ProfileList = () => {
   const history = useHistory()
   const dispatch = useAppDispatch()
+  const userData = useAppSelector(getUserData)
 
-  const { firstname, surname, email, displayName, avatar } = props
+  const [email] = useState(() => (userData?.email ? userData?.email : ''))
+  const [firstname] = useState(() =>
+    userData?.first_name ? userData?.first_name : ''
+  )
+  const [surname] = useState(userData?.second_name ? userData?.second_name : '')
+  const [displayName] = useState(
+    userData?.display_name ? userData?.display_name : ''
+  )
+  const [avatar] = useState(() =>
+    userData?.avatar
+      ? `https://ya-praktikum.tech/api/v2/resources/${userData?.avatar}`
+      : userIcon
+  )
 
   const onLogoutClick = () => {
     dispatch(logoutUser())
@@ -58,10 +66,10 @@ const ProfileList = (props: ProfileProps) => {
           </div>
         </div>
       </div>
-      <GuiButton
-        type="button"
-        btnText="Change profile info"
-        className="profile-list__btn"
+      <GuiLink
+        text="Change profile info"
+        url={RoutePath.Settings}
+        className="gui-button profile-list__btn"
       />
       <GuiButton
         type="button"

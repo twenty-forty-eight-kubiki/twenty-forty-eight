@@ -1,10 +1,20 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import Icon from '../../ui/Icon/Icon'
 import { Link } from 'react-router-dom'
 import './Header.scss'
 import { RoutePath } from '../../router/RoutePath'
+import { useAppSelector } from '../../hooks/store'
+import { getUserAvatar } from '../../store/selectors'
+import userIcon from '../../assets/icons/user-icon.svg'
 
 const Header = memo(() => {
+  const avatarPath = useAppSelector(getUserAvatar)
+  const [avatar] = useState(
+    avatarPath
+      ? `https://ya-praktikum.tech/api/v2/resources/${avatarPath}`
+      : userIcon
+  )
+
   return (
     <div className="header">
       <div className="inner">
@@ -20,8 +30,8 @@ const Header = memo(() => {
         <Link to={RoutePath.Settings} className="header__item">
           Settings
         </Link>
-        <Link to={RoutePath.User}>
-          <Icon img="" />
+        <Link to={RoutePath.User} className="header__icon">
+          <Icon img={avatar} />
         </Link>
       </div>
     </div>

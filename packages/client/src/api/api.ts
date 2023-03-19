@@ -44,4 +44,25 @@ export const API = {
         'Content-Type': 'application/json',
       },
     }),
+  put: <TBody, TResponse>(url: string, body?: TBody): Promise<TResponse> =>
+    request<TResponse>(url, {
+      method: 'PUT',
+      body: JSON.stringify(body),
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    }),
+  putFile: <TBody extends BodyInit, TResponse>(
+    url: string,
+    body: TBody
+  ): Promise<TResponse> =>
+    request<TResponse>(url, {
+      method: 'PUT',
+      body: body,
+      credentials: 'include',
+      headers: {
+        accept: 'application/json',
+      },
+    }),
 }

@@ -39,6 +39,8 @@ export enum ProfileFormFields {
   ConfirmPassword = 'confirmPassword',
   OldPassword = 'oldPassword',
   DisplayName = 'displayName',
+  Login = 'login',
+  Phone = 'phone',
 }
 
 export type ProfileErrorsObj =
@@ -46,8 +48,10 @@ export type ProfileErrorsObj =
       firstname: string | null
       surname: string | null
       email: string | null
+      login: string | null
       password: string | null
       oldPassword: string | null
       displayName: string | null
+      phone: string | null
     }
   | Record<string, never>

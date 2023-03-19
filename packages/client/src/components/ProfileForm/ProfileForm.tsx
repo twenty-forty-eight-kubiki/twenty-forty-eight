@@ -5,18 +5,52 @@ import Modal from '../Modal/Modal'
 import { FileModal } from '../FileModal/FileModal'
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
 import { ProfileFormFields, ProfileErrorsObj } from '../../types/form'
-import '../ProfileList/ProfileList.scss'
 import userIcon from '../../assets/icons/user-icon.svg'
+import { useAppDispatch, useAppSelector } from '../../hooks/store'
+import { getUserData } from '../../store/selectors'
+import {
+  PasswordRequestData,
+  ProfileRequestData,
+} from '../../types/api/profieApi'
+import { profileAPI } from '../../api/profileApi'
+import { updateUserData } from '../../store/reducers/AuthSlice'
+import TextError from '../../ui/TextError/TextError'
+import '../ProfileList/ProfileList.scss'
 
 const ProfileForm = (): ReactElement => {
+  const userData = useAppSelector(getUserData)
+  const dispatch = useAppDispatch()
+
   const [isModal, setModal] = useState(false)
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState(() =>
+    userData?.email ? userData?.email : ''
+  )
   const [password, setPassword] = useState('')
   const [oldPassword, setOldPassword] = useState('')
-  const [firstname, setFirstname] = useState('')
-  const [displayName, setDisplayName] = useState('')
-  const [surname, setSurname] = useState('')
-  const [avatar] = useState(userIcon)
+  const [firstname, setFirstname] = useState(() =>
+    userData?.first_name ? userData?.first_name : ''
+  )
+  const [displayName, setDisplayName] = useState(() =>
+    userData?.display_name ? userData?.display_name : ''
+  )
+  const [surname, setSurname] = useState(() =>
+    userData?.second_name ? userData?.second_name : ''
+  )
+  const [login, setLogin] = useState(() =>
+    userData?.login ? userData?.login : ''
+  )
+  const [avatar] = useState(() =>
+    userData?.avatar
+      ? `https://ya-praktikum.tech/api/v2/resources/${userData?.avatar}`
+      : userIcon
+  )
+  const [phone, setPhone] = useState(() =>
+    userData?.phone ? userData?.phone : ''
+  )
+  const [profileDataError, setProfileDataError] = useState('')
+  const [passwordDataError, setPasswordDataError] = useState('')
+  const [passwordDataSuccess, setPasswordDataSuccess] = useState('')
+  const [profileDataSuccess, setProfileDataSuccess] = useState('')
   const [errors, setErrors] = useState<ProfileErrorsObj>({
     firstname: '',
     surname: '',
@@ -24,6 +58,8 @@ const ProfileForm = (): ReactElement => {
     email: '',
     password: '',
     oldPassword: '',
+    login: '',
+    phone: '',
   })
 
   const schema: IValidationSchema = {
@@ -58,27 +94,20 @@ const ProfileForm = (): ReactElement => {
         msg: 'The first letter must be capital, no spaces and no numbers, no special characters (only a hyphen is allowed)',
       },
     },
+    login: {
+      isRequired: { msg: 'This field is required' },
+      minLength: { value: 3, msg: 'Minimum 3 characters' },
+      maxLength: { value: 20, msg: 'Maximum 20 characters' },
+    },
+    phone: {
+      isRequired: { msg: 'This field is required' },
+      minLength: { value: 9, msg: 'Minimum 9 characters' },
+      maxLength: { value: 15, msg: 'Maximum 15 characters' },
+      isCorrectPhone: { msg: 'Only digits must be registered' },
+    },
   }
 
   const easyValidator = new EasyValidator(schema)
-
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    const errorsObj = easyValidator.validateFields({
-      email,
-      firstname,
-      surname,
-      password,
-      oldPassword,
-      displayName,
-    })
-
-    setErrors({ ...errorsObj })
-
-    if (easyValidator.isValid()) {
-      //api
-    }
-  }
 
   const onChangeFirstname = (event: FormEvent<HTMLInputElement>) => {
     setFirstname(event.currentTarget.value)
@@ -103,14 +132,87 @@ const ProfileForm = (): ReactElement => {
   const onChangeOldPassword = (e: FormEvent<HTMLInputElement>) => {
     setOldPassword(e.currentTarget.value)
   }
+  const onChangeLogin = (e: FormEvent<HTMLInputElement>) => {
+    setLogin(e.currentTarget.value)
+  }
+
+  const onChangePhone = (e: FormEvent<HTMLInputElement>) => {
+    setPhone(e.currentTarget.value)
+  }
 
   const resetError = (fieldName: ProfileFormFields) => {
     const errorsObj = { ...errors, [fieldName]: '' } as ProfileErrorsObj
     setErrors(errorsObj)
+    setProfileDataSuccess('')
+    setPasswordDataSuccess('')
+    setPasswordDataError('')
+    setProfileDataError('')
   }
 
   const openModal = () => {
     setModal(true)
+  }
+
+  const onChangeProfileBtnClick = () => {
+    const errorsObj = easyValidator.validateFields({
+      email,
+      firstname,
+      surname,
+      displayName,
+      login,
+      phone,
+    })
+
+    setErrors({ ...errorsObj })
+
+    if (easyValidator.isValid()) {
+      const userData: ProfileRequestData = {
+        login: login,
+        second_name: surname,
+        first_name: firstname,
+        display_name: displayName,
+        email: email,
+        phone: phone,
+      }
+
+      profileAPI
+        .profile(userData)
+        .then(data => {
+          dispatch(updateUserData(data))
+          setProfileDataSuccess('Profile data was updated')
+        })
+        .catch((error: string) => {
+          setProfileDataError(error)
+          setProfileDataSuccess('')
+        })
+    }
+  }
+
+  const onChangePasswordBtnClick = () => {
+    const errorsObj = easyValidator.validateFields({
+      password,
+      oldPassword,
+    })
+
+    setErrors({ ...errorsObj })
+
+    if (easyValidator.isValid()) {
+      const passwordData: PasswordRequestData = {
+        oldPassword: oldPassword,
+        newPassword: password,
+      }
+
+      profileAPI
+        .password(passwordData)
+        .then(() => {
+          setPasswordDataSuccess('Password was changed')
+          setPasswordDataError('')
+        })
+        .catch((error: string) => {
+          setPasswordDataSuccess('')
+          setPasswordDataError(error)
+        })
+    }
   }
 
   return (
@@ -122,7 +224,7 @@ const ProfileForm = (): ReactElement => {
           <img src={avatar} alt="User avatar" />
           <span>Change picture</span>
         </button>
-        <form onSubmit={onSubmit}>
+        <form>
           <div className="profile-list__fields">
             <div className="profile-list__field">
               <h2 className="profile-list__title">Profile info</h2>
@@ -161,6 +263,17 @@ const ProfileForm = (): ReactElement => {
                       onFocus={() => resetError(ProfileFormFields.DisplayName)}
                     />
                   </div>
+                  <div className="profile-list__item">
+                    <GuiInput
+                      label="Login"
+                      placeholder="Enter your login"
+                      value={login}
+                      error={errors[ProfileFormFields.Login]}
+                      onChange={onChangeLogin}
+                      onBlur={() => resetError(ProfileFormFields.Login)}
+                      onFocus={() => resetError(ProfileFormFields.Login)}
+                    />
+                  </div>
                 </div>
                 <div className="profile-list__column">
                   <div className="profile-list__item">
@@ -174,8 +287,27 @@ const ProfileForm = (): ReactElement => {
                       onFocus={() => resetError(ProfileFormFields.Email)}
                     />
                   </div>
+                  <div className="profile-list__item">
+                    <GuiInput
+                      label="Phone"
+                      placeholder="Enter your phone"
+                      value={phone}
+                      error={errors[ProfileFormFields.Phone]}
+                      onChange={onChangePhone}
+                      onBlur={() => resetError(ProfileFormFields.Phone)}
+                      onFocus={() => resetError(ProfileFormFields.Phone)}
+                    />
+                  </div>
                 </div>
               </div>
+              <GuiButton
+                type="button"
+                btnText="Update profile data"
+                className="profile-list__btn profile-list__btn--change"
+                onClick={onChangeProfileBtnClick}
+              />
+              <TextError text={profileDataSuccess} />
+              <TextError text={profileDataError} />
             </div>
             <div className="profile-list__field">
               <h2 className="profile-list__title">Password Config</h2>
@@ -185,6 +317,7 @@ const ProfileForm = (): ReactElement => {
                     <GuiInput
                       label="Old password"
                       placeholder="Enter your old password"
+                      type="password"
                       value={oldPassword}
                       error={errors[ProfileFormFields.OldPassword]}
                       onChange={onChangeOldPassword}
@@ -196,6 +329,7 @@ const ProfileForm = (): ReactElement => {
                     <GuiInput
                       label="New password"
                       placeholder="Enter your new password"
+                      type="password"
                       value={password}
                       error={errors[ProfileFormFields.Password]}
                       onChange={onChangePassword}
@@ -205,13 +339,16 @@ const ProfileForm = (): ReactElement => {
                   </div>
                 </div>
               </div>
+              <GuiButton
+                type="button"
+                btnText="Update password"
+                className="profile-list__btn profile-list__btn--change"
+                onClick={onChangePasswordBtnClick}
+              />
+              <TextError text={passwordDataSuccess} />
+              <TextError text={passwordDataError} />
             </div>
           </div>
-          <GuiButton
-            type="submit"
-            btnText="Update"
-            className="profile-list__btn"
-          />
         </form>
       </div>
       <Modal
