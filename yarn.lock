@@ -2893,13 +2893,17 @@
   "resolved" "file:packages/client"
   "version" "0.0.0"
   dependencies:
+    "@reduxjs/toolkit" "1.9.3"
     "dotenv" "16.0.2"
     "eslint-config-prettier" "8.5.0"
+    "history" "5.3.0"
     "immer" "9.0.19"
     "prettier" "2.7.1"
     "react" "18.2.0"
     "react-dom" "18.2.0"
+    "react-redux" "8.0.5"
     "react-router-dom" "5.2.0"
+    "redux-thunk" "2.4.2"
 
 "cliui@^7.0.2":
   "integrity" "sha512-OcRE68cOsVMXp1Yvonl/fzkQOyjLSu/8bhPDfQt0e0/Eb283TKP20Fs2MqoPsr9SwA595rRCA+QMzYc9nBP+JQ=="
@@ -3615,8 +3619,10 @@
   optionalDependencies:
     "source-map" "~0.6.1"
 
-"eslint-config-prettier@^8.5.0":
-  "version" "8.6.0"
+"eslint-config-prettier@^8.5.0", "eslint-config-prettier@^8.8.0":
+  "integrity" "sha512-wLbQiFre3tdGgpDv67NQKnJuTlcUVYHas3k+DZCc2U2BadthoEY4B7hLPvAxaqdyOGCzuLfii2fqGph10va7oA=="
+  "resolved" "https://registry.npmjs.org/eslint-config-prettier/-/eslint-config-prettier-8.8.0.tgz"
+  "version" "8.8.0"
 
 "eslint-config-prettier@8.5.0":
   "integrity" "sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q=="
@@ -3656,7 +3662,7 @@
   "resolved" "https://registry.npmjs.org/eslint-visitor-keys/-/eslint-visitor-keys-3.3.0.tgz"
   "version" "3.3.0"
 
-"eslint@*", "eslint@^6.0.0 || ^7.0.0 || ^8.0.0", "eslint@>=5":
+"eslint@*", "eslint@^6.0.0 || ^7.0.0 || ^8.0.0", "eslint@>=5", "eslint@>=7.0.0":
   "version" "8.35.0"
   dependencies:
     "@eslint/eslintrc" "^2.0.0"
@@ -3744,7 +3750,7 @@
     "strip-json-comments" "^3.1.0"
     "text-table" "^0.2.0"
 
-"eslint@>=7.0.0", "eslint@8.23.0":
+"eslint@8.23.0":
   "integrity" "sha512-pBG/XOn0MsJcKcTRLr27S5HpzQo4kLr+HjLQIyK4EiCsijDl/TB+h5uEuJU6bQ8Edvwz1XWOjpaP2qgnXGpTcA=="
   "resolved" "https://registry.npmjs.org/eslint/-/eslint-8.23.0.tgz"
   "version" "8.23.0"
