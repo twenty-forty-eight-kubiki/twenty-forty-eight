@@ -1,79 +1,79 @@
 @import './variables';
 
 @font-face {
-  $file-name: '#{$font-family-custom}-ExtraLight';
+	$file-name: '#{$font-family-custom}-ExtraLight';
 
-  font-family: $font-family-custom;
-  font-weight: $font-weight-extra-light;
-  font-style: normal;
+	font-family: $font-family-custom;
+	font-weight: $font-weight-extra-light;
+	font-style: normal;
 
-  src: url('#{$font-path}/#{$file-name}.ttf') format('ttf'),
-    url('#{$font-path}/#{$file-name}.woff') format('woff');
+	src: url('#{$font-path}/#{$file-name}.ttf') format('ttf'),
+		url('#{$font-path}/#{$file-name}.woff') format('woff');
 
-  font-display: swap;
+	font-display: swap;
 }
 
 @font-face {
-  $file-name: '#{$font-family-custom}-Light';
+	$file-name: '#{$font-family-custom}-Light';
 
-  font-family: $font-family-custom;
-  font-weight: $font-weight-light;
-  font-style: normal;
+	font-family: $font-family-custom;
+	font-weight: $font-weight-light;
+	font-style: normal;
 
-  src: url('#{$font-path}/#{$file-name}.ttf') format('ttf'),
-    url('#{$font-path}/#{$file-name}.woff') format('woff');
+	src: url('#{$font-path}/#{$file-name}.ttf') format('ttf'),
+		url('#{$font-path}/#{$file-name}.woff') format('woff');
 
-  font-display: swap;
+	font-display: swap;
 }
 
 @font-face {
-  $file-name: '#{$font-family-custom}-Regular';
+	$file-name: '#{$font-family-custom}-Regular';
 
-  font-family: $font-family-custom;
-  font-weight: $font-weight-regular;
-  font-style: normal;
+	font-family: $font-family-custom;
+	font-weight: $font-weight-regular;
+	font-style: normal;
 
-  src: url('#{$font-path}/#{$file-name}.ttf') format('ttf'),
-    url('#{$font-path}/#{$file-name}.woff') format('woff');
+	src: url('#{$font-path}/#{$file-name}.ttf') format('ttf'),
+		url('#{$font-path}/#{$file-name}.woff') format('woff');
 
-  font-display: swap;
+	font-display: swap;
 }
 
 @font-face {
-  $file-name: '#{$font-family-custom}-Medium';
+	$file-name: '#{$font-family-custom}-Medium';
 
-  font-family: $font-family-custom;
-  font-weight: $font-weight-medium;
-  font-style: normal;
+	font-family: $font-family-custom;
+	font-weight: $font-weight-medium;
+	font-style: normal;
 
-  src: url('#{$font-path}/#{$file-name}.ttf') format('ttf'),
-    url('#{$font-path}/#{$file-name}.woff') format('woff');
+	src: url('#{$font-path}/#{$file-name}.ttf') format('ttf'),
+		url('#{$font-path}/#{$file-name}.woff') format('woff');
 
-  font-display: swap;
+	font-display: swap;
 }
 
 @font-face {
-  $file-name: '#{$font-family-custom}-SemiBold';
+	$file-name: '#{$font-family-custom}-SemiBold';
 
-  font-family: $font-family-custom;
-  font-weight: $font-weight-semi-bold;
-  font-style: normal;
+	font-family: $font-family-custom;
+	font-weight: $font-weight-semi-bold;
+	font-style: normal;
 
-  src: url('#{$font-path}/#{$file-name}.ttf') format('ttf'),
-    url('#{$font-path}/#{$file-name}.woff') format('woff');
+	src: url('#{$font-path}/#{$file-name}.ttf') format('ttf'),
+		url('#{$font-path}/#{$file-name}.woff') format('woff');
 
-  font-display: swap;
+	font-display: swap;
 }
 
 @font-face {
-  $file-name: '#{$font-family-custom}-Bold';
+	$file-name: '#{$font-family-custom}-Bold';
 
-  font-family: $font-family-custom;
-  font-weight: $font-weight-bold;
-  font-style: normal;
+	font-family: $font-family-custom;
+	font-weight: $font-weight-bold;
+	font-style: normal;
 
-  src: url('#{$font-path}/#{$file-name}.ttf') format('ttf'),
-    url('#{$font-path}/#{$file-name}.woff') format('woff');
+	src: url('#{$font-path}/#{$file-name}.ttf') format('ttf'),
+		url('#{$font-path}/#{$file-name}.woff') format('woff');
 
-  font-display: swap;
+	font-display: swap;
 }

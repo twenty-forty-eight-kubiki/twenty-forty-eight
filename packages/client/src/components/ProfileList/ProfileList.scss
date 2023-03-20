@@ -1,153 +1,153 @@
 @import '../src/assets/scss/variables';
 
 .profile-list {
-  position: relative;
-  z-index: 10;
-  width: 100%;
+	position: relative;
+	z-index: 10;
+	width: 100%;
 
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-  &__btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    color: $white;
+	&__btn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin: 0 auto;
+		color: $white;
 
-    &--logout {
-      margin-top: 10px;
-    }
+		&--logout {
+			margin-top: 10px;
+		}
 
-    &--change {
-      margin-top: 30px;
-      margin-bottom: 5px;
-    }
-  }
+		&--change {
+			margin-top: 30px;
+			margin-bottom: 5px;
+		}
+	}
 
-  &__avatar {
-    width: 165px;
-    height: 165px;
+	&__avatar {
+		width: 165px;
+		height: 165px;
 
-    margin: 0 auto;
+		margin: 0 auto;
 
-    border-radius: 50%;
-    background-color: $alto;
-    border: 5px solid $white;
-    overflow: hidden;
+		border-radius: 50%;
+		background-color: $alto;
+		border: 5px solid $white;
+		overflow: hidden;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 
-    &--button {
-      position: relative;
+		&--button {
+			position: relative;
 
-      margin: 0 auto;
+			margin: 0 auto;
 
-      cursor: pointer;
+			cursor: pointer;
 
-      &::after {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        background-color: transparent;
-        transition: background-color 0.3s ease;
-      }
+			&::after {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+				background-color: transparent;
+				transition: background-color 0.3s ease;
+			}
 
-      &:hover {
-        &::after {
-          background-color: rgba(0, 0, 0, 0.5);
-        }
+			&:hover {
+				&::after {
+					background-color: rgba(0, 0, 0, 0.5);
+				}
 
-        .profile-list__avatar-text {
-          opacity: 1;
-          z-index: 100;
-        }
-      }
-    }
+				.profile-list__avatar-text {
+					opacity: 1;
+					z-index: 100;
+				}
+			}
+		}
 
-    .profile-list__avatar-text {
-      position: absolute;
-      opacity: 0;
+		.profile-list__avatar-text {
+			position: absolute;
+			opacity: 0;
 
-      color: #f8dede;
+			color: #f8dede;
 
-      text-align: center;
+			text-align: center;
 
-      transition: opacity $trans-default;
+			transition: opacity $trans-default;
 
-      font-style: italic;
-      font-weight: 400;
-      font-size: 16px;
-      line-height: 17px;
-    }
+			font-style: italic;
+			font-weight: 400;
+			font-size: 16px;
+			line-height: 17px;
+		}
 
-    .profile-list__avatar-img {
-      object-fit: cover;
-      width: 100%;
-      height: 100%;
-      object-position: center;
-    }
-  }
+		.profile-list__avatar-img {
+			object-fit: cover;
+			width: 100%;
+			height: 100%;
+			object-position: center;
+		}
+	}
 
-  &__fields {
-    padding: 50px 86px 90px;
-  }
+	&__fields {
+		padding: 50px 86px 90px;
+	}
 
-  &__field {
-    margin-bottom: 23px;
-  }
+	&__field {
+		margin-bottom: 23px;
+	}
 
-  &__title {
-    display: block;
-    padding-bottom: 8px;
-    margin-bottom: 20px;
+	&__title {
+		display: block;
+		padding-bottom: 8px;
+		margin-bottom: 20px;
 
-    font-style: italic;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
+		font-style: italic;
+		font-weight: 400;
+		font-size: 20px;
+		line-height: 24px;
 
-    border-bottom: 1px solid #d6d4d0;
-  }
+		border-bottom: 1px solid #d6d4d0;
+	}
 
-  &__list {
-    display: flex;
-    flex-wrap: wrap;
-  }
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+	}
 
-  &__column {
-    width: calc(50% - 20px);
+	&__column {
+		width: calc(50% - 20px);
 
-    margin-bottom: -30px;
+		margin-bottom: -30px;
 
-    &:nth-child(2n) {
-      margin-left: 20px;
-    }
-  }
+		&:nth-child(2n) {
+			margin-left: 20px;
+		}
+	}
 
-  &__item {
-    margin-bottom: 30px;
-  }
+	&__item {
+		margin-bottom: 30px;
+	}
 
-  &__subtitle {
-    margin-bottom: 20px;
+	&__subtitle {
+		margin-bottom: 20px;
 
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
-  }
+		font-weight: 400;
+		font-size: 18px;
+		line-height: 22px;
+	}
 
-  &__value {
-    font-weight: 300;
-    font-size: 16px;
-    line-height: 20px;
+	&__value {
+		font-weight: 300;
+		font-size: 16px;
+		line-height: 20px;
 
-    color: rgba(15, 15, 12, 0.93);
-  }
+		color: rgba(15, 15, 12, 0.93);
+	}
 }

@@ -1,5 +1,5 @@
 export enum GameState {
-  Win,
-  Lose,
-  Continue,
+	Win,
+	Lose,
+	Continue
 }
