@@ -6,6 +6,7 @@ import ForumPage from '../pages/ForumPage/ForumPage';
 import LeaderBoardPage from '../pages/LeaderBoardPage/LeaderBoardPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import ProfileSettings from '../pages/ProfileSettings/ProfileSettings';
+import GamePage from '../pages/GamePage/GamePage';
 
 export interface IRoute {
   id: number;
@@ -58,7 +59,7 @@ export const routes: Array<IRoute> = [
     id: 6,
     path: RoutePath.Game,
     exact: true,
-    component: () => <>Game page in progress...</>,
+    component: GamePage,
     private: true
   },
   {
