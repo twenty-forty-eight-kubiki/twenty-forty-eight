@@ -1,24 +1,24 @@
 @import '../../assets/scss/variables';
 
 .forum-topic {
-	background-color: $white-linen;
-	padding: 20px;
-	border-bottom: 1px solid $linen;
-	box-shadow: 2px 0 2px 2px $linen;
-	cursor: pointer;
-	transition: background-color 0.4s;
+  background-color: $white-linen;
+  padding: 20px;
+  border-bottom: 1px solid $linen;
+  box-shadow: 2px 0 2px 2px $linen;
+  cursor: pointer;
+  transition: background-color 0.4s;
 
-	&:hover {
-		background-color: $hint-of-red;
-	}
+  &:hover {
+    background-color: $hint-of-red;
+  }
 
-	&__header {
-		font-size: 18px;
-		color: $black;
-	}
+  &__header {
+    font-size: 18px;
+    color: $black;
+  }
 
-	&__theme {
-		font-size: 16px;
-		color: $rangoon-green;
-	}
+  &__theme {
+    font-size: 16px;
+    color: $rangoon-green;
+  }
 }

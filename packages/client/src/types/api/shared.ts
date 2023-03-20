@@ -1,3 +1,3 @@
 export type APIError = {
-	reason: string;
+  reason: string;
 };

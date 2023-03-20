@@ -2,9 +2,9 @@ import { store, rootReducer } from './store';
 import { AuthorizationStatus } from '../constants';
 
 export type GenericState<TData, TError = unknown> = {
-	data: TData | null;
-	error: TError | null;
-	authorizationStatus: AuthorizationStatus;
+  data: TData | null;
+  error: TError | null;
+  authorizationStatus: AuthorizationStatus;
 };
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -7,13 +7,13 @@ import { store } from './store/store';
 import './index.scss';
 
 const Application = (
-	<Provider store={store}>
-		<BrowserRouter>
-			<App />
-		</BrowserRouter>
-	</Provider>
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
 );
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-	Application
+  Application
 );

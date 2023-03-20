@@ -8,30 +8,30 @@ import { getUserAvatar } from '../../store/selectors';
 import { getAvatar } from '../../helpers/getAvatar';
 
 const Header = memo(() => {
-	const avatarPath = useAppSelector(getUserAvatar);
-	const [avatar] = useState(getAvatar(avatarPath));
+  const avatarPath = useAppSelector(getUserAvatar);
+  const [avatar] = useState(getAvatar(avatarPath));
 
-	return (
-		<div className='header'>
-			<div className='inner'>
-				<Link to={RoutePath.Game} className='header__item'>
-					Game
-				</Link>
-				<Link to={RoutePath.Forum} className='header__item'>
-					Forum
-				</Link>
-				<Link to={RoutePath.Leaders} className='header__item'>
-					Leaderboard
-				</Link>
-				<Link to={RoutePath.Settings} className='header__item'>
-					Settings
-				</Link>
-				<Link to={RoutePath.User} className='header__icon'>
-					<Icon img={avatar} />
-				</Link>
-			</div>
-		</div>
-	);
+  return (
+    <div className='header'>
+      <div className='inner'>
+        <Link to={RoutePath.Game} className='header__item'>
+          Game
+        </Link>
+        <Link to={RoutePath.Forum} className='header__item'>
+          Forum
+        </Link>
+        <Link to={RoutePath.Leaders} className='header__item'>
+          Leaderboard
+        </Link>
+        <Link to={RoutePath.Settings} className='header__item'>
+          Settings
+        </Link>
+        <Link to={RoutePath.User} className='header__icon'>
+          <Icon img={avatar} />
+        </Link>
+      </div>
+    </div>
+  );
 });
 
 export default Header;
