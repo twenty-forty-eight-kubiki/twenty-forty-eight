@@ -5,3 +5,9 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export const leaderBoardData = {
+  ratingFieldName: 'leader',
+  cursor: 0,
+  limit: 100,
+}

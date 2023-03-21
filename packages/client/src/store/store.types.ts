@@ -4,7 +4,7 @@ import { AuthorizationStatus } from '../constants'
 export type GenericState<TData, TError = unknown> = {
   data: TData | null
   error: TError | null
-  authorizationStatus: AuthorizationStatus
+  authorizationStatus?: AuthorizationStatus
 }
 
 export type RootState = ReturnType<typeof rootReducer>
