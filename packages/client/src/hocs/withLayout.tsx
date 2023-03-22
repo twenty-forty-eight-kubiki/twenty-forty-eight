@@ -1,6 +1,6 @@
-import React from 'react'
-import { getDisplayName } from '../utils/getDisplayName'
-import Layout from '../components/Layout/Layout'
+import React from 'react';
+import { getDisplayName } from '../utils/getDisplayName';
+import Layout from '../components/Layout/Layout';
 
 export const withLayout = <T extends JSX.IntrinsicAttributes>(
   Content: React.FC<T>
@@ -9,9 +9,9 @@ export const withLayout = <T extends JSX.IntrinsicAttributes>(
     <Layout>
       <Content {...props} />
     </Layout>
-  )
+  );
 
-  WithLayout.displayName = `WithLayout(${getDisplayName(Content)})`
+  WithLayout.displayName = `WithLayout(${getDisplayName(Content)})`;
 
-  return WithLayout
-}
+  return WithLayout;
+};

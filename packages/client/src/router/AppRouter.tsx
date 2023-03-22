@@ -1,13 +1,13 @@
-import { useAppSelector } from '../hooks/store'
-import { Switch, Route, Redirect } from 'react-router-dom'
-import { IRoute, routes } from './routerData'
-import PrivateRoute from '../components/PrivateRoute/PrivateRoute'
-import { RoutePath } from './RoutePath'
-import { getAuthorizationStatus } from '../store/selectors'
-import PublicRoute from '../components/PublicRoute/PublicRoute'
+import { useAppSelector } from '../hooks/store';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import { IRoute, routes } from './routerData';
+import PrivateRoute from '../components/PrivateRoute/PrivateRoute';
+import { RoutePath } from './RoutePath';
+import { getAuthorizationStatus } from '../store/selectors';
+import PublicRoute from '../components/PublicRoute/PublicRoute';
 
 const AppRouter = () => {
-  const isAuth = useAppSelector(getAuthorizationStatus)
+  const isAuth = useAppSelector(getAuthorizationStatus);
 
   return (
     <Switch>
@@ -21,7 +21,7 @@ const AppRouter = () => {
               isAuth={isAuth}
               component={route.component}
             />
-          )
+          );
         } else {
           if (route.public) {
             return (
@@ -32,7 +32,7 @@ const AppRouter = () => {
                 component={route.component}
                 isAuth={isAuth}
               />
-            )
+            );
           }
 
           return (
@@ -42,13 +42,13 @@ const AppRouter = () => {
               exact={route.exact}
               component={route.component}
             />
-          )
+          );
         }
       })}
 
       <Redirect to={RoutePath.Login} />
     </Switch>
-  )
-}
+  );
+};
 
-export default AppRouter
+export default AppRouter;

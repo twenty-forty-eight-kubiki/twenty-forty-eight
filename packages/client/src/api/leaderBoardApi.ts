@@ -1,10 +1,10 @@
-import { BASE_URL } from '../constants'
+import { BASE_URL } from '../constants';
 
 export interface LeaderResponse {
-  user_name: string
-  avatar: string
-  userId: number
-  score: number
+  user_name: string;
+  avatar: string;
+  userId: number;
+  score: number;
 }
 
 export const LeaderBoardApi = {
@@ -13,10 +13,10 @@ export const LeaderBoardApi = {
       body: '',
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     })
       .then(response => response.json())
-      .catch(err => console.log(err))
-  },
-}
+      .catch(err => console.log(err));
+  }
+};

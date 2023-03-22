@@ -1,6 +1,6 @@
 export enum LoginFormFields {
   Login = 'login',
-  Password = 'password',
+  Password = 'password'
 }
 
 export enum RegistrationFormFields {
@@ -10,27 +10,27 @@ export enum RegistrationFormFields {
   Password = 'password',
   ConfirmPassword = 'confirmPassword',
   Phone = 'phone',
-  Login = 'login',
+  Login = 'login'
 }
 
 export type LoginErrorsObj =
   | {
-      login: string | null
-      password: string | null
+      login: string | null;
+      password: string | null;
     }
-  | Record<string, never>
+  | Record<string, never>;
 
 export type RegistrationErrorsObj =
   | {
-      firstname: string | null
-      surname: string | null
-      email: string | null
-      password: string | null
-      confirmPassword: string | null
-      phone: string | null
-      login: string | null
+      firstname: string | null;
+      surname: string | null;
+      email: string | null;
+      password: string | null;
+      confirmPassword: string | null;
+      phone: string | null;
+      login: string | null;
     }
-  | Record<string, never>
+  | Record<string, never>;
 export enum ProfileFormFields {
   Firstname = 'firstname',
   Surname = 'surname',
@@ -40,18 +40,18 @@ export enum ProfileFormFields {
   OldPassword = 'oldPassword',
   DisplayName = 'displayName',
   Login = 'login',
-  Phone = 'phone',
+  Phone = 'phone'
 }
 
 export type ProfileErrorsObj =
   | {
-      firstname: string | null
-      surname: string | null
-      email: string | null
-      login: string | null
-      password: string | null
-      oldPassword: string | null
-      displayName: string | null
-      phone: string | null
+      firstname: string | null;
+      surname: string | null;
+      email: string | null;
+      login: string | null;
+      password: string | null;
+      oldPassword: string | null;
+      displayName: string | null;
+      phone: string | null;
     }
-  | Record<string, never>
+  | Record<string, never>;

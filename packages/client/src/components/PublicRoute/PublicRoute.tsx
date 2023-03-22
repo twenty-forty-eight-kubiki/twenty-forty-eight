@@ -1,15 +1,15 @@
-import { Route, Redirect, RouteProps } from 'react-router-dom'
-import { FC, ReactElement } from 'react'
-import { RoutePath } from '../../router/RoutePath'
-import { AuthorizationStatus } from '../../constants'
+import { Route, Redirect, RouteProps } from 'react-router-dom';
+import { FC, ReactElement } from 'react';
+import { RoutePath } from '../../router/RoutePath';
+import { AuthorizationStatus } from '../../constants';
 
 type PublicRouteProps = {
-  component: FC
-  isPublic?: boolean
-  path: RouteProps['path']
-  exact: boolean
-  isAuth: AuthorizationStatus
-}
+  component: FC;
+  isPublic?: boolean;
+  path: RouteProps['path'];
+  exact: boolean;
+  isAuth: AuthorizationStatus;
+};
 
 const PublicRoute: FC<PublicRouteProps> = ({
   component: Component,
@@ -27,7 +27,7 @@ const PublicRoute: FC<PublicRouteProps> = ({
         )
       }
     />
-  )
-}
+  );
+};
 
-export default PublicRoute
+export default PublicRoute;

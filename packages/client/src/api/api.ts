@@ -1,30 +1,30 @@
-import { BASE_URL } from '../constants'
-import { FileRequestData } from '../types/api/profieApi'
+import { BASE_URL } from '../constants';
+import { FileRequestData } from '../types/api/profieApi';
 function request<T>(url: string, config: RequestInit = {}): Promise<T> {
   return fetch(`${BASE_URL}/` + url, config)
     .then(response => {
       if (!response.ok) {
         return response.json().then(data => {
           if (data.reason) {
-            throw data.reason
+            throw data.reason;
           }
 
-          return console.log('error', data)
-        })
+          return console.log('error', data);
+        });
       }
-      const contentType = response.headers.get('content-type')
+      const contentType = response.headers.get('content-type');
       const isJson =
-        contentType && contentType.indexOf('application/json') !== -1
-      const isText = contentType && contentType.indexOf('text/plain') !== -1
+        contentType && contentType.indexOf('application/json') !== -1;
+      const isText = contentType && contentType.indexOf('text/plain') !== -1;
       if (isJson) {
-        return response.json()
+        return response.json();
       }
       if (isText) {
-        return response.text()
+        return response.text();
       }
-      return response
+      return response;
     })
-    .then(data => data)
+    .then(data => data);
 }
 
 export const API = {
@@ -33,8 +33,8 @@ export const API = {
       method: 'GET',
       credentials: 'include',
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     }),
   post: <TBody, TResponse>(url: string, body?: TBody): Promise<TResponse> =>
     request<TResponse>(url, {
@@ -42,8 +42,8 @@ export const API = {
       body: JSON.stringify(body),
       credentials: 'include',
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     }),
   put: <TBody, TResponse>(url: string, body?: TBody): Promise<TResponse> =>
     request<TResponse>(url, {
@@ -51,22 +51,22 @@ export const API = {
       body: JSON.stringify(body),
       credentials: 'include',
       headers: {
-        'Content-Type': 'application/json',
-      },
+        'Content-Type': 'application/json'
+      }
     }),
   putFile: <TResponse>(
     url: string,
     data: FileRequestData
   ): Promise<TResponse> => {
-    const formData = new FormData()
-    formData.append(data.fileName, data.file)
+    const formData = new FormData();
+    formData.append(data.fileName, data.file);
     return request<TResponse>(url, {
       method: 'PUT',
       body: formData,
       credentials: 'include',
       headers: {
-        accept: 'application/json',
-      },
-    })
-  },
-}
+        accept: 'application/json'
+      }
+    });
+  }
+};

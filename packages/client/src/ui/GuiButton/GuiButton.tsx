@@ -1,12 +1,12 @@
-import './GuiButton.scss'
-import React, { FC, memo, ReactElement } from 'react'
+import './GuiButton.scss';
+import React, { FC, memo, ReactElement } from 'react';
 
 type GuiButtonProps = {
-  type?: 'button' | 'submit'
-  btnText: string
-  className?: string
-  onClick?: () => void
-}
+  type?: 'button' | 'submit';
+  btnText: string;
+  className?: string;
+  onClick?: () => void;
+};
 
 const GuiButton: FC<GuiButtonProps> = memo(
   ({ type = 'button', btnText, onClick, className }): ReactElement => {
@@ -14,11 +14,12 @@ const GuiButton: FC<GuiButtonProps> = memo(
       <button
         className={`gui-button ${className}`}
         type={type}
-        onClick={onClick}>
+        onClick={onClick}
+      >
         {btnText}
       </button>
-    )
+    );
   }
-)
+);
 
-export default GuiButton
+export default GuiButton;

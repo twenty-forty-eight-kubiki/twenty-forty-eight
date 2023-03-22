@@ -1,22 +1,25 @@
-import './RegistrationForm.scss'
-import React, { FormEvent, ReactElement, useState } from 'react'
-import GuiInput from '../../ui/GuiInput/GuiInput'
-import GuiButton from '../../ui/GuiButton/GuiButton'
-import { RegistrationErrorsObj, RegistrationFormFields } from '../../types/form'
-import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
-import GuiLink from '../../ui/GuiLink/GuiLink'
-import { authAPI } from '../../api/authApi'
-import { SignupRequestData } from '../../types/api/authApi'
-import TextError from '../../ui/TextError/TextError'
+import './RegistrationForm.scss';
+import React, { FormEvent, ReactElement, useState } from 'react';
+import GuiInput from '../../ui/GuiInput/GuiInput';
+import GuiButton from '../../ui/GuiButton/GuiButton';
+import {
+  RegistrationErrorsObj,
+  RegistrationFormFields
+} from '../../types/form';
+import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator';
+import GuiLink from '../../ui/GuiLink/GuiLink';
+import { authAPI } from '../../api/authApi';
+import { SignupRequestData } from '../../types/api/authApi';
+import TextError from '../../ui/TextError/TextError';
 
 const RegistrationForm = (): ReactElement => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
-  const [firstname, setFirstname] = useState('')
-  const [surname, setSurname] = useState('')
-  const [phone, setPhone] = useState('')
-  const [login, setLogin] = useState('')
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [firstname, setFirstname] = useState('');
+  const [surname, setSurname] = useState('');
+  const [phone, setPhone] = useState('');
+  const [login, setLogin] = useState('');
   const [errors, setErrors] = useState<RegistrationErrorsObj>({
     firstname: null,
     surname: null,
@@ -24,49 +27,49 @@ const RegistrationForm = (): ReactElement => {
     password: null,
     confirmPassword: null,
     phone: null,
-    login: null,
-  })
-  const [formError, setFormError] = useState('')
+    login: null
+  });
+  const [formError, setFormError] = useState('');
 
   const schema: IValidationSchema = {
     firstname: {
       isRequired: { msg: 'Это поле обязательно для заполнения' },
       minLength: { value: 3, msg: 'Минимум 3 символа' },
-      maxLength: { value: 50, msg: 'Максимум 50 символов' },
+      maxLength: { value: 50, msg: 'Максимум 50 символов' }
     },
     surname: {
       isRequired: { msg: 'Это поле обязательно для заполнения' },
       minLength: { value: 3, msg: 'Минимум 3 символа' },
-      maxLength: { value: 50, msg: 'Максимум 50 символов' },
+      maxLength: { value: 50, msg: 'Максимум 50 символов' }
     },
     login: {
       isRequired: { msg: 'Это поле обязательно для заполнения' },
       minLength: { value: 3, msg: 'Минимум 3 символа' },
-      maxLength: { value: 50, msg: 'Максимум 50 символов' },
+      maxLength: { value: 50, msg: 'Максимум 50 символов' }
     },
     email: {
       isRequired: { msg: 'Это поле обязательно для заполнения' },
-      isEmail: { msg: 'Введите корректный email' },
+      isEmail: { msg: 'Введите корректный email' }
     },
     phone: {
-      isRequired: { msg: 'Это поле обязательно для заполнения' },
+      isRequired: { msg: 'Это поле обязательно для заполнения' }
     },
     password: {
-      isRequired: { msg: 'Это поле обязательно для заполнения' },
+      isRequired: { msg: 'Это поле обязательно для заполнения' }
     },
     confirmPassword: {
       isRequired: { msg: 'Это поле обязательно для заполнения' },
       areEqual: {
         value: RegistrationFormFields.Password,
-        msg: 'Поля не совпадают',
-      },
-    },
-  }
+        msg: 'Поля не совпадают'
+      }
+    }
+  };
 
-  const easyValidator = new EasyValidator(schema)
+  const easyValidator = new EasyValidator(schema);
 
   const onSubmit = (e: FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     const errorsObj = easyValidator.validateFields({
       email,
       firstname,
@@ -74,10 +77,10 @@ const RegistrationForm = (): ReactElement => {
       login,
       password,
       phone,
-      confirmPassword,
-    })
+      confirmPassword
+    });
 
-    setErrors({ ...errorsObj })
+    setErrors({ ...errorsObj });
 
     if (easyValidator.isValid()) {
       const userData: SignupRequestData = {
@@ -86,70 +89,70 @@ const RegistrationForm = (): ReactElement => {
         login: login,
         email: email,
         password: password,
-        phone: phone,
-      }
+        phone: phone
+      };
 
       authAPI
         .signup(userData)
         .then(response => {
-          console.log(response.id)
+          console.log(response.id);
         })
         .catch((error: string) => {
-          setFormError(error)
-        })
+          setFormError(error);
+        });
     }
-  }
+  };
 
   const onChangeFirstname = (e: FormEvent) => {
-    setFirstname((e.target as HTMLInputElement).value)
-  }
+    setFirstname((e.target as HTMLInputElement).value);
+  };
 
   const onChangeSurname = (e: FormEvent) => {
-    setSurname((e.target as HTMLInputElement).value)
-  }
+    setSurname((e.target as HTMLInputElement).value);
+  };
 
   const onChangeEmail = (e: FormEvent) => {
-    setEmail((e.target as HTMLInputElement).value)
-  }
+    setEmail((e.target as HTMLInputElement).value);
+  };
 
   const onChangePassword = (e: FormEvent) => {
-    setPassword((e.target as HTMLInputElement).value)
-  }
+    setPassword((e.target as HTMLInputElement).value);
+  };
 
   const onChangeLogin = (e: FormEvent) => {
-    setLogin((e.target as HTMLInputElement).value)
-  }
+    setLogin((e.target as HTMLInputElement).value);
+  };
 
   const onChangeConfirmPassword = (e: FormEvent) => {
-    setConfirmPassword((e.target as HTMLInputElement).value)
-  }
+    setConfirmPassword((e.target as HTMLInputElement).value);
+  };
 
   const onChangePhone = (e: FormEvent) => {
-    setPhone((e.target as HTMLInputElement).value)
-  }
+    setPhone((e.target as HTMLInputElement).value);
+  };
 
   const resetError = (fieldName: RegistrationFormFields) => {
-    const errorsObj = { ...errors, [fieldName]: '' } as RegistrationErrorsObj
-    setErrors(errorsObj)
-    setFormError('')
-  }
+    const errorsObj = { ...errors, [fieldName]: '' } as RegistrationErrorsObj;
+    setErrors(errorsObj);
+    setFormError('');
+  };
 
   return (
-    <div className="registration-form">
-      <div className="registration-form__inner">
-        <div className="registration-form__wrapper">
+    <div className='registration-form'>
+      <div className='registration-form__inner'>
+        <div className='registration-form__wrapper'>
           <div>
-            <h1 className="registration-form__title">Sign Up</h1>
+            <h1 className='registration-form__title'>Sign Up</h1>
 
-            <div className="registration-form__text">
+            <div className='registration-form__text'>
               To continue, please, sign up!
             </div>
           </div>
 
           <form onSubmit={onSubmit}>
             <GuiInput
-              label="FirstName"
-              placeholder="Enter your firstname"
+              label='FirstName'
+              placeholder='Enter your firstname'
               value={firstname}
               error={errors[RegistrationFormFields.Firstname]}
               onChange={onChangeFirstname}
@@ -158,8 +161,8 @@ const RegistrationForm = (): ReactElement => {
             />
 
             <GuiInput
-              label="Surname"
-              placeholder="Enter your surname"
+              label='Surname'
+              placeholder='Enter your surname'
               value={surname}
               error={errors[RegistrationFormFields.Surname]}
               onChange={onChangeSurname}
@@ -168,8 +171,8 @@ const RegistrationForm = (): ReactElement => {
             />
 
             <GuiInput
-              label="Login"
-              placeholder="Enter your login"
+              label='Login'
+              placeholder='Enter your login'
               value={login}
               error={errors[RegistrationFormFields.Login]}
               onChange={onChangeLogin}
@@ -178,8 +181,8 @@ const RegistrationForm = (): ReactElement => {
             />
 
             <GuiInput
-              label="Email"
-              placeholder="Enter your email"
+              label='Email'
+              placeholder='Enter your email'
               value={email}
               error={errors[RegistrationFormFields.Email]}
               onChange={onChangeEmail}
@@ -188,8 +191,8 @@ const RegistrationForm = (): ReactElement => {
             />
 
             <GuiInput
-              label="Phone"
-              placeholder="Enter your phone"
+              label='Phone'
+              placeholder='Enter your phone'
               value={phone}
               error={errors[RegistrationFormFields.Phone]}
               onChange={onChangePhone}
@@ -198,8 +201,8 @@ const RegistrationForm = (): ReactElement => {
             />
 
             <GuiInput
-              label="Password"
-              placeholder="Enter your password"
+              label='Password'
+              placeholder='Enter your password'
               value={password}
               error={errors[RegistrationFormFields.Password]}
               onChange={onChangePassword}
@@ -208,8 +211,8 @@ const RegistrationForm = (): ReactElement => {
             />
 
             <GuiInput
-              label="Repeat Password"
-              placeholder="Confirm password"
+              label='Repeat Password'
+              placeholder='Confirm password'
               value={confirmPassword}
               error={errors[RegistrationFormFields.ConfirmPassword]}
               onChange={onChangeConfirmPassword}
@@ -218,20 +221,20 @@ const RegistrationForm = (): ReactElement => {
             />
 
             <GuiButton
-              type="submit"
-              btnText="Sign up"
-              className="registration-form__btn"
+              type='submit'
+              btnText='Sign up'
+              className='registration-form__btn'
             />
             <TextError text={formError} />
 
-            <div className="registration-form__info">
-              Already have an account <GuiLink url="/" text="Log in" />
+            <div className='registration-form__info'>
+              Already have an account <GuiLink url='/' text='Log in' />
             </div>
           </form>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RegistrationForm
+export default RegistrationForm;
