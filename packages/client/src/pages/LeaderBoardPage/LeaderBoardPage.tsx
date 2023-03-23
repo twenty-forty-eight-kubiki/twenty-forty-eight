@@ -4,7 +4,7 @@ import { withLayout } from '../../hocs/withLayout'
 import './LeaderBoardPage.scss'
 import { useAppDispatch, useAppSelector } from '../../hooks/store'
 import { fetchLeaders } from '../../store/leaderborad-actions'
-import { getSortedLeaders, getLeaders } from '../../store/selectors'
+import { getLeaders } from '../../store/selectors'
 
 const LeaderBoardPage = () => {
   const dispatch = useAppDispatch()
@@ -12,16 +12,16 @@ const LeaderBoardPage = () => {
   useEffect(() => {
     dispatch(fetchLeaders())
   }, [])
-  const sortedList = useAppSelector(getSortedLeaders)
+  const sortedList = useAppSelector(getLeaders)
 
   return (
     <div className="leader-board-page">
       {sortedList &&
         sortedList.map(leader => (
           <GamerItem
-            name={leader.name}
-            score={leader.score}
-            key={leader.userId}
+            name={leader.data.name}
+            score={leader.data.score}
+            key={leader.data.userId}
           />
         ))}
     </div>

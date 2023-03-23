@@ -1,6 +1,4 @@
-export type LeaderResponse = {
-  data: LeadersList
-}
+export type LeaderResponse = LeadersList
 
 export type LeaderRequest = {
   ratingFieldName: string
@@ -14,12 +12,12 @@ export type AddLeaderRequest = {
   limit: number
 }
 
-type Leader = {
+type LeaderItem = {
   name: string
   score: number
   userId: number
 }
 
 export type LeadersList = {
-  leader: Leader[]
+  data: LeaderItem
 }

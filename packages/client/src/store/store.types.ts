@@ -1,10 +1,15 @@
 import { store, rootReducer } from './store'
-import { AuthorizationStatus } from '../constants'
+import { AuthorizationStatus } from '../constants/auth'
 
-export type GenericState<TData, TError = unknown> = {
+export type AuthState<TData, TError = unknown> = {
   data: TData | null
   error: TError | null
-  authorizationStatus?: AuthorizationStatus
+  authorizationStatus: AuthorizationStatus
+}
+
+export type LeaderBoardState<TData, TError = unknown> = {
+  data: TData | null
+  error: TError | null
 }
 
 export type RootState = ReturnType<typeof rootReducer>

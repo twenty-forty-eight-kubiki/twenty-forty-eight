@@ -1,9 +1,9 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { GenericState } from '../store.types'
+import { createSlice } from '@reduxjs/toolkit'
+import { LeaderBoardState } from '../store.types'
 import { LeaderResponse } from '../../types/api/leaderbordApi'
 import { fetchLeaders } from '../leaderborad-actions'
 
-const initialState: GenericState<LeaderResponse[]> = {
+const initialState: LeaderBoardState<LeaderResponse> = {
   error: null,
   data: null,
 }

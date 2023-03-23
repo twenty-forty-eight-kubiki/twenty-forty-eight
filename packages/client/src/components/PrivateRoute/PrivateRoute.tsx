@@ -1,7 +1,7 @@
 import { Route, Redirect, RouteProps } from 'react-router-dom'
 import { FC, ReactElement } from 'react'
 import { RoutePath } from '../../router/RoutePath'
-import { AuthorizationStatus } from '../../constants'
+import { AuthorizationStatus } from '../../constants/auth'
 
 type PrivateRouteProps = {
   component: FC
