@@ -1,4 +1,4 @@
-export type LeaderResponse = LeadersList
+export type LeaderResponse = LeadersList[]
 
 export type LeaderRequest = {
   ratingFieldName: string
