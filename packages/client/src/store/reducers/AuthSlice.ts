@@ -1,8 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { UserInfoResponse } from '../../types/api/authApi'
-import { AuthState } from '../store.types'
-import { AuthorizationStatus } from '../../constants/auth'
-import { fetchUser, logoutUser } from '../auth-actions'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { UserInfoResponse } from '../../types/api/authApi';
+import { AuthState } from '../store.types';
+import { AuthorizationStatus } from '../../constants/auth';
+import { fetchUser, logoutUser } from '../auth-actions';
 
 const initialState: AuthState<UserInfoResponse> = {
   error: null,

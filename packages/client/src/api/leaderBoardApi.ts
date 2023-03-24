@@ -1,7 +1,7 @@
 import {
   LeaderResponse,
   LeaderRequest,
-  AddLeaderRequest,
+  AddLeaderRequest
 } from '../types/api/leaderbordApi';
 import { API } from './api';
 
@@ -10,9 +10,9 @@ export const LeaderBoardApi = {
     return API.post<LeaderRequest, LeaderResponse>(
       'leaderboard/dev-kubiki',
       data
-    )
+    );
   },
   async addUser(data: AddLeaderRequest) {
     return API.post<AddLeaderRequest, void>('leaderboard', data);
-  },
-}
+  }
+};

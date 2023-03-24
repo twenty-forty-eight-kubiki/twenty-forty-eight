@@ -1,32 +1,32 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { LeaderBoardState } from '../store.types'
-import { LeaderResponse } from '../../types/api/leaderbordApi'
-import { fetchLeaders } from '../leaderborad-actions'
+import { createSlice } from '@reduxjs/toolkit';
+import { LeaderBoardState } from '../store.types';
+import { LeaderResponse } from '../../types/api/leaderbordApi';
+import { fetchLeaders } from '../leaderborad-actions';
 
 const initialState: LeaderBoardState<LeaderResponse> = {
   error: null,
-  data: null,
-}
+  data: null
+};
 
 export const leaderboardSlice = createSlice({
   name: 'leaderboard',
   initialState,
   reducers: {
-    clear: () => initialState,
+    clear: () => initialState
   },
   extraReducers: builder => {
     builder
       .addCase(fetchLeaders.pending, state => {
-        state.error = null
+        state.error = null;
       })
       .addCase(fetchLeaders.fulfilled, (state, action) => {
-        state.data = action.payload
+        state.data = action.payload;
       })
       .addCase(fetchLeaders.rejected, (state, action) => {
-        state.error = action.payload as string
-        state.data = null
-      })
-  },
-})
+        state.error = action.payload as string;
+        state.data = null;
+      });
+  }
+});
 
-export default leaderboardSlice.reducer
+export default leaderboardSlice.reducer;
