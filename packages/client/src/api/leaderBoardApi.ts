@@ -2,8 +2,8 @@ import {
   LeaderResponse,
   LeaderRequest,
   AddLeaderRequest,
-} from '../types/api/leaderbordApi'
-import { API } from './api'
+} from '../types/api/leaderbordApi';
+import { API } from './api';
 
 export const LeaderBoardApi = {
   async getAll(data: LeaderRequest): Promise<LeaderResponse> {
@@ -13,6 +13,6 @@ export const LeaderBoardApi = {
     )
   },
   async addUser(data: AddLeaderRequest) {
-    return API.post<AddLeaderRequest, void>('leaderboard', data)
+    return API.post<AddLeaderRequest, void>('leaderboard', data);
   },
 }

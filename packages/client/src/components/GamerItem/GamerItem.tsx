@@ -1,7 +1,5 @@
-import React from 'react'
-import './GamerItem.scss'
-import Icon from '../../ui/Icon/Icon'
-import { LeaderResponse } from '../../types/api/leaderbordApi'
+import React from 'react';
+import './GamerItem.scss';
 
 interface GamerItemProps {
   name: string
@@ -18,7 +16,7 @@ const GamerItem = (props: GamerItemProps) => {
         <p>{props.score}</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default GamerItem
+export default GamerItem;

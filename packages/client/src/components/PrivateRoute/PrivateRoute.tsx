@@ -1,14 +1,14 @@
-import { Route, Redirect, RouteProps } from 'react-router-dom'
-import { FC, ReactElement } from 'react'
-import { RoutePath } from '../../router/RoutePath'
-import { AuthorizationStatus } from '../../constants/auth'
+import { Route, Redirect, RouteProps } from 'react-router-dom';
+import { FC, ReactElement } from 'react';
+import { RoutePath } from '../../router/RoutePath';
+import { AuthorizationStatus } from '../../constants/auth';
 
 type PrivateRouteProps = {
-  component: FC
-  isAuth?: AuthorizationStatus
-  path: RouteProps['path']
-  exact: boolean
-}
+  component: FC;
+  isAuth?: AuthorizationStatus;
+  path: RouteProps['path'];
+  exact: boolean;
+};
 
 const PrivateRoute: FC<PrivateRouteProps> = ({
   component: Component,
@@ -26,7 +26,7 @@ const PrivateRoute: FC<PrivateRouteProps> = ({
         )
       }
     />
-  )
-}
+  );
+};
 
-export default PrivateRoute
+export default PrivateRoute;

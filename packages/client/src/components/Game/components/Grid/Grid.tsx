@@ -1,12 +1,12 @@
-import React, { FC } from 'react'
-import RoundedRectangle from '../RoundedRectangle/RoundedRectangle'
-import { useGameConfig } from '../../hooks/useGameConfig'
+import React, { FC } from 'react';
+import RoundedRectangle from '../RoundedRectangle/RoundedRectangle';
+import { useGameConfig } from '../../hooks/useGameConfig';
 
 const Grid: FC = () => {
-  const { boardSize, tileSize, countTiles, padding } = useGameConfig()
+  const { boardSize, tileSize, countTiles, padding } = useGameConfig();
 
-  let row = -tileSize
-  let column = -tileSize
+  let row = -tileSize;
+  let column = -tileSize;
 
   return (
     <>
@@ -21,11 +21,11 @@ const Grid: FC = () => {
       />
       {/*Cell*/}
       {[...Array(countTiles * countTiles).keys()].map((_, index) => {
-        row = row + padding + tileSize
+        row = row + padding + tileSize;
 
         if (index % countTiles === 0) {
-          column = column + padding + tileSize
-          row = padding
+          column = column + padding + tileSize;
+          row = padding;
         }
 
         return (
@@ -37,10 +37,10 @@ const Grid: FC = () => {
             radius={5}
             color={'#CDC1B4'}
           />
-        )
+        );
       })}
     </>
-  )
-}
+  );
+};
 
-export default Grid
+export default Grid;

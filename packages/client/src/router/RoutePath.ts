@@ -6,7 +6,7 @@ export enum RoutePath {
   Forum = '/forum',
   Leaders = '/leaders',
   Settings = '/settings',
-  User = '/user',
+  User = '/user'
 }
 
 export const HEADER_PATHS: RoutePath[] = [
@@ -14,5 +14,5 @@ export const HEADER_PATHS: RoutePath[] = [
   RoutePath.Leaders,
   RoutePath.Settings,
   RoutePath.Game,
-  RoutePath.User,
-]
+  RoutePath.User
+];

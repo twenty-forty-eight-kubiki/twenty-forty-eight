@@ -25,7 +25,7 @@ const LeaderBoardPage = () => {
           />
         ))}
     </div>
-  )
-}
+  );
+};
 
-export default withLayout(LeaderBoardPage)
+export default withLayout(LeaderBoardPage);
