@@ -1,23 +1,19 @@
 import React from 'react';
 import './GamerItem.scss';
-import Icon from '../../ui/Icon/Icon';
-import { LeaderResponse } from '../../api/leaderBoardApi';
 
 interface GamerItemProps {
-  profile: LeaderResponse;
+  name: string;
+  score: number;
 }
 
 const GamerItem = (props: GamerItemProps) => {
   return (
     <div className='gamer-item'>
-      <div className='gamer-item__icon'>
-        <Icon img={props.profile.avatar} />
-      </div>
       <div className='gamer-item__info'>
-        <p>{props.profile.user_name}</p>
+        <p>{props.name}</p>
       </div>
       <div className='gamer-item__score'>
-        <p>{props.profile.score}</p>
+        <p>{props.score}</p>
       </div>
     </div>
   );

@@ -1,10 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { UserInfoResponse } from '../../types/api/authApi';
-import { GenericState } from '../store.types';
-import { AuthorizationStatus } from '../../constants';
+import { AuthState } from '../store.types';
+import { AuthorizationStatus } from '../../constants/auth';
 import { fetchUser, logoutUser } from '../auth-actions';
 
-const initialState: GenericState<UserInfoResponse> = {
+const initialState: AuthState<UserInfoResponse> = {
   error: null,
   data: null,
   authorizationStatus: AuthorizationStatus.Unknown
