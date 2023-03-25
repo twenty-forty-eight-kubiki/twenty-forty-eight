@@ -3,18 +3,19 @@ import { withLayout } from '../../hocs/withLayout';
 import './GamePage.scss';
 import GuiButton from '../../ui/GuiButton/GuiButton';
 import { Fullscreen } from '../../helpers/fullscreen';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const GamePage = () => {
   const [fullscreenBtnText, setFullscreenBtnText] = useState(
     'Открыть на полный экран'
   );
+  const boardPageRef = useRef();
   const onFullscreenBtnClick = () => {
     if (Fullscreen.check()) {
       Fullscreen.exit();
       setFullscreenBtnText('Открыть на полный экран');
     } else {
-      const page = document.querySelector('.board-page') as HTMLDivElement;
+      const page = boardPageRef.current;
       if (!page) return;
       Fullscreen.enter(page);
       setFullscreenBtnText('Закрыть полный экран');
@@ -22,7 +23,7 @@ const GamePage = () => {
   };
 
   return (
-    <div className='board-page'>
+    <div className='board-page' ref={boardPageRef}>
       <div className='container'>
         <div className='board-page__wrapper'>
           <Board />
