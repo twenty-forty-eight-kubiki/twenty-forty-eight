@@ -1,8 +1,28 @@
 .board-page {
   width: 100vw;
-  height: calc(100vh - 64px);
+  min-height: calc(100vh - 64px);
+  height: 100%;
+  padding: 70px 0;
+
   display: flex;
-  justify-content: center;
-  align-items: center;
+
   background-color: #faf8ef;
+
+  .container {
+    min-height: 100%;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
+
+  &__fullscreen-btn {
+    margin-left: 100px;
+  }
 }
