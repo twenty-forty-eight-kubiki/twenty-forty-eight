@@ -1,6 +1,6 @@
 import { FullscreenDocument, FullscreenElement } from '../types/types';
 
-const fullscreenDocument = document as FullscreenDocument
+const fullscreenDocument = document as FullscreenDocument;
 
 function enterFullscreen(element: FullscreenElement): void {
   if (element.requestFullscreen) {
