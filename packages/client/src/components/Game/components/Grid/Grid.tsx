@@ -36,6 +36,7 @@ const Grid: FC = () => {
             height={tileSize}
             radius={5}
             color={'#CDC1B4'}
+            key={index}
           />
         );
       })}
