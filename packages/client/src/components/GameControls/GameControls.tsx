@@ -1,7 +1,7 @@
 import React, { ReactElement, useState } from 'react';
-import './GameControls.scss';
 import GuiButton from '../../ui/GuiButton/GuiButton';
 import restartIcon from '../../assets/icons/restart.svg';
+import './GameControls.scss';
 
 const GameControls = (): ReactElement => {
   const [currentScore] = useState('0');
