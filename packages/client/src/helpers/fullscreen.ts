@@ -1,4 +1,8 @@
-function enterFullscreen(element: HTMLDivElement): void {
+import { FullscreenDocument, FullscreenElement } from '../types/types';
+
+const fullscreenDocument = document as FullscreenDocument;
+
+function enterFullscreen(element: FullscreenElement): void {
   if (element.requestFullscreen) {
     element.requestFullscreen();
   } else if (element.webkitRequestFullscreen) {
@@ -11,23 +15,23 @@ function enterFullscreen(element: HTMLDivElement): void {
 }
 
 function exitFullscreen(): void {
-  if (document.exitFullscreen) {
-    document.exitFullscreen();
-  } else if (document.mozCancelFullScreen) {
-    document.mozCancelFullScreen();
-  } else if (document.webkitExitFullscreen) {
-    document.webkitExitFullscreen();
-  } else if (document.msExitFullscreen) {
-    document.msExitFullscreen();
+  if (fullscreenDocument.exitFullscreen) {
+    fullscreenDocument.exitFullscreen();
+  } else if (fullscreenDocument.mozCancelFullScreen) {
+    fullscreenDocument.mozCancelFullScreen();
+  } else if (fullscreenDocument.webkitExitFullscreen) {
+    fullscreenDocument.webkitExitFullscreen();
+  } else if (fullscreenDocument.msExitFullscreen) {
+    fullscreenDocument.msExitFullscreen();
   }
 }
 
 function checkFullscreen(): Element | null {
   return (
-    document.fullscreenElement ||
-    document.mozFullScreenElement ||
-    document.webkitFullscreenElement ||
-    document.msFullscreenElement
+    fullscreenDocument.fullscreenElement ||
+    fullscreenDocument.mozFullScreenElement ||
+    fullscreenDocument.webkitFullscreenElement ||
+    fullscreenDocument.msFullscreenElement
   );
 }
 
