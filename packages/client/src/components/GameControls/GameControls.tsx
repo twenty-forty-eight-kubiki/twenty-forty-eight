@@ -2,16 +2,20 @@ import React, { ReactElement, useState } from 'react';
 import GuiButton from '../../ui/GuiButton/GuiButton';
 import restartIcon from '../../assets/icons/restart.svg';
 import './GameControls.scss';
+import { useAppDispatch, useAppSelector } from '../../hooks/store';
+import { getBoardCurrentScore, getBoardBestScore } from '../../store/selectors';
+import { resetBoardState } from '../../store/reducers/GameSlice';
 
-type GameControlsProps = {
-  currentScore: number;
-  bestScore: number;
-};
+const GameControls = (): ReactElement => {
+  const dispatch = useAppDispatch();
 
-const GameControls = ({
-  currentScore,
-  bestScore
-}: GameControlsProps): ReactElement => {
+  const currentScore = useAppSelector(getBoardCurrentScore);
+  const bestScore = useAppSelector(getBoardBestScore);
+
+  const onResetClick = () => {
+    dispatch(resetBoardState());
+  };
+
   return (
     <div className='game-controls'>
       <h2 className='game-controls__title'>2048</h2>
@@ -21,6 +25,7 @@ const GameControls = ({
           labelText='restart'
           icon={restartIcon}
           className='game-controls__restart'
+          onClick={onResetClick}
         />
         <div className='game-controls__item'>
           <span className='game-controls__text'>Счет</span>

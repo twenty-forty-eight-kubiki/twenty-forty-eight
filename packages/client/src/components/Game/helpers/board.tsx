@@ -32,6 +32,9 @@ export const getEmptyCell = (board: Board) => {
 
 export const randomNewTile = (board: Board) => {
   return produce(board, draft => {
+    if (!getEmptyCell(draft)) {
+      return;
+    }
     const { x, y } = getEmptyCell(draft);
     draft[x][y] = getRandomInt(1, 2) * 2;
   });

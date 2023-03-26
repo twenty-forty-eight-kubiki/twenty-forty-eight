@@ -3,11 +3,13 @@ import { withLayout } from '../../hocs/withLayout';
 import './GamePage.scss';
 import GuiButton from '../../ui/GuiButton/GuiButton';
 import { Fullscreen } from '../../helpers/fullscreen';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import GameControls from '../../components/GameControls/GameControls';
 import GameOnboarding from '../../components/GameOnboarding/GameOnboarding';
 import { GameRulesModal } from '../../components/GameRulesModal/GameRulesModal';
 import Modal from '../../components/Modal/Modal';
+import { useAppDispatch } from '../../hooks/store';
+import { createBoard } from '../../store/reducers/GameSlice';
 
 const GamePage = () => {
   const [fullscreenBtnText, setFullscreenBtnText] = useState(
@@ -15,6 +17,12 @@ const GamePage = () => {
   );
   const [isRuleModal, setRuleModal] = useState(false);
   const boardPageRef = useRef();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(createBoard());
+  }, []);
+
   const onFullscreenBtnClick = () => {
     if (Fullscreen.check()) {
       Fullscreen.exit();
@@ -49,7 +57,7 @@ const GamePage = () => {
             />
           </div>
           <div className='board-page__game'>
-            <GameControls currentScore={0} bestScore={0} />
+            <GameControls />
             <Board />
           </div>
         </div>

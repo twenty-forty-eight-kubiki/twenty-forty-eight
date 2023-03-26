@@ -29,4 +29,4 @@ export const leaderboardSlice = createSlice({
   }
 });
 
-export default leaderboardSlice.reducer;
+export default leaderboardSlice;
