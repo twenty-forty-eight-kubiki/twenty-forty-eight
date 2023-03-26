@@ -1,11 +1,11 @@
 @import '../../assets/scss/variables';
 
 .game-onboarding {
-  width: 20%;
-
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  margin-bottom: 30px;
 
   &__title {
     font-size: 24px;
