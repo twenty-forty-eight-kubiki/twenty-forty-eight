@@ -3,7 +3,10 @@ import GuiButton from '../../ui/GuiButton/GuiButton';
 import restartIcon from '../../assets/icons/restart.svg';
 import './GameControls.scss';
 import { useAppDispatch, useAppSelector } from '../../hooks/store';
-import { getBoardCurrentScore, getBoardBestScore } from '../../store/selectors';
+import {
+  getBoardCurrentScore,
+  getBoardBestScore
+} from '../../store/game-selectors';
 import { resetBoardState } from '../../store/reducers/GameSlice';
 
 const GameControls = (): ReactElement => {

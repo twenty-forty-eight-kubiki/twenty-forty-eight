@@ -1,8 +1,8 @@
-import { Board } from '../common/types';
+import { Board } from '../types/game';
 import { getRandomInt } from './random';
 import produce from 'immer';
-import { GameState } from '../common/states';
-import { Direction } from '../common/direction';
+import { GameStates } from '../constants/gameStates';
+import { Direction } from '../types/direction';
 import {
   canMoveDown,
   canMoveLeft,
@@ -82,10 +82,10 @@ export const isGameWin = (board: Board) => {
 
 export const checkBoardStatus = (board: Board) => {
   if (isGameWin(board)) {
-    return GameState.Win;
+    return GameStates.Win;
   }
 
-  return GameState.Continue;
+  return GameStates.Continue;
 };
 
 export const directionMove = (board: Board, direction: Direction) => {

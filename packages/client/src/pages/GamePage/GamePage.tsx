@@ -9,7 +9,7 @@ import GameOnboarding from '../../components/GameOnboarding/GameOnboarding';
 import { GameRulesModal } from '../../components/GameRulesModal/GameRulesModal';
 import Modal from '../../components/Modal/Modal';
 import { useAppDispatch } from '../../hooks/store';
-import { createBoard } from '../../store/reducers/GameSlice';
+import { createBoard, setTileSize } from '../../store/reducers/GameSlice';
 
 const GamePage = () => {
   const [fullscreenBtnText, setFullscreenBtnText] = useState(
@@ -20,6 +20,7 @@ const GamePage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    dispatch(setTileSize());
     dispatch(createBoard());
   }, []);
 

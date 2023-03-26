@@ -2,23 +2,20 @@ import React, { memo, useEffect, useLayoutEffect, useState } from 'react';
 import { Canvas } from '../Canvas/Canvas';
 import Grid from '../Grid/Grid';
 import Tile from '../Tile/Tile';
-import { checkBoardStatus } from '../../helpers/board';
-
-import { useGameConfig } from '../../hooks/useGameConfig';
-import { GameState } from '../../common/states';
-import { directionByKey } from '../../common/direction';
+import { checkBoardStatus } from '../../../../helpers/board';
+import { GameStates } from '../../../../constants/gameStates';
+import { directionByKey } from '../../../../types/direction';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/store';
 import {
   moveBoard,
   resetBoardState
 } from '../../../../store/reducers/GameSlice';
-import { getBoard } from '../../../../store/selectors';
+import { getBoard, getGameConfig } from '../../../../store/game-selectors';
 
 const Board = memo(() => {
-  const { boardSize, tileSize, padding } = useGameConfig();
   const dispatch = useAppDispatch();
-
   const board = useAppSelector(getBoard);
+  const { boardSize, tileSize, padding } = useAppSelector(getGameConfig);
 
   useEffect(() => {
     const handleMove = (event: any) => {
@@ -39,7 +36,7 @@ const Board = memo(() => {
       return;
     }
     switch (checkBoardStatus(board)) {
-      case GameState.Win: {
+      case GameStates.Win: {
         console.log('Вы выиграли');
 
         dispatch(resetBoardState());
