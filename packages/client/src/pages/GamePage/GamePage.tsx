@@ -4,6 +4,8 @@ import './GamePage.scss';
 import GuiButton from '../../ui/GuiButton/GuiButton';
 import { Fullscreen } from '../../helpers/fullscreen';
 import { useRef, useState } from 'react';
+import GameControls from '../../components/GameControls/GameControls';
+import GameOnboarding from '../../components/GameOnboarding/GameOnboarding';
 
 const GamePage = () => {
   const [fullscreenBtnText, setFullscreenBtnText] = useState(
@@ -26,12 +28,16 @@ const GamePage = () => {
     <div className='board-page' ref={boardPageRef}>
       <div className='container'>
         <div className='board-page__wrapper'>
-          <Board />
-          <GuiButton
-            className='board-page__fullscreen-btn'
-            btnText={fullscreenBtnText}
-            onClick={onFullscreenBtnClick}
-          />
+          <GameOnboarding />
+          <div className='board-page__game'>
+            <GameControls currentScore={0} bestScore={0} />
+            <Board />
+            <GuiButton
+              className='board-page__fullscreen-btn'
+              btnText={fullscreenBtnText}
+              onClick={onFullscreenBtnClick}
+            />
+          </div>
         </div>
       </div>
     </div>
