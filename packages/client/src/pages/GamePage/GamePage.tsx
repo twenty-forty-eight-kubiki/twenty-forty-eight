@@ -30,7 +30,7 @@ const GamePage = () => {
         <div className='board-page__wrapper'>
           <GameOnboarding />
           <div className='board-page__game'>
-            <GameControls />
+            <GameControls currentScore={0} bestScore={0} />
             <Board />
             <GuiButton
               className='board-page__fullscreen-btn'

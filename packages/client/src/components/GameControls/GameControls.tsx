@@ -3,10 +3,15 @@ import GuiButton from '../../ui/GuiButton/GuiButton';
 import restartIcon from '../../assets/icons/restart.svg';
 import './GameControls.scss';
 
-const GameControls = (): ReactElement => {
-  const [currentScore] = useState('0');
-  const [bestScore] = useState('0');
+type GameControlsProps = {
+  currentScore: number;
+  bestScore: number;
+};
 
+const GameControls = ({
+  currentScore,
+  bestScore
+}: GameControlsProps): ReactElement => {
   return (
     <div className='game-controls'>
       <h2 className='game-controls__title'>2048</h2>
