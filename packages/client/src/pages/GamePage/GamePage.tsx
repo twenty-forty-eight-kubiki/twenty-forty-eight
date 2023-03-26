@@ -49,7 +49,7 @@ const GamePage = () => {
             />
           </div>
           <div className='board-page__game'>
-            <GameControls currentScore={0} bestScore={0}/>
+            <GameControls currentScore={0} bestScore={0} />
             <Board />
           </div>
         </div>
