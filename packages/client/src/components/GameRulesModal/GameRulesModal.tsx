@@ -1,4 +1,4 @@
-import React, { FormEvent, ReactElement, useState } from 'react';
+import React, { ReactElement } from 'react';
 import './GameRulesModal.scss';
 
 const GameRulesModal = (): ReactElement => {

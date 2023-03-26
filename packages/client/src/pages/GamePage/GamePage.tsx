@@ -13,7 +13,7 @@ const GamePage = () => {
   const [fullscreenBtnText, setFullscreenBtnText] = useState(
     'Открыть на полный экран'
   );
-  const [isModal, setModal] = useState(false);
+  const [isRuleModal, setRuleModal] = useState(false);
   const boardPageRef = useRef();
   const onFullscreenBtnClick = () => {
     if (Fullscreen.check()) {
@@ -28,7 +28,7 @@ const GamePage = () => {
   };
 
   const onRulesBtnClick = () => {
-    setModal(true);
+    setRuleModal(true);
   };
 
   return (
@@ -55,9 +55,9 @@ const GamePage = () => {
         </div>
       </div>
       <Modal
-        isVisible={isModal}
+        isVisible={isRuleModal}
         content={<GameRulesModal />}
-        onClose={() => setModal(false)}
+        onClose={() => setRuleModal(false)}
       />
     </div>
   );
