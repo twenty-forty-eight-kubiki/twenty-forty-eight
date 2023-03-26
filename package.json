@@ -24,8 +24,5 @@
 		"@evilmartians/lefthook": "1.1.1",
 		"eslint-config-prettier": "^8.8.0",
 		"lerna": "5.4.3"
-	},
-	"dependencies": {
-		"react-scrolllock": "^5.0.1"
 	}
 }
