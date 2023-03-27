@@ -16,7 +16,7 @@ const GamePage = () => {
     'Открыть на полный экран'
   );
   const [isRuleModal, setRuleModal] = useState(false);
-  const boardPageRef = useRef();
+  const boardPageRef: React.MutableRefObject<any> = useRef();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
