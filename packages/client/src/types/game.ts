@@ -9,4 +9,5 @@ export type GameConfig = {
 export type BoardWithScore = {
   board: Board;
   score: number;
+  wasMoved: boolean;
 };

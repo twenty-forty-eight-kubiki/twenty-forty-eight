@@ -47,6 +47,11 @@ const Board = memo(() => {
         dispatch(resetBoardState());
         break;
       }
+      case GameStates.Lose: {
+        console.log('Вы проиграли');
+
+        break;
+      }
     }
   }, [board]);
 

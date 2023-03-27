@@ -156,7 +156,8 @@ export const moveUp = (board: Board, currentScore: number): BoardWithScore => {
 
   const result = {
     board: newBoard,
-    score: gameScore
+    score: gameScore,
+    wasMoved: true
   };
 
   return result;
@@ -204,7 +205,8 @@ export const moveDown = (
 
   const result = {
     board: newBoard,
-    score: gameScore
+    score: gameScore,
+    wasMoved: true
   };
 
   return result;
@@ -252,7 +254,8 @@ export const moveLeft = (
 
   const result = {
     board: newBoard,
-    score: gameScore
+    score: gameScore,
+    wasMoved: true
   };
 
   return result;
@@ -300,7 +303,8 @@ export const moveRight = (
 
   const result = {
     board: newBoard,
-    score: gameScore
+    score: gameScore,
+    wasMoved: true
   };
 
   return result;

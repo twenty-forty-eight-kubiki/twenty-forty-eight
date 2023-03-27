@@ -26,8 +26,12 @@ export const gameSlice = createSlice({
   initialState,
   reducers: {
     createBoard: state => {
-      const startBoard = initBoard(generateBoard(state.gameConfig.countTiles));
-      state.board = startBoard;
+      if (!state.board) {
+        const startBoard = initBoard(
+          generateBoard(state.gameConfig.countTiles)
+        );
+        state.board = startBoard;
+      }
     },
     resetBoardState: state => {
       if (state.board) {
@@ -43,7 +47,10 @@ export const gameSlice = createSlice({
         direction,
         state.currentScore
       );
-      state.board = randomNewTile(boardWithScore.board);
+      state.board = boardWithScore.board;
+      if (boardWithScore.wasMoved) {
+        state.board = randomNewTile(boardWithScore.board);
+      }
       state.currentScore = boardWithScore.score;
       state.bestScore = getBestScore(state.bestScore, state.currentScore);
     }

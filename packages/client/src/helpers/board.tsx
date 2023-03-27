@@ -80,9 +80,22 @@ export const isGameWin = (board: Board) => {
   return false;
 };
 
+export const isFailGame = (board: Board) => {
+  return (
+    !canMoveUp(board) &&
+    !canMoveRight(board) &&
+    !canMoveDown(board) &&
+    !canMoveLeft(board)
+  );
+};
+
 export const checkBoardStatus = (board: Board) => {
   if (isGameWin(board)) {
     return GameStates.Win;
+  }
+
+  if (isFailGame(board)) {
+    return GameStates.Lose;
   }
 
   return GameStates.Continue;
@@ -95,7 +108,8 @@ export const directionMove = (
 ): BoardWithScore => {
   const resultBoard = {
     board: board,
-    score: currentScore
+    score: currentScore,
+    wasMoved: false
   };
 
   switch (direction) {
