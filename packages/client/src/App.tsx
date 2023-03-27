@@ -1,21 +1,23 @@
 import AppRouter from './router/AppRouter'
-import { fetchUser } from './store/auth-actions'
-import { useAppDispatch, useAppSelector } from './hooks/store'
-import { useEffect } from 'react'
-import { getAuthCheckedStatus } from './store/selectors'
+import {fetchUser} from './store/auth-actions'
+import {useAppDispatch, useAppSelector} from './hooks/store'
+import {useEffect} from 'react'
+import {getAuthCheckedStatus} from './store/selectors'
 
 const App = () => {
-  const dispatch = useAppDispatch()
-  useEffect(() => {
-    dispatch(fetchUser())
-  }, [])
-  const isAuthChecked = useAppSelector(getAuthCheckedStatus)
+    const dispatch = useAppDispatch();
 
-  if (!isAuthChecked) {
-    return <p>Loading...</p>
-  }
+    useEffect(() => {
+        dispatch(fetchUser());
+    }, []);
 
-  return <AppRouter />
+    const isAuthChecked = useAppSelector(getAuthCheckedStatus);
+
+    if (!isAuthChecked) {
+        return <p>Loading...</p>
+    }
+
+    return <AppRouter/>
 }
 
 export default App
