@@ -15,7 +15,6 @@ const initialState: GameState = {
   bestScore: 0,
   gameConfig: {
     padding: 15,
-    tileSize: 0,
     countTiles: 4,
     boardSize: 500
   }
@@ -25,11 +24,6 @@ export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    setTileSize: state => {
-      const { boardSize, countTiles, padding } = state.gameConfig;
-      state.gameConfig.tileSize =
-        (boardSize - padding * (countTiles + 1)) / countTiles;
-    },
     createBoard: state => {
       const startBoard = initBoard(generateBoard(state.gameConfig.countTiles));
       state.board = startBoard;
@@ -48,5 +42,4 @@ export const gameSlice = createSlice({
   }
 });
 
-export const { resetBoardState, createBoard, moveBoard, setTileSize } =
-  gameSlice.actions;
+export const { resetBoardState, createBoard, moveBoard } = gameSlice.actions;

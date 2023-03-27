@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import RoundedRectangle from '../RoundedRectangle/RoundedRectangle';
 import Text from '../Text/Text';
 import { useAppSelector } from '../../../../hooks/store';
-import { getGameConfig } from '../../../../store/game-selectors';
+import { getTileSize } from '../../../../store/game-selectors';
 
 export type TileProps = {
   x: number;
@@ -40,7 +40,7 @@ const colorTile: any = {
 };
 
 const Tile: FC<TileProps> = ({ x, y, value }) => {
-  const { tileSize } = useAppSelector(getGameConfig);
+  const tileSize = useAppSelector(getTileSize);
 
   return (
     <>

@@ -10,12 +10,17 @@ import {
   moveBoard,
   resetBoardState
 } from '../../../../store/reducers/GameSlice';
-import { getBoard, getGameConfig } from '../../../../store/game-selectors';
+import {
+  getBoard,
+  getGameConfig,
+  getTileSize
+} from '../../../../store/game-selectors';
 
 const Board = memo(() => {
   const dispatch = useAppDispatch();
   const board = useAppSelector(getBoard);
-  const { boardSize, tileSize, padding } = useAppSelector(getGameConfig);
+  const { boardSize, padding } = useAppSelector(getGameConfig);
+  const tileSize = useAppSelector(getTileSize);
 
   useEffect(() => {
     const handleMove = (event: any) => {
