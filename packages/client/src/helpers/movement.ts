@@ -1,6 +1,5 @@
-import { Board } from '../types/game';
+import { Board, BoardWithScore } from '../types/game';
 import produce from 'immer';
-
 export const moveTile = (
   board: Board,
   x: number,
@@ -33,6 +32,22 @@ export const mergeTile = (
   }
 
   return board;
+};
+
+export const setScore = (
+  currentScore: number,
+  board: Board,
+  x: number,
+  y: number,
+  mergeX: number,
+  mergeY: number
+) => {
+  let score = currentScore;
+  if (board[x][y] === board[mergeX][mergeY]) {
+    score += board[x][y] * 2;
+  }
+
+  return score;
 };
 
 export const canMoveUp = (board: Board): boolean => {
@@ -102,8 +117,9 @@ export const canMoveRight = (board: Board): boolean => {
   return false;
 };
 
-export const moveUp = (board: Board): Board => {
+export const moveUp = (board: Board, currentScore: number): BoardWithScore => {
   let newBoard = board;
+  let gameScore = currentScore;
 
   for (let x = 0; x < newBoard.length; x++) {
     for (let y = 0; y < newBoard[x].length; y++) {
@@ -121,6 +137,7 @@ export const moveUp = (board: Board): Board => {
         }
 
         if (bottomY !== -1) {
+          gameScore = setScore(gameScore, newBoard, x, y, x, bottomY);
           newBoard = mergeTile(newBoard, x, y, x, bottomY);
         }
 
@@ -137,11 +154,20 @@ export const moveUp = (board: Board): Board => {
     }
   }
 
-  return newBoard;
+  const result = {
+    board: newBoard,
+    score: gameScore
+  };
+
+  return result;
 };
 
-export const moveDown = (board: Board): Board => {
+export const moveDown = (
+  board: Board,
+  currentScore: number
+): BoardWithScore => {
   let newBoard = board;
+  let gameScore = currentScore;
 
   for (let x = 0; x < newBoard.length; x++) {
     for (let y = newBoard[x].length - 1; y >= 0; y--) {
@@ -167,6 +193,7 @@ export const moveDown = (board: Board): Board => {
         }
 
         if (topY !== -1) {
+          gameScore = setScore(gameScore, newBoard, x, y, x, topY);
           newBoard = mergeTile(newBoard, x, y, x, topY);
         }
 
@@ -175,11 +202,20 @@ export const moveDown = (board: Board): Board => {
     }
   }
 
-  return newBoard;
+  const result = {
+    board: newBoard,
+    score: gameScore
+  };
+
+  return result;
 };
 
-export const moveLeft = (board: Board): Board => {
+export const moveLeft = (
+  board: Board,
+  currentScore: number
+): BoardWithScore => {
   let newBoard = board;
+  let gameScore = currentScore;
 
   for (let y = 0; y < newBoard.length; y++) {
     for (let x = 0; x < newBoard.length; x++) {
@@ -197,6 +233,7 @@ export const moveLeft = (board: Board): Board => {
         }
 
         if (leftX !== -1) {
+          gameScore = setScore(gameScore, newBoard, x, y, leftX, y);
           newBoard = mergeTile(newBoard, x, y, leftX, y);
         }
 
@@ -213,11 +250,20 @@ export const moveLeft = (board: Board): Board => {
     }
   }
 
-  return newBoard;
+  const result = {
+    board: newBoard,
+    score: gameScore
+  };
+
+  return result;
 };
 
-export const moveRight = (board: Board): Board => {
+export const moveRight = (
+  board: Board,
+  currentScore: number
+): BoardWithScore => {
   let newBoard = board;
+  let gameScore = currentScore;
 
   for (let y = 0; y < newBoard.length; y++) {
     for (let x = newBoard.length - 1; x >= 0; x--) {
@@ -243,6 +289,7 @@ export const moveRight = (board: Board): Board => {
         }
 
         if (rightX !== -1) {
+          gameScore = setScore(gameScore, newBoard, x, y, rightX, y);
           newBoard = mergeTile(newBoard, x, y, rightX, y);
         }
 
@@ -251,5 +298,10 @@ export const moveRight = (board: Board): Board => {
     }
   }
 
-  return newBoard;
+  const result = {
+    board: newBoard,
+    score: gameScore
+  };
+
+  return result;
 };

@@ -1,4 +1,4 @@
-import { Board } from '../types/game';
+import { Board, BoardWithScore } from '../types/game';
 import { getRandomInt } from './random';
 import produce from 'immer';
 import { GameStates } from '../constants/gameStates';
@@ -88,42 +88,51 @@ export const checkBoardStatus = (board: Board) => {
   return GameStates.Continue;
 };
 
-export const directionMove = (board: Board, direction: Direction) => {
+export const directionMove = (
+  board: Board,
+  direction: Direction,
+  currentScore: number
+): BoardWithScore => {
+  const resultBoard = {
+    board: board,
+    score: currentScore
+  };
+
   switch (direction) {
     case Direction.Up: {
       if (canMoveUp(board)) {
-        return moveUp(board);
+        return moveUp(board, currentScore);
       }
 
-      return board;
+      return resultBoard;
     }
 
     case Direction.Down: {
       if (canMoveDown(board)) {
-        return moveDown(board);
+        return moveDown(board, currentScore);
       }
 
-      return board;
+      return resultBoard;
     }
 
     case Direction.Left: {
       if (canMoveLeft(board)) {
-        return moveLeft(board);
+        return moveLeft(board, currentScore);
       }
 
-      return board;
+      return resultBoard;
     }
 
     case Direction.Right: {
       if (canMoveRight(board)) {
-        return moveRight(board);
+        return moveRight(board, currentScore);
       }
 
-      return board;
+      return resultBoard;
     }
 
     default: {
-      return board;
+      return resultBoard;
     }
   }
 };

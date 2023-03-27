@@ -5,3 +5,8 @@ export type GameConfig = {
   countTiles: number;
   boardSize: number;
 };
+
+export type BoardWithScore = {
+  board: Board;
+  score: number;
+};

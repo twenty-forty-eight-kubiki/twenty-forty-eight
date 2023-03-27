@@ -14,6 +14,7 @@ export const getTileSize = (state: State) => {
 };
 
 export const getBoard = createSelector(getBoardState, board => board);
+
 export const getGameConfig = createSelector(
   getGameConfigState,
   config => config
