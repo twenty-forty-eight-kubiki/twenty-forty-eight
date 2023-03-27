@@ -1,4 +1,4 @@
-import { Board } from '../common/types';
+import { Board } from '../types/game';
 import produce from 'immer';
 
 export const moveTile = (

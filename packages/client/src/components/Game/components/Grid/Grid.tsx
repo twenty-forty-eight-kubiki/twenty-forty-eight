@@ -1,9 +1,12 @@
 import React, { FC } from 'react';
 import RoundedRectangle from '../RoundedRectangle/RoundedRectangle';
-import { useGameConfig } from '../../hooks/useGameConfig';
+import { useAppSelector } from '../../../../hooks/store';
+import { getGameConfig, getTileSize } from '../../../../store/game-selectors';
 
 const Grid: FC = () => {
-  const { boardSize, tileSize, countTiles, padding } = useGameConfig();
+  const { boardSize, countTiles, padding } = useAppSelector(getGameConfig);
+
+  const tileSize = useAppSelector(getTileSize);
 
   let row = -tileSize;
   let column = -tileSize;
