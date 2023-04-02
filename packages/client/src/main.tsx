@@ -4,16 +4,15 @@ import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { store } from './store/store';
-import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import './index.scss';
-
 
 const Application = (
   <Provider store={store}>
     <BrowserRouter>
-        <ErrorBoundary>
-            <App />
-        </ErrorBoundary>
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
     </BrowserRouter>
   </Provider>
 );
