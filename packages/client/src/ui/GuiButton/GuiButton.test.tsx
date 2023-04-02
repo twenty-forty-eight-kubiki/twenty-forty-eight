@@ -10,7 +10,9 @@ describe('Button component', () => {
 
   it('calls onClick when clicked', () => {
     const handleClick = jest.fn();
-    const component = renderer.create(<GuiButton btnText='Open' onClick={handleClick} />);
+    const component = renderer.create(
+      <GuiButton btnText='Open' onClick={handleClick} />
+    );
     component.root.findByType('button').props.onClick();
     expect(handleClick).toHaveBeenCalledTimes(1);
     expect(component.toJSON()).toMatchSnapshot();
