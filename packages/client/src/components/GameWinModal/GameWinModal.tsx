@@ -6,7 +6,7 @@ import { useAppDispatch } from '../../hooks/store';
 
 type GameWinModalProps = {
   onClose: () => void;
-}
+};
 
 const GameWinModal = (props: GameWinModalProps): ReactElement => {
   const dispatch = useAppDispatch();
@@ -18,9 +18,14 @@ const GameWinModal = (props: GameWinModalProps): ReactElement => {
 
   return (
     <div className='game-win-modal'>
-      <h2 className='game-win-modal__title'><span className="game-win-modal__title-text">Поздравляем!</span> Вы набрали 2048 очков!</h2>
-      <p className='game-win-modal__subtitle'>Вы можете продолжить игру или начать заново</p>
-      <div className="game-win-modal__btns">
+      <h2 className='game-win-modal__title'>
+        <span className='game-win-modal__title-text'>Поздравляем!</span> Вы
+        набрали 2048 очков!
+      </h2>
+      <p className='game-win-modal__subtitle'>
+        Вы можете продолжить игру или начать заново
+      </p>
+      <div className='game-win-modal__btns'>
         <GuiButton
           btnText='Продолжить'
           labelText='continue'

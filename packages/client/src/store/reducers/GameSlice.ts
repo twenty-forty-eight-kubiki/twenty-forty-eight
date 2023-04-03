@@ -67,5 +67,10 @@ export const gameSlice = createSlice({
   }
 });
 
-export const { resetBoardState, createBoard, moveBoard, failGame, get2048Points } =
-  gameSlice.actions;
+export const {
+  resetBoardState,
+  createBoard,
+  moveBoard,
+  failGame,
+  get2048Points
+} = gameSlice.actions;
