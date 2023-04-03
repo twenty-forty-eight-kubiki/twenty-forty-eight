@@ -8,7 +8,8 @@ import { directionByKey } from '../../../../types/direction';
 import { useAppDispatch, useAppSelector } from '../../../../hooks/store';
 import {
   moveBoard,
-  resetBoardState
+  resetBoardState,
+  failGame
 } from '../../../../store/reducers/GameSlice';
 import {
   getBoard,
@@ -49,6 +50,8 @@ const Board = memo(() => {
       }
       case GameStates.Lose: {
         console.log('Вы проиграли');
+
+        dispatch(failGame());
 
         break;
       }

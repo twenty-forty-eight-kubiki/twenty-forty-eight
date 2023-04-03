@@ -6,22 +6,32 @@ import { Fullscreen } from '../../helpers/fullscreen';
 import React, { useEffect, useRef, useState } from 'react';
 import GameControls from '../../components/GameControls/GameControls';
 import GameOnboarding from '../../components/GameOnboarding/GameOnboarding';
-import { GameRulesModal } from '../../components/GameRulesModal/GameRulesModal';
 import Modal from '../../components/Modal/Modal';
-import { useAppDispatch } from '../../hooks/store';
+import { GameRulesModal } from '../../components/GameRulesModal/GameRulesModal';
+import { GameOverModal } from '../../components/GameOverModal/GameOverModal';
+import { useAppDispatch, useAppSelector } from '../../hooks/store';
 import { createBoard } from '../../store/reducers/GameSlice';
+import { getIsGameFail } from '../../store/game-selectors';
 
 const GamePage = () => {
   const [fullscreenBtnText, setFullscreenBtnText] = useState(
     'Открыть на полный экран'
   );
   const [isRuleModal, setRuleModal] = useState(false);
+
   const boardPageRef: React.MutableRefObject<any> = useRef();
   const dispatch = useAppDispatch();
+
+  const isFail = useAppSelector(getIsGameFail);
+  const [isGameOverModal, setGameOverModal] = useState(isFail);
 
   useEffect(() => {
     dispatch(createBoard());
   }, []);
+
+  useEffect(() => {
+    setGameOverModal(isFail);
+  }, [isFail]);
 
   const onFullscreenBtnClick = () => {
     if (Fullscreen.check()) {
@@ -66,6 +76,11 @@ const GamePage = () => {
         isVisible={isRuleModal}
         content={<GameRulesModal />}
         onClose={() => setRuleModal(false)}
+      />
+      <Modal
+        isVisible={isGameOverModal}
+        content={<GameOverModal />}
+        onClose={() => setGameOverModal(false)}
       />
     </div>
   );

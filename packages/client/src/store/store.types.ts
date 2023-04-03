@@ -17,6 +17,7 @@ export type GameState = {
   board: Board | null;
   currentScore: number;
   bestScore: number;
+  isFail: boolean;
   gameConfig: GameConfig;
 };
 
