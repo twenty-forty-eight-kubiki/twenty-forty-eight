@@ -15,6 +15,7 @@ const initialState: GameState = {
   currentScore: 0,
   bestScore: 0,
   isFail: false,
+  is2048: false,
   gameConfig: {
     padding: 15,
     countTiles: 4,
@@ -40,6 +41,7 @@ export const gameSlice = createSlice({
         state.board = initBoard(resetedBoard);
         state.currentScore = 0;
         state.isFail = false;
+        state.is2048 = false;
       }
     },
     moveBoard: (state, action) => {
@@ -58,9 +60,12 @@ export const gameSlice = createSlice({
     },
     failGame: state => {
       state.isFail = true;
+    },
+    get2048Points: state => {
+      state.is2048 = true;
     }
   }
 });
 
-export const { resetBoardState, createBoard, moveBoard, failGame } =
+export const { resetBoardState, createBoard, moveBoard, failGame, get2048Points } =
   gameSlice.actions;

@@ -42,17 +42,8 @@ const Board = memo(() => {
       return;
     }
     switch (checkBoardStatus(board)) {
-      case GameStates.Win: {
-        console.log('Вы выиграли');
-
-        dispatch(resetBoardState());
-        break;
-      }
       case GameStates.Lose: {
-        console.log('Вы проиграли');
-
         dispatch(failGame());
-
         break;
       }
     }

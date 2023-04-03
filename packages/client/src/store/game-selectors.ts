@@ -8,6 +8,7 @@ export const getBoardCurrentScore = (state: State) => state.game.currentScore;
 
 export const getBoardBestScore = (state: State) => state.game.bestScore;
 export const getIsGameFail = (state: State) => state.game.isFail;
+export const getIsGame2048 = (state: State) => state.game.is2048;
 
 export const getTileSize = (state: State) => {
   const { boardSize, countTiles, padding } = state.game.gameConfig;

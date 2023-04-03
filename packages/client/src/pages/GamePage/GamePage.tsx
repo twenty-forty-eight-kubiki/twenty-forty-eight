@@ -10,8 +10,11 @@ import Modal from '../../components/Modal/Modal';
 import { GameRulesModal } from '../../components/GameRulesModal/GameRulesModal';
 import { GameOverModal } from '../../components/GameOverModal/GameOverModal';
 import { useAppDispatch, useAppSelector } from '../../hooks/store';
-import { createBoard } from '../../store/reducers/GameSlice';
-import { getIsGameFail } from '../../store/game-selectors';
+import { createBoard, get2048Points, resetBoardState } from '../../store/reducers/GameSlice'
+import { getBoard, getIsGameFail, getIsGame2048 } from '../../store/game-selectors'
+import { checkBoardStatus } from '../../helpers/board'
+import { GameStates } from '../../constants/gameStates'
+import { GameWinModal } from '../../components/GameWinModal/GameWinModal'
 
 const GamePage = () => {
   const [fullscreenBtnText, setFullscreenBtnText] = useState(
@@ -21,9 +24,26 @@ const GamePage = () => {
 
   const boardPageRef: React.MutableRefObject<any> = useRef();
   const dispatch = useAppDispatch();
-
+  const board = useAppSelector(getBoard);
   const isFail = useAppSelector(getIsGameFail);
+  const is2048 = useAppSelector(getIsGame2048);
   const [isGameOverModal, setGameOverModal] = useState(isFail);
+  const [is2048Modal, set2048Modal] = useState(false);
+
+  useEffect(() => {
+    if (!board || is2048) {
+      return;
+    }
+
+    switch (checkBoardStatus(board)) {
+      case GameStates.Win: {
+        set2048Modal(true);
+        dispatch(get2048Points())
+
+        break;
+      }
+    }
+  }, [board]);
 
   useEffect(() => {
     dispatch(createBoard());
@@ -81,6 +101,11 @@ const GamePage = () => {
         isVisible={isGameOverModal}
         content={<GameOverModal />}
         onClose={() => setGameOverModal(false)}
+      />
+      <Modal
+        isVisible={is2048Modal}
+        content={<GameWinModal onClose={() => set2048Modal(false)}/>}
+        onClose={() => set2048Modal(false)}
       />
     </div>
   );

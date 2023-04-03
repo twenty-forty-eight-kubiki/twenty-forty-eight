@@ -18,6 +18,7 @@ export type GameState = {
   currentScore: number;
   bestScore: number;
   isFail: boolean;
+  is2048: boolean;
   gameConfig: GameConfig;
 };
 
