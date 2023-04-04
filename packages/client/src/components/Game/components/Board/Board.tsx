@@ -37,18 +37,6 @@ const Board = memo(() => {
     return () => document.removeEventListener('keyup', handleMove);
   }, [board]);
 
-  useEffect(() => {
-    if (!board) {
-      return;
-    }
-    switch (checkBoardStatus(board)) {
-      case GameStates.Lose: {
-        dispatch(failGame());
-        break;
-      }
-    }
-  }, [board]);
-
   return (
     <Canvas height={boardSize} width={boardSize} dpr={1}>
       <Grid />

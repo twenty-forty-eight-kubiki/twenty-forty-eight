@@ -12,8 +12,8 @@ import { GameOverModal } from '../../components/GameOverModal/GameOverModal';
 import { useAppDispatch, useAppSelector } from '../../hooks/store';
 import {
   createBoard,
-  get2048Points,
-  resetBoardState
+  failGame,
+  reach2048Points
 } from '../../store/reducers/GameSlice';
 import {
   getBoard,
@@ -39,17 +39,17 @@ const GamePage = () => {
   const [is2048Modal, set2048Modal] = useState(false);
 
   useEffect(() => {
-    if (!board || is2048) {
+    if (!board) {
       return;
     }
 
-    switch (checkBoardStatus(board)) {
-      case GameStates.Win: {
-        set2048Modal(true);
-        dispatch(get2048Points());
+    if (checkBoardStatus(board) === GameStates.Lose) {
+      dispatch(failGame());
+    }
 
-        break;
-      }
+    if (checkBoardStatus(board) === GameStates.Win && !is2048) {
+      set2048Modal(true);
+      dispatch(reach2048Points());
     }
   }, [board]);
 

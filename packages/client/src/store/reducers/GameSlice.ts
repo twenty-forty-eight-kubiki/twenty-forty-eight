@@ -61,7 +61,7 @@ export const gameSlice = createSlice({
     failGame: state => {
       state.isFail = true;
     },
-    get2048Points: state => {
+    reach2048Points: state => {
       state.is2048 = true;
     }
   }
@@ -72,5 +72,5 @@ export const {
   createBoard,
   moveBoard,
   failGame,
-  get2048Points
+  reach2048Points
 } = gameSlice.actions;
