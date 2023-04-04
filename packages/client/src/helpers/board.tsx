@@ -71,7 +71,7 @@ export const resetBoard = (board: Board) => {
 export const isGameWin = (board: Board) => {
   for (let x = 0; x < board.length; x++) {
     for (let y = 0; y < board[x].length; y++) {
-      if (board[x][y] === 16) {
+      if (board[x][y] === 2048) {
         return true;
       }
     }
