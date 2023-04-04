@@ -90,12 +90,12 @@ export const isFailGame = (board: Board) => {
 };
 
 export const checkBoardStatus = (board: Board) => {
-  if (isGameWin(board)) {
-    return GameStates.Win;
-  }
-
   if (isFailGame(board)) {
     return GameStates.Lose;
+  }
+
+  if (isGameWin(board)) {
+    return GameStates.Win;
   }
 
   return GameStates.Continue;
