@@ -23,6 +23,7 @@
 	"devDependencies": {
 		"@evilmartians/lefthook": "1.1.1",
 		"eslint-config-prettier": "^8.8.0",
-		"lerna": "5.4.3"
+		"lerna": "5.4.3",
+		"rimraf": "^4.4.1"
 	}
 }
