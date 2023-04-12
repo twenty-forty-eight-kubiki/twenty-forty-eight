@@ -22,6 +22,11 @@
   },
   "devDependencies": {
     "@evilmartians/lefthook": "1.1.1",
-    "lerna": "5.4.3"
+    "lerna": "5.4.3",
+    "vite-plugin-pwa": "^0.14.7"
+  },
+  "dependencies": {
+    "@rollup/plugin-node-resolve": "^15.0.2",
+    "rollup-plugin-typescript": "^1.0.1"
   }
 }
