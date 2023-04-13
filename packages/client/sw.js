@@ -1,4 +1,4 @@
-const URLS = ['/index.html', '/src/app.tsx', '/src/main.tsx']
+const URLS = ['./index.html', './src/app.tsx', '/src/main.tsx']
 const CACHE_NAME = '2048-cache-v1'
 const tryNetwork = (req, timeout) => {
   return new Promise((resolve, reject) => {
