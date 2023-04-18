@@ -1,0 +1,84 @@
+@import '../src/assets/scss/variables';
+
+.loader {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: $white-linen;
+}
+
+.loader__cube {
+  width: 200px;
+  height: 200px;
+  position: relative;
+
+  transform-style: preserve-3d;
+  transform: translateZ(-100px);
+
+  animation: cube-rotate 8s ease infinite;
+  animation-timing-function: linear;
+}
+
+.loader__face {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border: 2px solid black;
+  line-height: 200px;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+}
+
+.loader__face--front {
+  background: $tacao;
+}
+.loader__face--right {
+  background: $parchment;
+}
+.loader__face--back {
+  background: $cornflower-blue;
+}
+.loader__face--left {
+  background: $flamingo;
+}
+.loader__face--top {
+  background: $golden-dream;
+}
+.loader__face--bottom {
+  background: $bittersweet;
+}
+
+.loader__face--front {
+  transform: rotateY(0deg) translateZ(100px);
+}
+.loader__face--right {
+  transform: rotateY(90deg) translateZ(100px);
+}
+.loader__face--back {
+  transform: rotateY(180deg) translateZ(100px);
+}
+.loader__face--left {
+  transform: rotateY(-90deg) translateZ(100px);
+}
+.loader__face--top {
+  transform: rotateX(90deg) translateZ(100px);
+}
+.loader__face--bottom {
+  transform: rotateX(-90deg) translateZ(100px);
+}
+
+@keyframes cube-rotate {
+  0% {
+    transform: rotateY(0deg) rotateX(0deg);
+  }
+
+  100% {
+    transform: rotateY(360deg) rotateX(360deg);
+  }
+}
