@@ -4,9 +4,8 @@
   "description": "",
   "scripts": {
     "build": "rimraf dist && tsc --p ./tsconfig.prod.json",
-    "build-client": "cd ../client && npm run build",
     "preview": "npm run build && node ./dist/index.js",
-    "dev": "npm run build-client && cross-env NODE_ENV=development nodemon index.ts",
+    "dev": "cross-env NODE_ENV=development nodemon index.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "jest ."
