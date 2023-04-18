@@ -1,0 +1,23 @@
+@import '../src/assets/scss/variables';
+
+.game-over-modal {
+  max-width: 600px;
+  width: 100%;
+  padding: 50px;
+
+  &__title {
+    font-size: 30px;
+    line-height: 80%;
+    color: $sandstone;
+
+    margin-bottom: 25px;
+
+    text-align: center;
+  }
+
+  &__score {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 25px;
+  }
+}

@@ -1,18 +1,22 @@
-import { useEffect } from 'react'
-import './App.css'
+import AppRouter from './router/AppRouter';
+import { fetchUser } from './store/auth-actions';
+import { useAppDispatch, useAppSelector } from './hooks/store';
+import { useEffect } from 'react';
+import { getAuthCheckedStatus } from './store/selectors';
+import Loader from './components/Loader/Loader';
 
-function App() {
+const App = () => {
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    const fetchServerData = async () => {
-      const url = `http://localhost:${__SERVER_PORT__}`
-      const response = await fetch(url)
-      const data = await response.json()
-      console.log(data)
-    }
+    dispatch(fetchUser());
+  }, []);
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
 
-    fetchServerData()
-  }, [])
-  return <div className="App">Вот тут будет жить ваше приложение :)</div>
-}
+  if (!isAuthChecked) {
+    return <Loader />;
+  }
 
-export default App
+  return <AppRouter />;
+};
+
+export default App;

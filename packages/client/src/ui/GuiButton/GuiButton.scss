@@ -1,0 +1,34 @@
+@import '../../assets/scss/variables';
+
+.gui-button {
+  background-color: $sandy-brown;
+  max-width: 220px;
+  min-width: 100px;
+  width: 100%;
+  height: 30px;
+  color: $white;
+  font-size: 16px;
+  line-height: 20px;
+  border-radius: $border-radius-small;
+  box-shadow: $box-shadow-standard;
+
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  outline: none;
+
+  transition: background-color $trans-default, transform $trans-default;
+
+  &:hover,
+  &:focus {
+    background-color: $geebung;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &__icon {
+    object-fit: cover;
+  }
+}
