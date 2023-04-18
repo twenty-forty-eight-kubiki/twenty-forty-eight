@@ -1,0 +1,77 @@
+@import '../src/assets/scss/variables';
+
+.loader {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: $white-linen;
+
+  &__cube {
+    width: 200px;
+    height: 200px;
+    position: relative;
+
+    transform-style: preserve-3d;
+    transform: translateZ(-100px);
+
+    animation: cube-rotate 8s ease infinite;
+    animation-timing-function: linear;
+  }
+
+  &__face {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+
+    border: 2px solid black;
+    line-height: 200px;
+    font-size: 40px;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+  }
+
+  &__face--front {
+    background: $tacao;
+    transform: rotateY(0deg) translateZ(100px);
+  }
+
+  &__face--right {
+    background: $parchment;
+    transform: rotateY(90deg) translateZ(100px);
+  }
+
+  &__face--back {
+    background: $cornflower-blue;
+    transform: rotateY(180deg) translateZ(100px);
+  }
+
+  &__face--left {
+    background: $flamingo;
+    transform: rotateY(-90deg) translateZ(100px);
+  }
+
+  &__face--top {
+    background: $golden-dream;
+    transform: rotateX(90deg) translateZ(100px);
+  }
+
+  &__face--bottom {
+    background: $bittersweet;
+    transform: rotateX(-90deg) translateZ(100px);
+  }
+}
+
+@keyframes cube-rotate {
+  0% {
+    transform: rotateY(0deg) rotateX(0deg);
+  }
+
+  100% {
+    transform: rotateY(360deg) rotateX(360deg);
+  }
+}
