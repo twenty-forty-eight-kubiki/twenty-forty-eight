@@ -13,8 +13,8 @@ const Header = memo(() => {
 
   return (
     <div className='header'>
-      <div className='inner'>
-        <Link to={RoutePath.Game} className='header__item'>
+      <div className='header__inner'>
+        <Link to={RoutePath.Game} className='header__item header__item--button'>
           Game
         </Link>
         <Link to={RoutePath.Forum} className='header__item'>
