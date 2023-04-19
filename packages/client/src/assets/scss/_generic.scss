@@ -31,6 +31,9 @@ body {
   width: 100%;
   min-width: 320px;
   background: $white-linen;
+  background: url('./assets/background.jpg');
+  background-size: 60%;
+  background-repeat: repeat;
 }
 
 .container {
