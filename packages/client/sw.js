@@ -1,4 +1,5 @@
-const URLS = ['./index.html', './src/app.tsx', '/src/main.tsx']
+// const URLS = ['./index.html', './src/app.tsx', '/src/main.tsx'];
+const PROD_URLS = ['/assets/index.000cbaf8.css', '/assets/js/app-4ff18a92.js'];
 const CACHE_NAME = '2048-cache-v1'
 const tryNetwork = (req, timeout) => {
   return new Promise((resolve, reject) => {
@@ -26,7 +27,7 @@ self.addEventListener('install', async event => {
     caches
       .open(CACHE_NAME)
       .then(cache => {
-        return cache.addAll(URLS)
+        return cache.addAll(PROD_URLS)
       })
       .catch(err => {
         throw err
