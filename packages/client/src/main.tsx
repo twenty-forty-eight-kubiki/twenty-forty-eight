@@ -14,6 +14,7 @@ const Application = (
   </Provider>
 );
 
-ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+ReactDOM.hydrateRoot(
+  document.getElementById('root') as HTMLElement,
   Application
 );

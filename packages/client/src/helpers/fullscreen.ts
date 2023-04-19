@@ -1,7 +1,5 @@
 import { FullscreenDocument, FullscreenElement } from '../types/types';
 
-const fullscreenDocument = document as FullscreenDocument;
-
 function enterFullscreen(element: FullscreenElement): void {
   if (element.requestFullscreen) {
     element.requestFullscreen();
@@ -15,6 +13,7 @@ function enterFullscreen(element: FullscreenElement): void {
 }
 
 function exitFullscreen(): void {
+  const fullscreenDocument = document as FullscreenDocument;
   if (fullscreenDocument.exitFullscreen) {
     fullscreenDocument.exitFullscreen();
   } else if (fullscreenDocument.mozCancelFullScreen) {
@@ -27,6 +26,7 @@ function exitFullscreen(): void {
 }
 
 function checkFullscreen(): Element | null {
+  const fullscreenDocument = document as FullscreenDocument;
   return (
     fullscreenDocument.fullscreenElement ||
     fullscreenDocument.mozFullScreenElement ||
