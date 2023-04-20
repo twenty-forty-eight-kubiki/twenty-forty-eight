@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import authReducer from './reducers/AuthSlice';
 import leaderboardSlice from './reducers/LeaderboardSlice';
 import { gameSlice } from './reducers/GameSlice';
+import { RootState } from './store.types'
 
 export const rootReducer = combineReducers({
   auth: authReducer,
@@ -9,6 +10,9 @@ export const rootReducer = combineReducers({
   game: gameSlice.reducer
 });
 
-export const store = configureStore({
-  reducer: rootReducer
-});
+export function createStore(initialState?: RootState) {
+  return configureStore({
+    reducer: rootReducer,
+    preloadedState: initialState,
+  });
+}
