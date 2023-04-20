@@ -1,7 +1,9 @@
 import dotenv from 'dotenv';
 import cors from 'cors';
 import { createServer as createViteServer } from 'vite';
+import jsesc from 'jsesc';
 import type { ViteDevServer } from 'vite';
+import { createProxyMiddleware } from 'http-proxy-middleware';
 
 dotenv.config();
 
@@ -30,6 +32,19 @@ async function startServer() {
 
     app.use(vite.middlewares);
   }
+
+  app.use(
+    '/api/v2',
+    createProxyMiddleware({
+      logLevel: isDev() ? 'debug' : 'info',
+      changeOrigin: true,
+      cookieDomainRewrite: {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        '*': '',
+      },
+      target: 'https://ya-praktikum.tech',
+    })
+  );
 
   app.get('/api', (_, res) => {
     res.json('👋 Howdy from the server :)');
@@ -70,7 +85,23 @@ async function startServer() {
 
       const appHtml = await render();
 
-      const html = template.replace(`<!--ssr-outlet-->`, appHtml);
+      const ssrEntryStore = (await vite!.ssrLoadModule(
+        require.resolve('client/src/store/store')
+      ))
+
+      const { createStore } = ssrEntryStore;
+
+      const initialState = createStore().getState();
+
+      const initialStateSerialized = jsesc(initialState, {
+        json: true,
+        isScriptContext: true,
+      });
+      const storeState = `<script>window.__INITIAL_STATE__ = ${initialStateSerialized}</script>`;
+
+      const html = template
+        .replace(`<!--ssr-outlet-->`, appHtml)
+        .replace('<!--store-state-->', storeState);
 
       res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
