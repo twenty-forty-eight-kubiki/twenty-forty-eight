@@ -40,9 +40,9 @@ async function startServer() {
       changeOrigin: true,
       cookieDomainRewrite: {
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        '*': '',
+        '*': ''
       },
-      target: 'https://ya-praktikum.tech',
+      target: 'https://ya-praktikum.tech'
     })
   );
 
@@ -85,9 +85,9 @@ async function startServer() {
 
       const appHtml = await render();
 
-      const ssrEntryStore = (await vite!.ssrLoadModule(
+      const ssrEntryStore = await vite!.ssrLoadModule(
         require.resolve('client/src/store/store')
-      ))
+      );
 
       const { createStore } = ssrEntryStore;
 
@@ -95,7 +95,7 @@ async function startServer() {
 
       const initialStateSerialized = jsesc(initialState, {
         json: true,
-        isScriptContext: true,
+        isScriptContext: true
       });
       const storeState = `<script>window.__INITIAL_STATE__ = ${initialStateSerialized}</script>`;
 
