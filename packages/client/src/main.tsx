@@ -9,7 +9,7 @@ import './index.scss';
 const initialState = window.__INITIAL_STATE__;
 delete window.__INITIAL_STATE__;
 
-const store = createStore(initialState);
+export const store = createStore(initialState);
 
 const Application = (
   <Provider store={store}>

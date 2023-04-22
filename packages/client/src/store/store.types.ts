@@ -1,6 +1,7 @@
-import { store, rootReducer } from './store';
+import { rootReducer } from './store';
 import { AuthorizationStatus } from '../constants/auth';
 import { Board, GameConfig } from '../types/game';
+import { store } from '../main';
 
 export type AuthState<TData, TError = unknown> = {
   data: TData | null;

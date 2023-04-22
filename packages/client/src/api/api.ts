@@ -46,7 +46,8 @@ export const API = {
       method: 'GET',
       credentials: 'include',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       }
     });
   },
@@ -56,7 +57,8 @@ export const API = {
       body: JSON.stringify(body),
       credentials: 'include',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       }
     }),
   put: <TBody, TResponse>(url: string, body?: TBody): Promise<TResponse> =>

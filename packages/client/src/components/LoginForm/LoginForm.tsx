@@ -13,8 +13,7 @@ import TextError from '../../ui/TextError/TextError';
 import './LoginForm.scss';
 import { fetchUser } from '../../store/auth-actions';
 import { RoutePath } from '../../router/RoutePath';
-import { oathAPI } from '../../api/oathApi';
-import { OAUTH_REDIRECT_URI } from '../../constants';
+import { getServiceId } from '../../utils/getServiceId';
 
 const LoginForm = (): ReactElement => {
   const dispatch = useAppDispatch();
@@ -78,12 +77,7 @@ const LoginForm = (): ReactElement => {
   };
 
   const onYandexAuthClick = () => {
-    const redirect = { redirect_uri: OAUTH_REDIRECT_URI };
-    oathAPI.getServiceID(redirect).then(response => {
-      window.location.replace(
-        `https://oauth.yandex.ru/authorize?response_type=code&client_id=${response.service_id}&redirect_uri=${OAUTH_REDIRECT_URI}`
-      );
-    });
+    getServiceId();
   };
 
   return (

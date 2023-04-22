@@ -2,15 +2,11 @@ import AppRouter from './router/AppRouter';
 import { fetchUser } from './store/auth-actions';
 import { useAppDispatch, useAppSelector } from './hooks/store';
 import React, { useEffect, useState } from 'react';
-import {
-  getAuthCheckedStatus,
-  getAuthorizationStatus
-} from './store/selectors';
+import { getAuthCheckedStatus } from './store/selectors';
 import Loader from './components/Loader/Loader';
 import { useHistory } from 'react-router-dom';
-import { OauthRequestData } from './types/api/oathApi';
-import { OAUTH_REDIRECT_URI } from './constants';
-import { oathAPI } from './api/oathApi';
+import { OauthRequestData } from './types/api/oauthAPI';
+import { oauthAPI } from './api/oauthAPI';
 import { RoutePath } from './router/RoutePath';
 import { useSearchParams } from './hooks/useSearchParams';
 
@@ -18,27 +14,23 @@ const App = () => {
   const dispatch = useAppDispatch();
   const [domLoaded, setDomLoaded] = useState(false);
   const isAuthChecked = useAppSelector(getAuthCheckedStatus);
-  const authStatus = useAppSelector(getAuthorizationStatus);
   const history = useHistory();
 
   useEffect(() => {
     setDomLoaded(true);
   }, []);
 
-  useEffect(() => {
-    dispatch(fetchUser());
-  }, []);
-
   const searchParams = useSearchParams();
   const param = searchParams.get('code');
 
   useEffect(() => {
-    if (param && authStatus !== 'AUTH') {
+    if (param) {
+      const redirectUri = import.meta.env.VITE_YANDEX_OAUTH_REDIRECT_URI;
       const data: OauthRequestData = {
         code: param,
-        redirect_uri: OAUTH_REDIRECT_URI
+        redirect_uri: redirectUri
       };
-      oathAPI
+      oauthAPI
         .signIn(data)
         .then(() => dispatch(fetchUser()))
         .then(() => {
@@ -47,6 +39,8 @@ const App = () => {
         .catch((error: string) => {
           console.log(error);
         });
+    } else {
+      dispatch(fetchUser());
     }
   }, []);
 
