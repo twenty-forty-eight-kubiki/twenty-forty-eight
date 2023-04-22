@@ -13,6 +13,7 @@ import TextError from '../../ui/TextError/TextError';
 import './LoginForm.scss';
 import { fetchUser } from '../../store/auth-actions';
 import { RoutePath } from '../../router/RoutePath';
+import { getServiceId } from '../../utils/getServiceId';
 
 const LoginForm = (): ReactElement => {
   const dispatch = useAppDispatch();
@@ -75,20 +76,24 @@ const LoginForm = (): ReactElement => {
     setFormError('');
   };
 
+  const onYandexAuthClick = () => {
+    getServiceId();
+  };
+
   return (
     <div className='login-form'>
       <div className='login-form__inner'>
         <div className='login-form__wrapper'>
           <div>
-            <h1 className='login-form__title'>Log In</h1>
+            <h1 className='login-form__title'>Войти</h1>
 
-            <div className='login-form__text'>Welcome to the 2048 Game!</div>
+            <div className='login-form__text'>Добро пожаловать в 2048!</div>
           </div>
 
           <form onSubmit={onSubmit}>
             <GuiInput
-              label='Login'
-              placeholder='login'
+              label='Логин'
+              placeholder='Введите логин'
               value={login}
               error={errors[LoginFormFields.Login]}
               onChange={onChangeLogin}
@@ -97,8 +102,8 @@ const LoginForm = (): ReactElement => {
             />
 
             <GuiInput
-              label='Password'
-              placeholder='password'
+              label='Пароль'
+              placeholder='Введите пароль'
               value={password}
               type='password'
               error={errors[LoginFormFields.Password]}
@@ -109,13 +114,19 @@ const LoginForm = (): ReactElement => {
 
             <GuiButton
               type='submit'
-              btnText='Log in'
+              btnText='Войти'
               className='login-form__btn'
+            />
+            <GuiButton
+              type='button'
+              btnText='Вход через Яндекс'
+              className='login-form__btn login-form__btn--yandex'
+              onClick={onYandexAuthClick}
             />
             <TextError text={formError} />
             <div className='login-form__info'>
-              Don't have an account?{' '}
-              <GuiLink url='/registration' text='Sign up' />
+              Нет аккаунта?{' '}
+              <GuiLink url='/registration' text='Зарегистрироваться' />
             </div>
           </form>
         </div>

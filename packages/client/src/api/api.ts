@@ -28,21 +28,37 @@ function request<T>(url: string, config: RequestInit = {}): Promise<T> {
 }
 
 export const API = {
-  get: <T>(url: string): Promise<T> =>
-    request(url, {
+  get: <T>(url: string): Promise<T> => {
+    return request(url, {
       method: 'GET',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       }
-    }),
+    });
+  },
+  getServiceId: <T, TResponse>(
+    url: string,
+    queriesData?: string
+  ): Promise<TResponse> => {
+    const urlWithQueries = queriesData ? `${url}?${queriesData}` : url;
+    return request(urlWithQueries, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
+    });
+  },
   post: <TBody, TResponse>(url: string, body?: TBody): Promise<TResponse> =>
     request<TResponse>(url, {
       method: 'POST',
       body: JSON.stringify(body),
       credentials: 'include',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       }
     }),
   put: <TBody, TResponse>(url: string, body?: TBody): Promise<TResponse> =>
