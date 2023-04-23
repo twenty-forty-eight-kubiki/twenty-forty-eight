@@ -1,6 +1,6 @@
 // const URLS = ['./index.html', './src/app.tsx', '/src/main.tsx'];
-const PROD_URLS = ['/assets/index.000cbaf8.css', 'assets/js/index-ce257c2b.js'];
-const CACHE_NAME = '2048-cache-v1';
+const PROD_URLS = ['/assets/index.000cbaf8.css', 'assets/js/index-ce257c2b.js']
+const CACHE_NAME = '2048-cache-v1'
 
 const tryNetwork = (req, timeout) => {
   return new Promise((resolve, reject) => {
@@ -56,7 +56,7 @@ self.addEventListener('fetch', event => {
   console.log('fetch')
   event.respondWith(
     fetch(event.request).catch(() => {
-      return caches.match(event.request);
+      return caches.match(event.request)
     })
     // caches
     //   .open(CACHE_NAME)
