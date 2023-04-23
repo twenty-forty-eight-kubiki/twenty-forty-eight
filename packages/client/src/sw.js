@@ -1,6 +1,6 @@
-// const URLS = ['./index.html', './src/app.tsx', '/src/main.tsx'];
-const PROD_URLS = ['/assets/index.000cbaf8.css', '/assets/js/app-4ff18a92.js'];
-const CACHE_NAME = '2048-cache-v1'
+const PROD_URLS = ['/assets/index.000cbaf8.css', 'assets/js/index-ce257c2b.js'];
+const CACHE_NAME = '2048-cache-v1';
+
 const tryNetwork = (req, timeout) => {
   return new Promise((resolve, reject) => {
     const timeoutId = setTimeout(reject, timeout)
@@ -14,6 +14,7 @@ const tryNetwork = (req, timeout) => {
     }, reject)
   })
 }
+
 const getFromCache = req => {
   console.log('network is off so getting from cache...')
   return caches.open(CACHE_NAME).then(cache => {
@@ -22,7 +23,9 @@ const getFromCache = req => {
     })
   })
 }
+
 self.addEventListener('install', async event => {
+  console.log('install')
   event.waitUntil(
     caches
       .open(CACHE_NAME)
@@ -34,7 +37,9 @@ self.addEventListener('install', async event => {
       })
   )
 })
+
 self.addEventListener('activate', event => {
+  console.log('activate')
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
@@ -45,8 +50,12 @@ self.addEventListener('activate', event => {
     })
   )
 })
+
 self.addEventListener('fetch', event => {
+  console.log('fetch')
   event.respondWith(
-    tryNetwork(event.request, 2000).catch(() => getFromCache(event.request))
+    fetch(event.request).catch(() => {
+      return caches.match(event.request);
+    })
   )
 })

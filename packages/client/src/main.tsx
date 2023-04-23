@@ -9,7 +9,7 @@ import './index.scss'
 const startServiceWorker = () => {
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker
-      .register('../sw.js')
+      .register('sw.js')
       .then(registration => {
         console.log(
           'ServiceWorker registration successful with scope: ',
