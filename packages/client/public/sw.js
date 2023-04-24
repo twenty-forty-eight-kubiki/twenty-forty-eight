@@ -1,5 +1,5 @@
 // const URLS = ['./index.html', './src/app.tsx', '/src/main.tsx'];
-const PROD_URLS = ['/assets/index.000cbaf8.css', 'assets/js/index-ce257c2b.js']
+const PROD_URLS = ['/assets/index.000cbaf8.css', '/assets/index.ce483ee3.js']
 const CACHE_NAME = '2048-cache-v1'
 
 const tryNetwork = (req, timeout) => {
@@ -27,16 +27,16 @@ const getFromCache = req => {
 
 self.addEventListener('install', async event => {
   console.log('install')
-  // event.waitUntil(
-  //   caches
-  //     .open(CACHE_NAME)
-  //     .then(cache => {
-  //       return cache.addAll(PROD_URLS)
-  //     })
-  //     .catch(err => {
-  //       throw err
-  //     })
-  // )
+  event.waitUntil(
+    caches
+      .open(CACHE_NAME)
+      .then(cache => {
+        return cache.addAll(PROD_URLS)
+      })
+      .catch(err => {
+        throw err
+      })
+  )
 })
 
 self.addEventListener('activate', event => {
@@ -58,13 +58,5 @@ self.addEventListener('fetch', event => {
     fetch(event.request).catch(() => {
       return caches.match(event.request)
     })
-    // caches
-    //   .open(CACHE_NAME)
-    //   .then(cache => {
-    //     return cache.addAll(PROD_URLS)
-    //   })
-    //   .catch(err => {
-    //     throw err
-    //   })
   )
 })
