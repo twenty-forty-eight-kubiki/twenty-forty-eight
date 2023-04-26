@@ -8,13 +8,16 @@ const tryNetwork = (req, timeout) => {
       clearTimeout(timeoutId)
       const responseClone = res.clone()
       const url = new URL(req.url)
-      caches.open(CACHE_NAME).then(cache => {
-            return cache.add(url.pathname)
-          }).catch(err => {
-            throw err;
-          })
+      caches
+        .open(CACHE_NAME)
+        .then(cache => {
+          return cache.add(url.pathname)
+        })
+        .catch(err => {
+          throw err
+        })
       resolve(res)
-    }, reject);
+    }, reject)
   })
 }
 
@@ -26,19 +29,6 @@ const getFromCache = req => {
     })
   })
 }
-
-self.addEventListener('install', async event => {
-  // event.waitUntil(
-  //   caches
-  //     .open(CACHE_NAME)
-  //     .then(cache => {
-  //       return cache.addAll(PROD_URLS)
-  //     })
-  //     .catch(err => {
-  //       throw err
-  //     })
-  // )
-})
 
 self.addEventListener('activate', event => {
   event.waitUntil(
@@ -53,5 +43,7 @@ self.addEventListener('activate', event => {
 })
 
 self.addEventListener('fetch', event => {
-  event.respondWith(tryNetwork(event.request, 2000).catch(() => getFromCache(event.request)))
+  event.respondWith(
+    tryNetwork(event.request, 2000).catch(() => getFromCache(event.request))
+  )
 })
