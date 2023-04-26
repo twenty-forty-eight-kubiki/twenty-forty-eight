@@ -1,5 +1,4 @@
-// const URLS = ['./index.html', './src/app.tsx', '/src/main.tsx'];
-const PROD_URLS = ['/assets/index.000cbaf8.css', '/assets/index.ce483ee3.js']
+let PROD_URLS = []
 const CACHE_NAME = '2048-cache-v1'
 
 const tryNetwork = (req, timeout) => {
@@ -8,11 +7,14 @@ const tryNetwork = (req, timeout) => {
     fetch(req).then(res => {
       clearTimeout(timeoutId)
       const responseClone = res.clone()
+      const url = new URL(req.url)
       caches.open(CACHE_NAME).then(cache => {
-        cache.put(req, responseClone)
-      })
+            return cache.add(url.pathname)
+          }).catch(err => {
+            throw err;
+          })
       resolve(res)
-    }, reject)
+    }, reject);
   })
 }
 
@@ -26,21 +28,19 @@ const getFromCache = req => {
 }
 
 self.addEventListener('install', async event => {
-  console.log('install')
-  event.waitUntil(
-    caches
-      .open(CACHE_NAME)
-      .then(cache => {
-        return cache.addAll(PROD_URLS)
-      })
-      .catch(err => {
-        throw err
-      })
-  )
+  // event.waitUntil(
+  //   caches
+  //     .open(CACHE_NAME)
+  //     .then(cache => {
+  //       return cache.addAll(PROD_URLS)
+  //     })
+  //     .catch(err => {
+  //       throw err
+  //     })
+  // )
 })
 
 self.addEventListener('activate', event => {
-  console.log('activate')
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
@@ -53,10 +53,5 @@ self.addEventListener('activate', event => {
 })
 
 self.addEventListener('fetch', event => {
-  console.log('fetch')
-  event.respondWith(
-    fetch(event.request).catch(() => {
-      return caches.match(event.request)
-    })
-  )
+  event.respondWith(tryNetwork(event.request, 2000).catch(() => getFromCache(event.request)))
 })
