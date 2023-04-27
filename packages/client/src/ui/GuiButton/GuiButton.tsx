@@ -1,5 +1,5 @@
-import './GuiButton.scss';
 import React, { FC, memo, ReactElement } from 'react';
+import './GuiButton.scss';
 
 type GuiButtonProps = {
   type?: 'button' | 'submit';
