@@ -1,23 +1,50 @@
-import AppRouter from './router/AppRouter'
-import { fetchUser } from './store/auth-actions'
-import { useAppDispatch, useAppSelector } from './hooks/store'
-import { useEffect } from 'react'
-import { getAuthCheckedStatus } from './store/selectors'
+import AppRouter from './router/AppRouter';
+import { fetchUser } from './store/auth-actions';
+import { useAppDispatch, useAppSelector } from './hooks/store';
+import React, { useEffect, useState } from 'react';
+import { getAuthCheckedStatus } from './store/selectors';
+import Loader from './components/Loader/Loader';
+import { useHistory } from 'react-router-dom';
+import { OauthRequestData } from './types/api/oauthAPI';
+import { oauthAPI } from './api/oauthAPI';
+import { RoutePath } from './router/RoutePath';
+import { useSearchParams } from './hooks/useSearchParams';
 
 const App = () => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
+  const [domLoaded, setDomLoaded] = useState(false);
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
+  const history = useHistory();
 
   useEffect(() => {
-    dispatch(fetchUser())
-  }, [])
+    setDomLoaded(true);
+  }, []);
 
-  const isAuthChecked = useAppSelector(getAuthCheckedStatus)
+  const searchParams = useSearchParams();
+  const param = searchParams.get('code');
 
-  if (!isAuthChecked) {
-    return <p>Loading...</p>
-  }
+  useEffect(() => {
+    if (param) {
+      const redirectUri = import.meta.env.VITE_YANDEX_OAUTH_REDIRECT_URI;
+      const data: OauthRequestData = {
+        code: param,
+        redirect_uri: redirectUri
+      };
+      oauthAPI
+        .signIn(data)
+        .then(() => dispatch(fetchUser()))
+        .then(() => {
+          history.push(RoutePath.User);
+        })
+        .catch((error: string) => {
+          console.log(error);
+        });
+    } else {
+      dispatch(fetchUser());
+    }
+  }, []);
 
-  return <AppRouter />
-}
+  return <>{domLoaded && (isAuthChecked ? <AppRouter /> : <Loader />)}</>;
+};
 
-export default App
+export default App;

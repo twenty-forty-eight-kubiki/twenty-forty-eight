@@ -1,8 +1,46 @@
 .board-page {
   width: 100vw;
-  height: 100vh;
+  min-height: calc(100vh - 64px);
+  height: 100%;
+  padding: 70px 0;
+
   display: flex;
-  justify-content: center;
-  align-items: center;
+
   background-color: #faf8ef;
+
+  .container {
+    min-height: 100%;
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__game {
+    width: calc(80% - 20px);
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__rules {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  &__fullscreen-btn {
+    margin-top: 30px;
+  }
+  &__rules-btn {
+    margin-top: 15px;
+  }
 }

@@ -1,0 +1,27 @@
+@import '/src/assets/scss/variables';
+
+.game-rules-modal {
+  max-width: 600px;
+  width: 100%;
+  padding: 40px 30px 39px;
+
+  &__title {
+    font-size: 24px;
+    line-height: 80%;
+    color: $sandstone;
+
+    margin-bottom: 25px;
+
+    text-align: center;
+  }
+  &__list {
+    margin-left: 15px;
+  }
+
+  &__item {
+    font-size: 14px;
+    line-height: 1.4;
+
+    margin-bottom: 12px;
+  }
+}

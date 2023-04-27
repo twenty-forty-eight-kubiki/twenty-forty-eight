@@ -5,41 +5,41 @@ import {
   useContext,
   useEffect,
   useRef,
-  useState,
-} from 'react'
+  useState
+} from 'react';
 
-const CanvasContext = createContext<CanvasRenderingContext2D | null>(null)
-const FrameContext = createContext(0)
+const CanvasContext = createContext<CanvasRenderingContext2D | null>(null);
+const FrameContext = createContext(0);
 
 export type CanvasProps = {
-  height: number
-  width: number
-  dpr: number
-  children: ReactNode
-}
+  height: number;
+  width: number;
+  dpr: number;
+  children: ReactNode;
+};
 
 export const Canvas: FC<CanvasProps> = ({ height, width, dpr, children }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
-  const actualWidth = width * dpr
-  const actualHeight = height * dpr
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const actualWidth = width * dpr;
+  const actualHeight = height * dpr;
 
   const canvasContext = canvasRef.current
     ? canvasRef?.current.getContext('2d')
-    : null
+    : null;
   if (canvasContext) {
-    canvasContext.scale(dpr, dpr)
+    canvasContext.scale(dpr, dpr);
   }
 
-  const [frameCount, setFrameCount] = useState(0)
+  const [frameCount, setFrameCount] = useState(0);
   useEffect(() => {
     const frameId = requestAnimationFrame(() => {
-      setFrameCount(frameCount + 1)
-    })
+      setFrameCount(frameCount + 1);
+    });
 
     return () => {
-      cancelAnimationFrame(frameId)
-    }
-  }, [frameCount, setFrameCount])
+      cancelAnimationFrame(frameId);
+    };
+  }, [frameCount, setFrameCount]);
 
   return (
     <CanvasContext.Provider value={canvasContext}>
@@ -53,15 +53,15 @@ export const Canvas: FC<CanvasProps> = ({ height, width, dpr, children }) => {
         {children}
       </FrameContext.Provider>
     </CanvasContext.Provider>
-  )
-}
+  );
+};
 
 export const useCanvas = (): CanvasRenderingContext2D | null => {
-  useContext(FrameContext)
-  const renderingContext = useContext(CanvasContext)
-  return renderingContext
-}
+  useContext(FrameContext);
+  const renderingContext = useContext(CanvasContext);
+  return renderingContext;
+};
 
 export const useCanvasUpdate = () => {
-  return useContext(FrameContext)
-}
+  return useContext(FrameContext);
+};

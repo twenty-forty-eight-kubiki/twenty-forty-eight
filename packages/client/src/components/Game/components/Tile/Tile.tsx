@@ -1,13 +1,14 @@
-import React, { FC } from 'react'
-import RoundedRectangle from '../RoundedRectangle/RoundedRectangle'
-import { useGameConfig } from '../../hooks/useGameConfig'
-import Text from '../Text/Text'
+import React, { FC } from 'react';
+import RoundedRectangle from '../RoundedRectangle/RoundedRectangle';
+import Text from '../Text/Text';
+import { useAppSelector } from '../../../../hooks/store';
+import { getTileSize } from '../../../../store/game-selectors';
 
 export type TileProps = {
-  x: number
-  y: number
-  value: number
-}
+  x: number;
+  y: number;
+  value: number;
+};
 
 const colorTile: any = {
   backgroundColor: {
@@ -21,7 +22,7 @@ const colorTile: any = {
     '256': '#edcc61',
     '512': '#edc850',
     '1024': '#edc53f',
-    '2048': '#edc22e',
+    '2048': '#edc22e'
   },
   textColor: {
     '2': '#776e65',
@@ -34,12 +35,12 @@ const colorTile: any = {
     '256': '#f9f6f2',
     '512': '#f9f6f2',
     '1024': '#f9f6f2',
-    '2048': '#f9f6f2',
-  },
-}
+    '2048': '#f9f6f2'
+  }
+};
 
 const Tile: FC<TileProps> = ({ x, y, value }) => {
-  const { tileSize } = useGameConfig()
+  const tileSize = useAppSelector(getTileSize);
 
   return (
     <>
@@ -58,7 +59,7 @@ const Tile: FC<TileProps> = ({ x, y, value }) => {
         color={colorTile.textColor[String(value)]}
       />
     </>
-  )
-}
+  );
+};
 
-export default Tile
+export default Tile;

@@ -1,17 +1,17 @@
-import './GuiInput.scss'
-import React, { FC, FormEvent, ReactElement } from 'react'
+import './GuiInput.scss';
+import React, { FC, FormEvent, ReactElement } from 'react';
 
 type GuiInputProps = {
-  value: string | number
-  label: string
-  placeholder: string
-  type?: string
-  disabled?: boolean
-  error?: string | null
-  onChange: (e: React.FormEvent<HTMLInputElement>) => void
-  onBlur: () => void
-  onFocus: () => void
-}
+  value: string | number;
+  label: string;
+  placeholder: string;
+  type?: string;
+  disabled?: boolean;
+  error?: string | null;
+  onChange: (e: React.FormEvent<HTMLInputElement>) => void;
+  onBlur: () => void;
+  onFocus: () => void;
+};
 
 const GuiInput: FC<GuiInputProps> = ({
   onBlur,
@@ -20,21 +20,21 @@ const GuiInput: FC<GuiInputProps> = ({
   ...props
 }): ReactElement => {
   const getClassName = () => {
-    const classNames = ['gui-input-control']
+    const classNames = ['gui-input-control'];
 
     if (props.disabled) {
-      classNames.push('gui-input-control--disabled')
+      classNames.push('gui-input-control--disabled');
     }
     if (props.error) {
-      classNames.push('gui-input-control--error')
+      classNames.push('gui-input-control--error');
     }
 
-    return classNames.join(' ')
-  }
+    return classNames.join(' ');
+  };
 
   return (
-    <div className="gui-input">
-      <label className="gui-input-label">
+    <div className='gui-input'>
+      <label className='gui-input-label'>
         <span>{props.label}</span>
         <input
           value={props.value}
@@ -49,12 +49,12 @@ const GuiInput: FC<GuiInputProps> = ({
       </label>
 
       {!!props.error && (
-        <div v-if={props.error} className="gui-input-error">
+        <div v-if={props.error} className='gui-input-error'>
           {props.error}
         </div>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default GuiInput
+export default GuiInput;

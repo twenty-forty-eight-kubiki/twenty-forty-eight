@@ -1,94 +1,99 @@
-import { FormEvent, ReactElement, useState } from 'react'
-import { useAppDispatch } from '../../hooks/store'
-import { useHistory } from 'react-router-dom'
+import { FormEvent, ReactElement, useState } from 'react';
+import { useAppDispatch } from '../../hooks/store';
+import { useHistory } from 'react-router-dom';
 
-import { authAPI } from '../../api/authApi'
-import { LoginRequestData } from '../../types/api/authApi'
-import { LoginErrorsObj, LoginFormFields } from '../../types/form'
-import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator'
-import GuiInput from '../../ui/GuiInput/GuiInput'
-import GuiButton from '../../ui/GuiButton/GuiButton'
-import GuiLink from '../../ui/GuiLink/GuiLink'
-import TextError from '../../ui/TextError/TextError'
-import './LoginForm.scss'
-import { fetchUser } from '../../store/auth-actions'
-import { RoutePath } from '../../router/RoutePath'
+import { authAPI } from '../../api/authApi';
+import { LoginRequestData } from '../../types/api/authApi';
+import { LoginErrorsObj, LoginFormFields } from '../../types/form';
+import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator';
+import GuiInput from '../../ui/GuiInput/GuiInput';
+import GuiButton from '../../ui/GuiButton/GuiButton';
+import GuiLink from '../../ui/GuiLink/GuiLink';
+import TextError from '../../ui/TextError/TextError';
+import './LoginForm.scss';
+import { fetchUser } from '../../store/auth-actions';
+import { RoutePath } from '../../router/RoutePath';
+import { getServiceId } from '../../utils/getServiceId';
 
 const LoginForm = (): ReactElement => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-  const [login, setLogin] = useState('')
-  const [password, setPassword] = useState('')
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
   const [errors, setErrors] = useState<LoginErrorsObj>({
     login: null,
-    password: null,
-  })
-  const [formError, setFormError] = useState('')
-  const history = useHistory()
+    password: null
+  });
+  const [formError, setFormError] = useState('');
+  const history = useHistory();
 
   const schema: IValidationSchema = {
     login: {
-      isRequired: { msg: 'Это поле обязательно для заполнения' },
+      isRequired: { msg: 'Это поле обязательно для заполнения' }
     },
     password: {
-      isRequired: { msg: 'Это поле обязательно для заполнения' },
-    },
-  }
+      isRequired: { msg: 'Это поле обязательно для заполнения' }
+    }
+  };
 
-  const easyValidator = new EasyValidator(schema)
+  const easyValidator = new EasyValidator(schema);
 
   const onSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    const errorsObj = easyValidator.validateFields({ login, password })
+    e.preventDefault();
+    const errorsObj = easyValidator.validateFields({ login, password });
 
-    setErrors({ ...errorsObj })
+    setErrors({ ...errorsObj });
 
     if (easyValidator.isValid()) {
       const loginData: LoginRequestData = {
         login: login,
-        password: password,
-      }
+        password: password
+      };
 
       authAPI
         .login(loginData)
         .then(() => dispatch(fetchUser()))
         .then(() => {
-          history.push(RoutePath.User)
+          history.push(RoutePath.User);
         })
         .catch((error: string) => {
-          setFormError(error)
-        })
+          setFormError(error);
+        });
     }
-  }
+  };
 
   const onChangeLogin = (e: FormEvent) => {
-    setLogin((e.target as HTMLInputElement).value)
-  }
+    setLogin((e.target as HTMLInputElement).value);
+  };
 
   const onChangePassword = (e: FormEvent) => {
-    setPassword((e.target as HTMLInputElement).value)
-  }
+    setPassword((e.target as HTMLInputElement).value);
+  };
 
   const resetError = (type: LoginFormFields) => {
-    const errorsObj = { ...errors, [type]: '' } as LoginErrorsObj
-    setErrors(errorsObj)
-    setFormError('')
-  }
+    const errorsObj = { ...errors, [type]: '' } as LoginErrorsObj;
+    setErrors(errorsObj);
+    setFormError('');
+  };
+
+  const onYandexAuthClick = () => {
+    getServiceId();
+  };
 
   return (
-    <div className="login-form">
-      <div className="login-form__inner">
-        <div className="login-form__wrapper">
+    <div className='login-form'>
+      <div className='login-form__inner'>
+        <div className='login-form__wrapper'>
           <div>
-            <h1 className="login-form__title">Log In</h1>
+            <h1 className='login-form__title'>Войти</h1>
 
-            <div className="login-form__text">Welcome to the 2048 Game!</div>
+            <div className='login-form__text'>Добро пожаловать в 2048!</div>
           </div>
 
           <form onSubmit={onSubmit}>
             <GuiInput
-              label="Login"
-              placeholder="login"
+              label='Логин'
+              placeholder='Введите логин'
               value={login}
               error={errors[LoginFormFields.Login]}
               onChange={onChangeLogin}
@@ -97,10 +102,10 @@ const LoginForm = (): ReactElement => {
             />
 
             <GuiInput
-              label="Password"
-              placeholder="password"
+              label='Пароль'
+              placeholder='Введите пароль'
               value={password}
-              type="password"
+              type='password'
               error={errors[LoginFormFields.Password]}
               onChange={onChangePassword}
               onBlur={() => resetError(LoginFormFields.Password)}
@@ -108,20 +113,26 @@ const LoginForm = (): ReactElement => {
             />
 
             <GuiButton
-              type="submit"
-              btnText="Log in"
-              className="login-form__btn"
+              type='submit'
+              btnText='Войти'
+              className='login-form__btn'
+            />
+            <GuiButton
+              type='button'
+              btnText='Вход через Яндекс'
+              className='login-form__btn login-form__btn--yandex'
+              onClick={onYandexAuthClick}
             />
             <TextError text={formError} />
-            <div className="login-form__info">
-              Don't have an account?{' '}
-              <GuiLink url="/registration" text="Sign up" />
+            <div className='login-form__info'>
+              Нет аккаунта?{' '}
+              <GuiLink url='/registration' text='Зарегистрироваться' />
             </div>
           </form>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default LoginForm
+export default LoginForm;

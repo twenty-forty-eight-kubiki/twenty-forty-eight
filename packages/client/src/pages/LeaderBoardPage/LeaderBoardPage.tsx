@@ -1,33 +1,31 @@
-import { useEffect, useState } from 'react'
-import GamerItem from '../../components/GamerItem/GamerItem'
-import { LeaderBoardApi, LeaderResponse } from '../../api/leaderBoardApi'
-import { withLayout } from '../../hocs/withLayout'
-import './LeaderBoardPage.scss'
+import { useEffect, useState } from 'react';
+import GamerItem from '../../components/GamerItem/GamerItem';
+import { withLayout } from '../../hocs/withLayout';
+import './LeaderBoardPage.scss';
+import { useAppDispatch, useAppSelector } from '../../hooks/store';
+import { fetchLeaders } from '../../store/leaderborad-actions';
+import { getLeaders } from '../../store/selectors';
 
 const LeaderBoardPage = () => {
-  const [leaders, setLeaders] = useState<LeaderResponse[]>([])
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    getLeaders()
-  }, [])
-
-  const getLeaders = (): void => {
-    const response: Promise<LeaderResponse[]> = LeaderBoardApi.getAll()
-    response.then(response => {
-      if (Array.isArray(response)) {
-        setLeaders(response)
-      }
-    })
-  }
+    dispatch(fetchLeaders());
+  }, []);
+  const sortedList = useAppSelector(getLeaders);
 
   return (
-    <div className="leader-board-page">
-      {Array.isArray(leaders) &&
-        leaders.map(leader => (
-          <GamerItem profile={leader} key={leader.userId} />
+    <div className='leader-board-page'>
+      {sortedList &&
+        sortedList.map(leader => (
+          <GamerItem
+            name={leader.data.name}
+            score={leader.data.score}
+            key={leader.data.userId}
+          />
         ))}
     </div>
-  )
-}
+  );
+};
 
-export default withLayout(LeaderBoardPage)
+export default withLayout(LeaderBoardPage);

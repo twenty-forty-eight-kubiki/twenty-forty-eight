@@ -27,4 +27,8 @@
   &:active {
     transform: scale(0.95);
   }
+
+  &__icon {
+    object-fit: cover;
+  }
 }

@@ -1,0 +1,42 @@
+@import '/src/assets/scss/variables';
+
+.game-win-modal {
+  max-width: 600px;
+  width: 100%;
+  padding: 50px;
+
+  &__title {
+    font-size: 30px;
+    line-height: 100%;
+    color: $sandstone;
+
+    margin-bottom: 25px;
+
+    text-align: center;
+
+    &-text {
+      display: block;
+    }
+  }
+
+  &__subtitle {
+    text-align: center;
+    font-size: 16px;
+  }
+
+  &__btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    margin: 20px 0 0;
+  }
+
+  &__btn {
+    margin-bottom: 15px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
