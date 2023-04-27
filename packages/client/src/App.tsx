@@ -5,8 +5,8 @@ import React, { useEffect, useState } from 'react';
 import { getAuthCheckedStatus } from './store/selectors';
 import Loader from './components/Loader/Loader';
 import { useHistory } from 'react-router-dom';
-import { OauthRequestData } from './types/api/oauthAPI';
-import { oauthAPI } from './api/oauthAPI';
+import { OauthRequestData } from './types/api/oauthApi';
+import { oauthAPI } from './api/oauthApi';
 import { RoutePath } from './router/RoutePath';
 import { useSearchParams } from './hooks/useSearchParams';
 

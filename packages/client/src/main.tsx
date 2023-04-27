@@ -19,14 +19,14 @@ const startServiceWorker = () => {
         console.log(
           'ServiceWorker registration successful with scope: ',
           registration.scope
-        )
+        );
       })
       .catch((error: string) => {
-        console.log('ServiceWorker registration failed: ', error)
-      })
+        console.log('ServiceWorker registration failed: ', error);
+      });
   }
-}
-startServiceWorker()
+};
+startServiceWorker();
 
 const Application = (
   <Provider store={store}>
