@@ -11,6 +11,23 @@ delete window.__INITIAL_STATE__;
 
 export const store = createStore(initialState);
 
+const startServiceWorker = () => {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+      .register('/sw.js')
+      .then(registration => {
+        console.log(
+          'ServiceWorker registration successful with scope: ',
+          registration.scope
+        );
+      })
+      .catch((error: string) => {
+        console.log('ServiceWorker registration failed: ', error);
+      });
+  }
+};
+startServiceWorker();
+
 const Application = (
   <Provider store={store}>
     <BrowserRouter>
