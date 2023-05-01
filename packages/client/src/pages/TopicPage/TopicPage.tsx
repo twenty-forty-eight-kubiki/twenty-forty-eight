@@ -40,8 +40,8 @@ const TopicPage = () => {
   const userData = useAppSelector(getUserData);
 
   useEffect(() => {
-    topicFetch().then();
-    commentsFetch().then();
+    topicFetch();
+    commentsFetch();
     setDomLoaded(true);
   }, []);
 
