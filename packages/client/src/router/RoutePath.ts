@@ -6,7 +6,8 @@ export enum RoutePath {
   Forum = '/forum',
   Leaders = '/leaders',
   Settings = '/settings',
-  User = '/user'
+  User = '/user',
+  Post = '/posts/:postId'
 }
 
 export const HEADER_PATHS: RoutePath[] = [

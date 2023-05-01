@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import ForumTopic from '../../components/ForumTopic/ForumTopic';
 import GuiButton from '../../ui/GuiButton/GuiButton';
 import ModalCreateForumTopic from '../../components/ModalCreateForumTopic/ModalCreateForumTopic';
@@ -17,6 +18,7 @@ const ForumPage = () => {
     title: '',
     body: ''
   };
+  const router = useHistory();
   const [topics, setTopics] = useState<CreateTopicProps[]>([]);
   const [isCreateTopicModalOpened, setIsCreateTopicModalOpened] =
     useState<boolean>(false);
@@ -52,7 +54,13 @@ const ForumPage = () => {
       <h2>Forum</h2>
       {topics.map(item => {
         return (
-          <ForumTopic header={item.title} theme={item.body} key={item.id} />
+          <ForumTopic
+            header={item.title}
+            theme={item.body}
+            key={item.id}
+            postId={item.id}
+            onClick={() => router.push(`/posts/${item.id}`)}
+          />
         );
       })}
       <div className='forum-page__button'>

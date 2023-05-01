@@ -3,9 +3,8 @@ import Icon from '../../ui/Icon/Icon';
 import './Topic.scss';
 
 interface TopicProps {
-  user_name: string;
-  date: string;
-  id: number;
+  userId: number | null;
+  id: number | null;
   title: string;
   body: string;
 }
@@ -16,10 +15,6 @@ const Topic = (props: { topic: TopicProps }) => {
       <div className='topic__header'>
         <Icon img='' />
         <div className='topic__info'>
-          <div>
-            <span className='user-name'>{props.topic.user_name}</span>, &nbsp;
-            <span className='topic__date'>{props.topic.date}</span>
-          </div>
           <p className='topic__theme'>{props.topic.title}</p>
         </div>
       </div>

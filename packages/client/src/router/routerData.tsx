@@ -7,6 +7,7 @@ import LeaderBoardPage from '../pages/LeaderBoardPage/LeaderBoardPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import ProfileSettings from '../pages/ProfileSettings/ProfileSettings';
 import GamePage from '../pages/GamePage/GamePage';
+import TopicPage from '../pages/TopicPage/TopicPage';
 
 export interface IRoute {
   id: number;
@@ -67,6 +68,13 @@ export const routes: Array<IRoute> = [
     path: RoutePath.User,
     exact: true,
     component: ProfilePage,
+    private: true
+  },
+  {
+    id: 8,
+    path: RoutePath.Post,
+    exact: true,
+    component: TopicPage,
     private: true
   }
 ];
