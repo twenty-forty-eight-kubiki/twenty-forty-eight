@@ -35,7 +35,7 @@ const GuiInput: FC<GuiInputProps> = ({
   return (
     <div className='gui-input'>
       <label className='gui-input-label'>
-        <span>{props.label}</span>
+        <span className='gui-input-label__title'>{props.label}</span>
         <input
           value={props.value}
           type={props.type}
