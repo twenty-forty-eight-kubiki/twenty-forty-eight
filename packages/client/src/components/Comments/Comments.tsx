@@ -4,7 +4,7 @@ import './Comments.scss';
 
 interface CommentsProps {
   postId: number | null;
-  id: number | null;
+  userId: number | null;
   name: string;
   email: string;
   body: string;
@@ -16,7 +16,7 @@ const Comments = (props: { comments: CommentsProps[] }) => {
       <h4>Comments</h4>
       {props.comments.map(comment => {
         return (
-          <div style={{ marginBottom: 30 }} key={comment.id}>
+          <div style={{ marginBottom: 30 }} key={comment.userId}>
             <div className='comments__header'>
               <Icon img='' />
               <div className='comments__info'>
