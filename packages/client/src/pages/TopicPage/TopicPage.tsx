@@ -65,16 +65,14 @@ const TopicPage = () => {
 
     const commentSend = () => {
         if (commentText.trim() !== '') {
-            setComments([
-                ...comments,
-                {
-                    body: (commentText as string),
-                    email: (userData!.email as string),
-                    id: Date.now(),
-                    postId: (userData!.id as number),
-                    name: (userData!.login as string)
-                }
-            ]);
+            const comment: CommentsData = {
+                body: commentText,
+                email: userData!.email,
+                id: Date.now(),
+                postId: userData!.id,
+                name: userData!.login
+            }
+            setComments([...comments, comment]);
             setCommentText('');
         }
     };
