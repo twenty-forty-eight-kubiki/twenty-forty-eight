@@ -66,12 +66,12 @@ const TopicPage = () => {
   const commentSend = () => {
     if (commentText.trim() !== '') {
       const comment = {
-        body: commentText,
-        email: userData!.email,
-        id: Date.now(),
-        postId: userData!.id,
-        name: userData!.login
-      } as CommentsData ?? {};
+          body: commentText || '',
+          email: userData!.email || '',
+          id: userData!.id,
+          postId: Date.now(),
+          name: userData!.login || ''
+        } as CommentsData;
       setComments([...comments, comment]);
       setCommentText('');
     }
