@@ -18,12 +18,19 @@
       font-weight: bold;
     }
   }
+
   &__date {
     font-size: 12px;
   }
 
+  &__info {
+    display: grid;
+  }
+
   &__theme {
     font-size: 18px;
+    margin: auto 0;
+    font-weight: 600;
   }
 
   .icon {
