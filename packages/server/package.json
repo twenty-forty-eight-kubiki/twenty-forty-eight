@@ -1,16 +1,18 @@
 {
   "name": "server",
   "version": "1.0.0",
+  "type": "module",
   "description": "",
   "scripts": {
     "build": "rimraf dist && tsc --p ./tsconfig.prod.json",
     "preview": "npm run build && node ./dist/index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.ts",
+    "dev": "cross-env NODE_ENV=development nodemon -x ts-node --esm -r dotenv/config src/index.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
     "test": "jest ."
   },
   "dependencies": {
+    "class-validator": "0.14.0",
     "cors": "2.8.5",
     "dotenv": "16.0.2",
     "eslint-config-prettier": "8.5.0",
@@ -19,8 +21,8 @@
     "jsesc": "3.0.2",
     "pg": "8.10.0",
     "pg-hstore": "2.3.4",
-    "reflect-metadata": "0.1.13",
     "prettier": "2.7.1",
+    "reflect-metadata": "0.1.13",
     "sequelize": "6.31.0",
     "sequelize-typescript": "2.1.5"
   },
