@@ -37,11 +37,8 @@ export const gameSlice = createSlice({
     },
     resetBoardState: state => {
       if (state.board) {
-        const startBoard = initBoard(
-          generateBoard(state.gameConfig.countTiles)
-        );
-        const resetedBoard = resetBoard(startBoard);
-        state.board = initBoard(resetedBoard);
+        const startBoard = generateBoard(state.gameConfig.countTiles);
+        state.board = initBoard(startBoard);
         state.currentScore = 0;
         state.isFail = false;
         state.is2048 = false;
