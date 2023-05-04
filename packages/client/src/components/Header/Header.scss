@@ -3,7 +3,7 @@
 .header {
   height: 64px;
   width: 100%;
-  background-color: $linen;
+  background-color: var(--bg-color-primary);
 
   &__inner {
     width: 100%;
@@ -20,18 +20,18 @@
     padding: 6px;
     margin-right: 18px;
     text-decoration: none;
-    color: #000;
+    color: var(--text-color-primary);
 
     &:nth-of-type(4) {
       margin-left: auto;
     }
 
     &--button {
-      color: $white;
-      background-color: $persian-red;
-      border-radius: $border-radius-normal;
       padding-left: 10px;
       padding-right: 10px;
+
+      border-radius: $border-radius-normal;
+      background-color: var(--caution-color);
     }
   }
 

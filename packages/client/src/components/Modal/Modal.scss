@@ -51,7 +51,7 @@
   &__content {
     position: relative;
 
-    background-color: $white;
+    background-color: var(--bg-color-primary);
 
     box-shadow: 0 0 6px rgba(0, 0, 0, 0.14);
     border-radius: 12px;

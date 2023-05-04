@@ -15,8 +15,13 @@ $sandy-brown: #f4ab56;
 $cornflower-blue: #6a7ee4;
 $torea-bay: #092097;
 $persian-red: #d42929;
+$maroon: #800000;
+$pompadour: #660066;
+$finn: #5a305a;
+$matterhorn: #4b344b;
 $rangoon-green: #0f0f0c;
 $black: #000000;
+$deep-cove: #0f0f0ced;
 $geebung: #d7831f;
 $bizarre: #eee4da;
 $malta: #bbada0;
@@ -28,6 +33,54 @@ $golden-dream: #edc22e;
 $bittersweet: #f67c5f;
 
 // Fonts
+
+html[data-theme='light'] {
+  --text-color-primary: #000000;
+  --text-color-secondary: #0f0f0ced;
+  --text-color-custom: #0f0f0c;
+
+  --bg-color-primary: #f8efde;
+  --bg-color-main: #faf8ef;
+  --bg-color-secondary: #f8f6f6;
+  --bg-color-magic: #f8dede80;
+  --bg-color-custom: #eee4da;
+  --bg-color-custom-hover: #f8f6f6;
+
+  --border-color-primary: #d6d4d0;
+
+  --bg-color-button: #f4ab56;
+  --box-shadow-color: #000012;
+  --bg-color-button-hover: #d7831f;
+  --caret-color: #0f0f0c;
+
+  --place-holder-color: #0f0f0c80;
+  --caution-color: #d42929;
+  --disabled-color: #d9d9d9;
+}
+
+html[data-theme='dark'] {
+  --text-color-primary: #f8f6f6;
+  --text-color-secondary: #eee4da;
+  --text-color-custom: #faf8ef;
+
+  --bg-color-primary: #0f0f0c;
+  --bg-color-main: #2d1f42;
+  --bg-color-secondary: #4b344b;
+  --bg-color-magic: #660066;
+  --bg-color-custom: #f8dede80;
+  --bg-color-custom-hover: #5a305a;
+
+  --border-color-primary: #f8f6f6;
+
+  --bg-color-button: #090a4e;
+  --bg-color-button-hover: #092097;
+  --box-shadow-color: #0f0f0c;
+  --caret-color: #ffffff;
+
+  --place-holder-color: #bbada0;
+  --caution-color: #800000;
+  --disabled-color: #5a305a;
+}
 
 $font-path: '../src/assets/fonts';
 $font-family-default: 'Helvetica', sans-serif;

@@ -5,8 +5,8 @@
   height: 50px;
   border-radius: 10px;
   overflow: hidden;
-  border: 1px solid $timberwolf;
-  background-color: $hint-of-red;
+  border: 1px solid var(--border-color-primary);
+  background-color: var(--bg-color-secondary);
 
   &__img {
     width: auto;
