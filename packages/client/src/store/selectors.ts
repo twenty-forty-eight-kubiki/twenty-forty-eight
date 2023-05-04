@@ -13,6 +13,8 @@ const getUserState = (state: State) => state.auth.data;
 export const getUserAvatar = (state: State) => state.auth.data?.avatar;
 
 const getLeadersState = (state: State) => state.leaderboard.data;
+export const getGameTileSizeState = (state: State) =>
+  state.game.gameConfig.countTiles;
 
 export const getLeaders = createSelector(getLeadersState, leaders => leaders);
 export const getUserData = createSelector(getUserState, users => users);

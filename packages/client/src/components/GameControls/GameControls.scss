@@ -17,6 +17,7 @@
 
   &__controls {
     display: flex;
+    align-items: center;
     margin-right: -10px;
   }
 
@@ -70,5 +71,31 @@
     color: $white;
     font-size: 20px;
     line-height: 90%;
+  }
+
+  &__select-wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 12px;
+  }
+
+  &__select-label {
+    margin-bottom: 4px;
+    color: $sandstone;
+    font-size: 12px;
+  }
+
+  &__select {
+    outline: none;
+    width: 60px;
+
+    background-color: transparent;
+    height: 25px;
+    border-color: $bizarre;
+    color: $sandstone;
+    font-size: 16px;
+    text-align: center;
   }
 }

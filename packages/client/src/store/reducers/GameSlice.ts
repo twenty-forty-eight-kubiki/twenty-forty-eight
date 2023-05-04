@@ -37,8 +37,8 @@ export const gameSlice = createSlice({
     },
     resetBoardState: state => {
       if (state.board) {
-        const resetedBoard = resetBoard(state.board);
-        state.board = initBoard(resetedBoard);
+        const startBoard = generateBoard(state.gameConfig.countTiles);
+        state.board = initBoard(startBoard);
         state.currentScore = 0;
         state.isFail = false;
         state.is2048 = false;
@@ -63,6 +63,9 @@ export const gameSlice = createSlice({
     },
     reach2048Points: state => {
       state.is2048 = true;
+    },
+    changeFieldSize: (state, action) => {
+      state.gameConfig.countTiles = action.payload.value;
     }
   }
 });
@@ -72,5 +75,6 @@ export const {
   createBoard,
   moveBoard,
   failGame,
-  reach2048Points
+  reach2048Points,
+  changeFieldSize
 } = gameSlice.actions;
