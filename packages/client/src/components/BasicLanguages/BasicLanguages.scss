@@ -1,0 +1,23 @@
+@import '/src/assets/scss/variables';
+
+.basic-languages {
+  font-size: 18px;
+
+  display: flex;
+  align-items: center;
+
+  &__language {
+    cursor: pointer;
+    user-select: none;
+
+    &:not(:last-child) {
+      margin-right: 8px;
+    }
+
+    &--active {
+      font-weight: $font-weight-semi-bold;
+
+      color: $flamingo;
+    }
+  }
+}
