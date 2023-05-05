@@ -1,13 +1,16 @@
 {
   "compilerOptions": {
     "composite": true,
-    "target": "es2019",
-    "module": "commonjs",
+    "target": "ESNext",
+    "module": "ESNext",
+    "strictPropertyInitialization": false,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "removeComments": true,
     "strict": true,
     "noImplicitAny": true,
@@ -17,8 +20,7 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "forceConsistentCasingInFileNames": true,
-    "importsNotUsedAsValues": "error",
-    "lib": ["DOM", "es2019", "esnext.asynciterable"],
+    "lib": ["DOM", "ESNext"],
     "types": ["node", "jest"],
     "baseUrl": ".",
     "paths": {

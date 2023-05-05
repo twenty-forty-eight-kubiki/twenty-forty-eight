@@ -1,0 +1,67 @@
+@import '/src/assets/scss/variables';
+
+.basic-theme-modes {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+
+  width: 200px;
+  padding: 4px;
+
+  border-radius: 12px;
+  background-color: var(--bg-color-custom);
+
+  &.light .basic-theme-modes__switch-box {
+    left: 4px;
+  }
+
+  &.dark .basic-theme-modes__switch-box {
+    left: 100px;
+  }
+
+  &__switch-wrapper {
+    z-index: 2;
+
+    flex: 1;
+
+    cursor: pointer;
+
+    &--active {
+      & .basic-theme-modes__switch-item {
+        color: $malta;
+      }
+    }
+  }
+
+  &__switch-item {
+    font-size: 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 0;
+
+    border-radius: 12px;
+    color: var(--text-color-custom);
+    user-select: none;
+
+    &-icon {
+      margin-right: 10px;
+    }
+  }
+
+  &__switch-box {
+    position: absolute;
+    top: 4px;
+
+    height: 40px;
+    width: 96px;
+
+    background-color: var(--bg-color-secondary);
+    border-radius: 8px;
+
+    transition: all 300ms ease-in-out;
+  }
+}

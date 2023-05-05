@@ -6,7 +6,7 @@ const ProfileSettings = () => {
   return (
     <div className='profile-page'>
       <div className='container'>
-        <div className='profile-page__wrapper'>
+        <div className='profile-page__wrapper profile-page__wrapper--pt'>
           <ProfileForm />
         </div>
       </div>

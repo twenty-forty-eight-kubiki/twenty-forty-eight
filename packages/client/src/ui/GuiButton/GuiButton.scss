@@ -1,7 +1,7 @@
 @import '../../assets/scss/variables';
 
 .gui-button {
-  background-color: $sandy-brown;
+  background-color: var(--bg-color-button);
   max-width: 220px;
   min-width: 100px;
   width: 100%;
@@ -21,7 +21,7 @@
 
   &:hover,
   &:focus {
-    background-color: $geebung;
+    background-color: var(--bg-color-button-hover);
   }
 
   &:active {

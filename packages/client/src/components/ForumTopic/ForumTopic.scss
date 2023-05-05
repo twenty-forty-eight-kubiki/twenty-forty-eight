@@ -1,7 +1,7 @@
 @import '../../assets/scss/variables';
 
 .forum-topic {
-  background-color: $white-linen;
+  background-color: var(--bg-color-custom);
   padding: 20px;
   border-bottom: 1px solid $linen;
   box-shadow: 2px 0 2px 2px $linen;
@@ -9,16 +9,15 @@
   transition: background-color 0.4s;
 
   &:hover {
-    background-color: $hint-of-red;
+    background-color: var(--bg-color-custom-hover);
   }
 
   &__header {
     font-size: 18px;
-    color: $black;
   }
 
   &__theme {
     font-size: 16px;
-    color: $rangoon-green;
+    color: var(--text-color-custom);
   }
 }

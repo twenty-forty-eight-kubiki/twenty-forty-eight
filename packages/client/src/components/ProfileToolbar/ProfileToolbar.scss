@@ -1,0 +1,13 @@
+@import '/src/assets/scss/variables';
+
+.profile-page-toolbar {
+  z-index: 1;
+
+  height: 61px;
+  padding-right: 40px;
+  padding-left: 40px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
