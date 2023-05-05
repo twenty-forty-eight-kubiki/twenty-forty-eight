@@ -17,16 +17,16 @@ const BasicThemeModes = () => {
     }
   ];
 
-  const [checked, setChecked] = useState('light');
+  const [themeMode, setThemeMode] = useState('light');
 
   const toggleTab = (code: string): void => {
-    if (code !== checked) {
-      setChecked(code);
+    if (code !== themeMode) {
+      setThemeMode(code);
     }
   };
 
   return (
-    <div className={`basic-theme-modes ${checked}`}>
+    <div className={`basic-theme-modes ${themeMode}`}>
       <span className='basic-theme-modes__switch-box'></span>
 
       {modes.map((item, index) => {
