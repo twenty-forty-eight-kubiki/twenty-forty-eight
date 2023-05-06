@@ -3,7 +3,7 @@
 .registration-form {
   max-width: 500px;
   width: 100%;
-  background: $linen;
+  background: var(--bg-color-primary);
   border-radius: $border-radius-large;
 
   &__inner {
