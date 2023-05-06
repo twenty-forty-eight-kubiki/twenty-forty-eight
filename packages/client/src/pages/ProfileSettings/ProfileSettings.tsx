@@ -1,12 +1,15 @@
 import '../ProfilePage/ProfilePage.scss';
-import { withLayout } from '../../hocs/withLayout';
 import ProfileForm from '../../components/ProfileForm/ProfileForm';
+import ProfileToolbar from '../../components/ProfileToolbar/ProfileToolbar';
+import { withLayout } from '../../hocs/withLayout';
 
 const ProfileSettings = () => {
   return (
     <div className='profile-page'>
       <div className='container'>
-        <div className='profile-page__wrapper profile-page__wrapper--pt'>
+        <div className='profile-page__wrapper'>
+          <ProfileToolbar />
+
           <ProfileForm />
         </div>
       </div>

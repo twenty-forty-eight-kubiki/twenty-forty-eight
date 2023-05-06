@@ -2,8 +2,9 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import ReactDOM from 'react-dom/client';
-import App from './App';
+import { ThemeProvider, Theme } from './hooks/useTheme';
 import { createStore } from './store/store';
+import App from './App';
 import './index.scss';
 
 const initialState = window.__INITIAL_STATE__;
@@ -31,7 +32,9 @@ startServiceWorker();
 const Application = (
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
     </BrowserRouter>
   </Provider>
 );
