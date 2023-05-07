@@ -1,5 +1,5 @@
 import { BASE_URL } from '../constants';
-import { FileRequestData } from '../types/api/profieApi';
+import { FileRequestData } from '../types/api/profie';
 function request<T>(url: string, config: RequestInit = {}): Promise<T> {
   return fetch(`${BASE_URL}/` + url, config)
     .then(response => {

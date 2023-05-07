@@ -10,8 +10,8 @@ import { getUserData } from '../../store/selectors';
 import {
   PasswordRequestData,
   ProfileRequestData
-} from '../../types/api/profieApi';
-import { profileAPI } from '../../api/profileApi';
+} from '../../types/api/profie';
+import { profileAPI } from '../../api/profile';
 import { updateUserData } from '../../store/reducers/AuthSlice';
 import { getAvatar } from '../../helpers/getAvatar';
 import TextError from '../../ui/TextError/TextError';

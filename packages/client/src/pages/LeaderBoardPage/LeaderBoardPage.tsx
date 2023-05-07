@@ -21,7 +21,7 @@ const LeaderBoardPage = () => {
           <GamerItem
             name={leader.data.name}
             score={leader.data.score}
-            key={leader.data.userId}
+            key={leader.data.id}
           />
         ))}
     </div>

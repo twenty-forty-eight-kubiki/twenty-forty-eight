@@ -1,5 +1,6 @@
 import Board from '../../components/Game/components/Board/Board';
 import { withLayout } from '../../hocs/withLayout';
+import { LeaderBoardApi } from '../../api/leaderboard';
 import './GamePage.scss';
 import GuiButton from '../../ui/GuiButton/GuiButton';
 import { Fullscreen } from '../../helpers/fullscreen';
@@ -18,8 +19,10 @@ import {
 import {
   getBoard,
   getIsGameFail,
-  getIsGame2048
+  getIsGame2048,
+  getBoardCurrentScore
 } from '../../store/game-selectors';
+import { getUserData } from '../../store/selectors';
 import { checkBoardStatus } from '../../helpers/board';
 import { GameStates } from '../../constants/gameStates';
 import { GameWinModal } from '../../components/GameWinModal/GameWinModal';
@@ -35,6 +38,8 @@ const GamePage = () => {
   const board = useAppSelector(getBoard);
   const isFail = useAppSelector(getIsGameFail);
   const is2048 = useAppSelector(getIsGame2048);
+  const userData = useAppSelector(getUserData);
+  const currentScore = useAppSelector(getBoardCurrentScore);
   const [isGameOverModal, setGameOverModal] = useState(isFail);
   const [is2048Modal, set2048Modal] = useState(false);
 
@@ -45,6 +50,15 @@ const GamePage = () => {
 
     if (checkBoardStatus(board) === GameStates.Lose) {
       dispatch(failGame());
+
+      LeaderBoardApi.addUser({
+        id: userData?.id,
+        login: userData?.login,
+        score: currentScore,
+        avatar: userData?.avatar,
+        name: userData?.first_name,
+        surname: userData?.second_name
+      });
     }
 
     if (checkBoardStatus(board) === GameStates.Win && !is2048) {

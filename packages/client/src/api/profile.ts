@@ -3,8 +3,8 @@ import {
   ProfileRequestData,
   PasswordRequestData,
   FileRequestData
-} from '../types/api/profieApi';
-import { UserInfoResponse } from '../types/api/authApi';
+} from '../types/api/profie';
+import { UserInfoResponse } from '../types/api/auth';
 
 export const profileAPI = {
   async profile(userData: ProfileRequestData): Promise<UserInfoResponse> {
