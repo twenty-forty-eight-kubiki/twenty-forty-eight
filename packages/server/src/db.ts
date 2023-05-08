@@ -1,6 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
-import { Theme } from './models/theme.model.js';
-import { User } from './models/user.model.js';
+import { Theme, User, Comment, Topic } from './models/index.js';
 
 const {
   POSTGRES_DB,
@@ -18,7 +17,7 @@ const sequelize = new Sequelize({
   port: Number(POSTGRES_PORT),
   username: POSTGRES_USER,
   password: POSTGRES_PASSWORD,
-  models: [User, Theme]
+  models: [User, Theme, Topic, Comment]
 });
 
 export async function dbConnect() {

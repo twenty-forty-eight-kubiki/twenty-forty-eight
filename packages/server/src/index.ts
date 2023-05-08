@@ -6,6 +6,7 @@ import cors from 'cors';
 import jsesc from 'jsesc';
 import { dbConnect } from './db.js';
 import { router } from './router.js';
+import swaggerDocs from './utils/swagger.js';
 
 dotenv.config();
 
@@ -115,6 +116,8 @@ async function startServer() {
       next(e);
     }
   });
+
+  swaggerDocs(app, port);
 
   app.listen(port, () => console.log(`Server is listening on port: ${port}`));
 }

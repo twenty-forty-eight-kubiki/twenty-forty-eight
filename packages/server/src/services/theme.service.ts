@@ -1,6 +1,6 @@
 import { Theme } from '../models/theme.model.js';
 import { UserService } from '../services/user.service.js';
-import type { UpdateUserThemeDto } from '../dto/update-user-theme.dto.js';
+import type { UpdateUserThemeDto } from '../dto/theme/update-user-theme.dto.js';
 
 export class ThemeService {
   static async updateUserTheme(dto: UpdateUserThemeDto) {
@@ -8,7 +8,10 @@ export class ThemeService {
     const user = await UserService.getUserById(dto.id);
 
     if (theme && user) {
-      await user.update({ themeId: theme.id }, { where: { id: user.id } });
+      await user.update(
+        { foreign_theme_id: theme.id },
+        { where: { id: user.id } }
+      );
       return theme.name;
     }
 
