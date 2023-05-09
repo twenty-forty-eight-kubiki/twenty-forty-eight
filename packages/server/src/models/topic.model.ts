@@ -11,7 +11,7 @@ import { User } from './user.model.js';
 import { Comment } from './comment.model.js';
 
 @Table({ tableName: 'topic', timestamps: false })
-export class Topic extends Model<Topic> {
+export class Topic extends Model {
   @Column({
     type: DataType.INTEGER,
     unique: true,
