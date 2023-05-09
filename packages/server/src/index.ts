@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import jsesc from 'jsesc';
 import { dbConnect } from './db.js';
-import { router } from './router.js';
+import { router } from './routes/router.js';
 import swaggerDocs from './utils/swagger.js';
 
 dotenv.config();

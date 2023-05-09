@@ -23,7 +23,7 @@ export class CommentService {
     });
   }
 
-  static async deleteCommentDto(dto: DeleteCommentDto) {
+  static async deleteComment(dto: DeleteCommentDto) {
     const deleteThemesCount = await Comment.destroy({
       where: { comment_id: dto.comment_id }
     });

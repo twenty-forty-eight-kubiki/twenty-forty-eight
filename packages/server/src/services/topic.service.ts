@@ -19,7 +19,7 @@ export class TopicService {
     });
   }
 
-  static async DeleteTopicDto(dto: DeleteTopicDto) {
+  static async deleteTopic(dto: DeleteTopicDto) {
     const deleteThemesCount = await Topic.destroy({
       where: { topic_id: dto.topic_id }
     });
