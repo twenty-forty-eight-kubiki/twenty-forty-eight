@@ -28,7 +28,7 @@ export class Topic extends Model {
 
   @ForeignKey(() => User)
   @Column({ type: DataType.INTEGER })
-  author_id: number;
+  foeign_author_id: number;
 
   @BelongsTo(() => User)
   author: ReturnType<() => User>;

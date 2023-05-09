@@ -1,7 +1,24 @@
 import { BASE_URL } from '../constants';
-import { FileRequestData } from '../types/api/profieApi';
-function request<T>(url: string, config: RequestInit = {}): Promise<T> {
-  return fetch(`${BASE_URL}/` + url, config)
+import { FileRequestData } from '../types/api/profie';
+
+new URLSearchParams();
+
+interface RequestParams {
+  params?: Record<string, string>;
+}
+
+type RequestOptions = RequestInit & RequestParams;
+
+function request<T>(url: string, config: RequestOptions = {}): Promise<T> {
+  const URL = `${BASE_URL}/${url}`;
+  let params;
+
+  if (config.params) {
+    params = new URLSearchParams(config.params).toString();
+    URL + `?${params}`;
+  }
+
+  return fetch(URL, config)
     .then(response => {
       if (!response.ok) {
         return response.json().then(data => {
@@ -28,29 +45,20 @@ function request<T>(url: string, config: RequestInit = {}): Promise<T> {
 }
 
 export const API = {
-  get: <T>(url: string): Promise<T> => {
+  get: <TResponse>(
+    url: string,
+    params?: Record<string, string>
+  ): Promise<TResponse> => {
     return request(url, {
       method: 'GET',
+      params,
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
       }
     });
   },
-  getServiceId: <T, TResponse>(
-    url: string,
-    queriesData?: string
-  ): Promise<TResponse> => {
-    const urlWithQueries = queriesData ? `${url}?${queriesData}` : url;
-    return request(urlWithQueries, {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      }
-    });
-  },
+
   post: <TBody, TResponse>(url: string, body?: TBody): Promise<TResponse> =>
     request<TResponse>(url, {
       method: 'POST',
@@ -61,6 +69,7 @@ export const API = {
         'Access-Control-Allow-Origin': '*'
       }
     }),
+
   put: <TBody, TResponse>(url: string, body?: TBody): Promise<TResponse> =>
     request<TResponse>(url, {
       method: 'PUT',
@@ -70,6 +79,17 @@ export const API = {
         'Content-Type': 'application/json'
       }
     }),
+
+  delete: <TBody, TResponse>(url: string, body?: TBody): Promise<TResponse> =>
+    request<TResponse>(url, {
+      method: 'DELTE',
+      body: JSON.stringify(body),
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }),
+
   putFile: <TResponse>(
     url: string,
     data: FileRequestData
@@ -82,6 +102,21 @@ export const API = {
       credentials: 'include',
       headers: {
         accept: 'application/json'
+      }
+    });
+  },
+
+  getServiceId: <T, TResponse>(
+    url: string,
+    queriesData?: string
+  ): Promise<TResponse> => {
+    const urlWithQueries = queriesData ? `${url}?${queriesData}` : url;
+    return request(urlWithQueries, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
       }
     });
   }

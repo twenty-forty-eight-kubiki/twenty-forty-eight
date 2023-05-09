@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { UserInfoResponse } from '../types/api/authApi';
-import { authAPI } from '../api/authApi';
+import { UserInfoResponse } from '../types/api/auth';
+import { authAPI } from '../api/auth';
 import { isAPIError } from '../utils/isAPIError';
 
 export const fetchUser = createAsyncThunk<UserInfoResponse, undefined>(

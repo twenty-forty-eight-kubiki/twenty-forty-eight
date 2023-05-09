@@ -5,15 +5,17 @@ import { Topic } from '../models/topic.model.js';
 
 export class TopicService {
   static async getTopics(dto: GetTopicsDto) {
-    return await Topic.findAndCountAll({
+    const { count, rows } = await Topic.findAndCountAll({
       limit: dto.limit,
       offset: dto.offset
     });
+
+    return { total: count, items: rows };
   }
 
   static async createTopic(dto: CreateTopicDto) {
     return await Topic.create({
-      author_id: dto.user_id,
+      foreign_author_id: dto.user_id,
       title: dto.title,
       description: dto.description
     });

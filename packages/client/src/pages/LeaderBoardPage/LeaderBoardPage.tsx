@@ -3,7 +3,7 @@ import GamerItem from '../../components/GamerItem/GamerItem';
 import { withLayout } from '../../hocs/withLayout';
 import './LeaderBoardPage.scss';
 import { useAppDispatch, useAppSelector } from '../../hooks/store';
-import { fetchLeaders } from '../../store/leaderborad-actions';
+import { fetchLeaders } from '../../store/leaderboard-actions';
 import { getLeaders } from '../../store/selectors';
 
 const LeaderBoardPage = () => {

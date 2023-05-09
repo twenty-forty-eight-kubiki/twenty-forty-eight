@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { LeaderBoardState } from '../store.types';
-import { LeaderResponse } from '../../types/api/leaderbordApi';
-import { fetchLeaders } from '../leaderborad-actions';
+import { LeaderResponse } from '../../types/api/leaderbord';
+import { fetchLeaders } from '../leaderboard-actions';
 
 const initialState: LeaderBoardState<LeaderResponse> = {
   error: null,

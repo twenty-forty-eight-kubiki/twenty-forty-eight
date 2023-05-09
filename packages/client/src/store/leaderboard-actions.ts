@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { isAPIError } from '../utils/isAPIError';
-import { LeaderResponse } from '../types/api/leaderbordApi';
-import { LeaderBoardApi } from '../api/leaderBoardApi';
+import { LeaderResponse } from '../types/api/leaderbord';
+import { LeaderBoardApi } from '../api/leaderboard';
 import { leaderBoardData } from '../constants/leaderboard';
 
 export const fetchLeaders = createAsyncThunk<LeaderResponse, undefined>(

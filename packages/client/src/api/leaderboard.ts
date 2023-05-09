@@ -2,7 +2,7 @@ import {
   LeaderResponse,
   LeaderRequest,
   AddLeaderRequest
-} from '../types/api/leaderbordApi';
+} from '../types/api/leaderbord';
 import { API } from './api';
 
 export const LeaderBoardApi = {
@@ -12,6 +12,7 @@ export const LeaderBoardApi = {
       data
     );
   },
+
   async addUser(data: AddLeaderRequest) {
     return API.post<AddLeaderRequest, void>('leaderboard', data);
   }
