@@ -14,7 +14,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 const isDev = () => process.env.NODE_ENV === 'development';
-console.log("Dev", isDev());
+console.log('Dev', isDev());
 
 async function startServer() {
   await dbConnect();
