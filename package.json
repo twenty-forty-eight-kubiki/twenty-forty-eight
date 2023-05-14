@@ -18,12 +18,14 @@
 		"packages/*"
 	],
 	"engines": {
-		"node": ">=15"
+		"node": ">=16.x"
+	},
+	"dependencies": {
+		"lerna": "6.5.1"
 	},
 	"devDependencies": {
 		"@evilmartians/lefthook": "1.1.1",
 		"eslint-config-prettier": "^8.8.0",
-		"lerna": "5.4.3",
 		"rimraf": "^4.4.1"
 	}
 }
