@@ -84,29 +84,30 @@ async function startServer() {
         template = await vite!.transformIndexHtml(url, template);
       }
 
-      let render: () => Promise<string>;
 
-      if (!isDev()) {
-        render = (await import(ssrClientPath)).render;
-      } else {
-        render = (await vite!.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx')))
-          .render;
+      interface SSRModule {
+        render: () => Promise<[any, string]>
       }
 
-      const appHtml = await render();
+      let mod: SSRModule
 
-      const ssrEntryStore = await vite!.ssrLoadModule(
-        require.resolve('client/src/store/store')
-      );
+      if (isDev()) {
+        mod = (await vite!.ssrLoadModule(
+          path.resolve(srcPath, 'ssr.tsx')
+        )) as SSRModule
+      } else {
+        mod = await import(ssrClientPath)
+      }
 
-      const { createStore } = ssrEntryStore;
+      const { render } = mod
+      const [createStore, appHtml] = await render();
 
       const isAuth = user ? 'AUTH' : 'UNKNOWN';
       const authState = {
         auth: { error: null, data: null, authorizationStatus: isAuth }
       };
-      const initialState = createStore(authState).getState();
 
+      const initialState = createStore(authState).getState();
       const initialStateSerialized = jsesc(initialState, {
         json: true,
         isScriptContext: true

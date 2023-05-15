@@ -27,7 +27,7 @@
     "reflect-metadata": "0.1.13",
     "sequelize": "6.31.0",
     "sequelize-typescript": "2.1.5",
-    "vite": "3.0.7"
+    "vite": "4.2.1"
   },
   "devDependencies": {
     "@types/cors": "2.8.12",
