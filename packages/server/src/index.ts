@@ -1,19 +1,20 @@
-import {createServer as createViteServer, ViteDevServer} from 'vite';
-import {createProxyMiddleware} from 'http-proxy-middleware';
-import {createRequire} from 'node:module';
+import { createServer as createViteServer, ViteDevServer } from 'vite';
+import { createProxyMiddleware } from 'http-proxy-middleware';
+import { createRequire } from 'node:module';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import jsesc from 'jsesc';
 import httpContext from 'express-http-context';
 import cookieParser from 'cookie-parser';
-import {dbConnect} from './db.js';
-import {router} from './router.js';
-import {authContext} from './middlewares/auth.js';
+import { dbConnect } from './db.js';
+import { router } from './router.js';
+import { authContext } from './middlewares/auth.js';
+
+dotenv.config();
+
 import express from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
-
-dotenv.config();
 
 const isDev = () => process.env.NODE_ENV === 'development';
 
@@ -29,19 +30,11 @@ async function startServer() {
   const srcPath = path.dirname(require.resolve('client'));
   const ssrClientPath = require.resolve('client/ssr-dist/client.cjs');
 
-  app.use((_req, res, next) => {
-    res.setHeader(
-      'Content-Security-Policy',
-      "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' ; font-src 'self'; img-src 'self'; frame-src 'self'; connect-src https://ya-praktikum.tech/ https://jsonplaceholder.typicode.com/"
-    );
-    next();
-  });
-
   app.use(cors());
 
   if (isDev()) {
     vite = await createViteServer({
-      server: {middlewareMode: true},
+      server: { middlewareMode: true },
       root: srcPath,
       appType: 'custom'
     });
@@ -108,11 +101,11 @@ async function startServer() {
         require.resolve('client/src/store/store')
       );
 
-      const {createStore} = ssrEntryStore;
+      const { createStore } = ssrEntryStore;
 
       const isAuth = user ? 'AUTH' : 'UNKNOWN';
       const authState = {
-        auth: {error: null, data: null, authorizationStatus: isAuth}
+        auth: { error: null, data: null, authorizationStatus: isAuth }
       };
       const initialState = createStore(authState).getState();
 
@@ -126,7 +119,7 @@ async function startServer() {
         .replace(`<!--ssr-outlet-->`, appHtml)
         .replace('<!--store-state-->', storeState);
 
-      res.status(200).set({'Content-Type': 'text/html'}).end(html);
+      res.status(200).set({ 'Content-Type': 'text/html' }).end(html);
     } catch (e) {
       if (isDev()) {
         vite!.ssrFixStacktrace(e as Error);
