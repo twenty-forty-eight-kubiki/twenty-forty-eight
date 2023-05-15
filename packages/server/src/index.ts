@@ -1,4 +1,4 @@
-import { createServer as createViteServer, type ViteDevServer } from 'vite';
+import { createServer as createViteServer, ViteDevServer } from 'vite';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { createRequire } from 'node:module';
 import dotenv from 'dotenv';
