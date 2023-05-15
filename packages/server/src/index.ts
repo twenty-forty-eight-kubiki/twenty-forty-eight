@@ -1,12 +1,15 @@
-import { createServer as createViteServer, type ViteDevServer } from 'vite';
+import { createServer as createViteServer, ViteDevServer } from 'vite';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import { createRequire } from 'node:module';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import jsesc from 'jsesc';
+import httpContext from 'express-http-context';
+import cookieParser from 'cookie-parser';
 import { dbConnect } from './db.js';
 import { router } from './routes/router.js';
 import swaggerDocs from './utils/swagger.js';
+import { authContext } from './middlewares/auth.js';
 
 dotenv.config();
 
@@ -53,7 +56,11 @@ async function startServer() {
     })
   );
 
-  app.get('/api', router);
+  app.use(express.json());
+  app.use(httpContext.middleware);
+  app.use(cookieParser());
+  app.use(authContext);
+  app.use('/api', router);
 
   if (!isDev()) {
     app.use('/assets', express.static(path.resolve(distPath, 'assets')));
@@ -61,6 +68,7 @@ async function startServer() {
 
   app.use('*', async (req, res, next) => {
     const url = req.originalUrl;
+    const user = httpContext.get('user');
 
     try {
       let template: string;
@@ -96,7 +104,11 @@ async function startServer() {
 
       const { createStore } = ssrEntryStore;
 
-      const initialState = createStore().getState();
+      const isAuth = user ? 'AUTH' : 'UNKNOWN';
+      const authState = {
+        auth: { error: null, data: null, authorizationStatus: isAuth }
+      };
+      const initialState = createStore(authState).getState();
 
       const initialStateSerialized = jsesc(initialState, {
         json: true,
