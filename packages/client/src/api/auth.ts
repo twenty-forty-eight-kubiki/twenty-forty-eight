@@ -4,7 +4,7 @@ import {
   SignupRequestData,
   SignupResponse,
   UserInfoResponse
-} from '../types/api/authApi';
+} from '../types/api/auth';
 
 export const authAPI = {
   async login(userData: LoginRequestData) {
