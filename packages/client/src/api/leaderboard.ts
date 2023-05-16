@@ -20,12 +20,10 @@ export type AddLeaderRequest = {
 };
 
 type LeaderItem = {
-  id: number | undefined;
-  login: string | undefined;
-  score: number;
-  avatar: string | undefined;
-  name: string | undefined;
-  surname: string | undefined;
+  userId?: number;
+  login?: string;
+  score?: number;
+  name?: string;
 };
 
 export type LeadersList = {
@@ -35,7 +33,7 @@ export type LeadersList = {
 export const LeaderBoardApi = {
   async getAll(data: LeadersRequest): Promise<LeadersResponse> {
     return API.post<LeadersRequest, LeadersResponse>(
-      'leaderboard/dev-kubiki',
+      'leaderboard/dev-kubiki-prod',
       data
     );
   },
@@ -43,12 +41,14 @@ export const LeaderBoardApi = {
   async addUser(payload: LeaderItem) {
     const requestParams: ReqParams = {
       ratingFieldName: 'score',
-      teamName: 'dev-kubiki'
+      teamName: 'dev-kubiki-prod'
     };
 
-    return API.post<AddLeaderRequest, void>('leaderboard', {
+    return API.post<AddLeaderRequest, void>('leaderboard/', {
       data: payload,
       ...requestParams
     });
   }
 };
+
+export class LeaderResponse {}

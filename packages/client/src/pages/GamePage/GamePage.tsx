@@ -48,22 +48,22 @@ const GamePage = () => {
       return;
     }
 
+    const user = {
+      userId: userData?.id,
+      login: userData?.login,
+      score: currentScore,
+      name: userData?.first_name
+    };
+
     if (checkBoardStatus(board) === GameStates.Lose) {
       dispatch(failGame());
-
-      LeaderBoardApi.addUser({
-        id: userData?.id,
-        login: userData?.login,
-        score: currentScore,
-        avatar: userData?.avatar,
-        name: userData?.first_name,
-        surname: userData?.second_name
-      });
+      LeaderBoardApi.addUser(user);
     }
 
     if (checkBoardStatus(board) === GameStates.Win && !is2048) {
       set2048Modal(true);
       dispatch(reach2048Points());
+      LeaderBoardApi.addUser(user);
     }
   }, [board]);
 
