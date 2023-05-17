@@ -1,16 +1,13 @@
 import {
-  LeaderResponse,
-  LeaderRequest,
+  TeamLeadersRequest,
+  TeamLeadersResponse,
   AddLeaderRequest
-} from '../types/api/leaderbord';
+} from '../types/api/leaderboard';
 import { API } from './api';
 
 export const LeaderBoardApi = {
-  async getAll(data: LeaderRequest): Promise<LeaderResponse> {
-    return API.post<LeaderRequest, LeaderResponse>(
-      'leaderboard/dev-kubiki',
-      data
-    );
+  async getTeamLeaders(teamName: string, data: TeamLeadersRequest): Promise<TeamLeadersResponse> {
+    return API.post<TeamLeadersRequest, TeamLeadersResponse>(`leaderboard/${teamName}`, data);
   },
 
   async addUser(data: AddLeaderRequest) {
