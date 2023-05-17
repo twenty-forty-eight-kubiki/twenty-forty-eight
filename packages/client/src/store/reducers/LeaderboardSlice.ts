@@ -20,7 +20,7 @@ export const leaderboardSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchLeaders.fulfilled, (state, action) => {
-        state.data = action.payload;
+        state.data = action.payload as LeadersResponse;
       })
       .addCase(fetchLeaders.rejected, (state, action) => {
         state.error = action.payload as string;
