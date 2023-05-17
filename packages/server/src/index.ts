@@ -1,34 +1,33 @@
-import { createServer as createViteServer, type ViteDevServer } from 'vite';
-import { createProxyMiddleware } from 'http-proxy-middleware';
-import { createRequire } from 'node:module';
+import dotenv from 'dotenv';
 import cors from 'cors';
+import { createServer as createViteServer } from 'vite';
+import type { ViteDevServer } from 'vite';
 import jsesc from 'jsesc';
-import httpContext from 'express-http-context';
-import cookieParser from 'cookie-parser';
-import { dbConnect } from './db.js';
-import { router } from './router.js';
-import { authContext } from './middlewares/auth.js';
+
+dotenv.config();
 
 import express from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
+import { createRequire } from 'node:module';
+import { createProxyMiddleware } from 'http-proxy-middleware';
+import httpContext from 'express-http-context';
+import cookieParser from 'cookie-parser';
+import { authContext } from './middlewares/auth.js';
+import { router } from './router.js';
 
 const isDev = () => process.env.NODE_ENV === 'development';
-console.log('Dev', isDev());
 
 async function startServer() {
-  await dbConnect();
   const app = express();
+  app.use(cors());
   const port = Number(process.env.SERVER_PORT) || 3001;
 
   let vite: ViteDevServer | undefined;
-
   const require = createRequire(import.meta.url);
-  const distPath = path.dirname(require.resolve('client/index.html'));
+  const distPath = path.dirname(require.resolve('client/dist/index.html'));
   const srcPath = path.dirname(require.resolve('client'));
   const ssrClientPath = require.resolve('client/ssr-dist/client.cjs');
-
-  app.use(cors());
 
   if (isDev()) {
     vite = await createViteServer({
@@ -53,7 +52,6 @@ async function startServer() {
     })
   );
 
-  app.use(express.json());
   app.use(httpContext.middleware);
   app.use(cookieParser());
   app.use(authContext);
@@ -84,24 +82,16 @@ async function startServer() {
         template = await vite!.transformIndexHtml(url, template);
       }
 
+      let mod: any;
 
-      interface SSRModule {
-        render: () => Promise<[any, string]>
-      }
-
-      let mod: SSRModule
-
-      if (isDev()) {
-        mod = (await vite!.ssrLoadModule(
-          path.resolve(srcPath, 'ssr.tsx')
-        )) as SSRModule
+      if (!isDev()) {
+        mod = await import(ssrClientPath);
       } else {
-        mod = await import(ssrClientPath)
+        mod = await vite!.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx'));
       }
 
-      const { render } = mod
+      const { render } = mod;
       const [createStore, appHtml] = await render();
-
       const isAuth = user ? 'AUTH' : 'UNKNOWN';
       const authState = {
         auth: { error: null, data: null, authorizationStatus: isAuth }
@@ -127,7 +117,9 @@ async function startServer() {
     }
   });
 
-  app.listen(port, () => console.log(`Server is listening on port: ${port}`));
+  app.listen(port, () => {
+    console.log(`  ➜ 🎸 Server is listening on port: ${port}`);
+  });
 }
 
 startServer();

@@ -7,7 +7,7 @@ import React from 'react';
 
 async function render() {
   const store = createStore();
- //  const initialState = store.getState();
+  // const initialState = store.getState();
 
   const renderResult = renderToString(
     <Provider store={store}>
@@ -17,7 +17,7 @@ async function render() {
     </Provider>
   );
 
-  return [createStore, renderResult]
+  return [createStore, renderResult];
 }
 
-export { render }
+export { render };
