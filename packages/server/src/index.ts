@@ -1,7 +1,8 @@
+import { createServer as createViteServer, ViteDevServer } from 'vite';
+import { createProxyMiddleware } from 'http-proxy-middleware';
+import { createRequire } from 'node:module';
 import dotenv from 'dotenv';
 import cors from 'cors';
-import { createServer as createViteServer } from 'vite';
-import type { ViteDevServer } from 'vite';
 import jsesc from 'jsesc';
 
 dotenv.config();
@@ -9,8 +10,6 @@ dotenv.config();
 import express from 'express';
 import * as fs from 'fs';
 import * as path from 'path';
-import { createRequire } from 'node:module';
-import { createProxyMiddleware } from 'http-proxy-middleware';
 import httpContext from 'express-http-context';
 import cookieParser from 'cookie-parser';
 import { authContext } from './middlewares/auth.js';

@@ -1,4 +1,4 @@
-import { oauthAPI } from '../api/oauthApi';
+import { oauthAPI } from '../api/oauth';
 
 export const getServiceId = () => {
   const redirect = import.meta.env.VITE_YANDEX_OAUTH_REDIRECT_URI;

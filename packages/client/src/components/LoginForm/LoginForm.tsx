@@ -2,8 +2,8 @@ import { FormEvent, ReactElement, useState } from 'react';
 import { useAppDispatch } from '../../hooks/store';
 import { useHistory } from 'react-router-dom';
 
-import { authAPI } from '../../api/authApi';
-import { LoginRequestData } from '../../types/api/authApi';
+import { authAPI } from '../../api/auth';
+import { LoginRequestData } from '../../types/api/auth';
 import { LoginErrorsObj, LoginFormFields } from '../../types/form';
 import EasyValidator, { IValidationSchema } from '../../helpers/easy-validator';
 import GuiInput from '../../ui/GuiInput/GuiInput';

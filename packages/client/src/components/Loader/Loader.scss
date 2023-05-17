@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
 
-  background-color: $white-linen;
+  background-color: var(--bg-color-main);
 
   &__cube {
     width: 200px;

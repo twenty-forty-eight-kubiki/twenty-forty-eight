@@ -1,10 +1,10 @@
 import React, { FormEvent, ReactElement, useState } from 'react';
 import GuiButton from '../../ui/GuiButton/GuiButton';
 import './FileModal.scss';
-import { profileAPI } from '../../api/profileApi';
+import { profileAPI } from '../../api/profile';
 import { useAppDispatch } from '../../hooks/store';
 import { fetchUser } from '../../store/auth-actions';
-import { FileRequestData } from '../../types/api/profieApi';
+import { FileRequestData } from '../../types/api/profie';
 
 const FileModal = (): ReactElement => {
   const dispatch = useAppDispatch();
