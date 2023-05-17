@@ -4,6 +4,7 @@ import ForumTopic from '../../components/ForumTopic/ForumTopic';
 import GuiButton from '../../ui/GuiButton/GuiButton';
 import ModalCreateForumTopic from '../../components/ModalCreateForumTopic/ModalCreateForumTopic';
 import { withLayout } from '../../hocs/withLayout';
+import { ForumApi } from '../../api/forum';
 import './ForumPage.scss';
 
 interface CreateTopicProps {
@@ -26,6 +27,7 @@ const ForumPage = () => {
     useState<Omit<CreateTopicProps, 'userId' | 'id'>>(initialPost);
 
   useEffect(() => {
+    ForumApi.getTopics({ limit: '100', offset: '0' });
     fetchPosts().then();
   }, []);
 

@@ -1,7 +1,24 @@
 import { BASE_URL } from '../constants';
 import { FileRequestData } from '../types/api/profie';
-function request<T>(url: string, config: RequestInit = {}): Promise<T> {
-  return fetch(`${BASE_URL}/` + url, config)
+
+new URLSearchParams();
+
+interface RequestParams {
+  params?: Record<string, string>;
+}
+
+type RequestOptions = RequestInit & RequestParams;
+
+function request<T>(url: string, config: RequestOptions = {}): Promise<T> {
+  const URL = `${BASE_URL}/${url}`;
+  let params;
+
+  if (config.params) {
+    params = new URLSearchParams(config.params).toString();
+    URL + `?${params}`;
+  }
+
+  return fetch(URL, config)
     .then(response => {
       if (!response.ok) {
         return response.json().then(data => {
@@ -28,9 +45,23 @@ function request<T>(url: string, config: RequestInit = {}): Promise<T> {
 }
 
 export const API = {
-  get: <T>(url: string): Promise<T> => {
+  get: <TResponse>(
+    url: string,
+    params?: Record<string, string>
+  ): Promise<TResponse> => {
     return request(url, {
       method: 'GET',
+      params,
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+  },
+  delete: <TBody, TResponse>(url: string, body?: TBody): Promise<TResponse> => {
+    return request<TResponse>(url, {
+      method: 'DELETE',
+      body: JSON.stringify(body),
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json'
