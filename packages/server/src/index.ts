@@ -14,10 +14,12 @@ import httpContext from 'express-http-context';
 import cookieParser from 'cookie-parser';
 import { authContext } from './middlewares/auth.js';
 import { router } from './router.js';
+import { dbConnect } from './db.js';
 
 const isDev = () => process.env.NODE_ENV === 'development';
 
 async function startServer() {
+  await dbConnect();
   const app = express();
   app.use(cors());
   const port = Number(process.env.SERVER_PORT) || 3001;

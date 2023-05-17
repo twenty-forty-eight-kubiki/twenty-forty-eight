@@ -4,7 +4,7 @@ import './FileModal.scss';
 import { profileAPI } from '../../api/profile';
 import { useAppDispatch } from '../../hooks/store';
 import { fetchUser } from '../../store/auth-actions';
-import { FileRequestData } from '../../types/api/profie';
+import { FileRequestData } from '../../types/api/profile';
 
 const FileModal = (): ReactElement => {
   const dispatch = useAppDispatch();

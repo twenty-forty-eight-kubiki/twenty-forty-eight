@@ -1,5 +1,4 @@
-import { BASE_URL } from '../constants';
-import { FileRequestData } from '../types/api/profie';
+import { FileRequestData } from '../types/api/profile';
 
 new URLSearchParams();
 
@@ -10,15 +9,14 @@ interface RequestParams {
 type RequestOptions = RequestInit & RequestParams;
 
 function request<T>(url: string, config: RequestOptions = {}): Promise<T> {
-  const URL = `${BASE_URL}/${url}`;
   let params;
 
   if (config.params) {
     params = new URLSearchParams(config.params).toString();
-    URL + `?${params}`;
+    url + `?${params}`;
   }
 
-  return fetch(URL, config)
+  return fetch(url, config)
     .then(response => {
       if (!response.ok) {
         return response.json().then(data => {
@@ -58,6 +56,7 @@ export const API = {
       }
     });
   },
+
   delete: <TBody, TResponse>(url: string, body?: TBody): Promise<TResponse> => {
     return request<TResponse>(url, {
       method: 'DELETE',
@@ -68,6 +67,7 @@ export const API = {
       }
     });
   },
+
   getServiceId: <T, TResponse>(
     url: string,
     queriesData?: string
@@ -82,6 +82,7 @@ export const API = {
       }
     });
   },
+
   post: <TBody, TResponse>(url: string, body?: TBody): Promise<TResponse> =>
     request<TResponse>(url, {
       method: 'POST',
@@ -92,6 +93,7 @@ export const API = {
         'Access-Control-Allow-Origin': '*'
       }
     }),
+
   put: <TBody, TResponse>(url: string, body?: TBody): Promise<TResponse> =>
     request<TResponse>(url, {
       method: 'PUT',
@@ -101,6 +103,7 @@ export const API = {
         'Content-Type': 'application/json'
       }
     }),
+
   putFile: <TResponse>(
     url: string,
     data: FileRequestData

@@ -10,7 +10,7 @@ import { getUserData } from '../../store/selectors';
 import {
   PasswordRequestData,
   ProfileRequestData
-} from '../../types/api/profie';
+} from '../../types/api/profile';
 import { profileAPI } from '../../api/profile';
 import { updateUserData } from '../../store/reducers/AuthSlice';
 import { getAvatar } from '../../helpers/getAvatar';
