@@ -6,8 +6,14 @@ import {
 import { API } from './api';
 
 export const LeaderBoardApi = {
-  async getTeamLeaders(teamName: string, data: TeamLeadersRequest): Promise<TeamLeadersResponse> {
-    return API.post<TeamLeadersRequest, TeamLeadersResponse>(`leaderboard/${teamName}`, data);
+  async getTeamLeaders(
+    teamName: string,
+    data: TeamLeadersRequest
+  ): Promise<TeamLeadersResponse> {
+    return API.post<TeamLeadersRequest, TeamLeadersResponse>(
+      `leaderboard/${teamName}`,
+      data
+    );
   },
 
   async addUser(data: AddLeaderRequest) {

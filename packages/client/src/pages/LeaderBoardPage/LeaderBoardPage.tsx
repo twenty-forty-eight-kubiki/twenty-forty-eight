@@ -19,11 +19,11 @@ const LeaderBoardPage = () => {
       {sortedList &&
         sortedList.map(leader => (
           <GamerItem
-            name={leader.data.name}
-            score={leader.data.score}
-            key={leader.data.userId}
-            userId={leader.data.userId}
-            login={leader.data.login}
+            name={leader.firstName}
+            score={leader.score}
+            key={leader.id}
+            userId={leader.id}
+            login={leader.displayName}
           />
         ))}
     </div>
