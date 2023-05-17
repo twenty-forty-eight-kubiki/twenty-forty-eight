@@ -22,6 +22,8 @@ const LeaderBoardPage = () => {
             name={leader.data.name}
             score={leader.data.score}
             key={leader.data.userId}
+            userId={leader.data.userId}
+            login={leader.data.login}
           />
         ))}
     </div>

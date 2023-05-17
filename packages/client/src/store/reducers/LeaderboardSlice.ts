@@ -3,7 +3,7 @@ import { LeaderBoardState } from '../store.types';
 import { LeaderResponse } from '../../types/api/leaderbord';
 import { fetchLeaders } from '../leaderboard-actions';
 
-const initialState: LeaderBoardState<LeaderResponse> = {
+const initialState: LeaderBoardState<LeadersResponse> = {
   error: null,
   data: null
 };

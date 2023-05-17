@@ -22,16 +22,14 @@ const isDev = () => process.env.NODE_ENV === 'development';
 async function startServer() {
   await dbConnect();
   const app = express();
+  app.use(cors());
   const port = Number(process.env.SERVER_PORT) || 3001;
 
   let vite: ViteDevServer | undefined;
-
   const require = createRequire(import.meta.url);
-  const distPath = path.dirname(require.resolve('client/index.html'));
+  const distPath = path.dirname(require.resolve('client/dist/index.html'));
   const srcPath = path.dirname(require.resolve('client'));
   const ssrClientPath = require.resolve('client/ssr-dist/client.cjs');
-
-  app.use(cors());
 
   if (isDev()) {
     vite = await createViteServer({
@@ -56,7 +54,6 @@ async function startServer() {
     })
   );
 
-  app.use(express.json());
   app.use(httpContext.middleware);
   app.use(cookieParser());
   app.use(authContext);
@@ -87,29 +84,22 @@ async function startServer() {
         template = await vite!.transformIndexHtml(url, template);
       }
 
-      let render: () => Promise<string>;
+      let mod: any;
 
       if (!isDev()) {
-        render = (await import(ssrClientPath)).render;
+        mod = await import(ssrClientPath);
       } else {
-        render = (await vite!.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx')))
-          .render;
+        mod = await vite!.ssrLoadModule(path.resolve(srcPath, 'ssr.tsx'));
       }
 
-      const appHtml = await render();
-
-      const ssrEntryStore = await vite!.ssrLoadModule(
-        require.resolve('client/src/store/store')
-      );
-
-      const { createStore } = ssrEntryStore;
-
+      const { render } = mod;
+      const [createStore, appHtml] = await render();
       const isAuth = user ? 'AUTH' : 'UNKNOWN';
       const authState = {
         auth: { error: null, data: null, authorizationStatus: isAuth }
       };
-      const initialState = createStore(authState).getState();
 
+      const initialState = createStore(authState).getState();
       const initialStateSerialized = jsesc(initialState, {
         json: true,
         isScriptContext: true

@@ -5,7 +5,7 @@
   "description": "",
   "scripts": {
     "build": "rimraf dist && tsc --p ./tsconfig.prod.json",
-    "preview": "npm run build && node ./dist/index.js",
+    "preview": "npm run build && node -r dotenv/config ./dist/src/index.js",
     "dev": "cross-env NODE_ENV=development nodemon -x ts-node --esm -r dotenv/config src/index.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
@@ -28,7 +28,8 @@
     "sequelize": "6.31.0",
     "sequelize-typescript": "2.1.5",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^4.6.3"
+    "swagger-ui-express": "^4.6.3",
+    "vite": "4.2.1"
   },
   "devDependencies": {
     "@types/cors": "2.8.12",
