@@ -28,7 +28,6 @@ async function startServer() {
 
   let vite: ViteDevServer | undefined;
   const require = createRequire(import.meta.url);
-  // const publicPath = path.dirname(require.resolve('client/public/index.html'));
   const srcPath = path.dirname(require.resolve('client'));
   const ssrClientPath = require.resolve('client/ssr-dist/client.cjs');
 
@@ -64,7 +63,7 @@ async function startServer() {
     app.use(
       '/assets',
       express.static(
-        path.resolve(require.resolve('client/public/index.html'), 'assets')
+        path.resolve(require.resolve('client/dist/index.html'), 'assets')
       )
     );
   }
@@ -78,7 +77,7 @@ async function startServer() {
 
       if (!isDev()) {
         template = fs.readFileSync(
-          path.resolve('client/public/index.html'),
+          path.resolve('client/dist/index.html'),
           'utf-8'
         );
       } else {
