@@ -1,6 +1,7 @@
-import { Table, Column, DataType, Model } from 'sequelize-typescript';
+import { Table, Column, DataType, Model, HasMany } from 'sequelize-typescript';
+import { User } from './user.model.js';
 
-@Table({ tableName: 'theme' })
+@Table({ tableName: 'theme', timestamps: false })
 export class Theme extends Model<Theme> {
   @Column({
     type: DataType.INTEGER,
@@ -8,8 +9,11 @@ export class Theme extends Model<Theme> {
     autoIncrement: true,
     primaryKey: true
   })
-  themeId: number;
+  theme_id: number;
 
   @Column({ type: DataType.STRING, unique: true, allowNull: false })
   name: string;
+
+  @HasMany(() => User)
+  users: User[];
 }

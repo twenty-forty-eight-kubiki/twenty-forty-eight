@@ -13,20 +13,22 @@ import * as path from 'path';
 import httpContext from 'express-http-context';
 import cookieParser from 'cookie-parser';
 import { authContext } from './middlewares/auth.js';
-import { router } from './router.js';
+import { router } from './routes/router.js';
 import { dbConnect } from './db.js';
+import swaggerDocs from './utils/swagger.js';
 
 const isDev = () => process.env.NODE_ENV === 'development';
 
 async function startServer() {
   await dbConnect();
+
   const app = express();
   app.use(cors());
-  const port = Number(process.env.SERVER_PORT) || 3001;
+  const port = Number(process.env.SERVER_PORT) || 5000;
 
   let vite: ViteDevServer | undefined;
   const require = createRequire(import.meta.url);
-  const distPath = path.dirname(require.resolve('client/dist/index.html'));
+  // const publicPath = path.dirname(require.resolve('client/public/index.html'));
   const srcPath = path.dirname(require.resolve('client'));
   const ssrClientPath = require.resolve('client/ssr-dist/client.cjs');
 
@@ -59,7 +61,12 @@ async function startServer() {
   app.use('/api', router);
 
   if (!isDev()) {
-    app.use('/assets', express.static(path.resolve(distPath, 'assets')));
+    app.use(
+      '/assets',
+      express.static(
+        path.resolve(require.resolve('client/public/index.html'), 'assets')
+      )
+    );
   }
 
   app.use('*', async (req, res, next) => {
@@ -71,7 +78,7 @@ async function startServer() {
 
       if (!isDev()) {
         template = fs.readFileSync(
-          path.resolve(distPath, 'index.html'),
+          path.resolve('client/public/index.html'),
           'utf-8'
         );
       } else {
@@ -118,9 +125,9 @@ async function startServer() {
     }
   });
 
-  app.listen(port, () => {
-    console.log(`  ➜ 🎸 Server is listening on port: ${port}`);
-  });
+  swaggerDocs(app, port);
+
+  app.listen(port, () => console.log(`Server is listening on port: ${port}`));
 }
 
 startServer();
