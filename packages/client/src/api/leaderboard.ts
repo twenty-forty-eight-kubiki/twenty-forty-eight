@@ -1,3 +1,4 @@
+import { BASE_URL } from '../constants';
 import { API } from './api';
 
 type ReqParams = {
@@ -33,7 +34,7 @@ export type LeadersList = {
 export const LeaderBoardApi = {
   async getAll(data: LeadersRequest): Promise<LeadersResponse> {
     return API.post<LeadersRequest, LeadersResponse>(
-      'leaderboard/dev-kubiki-prod',
+      `${BASE_URL}/leaderboard/dev-kubiki-prod`,
       data
     );
   },
@@ -44,7 +45,7 @@ export const LeaderBoardApi = {
       teamName: 'dev-kubiki-prod'
     };
 
-    return API.post<AddLeaderRequest, void>('leaderboard/', {
+    return API.post<AddLeaderRequest, void>(`${BASE_URL}/leaderboard/`, {
       data: payload,
       ...requestParams
     });
